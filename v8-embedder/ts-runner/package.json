@@ -1,0 +1,14 @@
+{
+  "name": "ts-runner",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "strip": "node strip.js",
+    "strip:example": "node strip.js examples/hello.ts build/hello.js"
+  },
+  "dependencies": {
+    "@swc/core": "^1.5.0",
+    "@swc/cli": "^0.5.0"
+  }
+}

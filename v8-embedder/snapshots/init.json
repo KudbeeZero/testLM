@@ -1,0 +1,16 @@
+{
+  "hostApi": {
+    "log": "enabled"
+  },
+  "pools": {
+    "maxIsolates": 4,
+    "warmSize": 2
+  },
+  "timeouts": {
+    "executionMs": 5000,
+    "compileMs": 1000
+  },
+  "memory": {
+    "maxOldSpaceSizeMb": 128
+  }
+}
