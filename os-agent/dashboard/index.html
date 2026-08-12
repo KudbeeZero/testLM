@@ -1,42 +1,88 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Trust Agent / Workbench</title>
-<style>
-:root{--ink:#17221f;--muted:#718078;--paper:#f2eee5;--panel:#fffdf8;--line:#d8d3c7;--green:#1d6755;--lime:#c9e96b;--coral:#e8785f;--blue:#dbe9e5}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,serif}.shell{max-width:1440px;margin:auto;padding:28px 30px 50px}.eyebrow,.mono{font:11px ui-monospace,Consolas,monospace;text-transform:uppercase;letter-spacing:1.4px}.eyebrow{color:var(--green)}header{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid var(--line);padding-bottom:22px}h1{font-size:clamp(38px,6vw,70px);font-weight:500;letter-spacing:-3px;line-height:.86;margin:12px 0 0}.live{color:var(--green);display:flex;align-items:center;gap:8px}.dot{width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 5px #e4f1b9}.intro{display:flex;justify-content:space-between;gap:20px;padding:24px 0}.intro p{max-width:610px;font-size:18px;line-height:1.4;margin:0;color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}.stat,.panel{background:var(--panel);border:1px solid var(--line);padding:20px}.stat strong{font-size:32px;font-weight:500;display:block;margin-top:15px}.workspace{display:grid;grid-template-columns:1.05fr 1.35fr .9fr;gap:14px}.panel{min-height:410px}.panel h2{font-size:26px;font-weight:500;margin:9px 0 20px}.task-form{display:flex;gap:8px;margin-bottom:18px}.task-form input,.terminal-form input{flex:1;min-width:0;border:1px solid var(--line);background:white;padding:11px;font:14px Georgia,serif}button{border:1px solid var(--ink);background:transparent;padding:10px 13px;font:11px ui-monospace,monospace;cursor:pointer}button:hover{background:var(--ink);color:white}.task{border-top:1px solid var(--line);padding:14px 0;display:flex;justify-content:space-between;gap:10px}.task small{display:block;color:var(--muted);margin-top:5px}.badge{font:10px ui-monospace,monospace;text-transform:uppercase;color:var(--green);white-space:nowrap}.terminal{height:270px;background:#15221f;color:#d9f1cf;padding:15px;overflow:auto;font:12px ui-monospace,Consolas,monospace;white-space:pre-wrap;line-height:1.45}.terminal-form{display:flex;gap:8px;margin-top:10px}.terminal-form input{background:#f8f8f2}.route{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding:15px 0}.ok{color:var(--green)}.warn{color:var(--coral)}.context{background:var(--blue);padding:18px;margin-top:16px;line-height:1.45;color:#34534c}@media(max-width:900px){.workspace{grid-template-columns:1fr}.stats{grid-template-columns:1fr}header{display:block}.live{margin-top:18px}.shell{padding:20px 15px}}
-</style></head><body><main class="shell"><header><div><div class="eyebrow">Trust Agent / Operator Workbench</div><h1>Make work<br>legible.</h1></div><div class="live"><span class="dot"></span><span id="live">connecting</span></div></header>
-<section class="intro"><p>Track the work queue, hand intelligence between providers, and run local commands against the workspace without leaving the control room.</p><div class="mono" id="repo">local workspace</div></section>
-<section class="stats"><div class="stat"><div class="eyebrow">Cache</div><strong id="cache">--</strong><span class="mono">durable learning ledger</span></div><div class="stat"><div class="eyebrow">Tasks</div><strong id="taskCount">--</strong><span class="mono">queued agent work</span></div><div class="stat"><div class="eyebrow">Intelligence</div><strong id="provider">--</strong><span class="mono" id="model">--</span></div></section>
-<section class="workspace"><article class="panel"><div class="eyebrow">01 / Work queue</div><h2>Agent tasks</h2><form class="task-form" id="taskForm"><input id="taskInput" placeholder="Add a tracked task" autocomplete="off"><button>ADD</button></form><div id="tasks"></div></article>
-<article class="panel"><div class="eyebrow">02 / Local shell</div><h2>Interactive terminal</h2><div class="terminal" id="terminal">Ready. Commands run in the workspace root.
-<div><form class="terminal-form" id="terminalForm"><input id="command" placeholder="git status, npm test, ..." autocomplete="off"><button>RUN</button></form><div class="context"><strong>Local execution</strong><br>PowerShell runs on 127.0.0.1 with the current workspace as its working directory.</div></article>
-<article class="panel"><div class="eyebrow">03 / Handoff bus</div><h2>Choose a route</h2><div id="routes"></div><div class="context"><strong>Latest intelligence</strong><p id="latest">Waiting for the next learning cycle.</p></div></article></section></main>
-<script>
-const $=s=>document.querySelector(s);const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-async function refresh(){try{const s=await fetch('/api/state').then(r=>r.json());$('#live').textContent='live / '+new Date().toLocaleTimeString();$('#repo').textContent=s.repo.name+' / '+s.repo.branch;$('#cache').textContent=s.cache.entries+' entries';$('#taskCount').textContent=s.tasks.length+' tracked';$('#provider').textContent=s.providerLabel;$('#model').textContent=s.model;$('#tasks').innerHTML=s.tasks.length?s.tasks.map(t=>`<div class="task"><span>${esc(t.title)}<small>${new Date(t.createdAt).toLocaleString()}</small></span><span class="badge">${esc(t.status)}</span></div>`).join(''):'<p style="color:var(--muted)">No tasks yet. Add the next piece of work above.</p>';$('#routes').innerHTML=Object.values(s.handoff).map(v=>`<div class="route"><span><strong>${esc(v.label)}</strong></span><span class="mono ${v.status==='needs key'?'warn':'ok'}">${esc(v.status)}</span></div>`).join('');if(s.memory.latestLearning)$('#latest').textContent=s.memory.latestLearning.insight}catch{$('#live').textContent='runtime unavailable'}}
-$('#taskForm').onsubmit=async e=>{e.preventDefault();const title=$('#taskInput').value.trim();if(!title)return;await fetch('/api/tasks',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title})});$('#taskInput').value='';refresh()};$('#terminalForm').onsubmit=async e=>{e.preventDefault();const input=$('#command');const command=input.value.trim();if(!command)return;$('#terminal').textContent+=`\n> ${command}\n`;input.value='';const response=await fetch('/api/terminal',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({command})});const reader=response.body.getReader(),decoder=new TextDecoder();while(true){const {done,value}=await reader.read();if(done)break;for(const line of decoder.decode(value).split('\n').filter(Boolean)){const item=JSON.parse(line);$('#terminal').textContent+=item.text||`\n[exit ${item.code}]\n`;$('#terminal').scrollTop=$('#terminal').scrollHeight}}};refresh();setInterval(refresh,5000);
-</script></body></html>
-<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Trust Agent / Control Room</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Trust Agent / Workbench</title>
   <style>
-    :root { --ink:#17221f; --muted:#6e7d76; --paper:#f4f0e8; --panel:#fffdf8; --line:#d9d5ca; --green:#1e6b58; --lime:#c9e96b; --coral:#ed765d; }
-    * { box-sizing:border-box; } body { margin:0; color:var(--ink); background:var(--paper); font-family: Georgia, 'Times New Roman', serif; }
-    .shell { max-width:1240px; margin:auto; padding:34px 28px 60px; } .eyebrow { font:700 11px ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing:1.5px; text-transform:uppercase; color:var(--green); }
-    header { display:flex; justify-content:space-between; align-items:end; gap:20px; border-bottom:1px solid var(--line); padding-bottom:25px; } h1 { font-size:clamp(42px,7vw,82px); line-height:.86; letter-spacing:-3px; margin:14px 0 0; font-weight:500; } .pulse { display:flex; gap:9px; align-items:center; font:12px ui-monospace,monospace; color:var(--green); } .dot { width:10px;height:10px;border-radius:50%;background:var(--lime); box-shadow:0 0 0 5px #e4f1b9; }
-    .hero { display:grid; grid-template-columns:1.35fr .65fr; gap:18px; margin:30px 0 18px; } .hero-panel { background:var(--green); color:#f8f5ec; padding:28px; min-height:205px; } .hero-panel h2 { margin:0 0 34px; font-size:32px; font-weight:500; } .hero-panel p { max-width:520px; color:#d8ebe0; font-size:18px; line-height:1.4; margin:0; } .metric-panel { background:var(--lime); padding:25px; } .metric-panel strong { display:block; font-size:66px; line-height:.9; font-weight:500; margin:26px 0 14px; }
-    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; } .card { background:var(--panel); border:1px solid var(--line); padding:22px; min-height:190px; } .card h3 { font-size:22px; font-weight:500; margin:10px 0 22px; } .label { color:var(--muted); font:11px ui-monospace,monospace; text-transform:uppercase; letter-spacing:1px; } .value { font-size:30px; } .split { display:flex; justify-content:space-between; gap:15px; border-top:1px solid var(--line); padding-top:12px; margin-top:13px; } .status { font:12px ui-monospace,monospace; color:var(--green); } .status.warn { color:var(--coral); }
-    .handoff { margin-top:18px; display:grid; grid-template-columns:1fr 1fr; gap:18px; } .handoff-card { background:#e7dfd0; padding:24px; } .handoff-card h2 { margin:0 0 20px; font-size:27px; font-weight:500; } .route { display:flex; justify-content:space-between; align-items:center; border-top:1px solid #c9c0b0; padding:15px 0; } button { border:1px solid var(--ink); background:transparent; padding:9px 13px; font:12px ui-monospace,monospace; cursor:pointer; } button:hover { background:var(--ink); color:white; } footer { margin-top:24px; color:var(--muted); font:12px ui-monospace,monospace; }
-    @media(max-width:760px){ .shell{padding:22px 16px 40px} header,.hero,.handoff{display:block}.pulse{margin-top:20px}.hero-panel,.metric-panel{margin-top:14px}.grid{grid-template-columns:1fr} h1{letter-spacing:-2px} }
+    body{font-family:Segoe UI,Arial,Helvetica,sans-serif;margin:0;background:#f6f4ee;color:#17221f}
+    .shell{max-width:1200px;margin:24px auto;padding:20px}
+    header{display:flex;justify-content:space-between;align-items:end}
+    h1{margin:0;font-size:28px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+    .card{background:#fff;padding:14px;border:1px solid #e0dbcf}
+    .terminal{height:280px;overflow:auto;background:#0b0b0b;color:#cfcfcf;padding:12px;font-family:ui-monospace,monospace}
+    .controls{display:flex;gap:8px;margin-top:8px}
+    input[type=text]{flex:1;padding:8px;border:1px solid #ccc}
+    button{padding:8px 12px}
   </style>
 </head>
-<body><main class="shell">
-  <header><div><div class="eyebrow">Trust Agent / Local Intelligence Fabric</div><h1>Control<br>room.</h1></div><div class="pulse"><span class="dot"></span><span id="updated">connecting to local runtime</span></div></header>
-  <section class="hero"><div class="hero-panel"><div class="eyebrow" style="color:#c9e96b">Operational brief</div><h2 id="provider">Loading provider...</h2><p>The agent observes the workspace, keeps a durable memory of the machine, and routes intelligence to the best available model.</p></div><div class="metric-panel"><div class="label">Memory cache</div><strong id="cacheCount">--</strong><div id="cacheStatus">warming local context</div></div></section>
-  <section class="grid"><article class="card"><div class="label">Learning ledger</div><h3>What the agent remembers</h3><div class="value" id="learnings">--</div><div class="split"><span>health reports</span><span id="health">--</span></div><div class="split"><span>optimizations</span><span id="optimizations">--</span></div></article><article class="card"><div class="label">Active model</div><h3 id="model">--</h3><div class="split"><span>provider</span><span class="status" id="providerSmall">--</span></div><div class="split"><span>cache source</span><span class="status">local JSON</span></div></article><article class="card"><div class="label">Latest intelligence</div><h3 id="latestTopic">Waiting for signal</h3><p id="latestInsight" style="line-height:1.45;color:var(--muted)">The latest machine-specific insight will appear here after the learning cycle runs.</p></article></section>
-  <section class="handoff"><div class="handoff-card"><div class="eyebrow">Handoff matrix</div><h2>Choose the brain.</h2><div id="routes"></div></div><div class="handoff-card"><div class="eyebrow">Bus + cache layer</div><h2>Context travels with the work.</h2><p style="line-height:1.5;max-width:430px">The provider bus keeps local and cloud intelligence behind one interface. The learning ledger acts as a durable cache, so every handoff starts with what this machine already knows.</p><button onclick="location.reload()">REFRESH STATE</button></div></section>
-  <footer id="workspace">local runtime / awaiting state</footer>
-</main><script>
-async function refresh(){ try { const s=await fetch('/api/state').then(r=>r.json()); document.querySelector('#updated').textContent='live / '+new Date().toLocaleTimeString(); document.querySelector('#provider').textContent=s.providerLabel; document.querySelector('#providerSmall').textContent=s.provider; document.querySelector('#model').textContent=s.model; document.querySelector('#cacheCount').textContent=s.cache.entries; document.querySelector('#cacheStatus').textContent=s.cache.status+' context'; document.querySelector('#learnings').textContent=s.memory.learnings+' learnings'; document.querySelector('#health').textContent=s.memory.healthReports; document.querySelector('#optimizations').textContent=s.memory.optimizations; document.querySelector('#workspace').textContent=s.workspace; if(s.memory.latestLearning){document.querySelector('#latestTopic').textContent=s.memory.latestLearning.topic;document.querySelector('#latestInsight').textContent=s.memory.latestLearning.insight;} document.querySelector('#routes').innerHTML=Object.entries(s.handoff).map(([key,v])=>`<div class="route"><span><strong>${v.label}</strong><br><small>${key}</small></span><span class="status ${v.status==='needs key'?'warn':''}">${v.status}</span></div>`).join(''); } catch(e){document.querySelector('#updated').textContent='runtime unavailable';} } refresh(); setInterval(refresh,5000);
-</script></body></html>
+<body>
+  <main class="shell">
+    <header>
+      <div>
+        <div style="font-size:12px;color:#4e6b5d">Trust Agent / Operator Workbench</div>
+        <h1>Control Room</h1>
+      </div>
+      <div id="status">connecting...</div>
+    </header>
+
+    <section class="grid">
+      <div class="card">
+        <h3>Tasks</h3>
+        <form id="taskForm" style="display:flex;gap:8px;margin-bottom:8px">
+          <input id="taskInput" type="text" placeholder="New task" />
+          <button>ADD</button>
+        </form>
+        <div id="tasks">Loading…</div>
+      </div>
+
+      <div class="card">
+        <h3>Interactive Terminal</h3>
+        <div id="terminal" class="terminal">Connecting to local runtime…</div>
+        <div class="controls">
+          <input id="command" type="text" placeholder="npm test, git status, ..." />
+          <button id="run">Run</button>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top:14px">
+      <div class="card">
+        <h3>Handoff</h3>
+        <div id="routes">Loading…</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const $ = q => document.querySelector(q);
+    async function refresh(){
+      try{
+        const s = await fetch('/api/state').then(r=>r.json());
+        $('#status').textContent = 'live / ' + new Date().toLocaleTimeString();
+        $('#tasks').innerHTML = s.tasks.length ? s.tasks.map(t => `<div><strong>${t.title}</strong> <small>${t.status}</small></div>`).join('') : '<div>No tasks</div>';
+        $('#routes').innerHTML = Object.values(s.handoff).map(h=>`<div>${h.label} — ${h.status}</div>`).join('');
+      }catch(e){$('#status').textContent='unavailable'}
+    }
+
+    $('#taskForm').onsubmit = async e => { e.preventDefault(); const title = $('#taskInput').value.trim(); if(!title) return; await fetch('/api/tasks',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title})}); $('#taskInput').value=''; refresh(); };
+
+    // WebSocket interactive terminal
+    let ws;
+    function ensureWs(){
+      if(ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING)) return ws;
+      ws = new WebSocket((location.protocol==='https:'?'wss:':'ws:')+'//'+location.host+'/ws/terminal');
+      ws.onopen = ()=>{ $('#terminal').textContent += '\n[connected]\n'; };
+      ws.onmessage = ev => { try { const m = JSON.parse(ev.data); if(m.stream==='out' || m.stream==='err'){ $('#terminal').textContent += m.text; } else if(m.stream==='exit'){ $('#terminal').textContent += `\n[exit ${m.code}]\n`; } } catch(e){ $('#terminal').textContent += ev.data; } $('#terminal').scrollTop = $('#terminal').scrollHeight; };
+      ws.onclose = ()=>$('#terminal').textContent += '\n[disconnected]\n';
+      ws.onerror = ()=>$('#terminal').textContent += '\n[error]\n';
+      return ws;
+    }
+
+    $('#run').onclick = ()=>{ const cmd = $('#command').value.trim(); if(!cmd) return; $('#terminal').textContent += `\n> ${cmd}\n`; $('#command').value=''; const s = ensureWs(); if(s.readyState === WebSocket.OPEN) s.send(JSON.stringify({cmd})); else s.addEventListener('open',()=>s.send(JSON.stringify({cmd})),{once:true}); };
+
+    refresh(); setInterval(refresh,5000);
+  </script>
+</body>
+</html>

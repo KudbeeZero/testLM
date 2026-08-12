@@ -1,0 +1,7 @@
+{
+  "skills": [
+    { "id": "explore", "name": "Explore", "desc": "Fast codebase exploration subagent" },
+    { "id": "agent-customization", "name": "Agent Customization", "desc": "Manage agent skill/config files" },
+    { "id": "chronicle", "name": "Chronicle", "desc": "Session history and standup reports" }
+  ]
+}

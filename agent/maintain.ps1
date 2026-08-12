@@ -96,6 +96,18 @@ foreach ($opt in $optimizations) {
     $mem.optimizations += $opt
 }
 
+# If memory usage is critically high, record a guarded learning recommendation
+if ($usedPct -ge 85) {
+    $warning = [pscustomobject]@{
+        date = (Get-Date -Format o)
+        topic = "memory"
+        insight = "Critical memory usage detected ($usedPct% used)."
+        recommendation = "Close or reduce memory-heavy applications (e.g. model servers) or upgrade RAM. Run maintenance with -ReportOnly first to inspect processes."
+    }
+    $mem.learnings += $warning
+    Write-Log ("WARNING: {0}" -f $warning.insight)
+}
+
 # Write JSON without a UTF-8 BOM so it is valid for JSON parsers (Node, etc.).
 $json = $mem | ConvertTo-Json -Depth 10
 [System.IO.File]::WriteAllText($memFile, $json, (New-Object System.Text.UTF8Encoding $false))

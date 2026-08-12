@@ -1,9 +1,10 @@
 import { createServer } from "node:http";
 import { readFile, writeFile } from "node:fs/promises";
 import { spawn } from "node:child_process";
+import WebSocket, { WebSocketServer } from "ws";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { MEMORY_FILE, PROVIDER, LOCAL_MODEL, providerLabel, WORKSPACE } from "./src/config.js";
+import { MEMORY_FILE, PROVIDER, LOCAL_MODEL, providerLabel, WORKSPACE, MONTHLY_BUDGET_USD, RATE_LIMIT_PER_MINUTE } from "./src/config.js";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const port = Number(process.env.DASHBOARD_PORT || 4173);
@@ -29,6 +30,12 @@ async function getState() {
   const health = memory.health || memory.healthReports || [];
   const optimizations = memory.optimizations || [];
   const tasks = await readTasks();
+  // Fuel / budget status (non-secret): read budget constants and memory spend if provided
+  const spendUsd = (memory.spend_usd && Number(memory.spend_usd)) || 0;
+  const budgetUsd = Number(MONTHLY_BUDGET_USD || 0);
+  const spendPercent = budgetUsd > 0 ? Math.round((spendUsd / budgetUsd) * 100) : 0;
+  const rateLimitUsage = { used_per_minute: (tasks.length || 0), limit_per_minute: Number(RATE_LIMIT_PER_MINUTE || 0) };
+  const agentHealth = memory.health || {};
   return {
     provider: PROVIDER,
     providerLabel: providerLabel(),
@@ -44,6 +51,13 @@ async function getState() {
       status: learnings.length ? "warm" : "cold",
       entries: learnings.length,
       source: "agent/memory/learnings.json",
+    },
+    fuel_status: {
+      spend_usd: spendUsd,
+      budget_usd: budgetUsd,
+      spend_percent: spendPercent,
+      rate_limit: rateLimitUsage,
+      agent_health: agentHealth
     },
     handoff: {
       local: { status: "available", label: "LM Studio / Qwen3" },
@@ -89,6 +103,38 @@ const server = createServer(async (req, res) => {
     res.end(content);
   } catch {
     res.writeHead(404); res.end("Not found");
+  }
+});
+
+// WebSocket server for interactive terminal (noServer mode; we upgrade manually)
+const wss = new WebSocketServer({ noServer: true });
+
+wss.on("connection", (ws, req) => {
+  // spawn an interactive PowerShell process
+  const child = spawn("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", "-"], { cwd: WORKSPACE, windowsHide: true });
+  ws.on("message", msg => {
+    try {
+      const data = typeof msg === "string" ? JSON.parse(msg) : JSON.parse(msg.toString());
+      if (data && data.cmd) {
+        child.stdin.write(String(data.cmd) + "\n");
+      }
+    } catch (e) {
+      // ignore parse errors
+      child.stdin.write(String(msg) + "\n");
+    }
+  });
+  child.stdout.on("data", d => { try { ws.send(JSON.stringify({ stream: "out", text: d.toString() })); } catch {} });
+  child.stderr.on("data", d => { try { ws.send(JSON.stringify({ stream: "err", text: d.toString() })); } catch {} });
+  child.on("close", code => { try { ws.send(JSON.stringify({ stream: "exit", code })); } catch {} ws.close(); });
+  ws.on("close", () => { try { child.kill(); } catch {} });
+});
+
+server.on('upgrade', (req, socket, head) => {
+  const { url } = req;
+  if (url === '/ws/terminal') {
+    wss.handleUpgrade(req, socket, head, ws => wss.emit('connection', ws, req));
+  } else {
+    socket.destroy();
   }
 });
 

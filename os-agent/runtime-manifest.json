@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "description": "Non-secret runtime manifest for the local OS Agent (fuel, provider, memory paths).",
+  "provider": {
+    "name": "local",
+    "label": "LM Studio / Qwen3",
+    "model": "qwen/qwen3-1.7b"
+  },
+  "budget": {
+    "monthly_budget_usd": 50,
+    "notes": "This manifest does not contain credentials. Real budget is read from .env at runtime."
+  },
+  "rate_limit_per_minute": 30,
+  "workspace": {
+    "root": "..",
+    "agent_memory": "agent/memory/learnings.json",
+    "dashboard_url": "http://127.0.0.1:4173"
+  }
+}
