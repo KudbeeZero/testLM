@@ -1,0 +1,12 @@
+# OS Agent runtime artifacts
+agent/logs/
+*.log
+
+# OS / editor noise
+Thumbs.db
+.DS_Store
+.vscode/
+.idea/
+
+# Temp
+*.tmp
