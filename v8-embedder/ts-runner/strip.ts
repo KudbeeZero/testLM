@@ -1,8 +1,8 @@
-import * as ts from "typescript";
 import fs from "fs";
 import path from "path";
 
 async function stripFile(inPath: string, outPath: string) {
+  const ts = await import("typescript");
   const src = fs.readFileSync(inPath, "utf8");
   const { outputText: code } = ts.transpileModule(src, {
     compilerOptions: {
