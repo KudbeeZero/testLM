@@ -1,0 +1,114 @@
+{
+  "system": {
+    "hostname": "DESKTOP-22KC5S1",
+    "ram_gb": 15.9,
+    "gpu": [
+      "Intel(R) HD Graphics 530",
+      "NVIDIA Quadro M1000M"
+    ],
+    "local_model": "qwen/qwen3-8b",
+    "server": "http://localhost:1234/v1"
+  },
+  "health": {
+    "last_check": "2026-08-12T04:52:32.3808492-05:00",
+    "last_memory_used_pct": 63,
+    "last_disk_free_gb": 1158.8,
+    "last_temp_mb": 61
+  },
+  "optimizations": [
+    {
+      "date": "2026-08-12T03:18:54.1913198-05:00",
+      "action": "temp-cleanup",
+      "detail": "Cleaned user temp folder",
+      "freed_mb": 227,
+      "impact": "Freed 227 MB of disk space"
+    },
+    {
+      "date": "2026-08-12T04:07:10.8666628-05:00",
+      "action": "temp-cleanup",
+      "detail": "Cleaned user temp folder",
+      "freed_mb": 44,
+      "impact": "Freed 44 MB of disk space"
+    }
+  ],
+  "learnings": [
+    {
+      "date": "2026-08-12T03:03:15.6083360-05:00",
+      "topic": "memory",
+      "insight": "High memory usage detected.",
+      "recommendation": "Monitor memory usage and consider increasing RAM or optimizing applications to reduce memory consumption."
+    },
+    {
+      "date": "2026-08-12T03:03:15.6083360-05:00",
+      "topic": "temp",
+      "insight": "Moderate temperature recorded.",
+      "recommendation": "Ensure proper ventilation and monitor temperatures during heavy workloads to prevent overheating."
+    },
+    {
+      "date": "2026-08-12T03:03:15.6083360-05:00",
+      "topic": "disk",
+      "insight": "Sufficient free disk space available.",
+      "recommendation": "Maintain at least 10% free disk space for optimal performance and system stability."
+    },
+    {
+      "date": "2026-08-12T08:24:27.745Z",
+      "topic": "gpu",
+      "insight": "NVIDIA Quadro M1000M is underutilized compared to Intel HD Graphics 530.",
+      "recommendation": "Prioritize GPU tasks for the NVIDIA Quadro M1000M to leverage its dedicated VRAM for model inference."
+    },
+    {
+      "date": "2026-08-12T08:24:27.747Z",
+      "topic": "startup",
+      "insight": "Potential startup programs may contribute to high memory usage during boot.",
+      "recommendation": "Audit and disable non-essential startup programs to reduce initial memory overhead."
+    },
+    {
+      "date": "2026-08-12T09:10:01.472Z",
+      "topic": "memory",
+      "insight": "High memory usage detected (77% used), indicating potential optimization needs.",
+      "recommendation": "Monitor memory consumption and consider adjusting application settings or upgrading RAM for better performance."
+    },
+    {
+      "date": "2026-08-12T09:10:01.473Z",
+      "topic": "disk",
+      "insight": "Sufficient free disk space (1158.8 GB) but should be maintained at least 10% for optimal stability.",
+      "recommendation": "Ensure at least 10% free disk space remains available to prevent performance issues."
+    },
+    {
+      "date": "2026-08-12T09:22:56.772Z",
+      "topic": "memory",
+      "insight": "High memory usage (55%) detected, indicating potential optimization needs.",
+      "recommendation": "Monitor memory consumption and consider adjusting application settings or upgrading RAM for better performance."
+    },
+    {
+      "date": "2026-08-12T09:22:56.774Z",
+      "topic": "disk",
+      "insight": "Sufficient free disk space (1158.9 GB) but should be maintained at least 10% for optimal stability.",
+      "recommendation": "Ensure at least 10% free disk space remains available to prevent performance issues."
+    },
+    {
+      "date": "2026-08-12T09:47:55.840Z",
+      "topic": "memory",
+      "insight": "High memory usage (77%) detected, indicating potential optimization needs.",
+      "recommendation": "Monitor memory consumption and consider adjusting application settings or upgrading RAM for better performance."
+    },
+    {
+      "date": "2026-08-12T09:54:30.809Z",
+      "topic": "memory",
+      "insight": "Persistent high memory usage (77% used) indicates potential optimization needs.",
+      "recommendation": "Monitor memory consumption and consider adjusting application settings or upgrading RAM for better performance."
+    },
+    {
+      "date": "2026-08-12T09:54:30.810Z",
+      "topic": "disk",
+      "insight": "Sufficient free disk space (1158.9 GB), but should be maintained at least 10% for optimal stability.",
+      "recommendation": "Ensure at least 10% free disk space remains available to prevent performance issues."
+    },
+    {
+      "date": "2026-08-12T09:54:30.810Z",
+      "topic": "gpu",
+      "insight": "NVIDIA Quadro M1000M is underutilized compared to Intel HD Graphics 530, suggesting potential resource reallocation.",
+      "recommendation": "Prioritize GPU tasks for the NVIDIA Quadro M1000M to leverage its dedicated VRAM for model inference."
+    }
+  ]
+}

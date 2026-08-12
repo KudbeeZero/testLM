@@ -24,7 +24,7 @@ param(
     [string]$BaseUrl = "http://localhost:1234/v1",
 
     # Model id to use. If empty, the server's default model is used.
-    [string]$Model = "qwen/qwen3-8b",
+    [string]$Model = "qwen/qwen3-1.7b",
 
     # System prompt that defines the agent's behavior.
     [string]$SystemPrompt = @"
@@ -35,6 +35,15 @@ Be concise, accurate, and honest. When you are unsure, say so.
 
     # The user's request. If empty, read from stdin (interactive mode).
     [string]$Prompt = "",
+
+    # Watch the filesystem live and summarize work without needing the LLM.
+    [switch]$Watch,
+
+    # Directory to watch. Defaults to the current working directory.
+    [string]$WatchPath = ".",
+
+    # Log file to append live filesystem events to.
+    [string]$WatchLogPath = "",
 
     # Maximum number of tool-call iterations before stopping.
     [int]$MaxIterations = 10,
@@ -178,6 +187,85 @@ function Invoke-Tool {
 }
 
 # ---------------------------------------------------------------------------
+# Workspace watch helpers
+# ---------------------------------------------------------------------------
+function Get-WatchSummary {
+    param(
+        [System.Collections.Generic.List[object]]$Events
+    )
+
+    if ($null -eq $Events -or $Events.Count -eq 0) {
+        return "waiting for activity..."
+    }
+
+    $recent = $Events | Sort-Object Timestamp -Descending | Select-Object -First 12
+    $changeCounts = $recent | Group-Object ChangeType | Sort-Object Count -Descending
+    if ($changeCounts.Count -eq 0) {
+        return "waiting for activity..."
+    }
+
+    $part1 = ($changeCounts | Select-Object -First 3 | ForEach-Object { "{0}:{1}" -f $_.Name, $_.Count }) -join " | "
+    $topPaths = $recent | Group-Object Path | Sort-Object Count -Descending | Select-Object -First 3 |
+        ForEach-Object { $_.Name }
+    if ($topPaths.Count -gt 0) {
+        $part2 = "top: {0}" -f (($topPaths | ForEach-Object { [System.IO.Path]::GetFileName($_) }) -join ", ")
+        return "$part1 | $part2"
+    }
+
+    return $part1
+}
+
+function Start-WorkspaceWatch {
+    param(
+        [string]$Path = ".",
+        [string]$LogPath = ""
+    )
+
+    $watchRoot = if ([string]::IsNullOrWhiteSpace($Path) -or $Path -eq ".") {
+        (Get-Location).Path
+    } else {
+        (Resolve-Path -LiteralPath $Path).Path
+    }
+
+    if ([string]::IsNullOrWhiteSpace($LogPath)) {
+        $LogPath = Join-Path $watchRoot ".local-agent-watch.log"
+    }
+
+    $logDir = Split-Path -Parent $LogPath
+    if ($logDir -and -not (Test-Path -LiteralPath $logDir -PathType Container)) {
+        New-Item -ItemType Directory -Path $logDir -Force | Out-Null
+    }
+
+    $events = New-Object 'System.Collections.Generic.List[object]'
+    $watcher = New-Object System.IO.FileSystemWatcher $watchRoot
+    $watcher.IncludeSubdirectories = $true
+    $watcher.EnableRaisingEvents = $true
+    $watcher.NotifyFilter = [System.IO.NotifyFilters]::FileName -bor [System.IO.NotifyFilters]::DirectoryName -bor [System.IO.NotifyFilters]::LastWrite -bor [System.IO.NotifyFilters]::CreationTime -bor [System.IO.NotifyFilters]::Size
+
+    Write-Host "Watching workspace: $watchRoot" -ForegroundColor Cyan
+    Write-Host "Log file: $LogPath" -ForegroundColor DarkGray
+    Write-Host "Press Ctrl+C to stop." -ForegroundColor DarkGray
+
+    while ($true) {
+        $result = $watcher.WaitForChanged([System.IO.WatcherChangeTypes]::All, 1000)
+        if ($result.TimedOut) { continue }
+
+        $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+        $fullPath = if ([string]::IsNullOrWhiteSpace($result.Name)) { $watchRoot } else { (Join-Path $watchRoot $result.Name) }
+        $entry = [pscustomobject]@{
+            Timestamp = $timestamp
+            ChangeType = [string]$result.ChangeType
+            Path = $fullPath
+        }
+        $events.Add($entry) | Out-Null
+
+        Add-Content -LiteralPath $LogPath -Value ("{0}|{1}|{2}" -f $entry.Timestamp, $entry.ChangeType, $entry.Path) -Encoding UTF8
+        Write-Host ("[{0}] {1}: {2}" -f $entry.Timestamp, $entry.ChangeType, $entry.Path) -ForegroundColor Green
+        Write-Host ("Recent activity: {0}" -f (Get-WatchSummary -Events $events)) -ForegroundColor DarkGray
+    }
+}
+
+# ---------------------------------------------------------------------------
 # API helper
 # ---------------------------------------------------------------------------
 function Invoke-Chat {
@@ -200,6 +288,11 @@ function Invoke-Chat {
         -ContentType "application/json; charset=utf-8" -Body ([System.Text.Encoding]::UTF8.GetBytes($json))
 
     return $resp.choices[0].message
+}
+
+if ($Watch) {
+    Start-WorkspaceWatch -Path $WatchPath -LogPath $WatchLogPath
+    exit 0
 }
 
 # ---------------------------------------------------------------------------

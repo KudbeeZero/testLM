@@ -9,17 +9,31 @@ are **no dependencies to install** — it works out of the box on Windows.
 
 ## What's in this folder
 
-| File              | Description                                                       |
-| ----------------- | ----------------------------------------------------------------- |
-| `local-agent.ps1` | The agent itself (a single self-contained PowerShell script).     |
-| `README.md`       | This file.                                                        |
+| File                | Description                                                       |
+| ------------------- | ----------------------------------------------------------------- |
+| `local-agent.ps1`   | Lightweight PowerShell local agent (single file).                |
+| `os-agent/`         | Node.js engineering OS Agent (multi-provider, learning memory).   |
+| `agent/`            | PowerShell maintenance + learning modules (backend).             |
+| `ENVIRONMENT.md`    | **Full `.env` reference** — every key, service, and setup step.   |
+| `README.md`         | This file.                                                        |
+
+## Environment & API keys
+
+> **Read [ENVIRONMENT.md](ENVIRONMENT.md) first.** It is the single source of
+> truth for every `.env` variable, API key, service, and setup step — so we
+> never lose track of the configuration.
+
+All secrets live in the workspace **`.env`** file (gitignored). The os-agent
+loads it automatically. See `ENVIRONMENT.md` for the full list of providers
+(Gemini, Grok, Lightning), databases (Neon, Upstash Redis/Vector), MCP servers,
+and the setup checklist.
 
 ## Current setup
 
-- **Model:** `qwen/qwen3-8b` (Qwen3 8B, Q4_K_M, ~5 GB) — installed via `lms`.
-- **Server:** LM Studio local server on `http://localhost:1234/v1` (start with `lms server start`).
-- **Agent default:** `local-agent.ps1` defaults to `qwen/qwen3-8b`.
-- **CLI:** `lms` is installed at `%USERPROFILE%\.lmstudio\bin` and added to the user PATH.
+- **Local model:** `qwen/qwen3-1.7b` (fast, ~2.5 GB) — installed via `lms`.
+- **Server:** LM Studio local server on `http://localhost:1234/v1`.
+- **OS Agent:** `os-agent/` (Node) — multi-provider (local / Gemini / Grok), stores learnings in Neon Postgres + mirrors to Upstash Redis.
+- **CLI:** `lms` at `%USERPROFILE%\.lmstudio\bin` (on PATH).
 
 ### Quick start
 

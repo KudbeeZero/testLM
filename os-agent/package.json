@@ -1,0 +1,23 @@
+{
+  "name": "os-agent",
+  "version": "0.1.0",
+  "description": "Engineering OS Agent - keeps the laptop optimized and always learning, using local LM Studio models or the Gemini API.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dashboard": "node dashboard-server.js",
+    "learn": "node index.js --learn-only",
+    "maintain": "node index.js --maintain-only"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "@lmstudio/sdk": "^0.1.0",
+    "@upstash/box": "^0.6.3",
+    "@upstash/qstash": "^2.11.3",
+    "@upstash/redis": "^1.38.2",
+    "@upstash/vector": "^1.2.3",
+    "dotenv": "^16.4.5",
+    "pg": "^8.23.0"
+  }
+}

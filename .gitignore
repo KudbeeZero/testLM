@@ -2,6 +2,15 @@
 agent/logs/
 *.log
 
+# Secrets / local config (never commit API keys)
+.env
+.grok/
+grok.env
+os-agent/.env
+
+# Node
+node_modules/
+
 # OS / editor noise
 Thumbs.db
 .DS_Store
