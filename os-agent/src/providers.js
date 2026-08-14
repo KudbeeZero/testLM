@@ -3,6 +3,7 @@ import {
   PROVIDER, LOCAL_MODEL, LM_STUDIO_BASE_URL,
   GEMINI_API_KEY, GEMINI_MODEL,
   XAI_API_KEY, GROK_MODEL, MODEL_TTL_SECONDS, RATE_LIMIT_PER_MINUTE,
+  DEEPSEEK_API_KEY, DEEPSEEK_MODEL, DEEPSEEK_BASE_URL,
 } from "./config.js";
 import { overBudget } from "./budget.js";
 
@@ -99,7 +100,33 @@ async function grokGenerate(prompt) {
   return data.choices?.[0]?.message?.content ?? "";
 }
 
-const generators = { local: localGenerate, gemini: geminiGenerate, grok: grokGenerate };
+// --- DeepSeek (OpenAI-compatible) -----------------------------------------
+async function deepseekGenerate(prompt) {
+  if (!DEEPSEEK_API_KEY) throw new Error("DEEPSEEK_API_KEY is not set in .env");
+  const resp = await fetch(`${DEEPSEEK_BASE_URL}/chat/completions`, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${DEEPSEEK_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: DEEPSEEK_MODEL,
+      messages: [
+        { role: "system", content: "You are a concise analysis engine that returns JSON." },
+        { role: "user", content: prompt },
+      ],
+      max_tokens: 1500,
+    }),
+  });
+  if (!resp.ok) {
+    const text = await resp.text();
+    throw new Error(`DeepSeek API error ${resp.status}: ${text.slice(0, 300)}`);
+  }
+  const data = await resp.json();
+  return data.choices?.[0]?.message?.content ?? "";
+}
+
+const generators = { local: localGenerate, gemini: geminiGenerate, grok: grokGenerate, deepseek: deepseekGenerate };
 
 export async function generate(prompt) {
   const fn = generators[PROVIDER];

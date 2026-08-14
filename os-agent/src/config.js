@@ -28,6 +28,10 @@ export const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-flash-latest";
 export const XAI_API_KEY = process.env.XAI_API_KEY || "";
 export const GROK_MODEL = process.env.GROK_MODEL || "grok-4.3";
 
+export const DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY || "";
+export const DEEPSEEK_MODEL = process.env.DEEPSEEK_MODEL || "deepseek-v4-flash";
+export const DEEPSEEK_BASE_URL = process.env.DEEPSEEK_BASE_URL || "https://api.deepseek.com";
+
 export const LIGHTNING_API_KEY = process.env.LIGHTNING_API_KEY || "";
 export const LIGHTNING_USER_ID = process.env.LIGHTNING_USER_ID || "";
 
@@ -49,6 +53,7 @@ export const AGENT_SCHEMA = {
   local: process.env.PG_DB_LOCAL || "agent_local",
   gemini: process.env.PG_DB_GEMINI || "agent_gemini",
   grok: process.env.PG_DB_GROK || "agent_grok",
+  deepseek: process.env.PG_DB_DEEPSEEK || "agent_deepseek",
 };
 
 export const MODEL_TTL_SECONDS = Number(process.env.MODEL_TTL_SECONDS || 600);
@@ -61,5 +66,5 @@ export const MONTHLY_BUDGET_USD = Number(process.env.MONTHLY_BUDGET_USD || 50);
 export const RATE_LIMIT_PER_MINUTE = Number(process.env.RATE_LIMIT_PER_MINUTE || 30);
 
 export function providerLabel() {
-  return { local: "local (LM Studio)", gemini: "Gemini", grok: "Grok (xAI)" }[PROVIDER] || PROVIDER;
+  return { local: "local (LM Studio)", gemini: "Gemini", grok: "Grok (xAI)", deepseek: "DeepSeek" }[PROVIDER] || PROVIDER;
 }
