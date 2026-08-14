@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gas Town Operations Dashboard</title>
+  <style>
+    :root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2128;--border:#30363d;--text:#e6edf3;--muted:#8b949e;
+          --green:#3fb950;--red:#f85149;--yellow:#d29922;--blue:#58a6ff;--purple:#bc8cff}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    .wrap{max-width:1280px;margin:0 auto;padding:20px}
+    header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+           border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:20px}
+    h1{margin:0;font-size:24px;letter-spacing:.5px}
+    h1 span{color:var(--purple)}
+    .sub{color:var(--muted);font-size:13px;margin-top:4px}
+    .live{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s infinite}
+    .dot.off{background:var(--red);box-shadow:0 0 8px var(--red)}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+    .card{background:var(--panel);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+    .card h3{margin:0;padding:12px 14px;font-size:13px;text-transform:uppercase;letter-spacing:.8px;
+             background:var(--panel2);border-bottom:1px solid var(--border);color:var(--muted)}
+    .card .body{padding:14px}
+    .stat{display:flex;justify-content:space-between;padding:8px 14px;border-bottom:1px solid #21262d;font-size:14px}
+    .stat:last-child{border-bottom:none}
+    .stat .k{color:var(--muted)}
+    .pill{display:inline-block;padding:2px 8px;border-radius:20px;font-size:12px;font-weight:600}
+    .pill.g{background:rgba(63,185,80,.15);color:var(--green)}
+    .pill.r{background:rgba(248,81,73,.15);color:var(--red)}
+    .pill.y{background:rgba(210,153,34,.15);color:var(--yellow)}
+    .pill.n{background:#21262d;color:var(--muted)}
+    .banner{border-radius:8px;padding:16px;margin-bottom:16px;border:1px solid var(--border);display:flex;
+            justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+    .banner.ok{background:rgba(63,185,80,.1);border-color:rgba(63,185,80,.4)}
+    .banner.bad{background:rgba(248,81,73,.1);border-color:rgba(248,81,73,.4)}
+    .banner .t{font-size:18px;font-weight:700}
+    .tbl{width:100%;border-collapse:collapse;font-size:13px}
+    .tbl th{text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.6px;
+            padding:6px 10px;border-bottom:1px solid var(--border)}
+    .tbl td{padding:7px 10px;border-bottom:1px solid #21262d}
+    .tbl tr:last-child td{border-bottom:none}
+    .mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+    .section-title{margin:26px 0 12px;font-size:15px;color:var(--blue);font-weight:600}
+    .meta{color:var(--muted);font-size:12px}
+    .tag{font-size:11px;color:var(--muted);background:#21262d;padding:1px 6px;border-radius:4px;margin-left:6px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Gas Town <span>Operations</span></h1>
+        <div class="sub" id="sub">connecting…</div>
+      </div>
+      <div class="live">
+        <span class="dot" id="livedot"></span>
+        <span id="live">connecting</span>
+      </div>
+    </header>
+
+    <div class="banner" id="banner">
+      <div>
+        <div class="t" id="bannerTitle">…</div>
+        <div class="meta" id="bannerMeta"></div>
+      </div>
+      <div class="meta" id="bannerDb"></div>
+    </div>
+
+    <!-- Overview stats -->
+    <div class="grid" id="overview"></div>
+
+    <!-- Agent databases -->
+    <div class="section-title">Per-Agent Databases (Neon Postgres schemas)</div>
+    <div class="tbl-wrap">
+      <table class="tbl" id="agentTbl">
+        <thead><tr><th>Agent</th><th>Schema</th><th>Exists</th><th>Endpoint</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Core tables -->
+    <div class="section-title">Core Data Tables</div>
+    <div class="grid" id="tables"></div>
+
+    <!-- Env variables -->
+    <div class="section-title">Environment Variables <span class="tag" id="envCount"></span></div>
+    <div class="card">
+      <table class="tbl">
+        <thead><tr><th>Variable</th><th>Kind</th><th>Status</th><th>Value</th></tr></thead>
+        <tbody id="envBody"></tbody>
+      </table>
+    </div>
+
+    <!-- API health -->
+    <div class="section-title">API Health</div>
+    <div class="card">
+      <table class="tbl">
+        <thead><tr><th>API</th><th>Path</th><th>Status</th></tr></thead>
+        <tbody id="apiBody"></tbody>
+      </table>
+      <div class="body meta" id="apiBase" style="padding:8px 14px"></div>
+    </div>
+
+    <!-- Bus firewall -->
+    <div class="section-title">Event Bus &amp; Firewall</div>
+    <div class="grid" id="busGrid"></div>
+
+    <!-- Phone system -->
+    <div class="section-title">Phone System</div>
+    <div class="grid" id="phoneGrid"></div>
+
+    <!-- Interactive terminal -->
+    <div class="section-title">Interactive Terminal <span class="tag">live · Gemini dispatcher</span></div>
+    <div class="card">
+      <div class="body">
+        <div id="term" class="terminal" style="height:280px;overflow:auto;background:#0b0b0b;color:#cfcfcf;padding:12px;font-family:ui-monospace,monospace">Gas Town terminal ready. Type a command…</div>
+        <div class="controls" style="display:flex;gap:6px;margin-top:8px">
+          <input id="tcmd" type="text" placeholder="e.g. npm run verify:quick, dir, show budget" style="flex:1;padding:8px;border:1px solid #30363d;background:#0d1117;color:#e6edf3" />
+          <button id="trun" style="padding:8px 14px;background:#21262d;border:1px solid #30363d;color:#e6edf3;border-radius:6px">Run</button>
+        </div>
+        <div class="meta" id="termMeta" style="margin-top:6px"></div>
+      </div>
+    </div>
+
+    <!-- Inception Labs plugin -->
+    <div class="section-title">Inception Labs <span class="tag">Mercury-2</span> <span class="tag" id="incepTag"></span></div>
+    <div class="grid" id="incepGrid"></div>
+
+    <!-- AWS / EC2 / RDS plugin -->
+    <div class="section-title">AWS · EC2 · RDS <span class="tag" id="awsRegion"></span></div>
+    <div class="grid" id="awsGrid"></div>
+    <table class="tbl" id="awsTbl" style="margin-top:10px;display:none">
+      <thead><tr><th>EC2 Instance</th><th>Status</th><th>Region</th></tr></thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="meta" style="text-align:center;margin-top:24px;opacity:.6">
+      Gas Town Operations Dashboard · live WebSocket feed · updates every 5s
+    </div>
+  </div>
+
+  <script>
+    const $ = q => document.querySelector(q);
+    const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    const pill = (ok, good="ok", bad="missing") => ok === true ? `<span class="pill g">${good}</span>`
+      : ok === false ? `<span class="pill r">${bad}</span>`
+      : `<span class="pill n">${ok ?? "—"}</span>`;
+
+    function render(state) {
+      // Header
+      $('#live').textContent = new Date(state.timestamp).toLocaleTimeString();
+      $('#sub').textContent = `Workspace: ${esc(state.workspace)} · updated ${new Date(state.timestamp).toLocaleTimeString()}`;
+      $('#bannerMeta').textContent = `Database connected: ${state.database.connected ? "yes" : "no"}`;
+      $('#bannerMeta').textContent += ` · API base: ${esc(state.apis.base)}`;
+
+      // Banner
+      const dbOk = state.database.connected;
+      $('#banner').className = 'banner ' + (dbOk ? 'ok' : 'bad');
+      $('#bannerTitle').textContent = dbOk ? `● On-line — ${state.database.database}` : `● Database unreachable`;
+      $('#bannerDb').textContent = dbOk ? `Size: ${state.database.size}` : (state.database.error || '');
+
+      // Overview stats
+      const apiOk = state.apis.checks.filter(c => c.status === 'ok').length;
+      $('#overview').innerHTML = ['Total Tables','Env Configured','Env Missing','APIs OK']
+        .map((label, i) => `<div class="card"><div class="body" style="text-align:center;padding:18px">
+            <div style="font-size:28px;font-weight:700">${esc([state.database.tables.length, state.env.counts.configured, state.env.counts.missing, apiOk][i])}</div>
+            <div class="meta">${esc(label)}</div></div></div>`).join('');
+
+      // Agent database schemas + their tables
+      $('#agentTbl tbody').innerHTML = (state.database.agentSchemas || []).map(a =>
+        `<tr><td>${esc(a.label)}</td><td class="mono">${esc(a.db)}</td>
+         <td>${pill(a.exists === true, 'yes', 'absent')}</td>
+         <td class="mono">${(a.tables || []).map(t => `${esc(t.name)} (${t.count ?? '—'})`).join(', ') || '—'}</td></tr>`).join('');
+
+      // Core tables (aggregate per table name)
+      $('#tables').innerHTML = (state.database.tables || []).map(t =>
+        `<div class="card"><h3>${esc(t.name)} <span class="tag">${esc((t.schemas || []).join('·')) || 'shared'}</span></h3><div class="body">
+          <div class="stat"><span class="k">Total Rows (all agents)</span><span>${esc(t.count)}</span></div>
+          <div class="stat"><span class="k">Schemas</span><span>${pill(t.schemas && t.schemas.length > 0)}</span></div>
+        </div></div>`).join('');
+
+      // Env vars
+      $('#envCount').textContent = `${state.env.counts.configured}/${state.env.counts.total} configured`;
+      $('#envBody').innerHTML = state.env.vars.map(v =>
+        `<tr><td class="mono">${esc(v.key)}</td><td>${esc(v.kind)}</td>
+         <td>${pill(v.status === 'configured')}</td>
+         <td class="mono">${v.secret ? (v.value ? esc(v.value) + ' <span class="pill y">masked</span>' : '') : (v.status === 'configured' ? esc(v.value) : '')}</td></tr>`).join('');
+
+      // API health
+      $('#apiBase').textContent = state.apis.error ? `Error: ${esc(state.apis.error)}` : `Base URL: ${esc(state.apis.base)}`;
+      $('#apiBody').innerHTML = state.apis.checks.map(c =>
+        `<tr><td>${esc(c.friendly)}</td><td class="mono">${esc(c.path)}</td>
+         <td>${c.status === 'ok' ? `<span class="pill g">OK</span>` : `<span class="pill r">${esc(c.status)}</span>`}</td></tr>`).join('');
+
+      // ---- Gas Town feed (bus + phone) ----
+      const gt = state.gastown || null;
+      if (gt) renderGasTown(gt);
+
+      // ---- Inception plugin ----
+      if (state.inception) renderInception(state.inception);
+
+      // ---- AWS / EC2 / RDS plugin ----
+      if (state.aws) renderAws(state.aws);
+    }
+
+    function renderInception(inc) {
+      $('#incepTag').textContent = inc.status === 'configured' ? '● configured' : '○ key needed';
+      document.getElementById('incepTag').className = inc.status === 'configured' ? 'tag pill g' : 'tag pill y';
+      const healthOk = inc.health && inc.health.reachable === 'ok';
+      $('#incepGrid').innerHTML = [
+        ['Model', `<span class="mono">${esc(inc.model || '—')}</span>`],
+        ['API Key', inc.status === 'configured' ? `<span class="mono">${esc(inc.apiKey || '')}</span>` : `<span class="pill r">needs key</span>`],
+        ['Endpoint', `<span class="mono">${esc(inc.endpoint || '—')}</span>`],
+      ].map(([k, v]) => `<div class="card"><div class="body"><div class="stat"><span class="k">${esc(k)}</span><span>${v}</span></div></div></div>`).join('') +
+      `<div class="card"><h3>Live Health</h3><div class="body">
+        <div class="stat"><span class="k">Reachable</span>${pill(healthOk === true, 'ok', 'down')}</div>
+        <div class="stat"><span class="k">Latency</span><span>${inc.health ? esc(inc.health.latencyMs ?? '—') + 'ms' : '—'}</span></div>
+        <div class="stat"><span class="k">Monthly Budget</span><span>$${esc(inc.budget?.monthlyUsd || '50')}</span></div>
+      </div></div>`;
+    }
+
+    function renderAws(aws) {
+      $('#awsRegion').textContent = aws.region || '';
+      const rdsOk = aws.rds && aws.rds.cluster && aws.rds.cluster !== 'n/a';
+      const vpc = aws.vpcId || '—';
+      $('#awsGrid').innerHTML = [
+        ['VPC', `<span class="mono">${esc(vpc)}</span>`],
+        ['EC2 Instances', `<span class="pill g">${esc(aws.ec2Instances?.length ?? 0)}</span>`],
+        ['RDS Cluster', pill(rdsOk)],
+      ].map(([k, v]) => `<div class="card"><div class="body"><div class="stat"><span class="k">${esc(k)}</span><span>${v}</span></div></div></div>`).join('');
+
+      const insts = (aws.ec2Instances || []).map(i =>
+        `<tr><td class="mono">${esc(i.id)}</td><td>${pill(i.status === 'provisioned', 'provisioned', 'down')}</td>
+         <td class="mono">${esc(aws.region || '—')}</td></tr>`).join('');
+      const tbl = document.getElementById('awsTbl');
+      if (insts) { tbl.style.display = 'table'; tbl.querySelector('tbody').innerHTML = insts; }
+      else { tbl.style.display = 'none'; }
+    }
+
+    function renderGasTown(gt) {
+      // Bus firewall
+      const bus = gt.bus || {};
+      const t = bus.transport || {};
+      $('#busGrid').innerHTML = [
+        ['Event Channel', `<span class="mono">${esc(bus.channel || '—')}</span>`],
+        ['Bus Mode', pill(bus.connected, 'connected', 'offline')],
+        ['Sentinel Policy', `<span class="pill y">${esc(bus.firewall?.policy || 'monitor')}</span>`],
+      ].map(([k, v]) => `<div class="card"><div class="body"><div class="stat"><span class="k">${esc(k)}</span><span>${v}</span></div></div></div>`).join('') +
+      `<div class="card"><h3>Transport</h3><div class="body">
+        <div class="stat"><span class="k">Primary Redis</span>${pill(t.primary === 'configured')}</div>
+        <div class="stat"><span class="k">Worker Redis</span>${pill(t.worker === 'configured')}</div>
+        <div class="stat"><span class="k">QStash</span>${pill(t.qstash === 'configured')}</div>
+      </div></div>`;
+
+      // Phone system
+      const ph = gt.phone || {};
+      const nodes = (ph.nodes || []).map(n => n.id).join(', ') || '—';
+      $('#phoneGrid').innerHTML = [
+        ['Phone Tree Nodes', `<span class="mono">${esc(nodes)}</span>`],
+        ['Calls Logged', `<span class="pill g">${esc(ph.callCount)}</span>`],
+        ['Voicemails', `<span class="pill y">${esc(ph.voicemailCount)}</span>`],
+      ].map(([k, v]) => `<div class="card"><div class="body"><div class="stat"><span class="k">${esc(k)}</span><span>${v}</span></div></div></div>`).join('');
+    }
+
+    // ---- Interactive terminal ----
+    const termEl = () => document.getElementById('term');
+    function termLog(msg, cls = '') {
+      const t = termEl();
+      const line = document.createElement('div');
+      line.style.cssText = cls === 'out' ? 'color:#7ee787' : cls === 'err' ? 'color:#ff7b72' : 'color:#cfcfcf';
+      line.textContent = msg;
+      t.appendChild(line);
+      t.scrollTop = t.scrollHeight;
+    }
+
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    }
+
+    document.getElementById('trun').addEventListener('click', runTerminal);
+    document.getElementById('tcmd').addEventListener('keydown', e => { if (e.key === 'Enter') runTerminal(); });
+
+    async function runTerminal() {
+      const input = document.getElementById('tcmd');
+      const cmd = input.value.trim();
+      if (!cmd) return;
+      termLog(`$ ${cmd}`);
+      input.value = '';
+      document.getElementById('termMeta').textContent = 'running…';
+      try {
+        const res = await fetch('/api/terminal', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ command: cmd }),
+        });
+        const r = await res.json();
+        document.getElementById('termMeta').textContent = r.meta
+          ? `model: ${r.meta.model} · latency: ${r.meta.latencyMs}ms · cost: $${r.meta.costUsd}`
+          : '';
+        termLog(r.output || '(no output)', 'out');
+      } catch (e) {
+        termLog(`[terminal error] ${e.message}`, 'err');
+        document.getElementById('termMeta').textContent = '';
+      }
+    }
+
+    async function load() {
+      try {
+        const res = await fetch('/api/state');
+        render(await res.json());
+        $('#livedot').className = 'dot';
+        $('#live').textContent = 'live';
+      } catch (e) {
+        $('#livedot').className = 'dot off';
+        $('#live').textContent = 'offline';
+      }
+    }
+
+    // WebSocket live feed
+    function connectWS() {
+      const proto = location.protocol === 'https:' ? 'wss' : 'ws';
+      const ws = new WebSocket(`${proto}://${location.host}/ws`);
+      ws.onmessage = e => {
+        try { render(JSON.parse(e.data)); $('#livedot').className = 'dot'; $('#live').textContent = 'live'; }
+        catch {}
+      };
+      ws.onclose = () => { $('#livedot').className = 'dot off'; $('#live').textContent = 'reconnecting…'; setTimeout(connectWS, 3000); };
+      ws.onerror = () => ws.close();
+    }
+
+    load();
+    setInterval(load, 8000); // polling fallback
+    connectWS();
+  </script>
+</body>
+</html>

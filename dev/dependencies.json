@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "note": "Single source of truth for the dev toolchain and project dependencies. Predicted from the files in this repo and the stack used across apps (os-agent, v8-embedder, Kudbee-fuel-gage).",
+  "tools": {
+    "git": { "required": true, "verify": "git --version", "windows": "winget install --id Git.Git -e", "expected": ">= 2.x" },
+    "node": { "required": true, "verify": "node --version", "windows": "winget install --id OpenJS.NodeJS -e", "expected": ">= 20 (LTS)" },
+    "npm": { "required": true, "verify": "npm --version", "note": "ships with Node.js", "expected": ">= 9" },
+    "rust": { "required": true, "verify": "rustc --version", "install": "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y", "expected": ">= 1.72" },
+    "cargo": { "required": true, "verify": "cargo --version", "note": "ships with Rust via rustup", "expected": ">= 1.72" },
+    "docker": { "required": true, "verify": "docker --version", "windows": "winget install --id Docker.DockerDesktop -e", "expected": ">= 24" },
+    "kubectl": { "optional": true, "verify": "kubectl version --client", "expected": "stable" },
+    "kind": { "optional": true, "verify": "kind --version", "expected": ">= 0.x" }
+  },
+  "project_packages": {
+    "node": {
+      "engine": ">= 20",
+      "workspaces": ["os-agent", "Kudbee-fuel-gage"],
+      "root_install": "npm ci",
+      "manifest": "os-agent/package.json"
+    },
+    "rust": {
+      "workspace": "v8-embedder/host-rust",
+      "root_install": "cargo build --release",
+      "manifest": "v8-embedder/host-rust/Cargo.toml"
+    }
+  },
+  "os_agent_npm_deps": {
+    "@google/generative-ai": "^0.21.0",
+    "@lmstudio/sdk": "^0.1.0",
+    "@upstash/box": "^0.6.3",
+    "@upstash/qstash": "^2.11.3",
+    "@upstash/redis": "^1.38.2",
+    "@upstash/vector": "^1.2.3",
+    "pg": "^8.23.0",
+    "ws": "^8.13.0"
+  },
+  "post_install": [
+    "git config --global user.name 'Kudbee'",
+    "git config --global user.email 'dominick.ziola@gmail.com'",
+    "SOURCE ~/.cargo/env if rust installed"
+  ]
+}

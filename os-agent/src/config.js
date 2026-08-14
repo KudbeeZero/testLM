@@ -20,9 +20,10 @@ export const LM_STUDIO_BASE_URL = process.env.LM_STUDIO_BASE_URL || "ws://localh
 
 // Accept the common misspelling "GEMENI_API_KEY" as a fallback.
 export const GEMINI_API_KEY = process.env.GEMINI_API_KEY || process.env.GEMENI_API_KEY || "";
-// Cheapest best thinking models. gemini-2.5-flash = free-tier hybrid reasoning;
-// grok-4.3 = cheapest general reasoning on xAI.
-export const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+// Cheapest best thinking models. Use gemini-flash-latest (a rolling alias) so
+// agent jobs keep working as Google rotates point releases; gemini-2.5-flash is
+// retired for new users (404). grok-4.x = cheapest general reasoning on xAI.
+export const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-flash-latest";
 
 export const XAI_API_KEY = process.env.XAI_API_KEY || "";
 export const GROK_MODEL = process.env.GROK_MODEL || "grok-4.3";

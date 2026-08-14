@@ -1,0 +1,20 @@
+# Dev compose: mounts the repo read-write, builds deps on first up.
+services:
+  dev:
+    build:
+      context: ..
+      dockerfile: dev/Dockerfile
+    image: testlm-dev:latest
+    container_name: testlm-dev
+    working_dir: /workspace
+    volumes:
+      - ..:/workspace
+    environment:
+      # Mount the host docker socket so docker/kubectl work from inside.
+      - PGHOST=${PGHOST:-}
+    stdin_open: true
+    tty: true
+    command: sleep infinity
+    # Uncomment to enable Docker-from-inside (requires Docker Desktop socket sharing):
+    # volumes:
+    #   - /var/run/docker.sock:/var/run/docker.sock

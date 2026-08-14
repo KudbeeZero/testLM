@@ -109,6 +109,24 @@
       "topic": "gpu",
       "insight": "NVIDIA Quadro M1000M is underutilized compared to Intel HD Graphics 530, suggesting potential resource reallocation.",
       "recommendation": "Prioritize GPU tasks for the NVIDIA Quadro M1000M to leverage its dedicated VRAM for model inference."
+    },
+    {
+      "date": "2026-08-12T19:53:47.482Z",
+      "topic": "memory",
+      "insight": "Running 'qwen/qwen3-8b' on a 15.9 GB RAM system keeps memory usage elevated at 63%, as the Nvidia Quadro M1000M's limited VRAM forces model layers to be offloaded to system RAM.",
+      "recommendation": "Optimize local inference server parameters to limit context window size or use a more aggressively quantized model (e.g., Q4_K_S) to free up system RAM."
+    },
+    {
+      "date": "2026-08-12T19:53:47.482Z",
+      "topic": "temp",
+      "insight": "The user temp folder size is currently down to 61 MB following recent cleanups (227 MB and 44 MB freed), showing diminishing returns for frequent automated purges.",
+      "recommendation": "Set temp cleanup scripts to execute conditionally only when temp directory size exceeds 1 GB to avoid redundant disk I/O operations."
+    },
+    {
+      "date": "2026-08-12T19:53:47.482Z",
+      "topic": "optimization",
+      "insight": "With 1158.8 GB of free disk space, disk capacity is not a bottleneck, whereas system RAM remains the primary performance constraint.",
+      "recommendation": "Reallocate agent background health checks to prioritize dynamic RAM reclamation and process monitoring over disk maintenance tasks."
     }
   ]
 }
