@@ -58,6 +58,28 @@ export const AGENT_SCHEMA = {
 
 export const MODEL_TTL_SECONDS = Number(process.env.MODEL_TTL_SECONDS || 600);
 
+// --- Level 0-4 Mayor routing configuration ---
+export const ROUTER_ENABLED = String(process.env.ROUTER_ENABLED || "false") === "true";
+export const PHI4_ENABLED = String(process.env.PHI4_ENABLED || "true") === "true";
+export const PHI4_MAX_CONTEXT = Number(process.env.PHI4_MAX_CONTEXT || 8192);
+export const PHI4_TIMEOUT_MS = Number(process.env.PHI4_TIMEOUT_MS || 60000);
+export const PHI4_MAX_INPUT = Number(process.env.PHI4_MAX_INPUT || 4000);
+export const PHI4_ESCALATION_ENABLED = String(process.env.PHI4_ESCALATION_ENABLED || "true") === "true";
+export const ROUTER_DEFAULT_LEVEL = Number(process.env.ROUTER_DEFAULT_LEVEL || 1);
+
+// --- Redis resource guard (Upstash ~500K monthly request quota) ---
+// Caps detailed telemetry writes so observability cannot consume the quota.
+export const TELEMETRY_MAX_WRITES = Number(process.env.TELEMETRY_MAX_WRITES || 100000);
+export const TELEMETRY_FLUSH_EVERY = Number(process.env.TELEMETRY_FLUSH_EVERY || 20);
+
+// Optional per-token pricing (USD). Unknown providers stay null (not fabricated).
+export const PRICING = {
+  gemini: { inPer1k: Number(process.env.GEMINI_IN_PER_1K || 0), outPer1k: Number(process.env.GEMINI_OUT_PER_1K || 0) },
+  grok: { inPer1k: Number(process.env.GROK_IN_PER_1K || 0), outPer1k: Number(process.env.GROK_OUT_PER_1K || 0) },
+  deepseek: { inPer1k: Number(process.env.DEEPSEEK_IN_PER_1K || 0), outPer1k: Number(process.env.DEEPSEEK_OUT_PER_1K || 0) },
+  local: { inPer1k: 0, outPer1k: 0 },
+};
+
 // Monthly LLM spend budget (USD). Mirrors the Kudbee MONTHLY_BUDGET_USD pattern.
 export const MONTHLY_BUDGET_USD = Number(process.env.MONTHLY_BUDGET_USD || 50);
 

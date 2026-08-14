@@ -13,7 +13,8 @@
 import { execFileSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
 import { AGENT_DIR, MEMORY_FILE, PROVIDER, providerLabel, LOCAL_MODEL } from "./src/config.js";
-import { generate } from "./src/providers.js";
+import { route } from "./src/router.js";
+import { createLearning } from "./src/learning.js";
 import { saveLearnings, closeDb } from "./src/db.js";
 import { setState } from "./src/upstash.js";
 
@@ -52,6 +53,16 @@ async function runLearning() {
   const mem = readMemory();
   const context = JSON.stringify(mem, null, 2);
 
+  // P0 no-call: if the health snapshot is unchanged since the last run, there
+  // is nothing new to learn — skip the model call entirely (token/Redis savings).
+  const lastRun = mem.last_run || {};
+  const healthNow = mem.health?.last_check;
+  if (healthNow && healthNow === lastRun.healthCheck) {
+    console.log("[no-call] health unchanged since last run — skipping model call (existing knowledge).");
+    return;
+  }
+  mem.last_run = { ...lastRun, healthCheck: healthNow };
+
   const prompt = `You are the learning engine for an engineering OS Agent on a local machine.
 Analyze the following system memory (health, optimizations, and prior learnings)
 and produce concrete learnings about how to keep THIS machine optimized.
@@ -67,7 +78,7 @@ Return a JSON array of 2 to 4 new learning objects. Each object must have:
 Base your learnings on the actual health numbers. Do not repeat learnings that
 already exist. Return ONLY the JSON array, no extra text.`;
 
-  const text = await generate(prompt);
+  const text = await route(prompt);
 
   // Extract JSON array (strip markdown fences / trailing text first).
   const cleaned = text.replace(/```json|```/g, "").trim();
@@ -103,10 +114,12 @@ already exist. Return ONLY the JSON array, no extra text.`;
       if (!topic || !insight) continue;
       const key = `${topic}|${insight}`;
       if (!existing.has(key)) {
-        mem.learnings.push({
-          date: new Date().toISOString(),
+        const learning = createLearning({
           topic, insight, recommendation: rec ?? null,
+          source: "os-agent", taskType: "learning_synthesis",
+          provider: PROVIDER, model: LOCAL_MODEL,
         });
+        mem.learnings.push(learning);
         existing.add(key);
         added++;
       }

@@ -4,8 +4,9 @@ import {
   GEMINI_API_KEY, GEMINI_MODEL,
   XAI_API_KEY, GROK_MODEL, MODEL_TTL_SECONDS, RATE_LIMIT_PER_MINUTE,
   DEEPSEEK_API_KEY, DEEPSEEK_MODEL, DEEPSEEK_BASE_URL,
+  PRICING,
 } from "./config.js";
-import { overBudget } from "./budget.js";
+import { overBudget, recordSpend } from "./budget.js";
 
 /**
  * Simple token-bucket rate limiter. Enforces at most `perMinute` calls per
@@ -36,13 +37,11 @@ class RateLimiter {
 const limiter = new RateLimiter(RATE_LIMIT_PER_MINUTE);
 
 /**
- * Unified provider interface: each provider exposes `generate(prompt) -> string`.
+ * Each provider returns { content, usage } where usage is null when the
+ * provider does not expose token counts (we never fabricate measurements).
  */
 
 // --- Local (LM Studio, OpenAI-compatible HTTP API) -------------------------
-// Uses the HTTP server (http://localhost:1234/v1). The @lmstudio/sdk requires
-// LM Studio's WebSocket SDK server, which may not be enabled; the HTTP API is
-// reliable and already verified.
 async function localGenerate(prompt) {
   const base = LM_STUDIO_BASE_URL.replace(/^ws:\/\//, "http://").replace(/\/$/, "");
   const resp = await fetch(`${base}/v1/chat/completions`, {
@@ -62,7 +61,10 @@ async function localGenerate(prompt) {
     throw new Error(`LM Studio error ${resp.status}: ${text.slice(0, 300)}`);
   }
   const data = await resp.json();
-  return data.choices?.[0]?.message?.content ?? "";
+  return {
+    content: data.choices?.[0]?.message?.content ?? "",
+    usage: data.usage || null,
+  };
 }
 
 // --- Gemini (Google) ------------------------------------------------------
@@ -71,7 +73,13 @@ async function geminiGenerate(prompt) {
   const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
   const model = genAI.getGenerativeModel({ model: GEMINI_MODEL });
   const result = await model.generateContent(prompt);
-  return result.response.text();
+  const usage = result.response.usageMetadata || null;
+  return {
+    content: result.response.text(),
+    usage: usage
+      ? { prompt_tokens: usage.promptTokenCount ?? null, completion_tokens: usage.candidatesTokenCount ?? null }
+      : null,
+  };
 }
 
 // --- Grok (xAI, OpenAI-compatible) ----------------------------------------
@@ -97,10 +105,16 @@ async function grokGenerate(prompt) {
     throw new Error(`Grok API error ${resp.status}: ${text.slice(0, 300)}`);
   }
   const data = await resp.json();
-  return data.choices?.[0]?.message?.content ?? "";
+  return {
+    content: data.choices?.[0]?.message?.content ?? "",
+    usage: data.usage || null,
+  };
 }
 
 // --- DeepSeek (OpenAI-compatible) -----------------------------------------
+// NOTE: DeepSeek is intentionally EXCLUDED from application routing. This
+// implementation is preserved for legacy/read-only reference only and is never
+// selected by the router.
 async function deepseekGenerate(prompt) {
   if (!DEEPSEEK_API_KEY) throw new Error("DEEPSEEK_API_KEY is not set in .env");
   const resp = await fetch(`${DEEPSEEK_BASE_URL}/chat/completions`, {
@@ -123,26 +137,88 @@ async function deepseekGenerate(prompt) {
     throw new Error(`DeepSeek API error ${resp.status}: ${text.slice(0, 300)}`);
   }
   const data = await resp.json();
-  return data.choices?.[0]?.message?.content ?? "";
+  return {
+    content: data.choices?.[0]?.message?.content ?? "",
+    usage: data.usage || null,
+  };
 }
 
 const generators = { local: localGenerate, gemini: geminiGenerate, grok: grokGenerate, deepseek: deepseekGenerate };
 
-export async function generate(prompt) {
-  const fn = generators[PROVIDER];
-  if (!fn) throw new Error(`Unknown provider: ${PROVIDER}`);
-  if (PROVIDER !== "local") {
+const MODEL_FOR = { local: LOCAL_MODEL, gemini: GEMINI_MODEL, grok: GROK_MODEL, deepseek: DEEPSEEK_MODEL };
+
+/**
+ * Estimate USD cost from usage. Local = 0. Cloud = null unless pricing is
+ * configured (we never fabricate cost). Distinguish actual vs unknown.
+ */
+function estimateCost(provider, usage) {
+  if (provider === "local") return 0;
+  const pricing = PRICING[provider];
+  if (!pricing) return null;
+  const inTok = usage?.prompt_tokens ?? usage?.input_tokens ?? null;
+  const outTok = usage?.completion_tokens ?? usage?.output_tokens ?? null;
+  if (inTok == null || outTok == null) return null;
+  if (pricing.inPer1k <= 0 && pricing.outPer1k <= 0) return null;
+  return (inTok / 1000) * pricing.inPer1k + (outTok / 1000) * pricing.outPer1k;
+}
+
+/**
+ * Unified provider interface. Returns the content string (legacy contract).
+ * Wires recordSpend() telemetry for every call (including local $0 spend).
+ *
+ * `opts.provider` selects the provider (default: global PROVIDER). The router
+ * uses this to choose the execution path; DeepSeek is never selected by it.
+ */
+export async function generate(prompt, opts = {}) {
+  const provider = opts.provider || PROVIDER;
+  const taskType = opts.taskType || "unknown";
+  const reason = opts.reason || null;
+
+  const fn = generators[provider];
+  if (!fn) throw new Error(`Unknown provider: ${provider}`);
+
+  if (provider !== "local") {
     try {
       if (await overBudget()) {
-        throw new Error(`Monthly budget reached for provider "${PROVIDER}" — skipping cloud call.`);
+        throw new Error(`Monthly budget reached for provider "${provider}" — skipping cloud call.`);
       }
     } catch (e) {
       if (e.message.includes("budget")) throw e;
       // Redis unavailable — proceed.
     }
   }
+
   await limiter.acquire();
-  return fn(prompt);
+  const start = Date.now();
+  try {
+    const { content, usage } = await fn(prompt);
+    const latency = Date.now() - start;
+    const usd = estimateCost(provider, usage);
+    await recordSpend({
+      provider,
+      model: MODEL_FOR[provider],
+      usd,
+      inputTokens: usage?.prompt_tokens ?? usage?.input_tokens ?? null,
+      outputTokens: usage?.completion_tokens ?? usage?.output_tokens ?? null,
+      latency,
+      taskType,
+      success: true,
+      reason,
+    });
+    return content;
+  } catch (e) {
+    const latency = Date.now() - start;
+    await recordSpend({
+      provider,
+      model: MODEL_FOR[provider],
+      usd: 0,
+      latency,
+      taskType,
+      success: false,
+      reason: e.message,
+    });
+    throw e;
+  }
 }
 
 export { PROVIDER, LOCAL_MODEL, GEMINI_MODEL, GROK_MODEL, MODEL_TTL_SECONDS };
