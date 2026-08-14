@@ -14,7 +14,17 @@
  * ---------------------------------------------------------------------------
  */
 
-export const LEARNING_STATUS = ["OBSERVED", "CANDIDATE", "VALIDATED", "ACTIVE", "DEPRECATED"];
+export const LEARNING_STATUS = ["DRAFT", "VERIFIED", "ACTIVE", "STALE", "SUPERSEDED", "ARCHIVED"];
+
+// Compatibility mapping from the earlier (non-canonical) lifecycle so
+// historical semantics can be interpreted without destructive migration.
+export const LIFECYCLE_COMPAT = {
+  OBSERVED: "DRAFT",
+  CANDIDATE: "DRAFT",
+  VALIDATED: "VERIFIED",
+  ACTIVE: "ACTIVE",
+  DEPRECATED: "ARCHIVED",
+};
 
 let idCounter = 0;
 function genId(prefix) {
@@ -42,7 +52,7 @@ export function createLearning({
     topic, insight, recommendation,
     source, taskType, agentId, provider, model,
     traceId, evidenceId, outcomeId, thinkTokenId,
-    status: "OBSERVED",
+    status: "DRAFT",
     confidence: null,
     sampleCount: 0, successCount: 0, failureCount: 0,
     evaluationMethod: null,
@@ -60,7 +70,7 @@ export function createLearning({
 export function validateLearning(learning, { sampleCount = 0, successCount = 0, failureCount = 0, evaluationMethod = "router_validation", threshold = 0.7 }) {
   const total = sampleCount || (successCount + failureCount);
   if (total <= 0) {
-    learning.status = "CANDIDATE";
+    learning.status = "DRAFT";
     return learning;
   }
   const confidence = successCount / total;
@@ -70,13 +80,13 @@ export function validateLearning(learning, { sampleCount = 0, successCount = 0, 
   learning.failureCount = failureCount;
   learning.evaluationMethod = evaluationMethod;
   learning.validatedAt = new Date().toISOString();
-  learning.status = confidence >= threshold ? "VALIDATED" : "CANDIDATE";
+  learning.status = confidence >= threshold ? "VERIFIED" : "DRAFT";
   return learning;
 }
 
 /** Promote a VALIDATED learning to ACTIVE (bumps version). */
 export function activate(learning) {
-  if (learning.status === "VALIDATED") {
+  if (learning.status === "VERIFIED") {
     learning.status = "ACTIVE";
     learning.version += 1;
   }
@@ -85,8 +95,22 @@ export function activate(learning) {
 
 /** Deprecate a learning (history preserved, never deleted). */
 export function deprecate(learning, reason) {
-  learning.status = "DEPRECATED";
+  learning.status = "ARCHIVED";
   learning.deprecationReason = reason;
+  return learning;
+}
+
+/** Mark a learning STALE (past review, needs re-evaluation). */
+export function markStale(learning, reason) {
+  learning.status = "STALE";
+  learning.staleReason = reason;
+  return learning;
+}
+
+/** Supersede a learning by a newer one (history preserved). */
+export function supersede(learning, supersededBy) {
+  learning.status = "SUPERSEDED";
+  learning.supersededBy = supersededBy;
   return learning;
 }
 
@@ -110,7 +134,7 @@ export function noCallCheck(existingLearnings, { topic, insight }) {
  * test specification (a test artifact, not an autonomous code change).
  */
 export function generateTestSpec(learning) {
-  if (learning.status !== "VALIDATED" && learning.status !== "ACTIVE") return null;
+  if (learning.status !== "VERIFIED" && learning.status !== "ACTIVE") return null;
   return {
     testId: genId("tst"),
     learningId: learning.learningId,
