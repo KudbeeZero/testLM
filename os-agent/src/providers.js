@@ -44,27 +44,42 @@ const limiter = new RateLimiter(RATE_LIMIT_PER_MINUTE);
 // --- Local (LM Studio, OpenAI-compatible HTTP API) -------------------------
 async function localGenerate(prompt) {
   const base = LM_STUDIO_BASE_URL.replace(/^ws:\/\//, "http://").replace(/\/$/, "");
-  const resp = await fetch(`${base}/v1/chat/completions`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: LOCAL_MODEL,
-      messages: [
-        { role: "system", content: "You are a concise analysis engine that returns JSON." },
-        { role: "user", content: prompt },
-      ],
-      max_tokens: 1500,
-    }),
-  });
-  if (!resp.ok) {
-    const text = await resp.text();
-    throw new Error(`LM Studio error ${resp.status}: ${text.slice(0, 300)}`);
+  const timeoutMs = Number(process.env.PHI4_TIMEOUT_MS || 60000);
+  const maxRetries = Number(process.env.PHI4_MAX_RETRIES || 2);
+  let lastErr;
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      const resp = await fetch(`${base}/v1/chat/completions`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: LOCAL_MODEL,
+          messages: [
+            { role: "system", content: "You are a concise analysis engine that returns JSON." },
+            { role: "user", content: prompt },
+          ],
+          max_tokens: 1500,
+        }),
+        signal: AbortSignal.timeout(timeoutMs),
+      });
+      if (!resp.ok) {
+        const text = await resp.text();
+        throw new Error(`LM Studio error ${resp.status}: ${text.slice(0, 300)}`);
+      }
+      const data = await resp.json();
+      return {
+        content: data.choices?.[0]?.message?.content ?? "",
+        usage: data.usage || null,
+      };
+    } catch (e) {
+      lastErr = e;
+      if (attempt < maxRetries) {
+        console.warn(`[local] attempt ${attempt + 1} failed (${e.message}) — retrying (bounded)`);
+        await new Promise((r) => setTimeout(r, 500 * (attempt + 1)));
+      }
+    }
   }
-  const data = await resp.json();
-  return {
-    content: data.choices?.[0]?.message?.content ?? "",
-    usage: data.usage || null,
-  };
+  throw lastErr || new Error("LM Studio unavailable");
 }
 
 // --- Gemini (Google) ------------------------------------------------------
@@ -77,7 +92,11 @@ async function geminiGenerate(prompt) {
   return {
     content: result.response.text(),
     usage: usage
-      ? { prompt_tokens: usage.promptTokenCount ?? null, completion_tokens: usage.candidatesTokenCount ?? null }
+      ? {
+          prompt_tokens: usage.promptTokenCount ?? null,
+          completion_tokens: usage.candidatesTokenCount ?? null,
+          cached_input_tokens: usage.cachedContentTokenCount ?? null,
+        }
       : null,
   };
 }
@@ -200,6 +219,8 @@ export async function generate(prompt, opts = {}) {
       usd,
       inputTokens: usage?.prompt_tokens ?? usage?.input_tokens ?? null,
       outputTokens: usage?.completion_tokens ?? usage?.output_tokens ?? null,
+      cachedInputTokens: usage?.cached_input_tokens ?? null,
+      cacheHit: usage?.cached_input_tokens ? true : null,
       latency,
       taskType,
       success: true,
