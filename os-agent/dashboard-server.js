@@ -4,14 +4,23 @@ import { spawn } from "node:child_process";
 import WebSocket, { WebSocketServer } from "ws";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { MEMORY_FILE, PROVIDER, LOCAL_MODEL, providerLabel, WORKSPACE, MONTHLY_BUDGET_USD, RATE_LIMIT_PER_MINUTE } from "./src/config.js";
+import { MEMORY_FILE, AGENT_DIR, PROVIDER, LOCAL_MODEL, providerLabel, WORKSPACE, MONTHLY_BUDGET_USD, RATE_LIMIT_PER_MINUTE } from "./src/config.js";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const port = Number(process.env.DASHBOARD_PORT || 4173);
 const TASKS_FILE = path.join(root, "dashboard", "tasks.json");
+const TEST_SPECS_FILE = path.join(AGENT_DIR, "memory", "test-specs.json");
+const REGRESSIONS_FILE = path.join(AGENT_DIR, "memory", "regressions.json");
 
 async function readTasks() {
   try { return JSON.parse(await readFile(TASKS_FILE, "utf8")); } catch { return []; }
+}
+
+async function readJson(file, key) {
+  try {
+    const data = JSON.parse((await readFile(file, "utf8")).replace(/^\uFEFF/, ""));
+    return key ? (data[key] || []) : data;
+  } catch { return []; }
 }
 
 async function jsonBody(req) {
@@ -66,6 +75,47 @@ async function getState() {
     },
     tasks,
     repo: { name: path.basename(WORKSPACE), branch: "local workspace", source: "filesystem" },
+    learning: await getLearningState(),
+  };
+}
+
+/**
+ * Learning-loop state: lifecycle counts, generated test specs, regression
+ * records, and a provenance trace. Reads local memory files only — no model
+ * calls, no Redis, no network.
+ */
+async function getLearningState() {
+  const learnings = (await readJson(MEMORY_FILE, "learnings"));
+  const testSpecs = await readJson(TEST_SPECS_FILE, "specs");
+  const regressions = await readJson(REGRESSIONS_FILE, "regressions");
+
+  const lifecycle = { DRAFT: 0, VERIFIED: 0, ACTIVE: 0, STALE: 0, SUPERSEDED: 0, ARCHIVED: 0 };
+  for (const l of learnings) {
+    const s = l.status || "DRAFT";
+    lifecycle[s] = (lifecycle[s] || 0) + 1;
+  }
+
+  // Provenance trace: how many learnings carry each provenance ID type.
+  const prov = { traceId: 0, evidenceId: 0, outcomeId: 0, thinkTokenId: 0 };
+  for (const l of learnings) {
+    if (l.traceId) prov.traceId++;
+    if (l.evidenceId) prov.evidenceId++;
+    if (l.outcomeId) prov.outcomeId++;
+    if (l.thinkTokenId) prov.thinkTokenId++;
+  }
+
+  return {
+    learnings: learnings.length,
+    lifecycle,
+    provenance: prov,
+    testSpecs: testSpecs.map((s) => ({
+      testId: s.testId, learningId: s.learningId, taskType: s.taskType || null,
+      input: s.input, expectedBehavior: s.expectedBehavior, createdAt: s.createdAt,
+    })),
+    regressions: regressions.map((r) => ({
+      regressionId: r.regressionId, learningId: r.learningId, failure: r.failure,
+      provider: r.provider || null, model: r.model || null, createdAt: r.createdAt,
+    })),
   };
 }
 

@@ -53,6 +53,13 @@
         <div id="routes">Loading…</div>
       </div>
     </section>
+
+    <section style="margin-top:14px">
+      <div class="card">
+        <h3>Learning Loop <small style="color:#4e6b5d">observe → record → evaluate → learn → validate → teach → test → improve</small></h3>
+        <div id="learning">Loading…</div>
+      </div>
+    </section>
   </main>
 
   <script>
@@ -63,7 +70,30 @@
         $('#status').textContent = 'live / ' + new Date().toLocaleTimeString();
         $('#tasks').innerHTML = s.tasks.length ? s.tasks.map(t => `<div><strong>${t.title}</strong> <small>${t.status}</small></div>`).join('') : '<div>No tasks</div>';
         $('#routes').innerHTML = Object.values(s.handoff).map(h=>`<div>${h.label} — ${h.status}</div>`).join('');
+        $('#learning').innerHTML = renderLearning(s.learning);
       }catch(e){$('#status').textContent='unavailable'}
+    }
+
+    function renderLearning(l){
+      if(!l) return '<div>No learning data</div>';
+      const lc = l.lifecycle || {};
+      const states = ['DRAFT','VERIFIED','ACTIVE','STALE','SUPERSEDED','ARCHIVED'];
+      const bars = states.map(s=>`<span style="display:inline-block;margin-right:10px"><b>${s}</b> ${lc[s]||0}</span>`).join('');
+      const prov = l.provenance || {};
+      const specs = (l.testSpecs||[]).length
+        ? l.testSpecs.map(s=>`<div><code>${s.testId}</code> ← ${s.learningId} <small>${s.taskType||'?'}</small></div>`).join('')
+        : '<div style="color:#888">No test specs yet — run <code>node generate-tests.mjs --apply</code> after validating learnings.</div>';
+      const regs = (l.regressions||[]).length
+        ? l.regressions.map(r=>`<div><code>${r.regressionId}</code> <small>${r.learningId||'no learning'}</small> — ${r.failure}</div>`).join('')
+        : '<div style="color:#888">No regressions recorded yet.</div>';
+      return `
+        <div style="margin-bottom:8px"><b>Learnings:</b> ${l.learnings||0} &nbsp;|&nbsp; <b>Lifecycle:</b> ${bars}</div>
+        <div style="margin-bottom:8px"><b>Provenance (learnings carrying ID):</b> trace ${prov.traceId||0} · evidence ${prov.evidenceId||0} · outcome ${prov.outcomeId||0} · thinkToken ${prov.thinkTokenId||0}</div>
+        <div style="margin-bottom:4px"><b>Test specs (${(l.testSpecs||[]).length}):</b></div>
+        <div style="margin-bottom:10px">${specs}</div>
+        <div style="margin-bottom:4px"><b>Regressions (${(l.regressions||[]).length}):</b></div>
+        <div>${regs}</div>
+      `;
     }
 
     $('#taskForm').onsubmit = async e => { e.preventDefault(); const title = $('#taskInput').value.trim(); if(!title) return; await fetch('/api/tasks',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title})}); $('#taskInput').value=''; refresh(); };

@@ -1,6 +1,8 @@
 # OS Agent runtime artifacts
 agent/logs/
 *.log
+agent/memory/regressions.json
+agent/memory/test-specs.json
 
 # Secrets / local config (never commit API keys)
 .env
