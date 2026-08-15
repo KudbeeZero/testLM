@@ -23,6 +23,17 @@
     .loginBox .err{color:#b00020;font-size:13px;min-height:16px}
     .pill{padding:3px 8px;border-radius:12px;font-size:12px;background:#e6efe9;color:#1a7c3a}
     .mono{font-family:ui-monospace,monospace;font-size:12px}
+    /* Status panels */
+    .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+    .dot.on{background:#1a7c3a;box-shadow:0 0 4px #1a7c3a}
+    .dot.off{background:#b00020}
+    .dot.warn{background:#d99a00}
+    .status-row{display:flex;justify-content:space-between;align-items:center;padding:7px 2px;border-bottom:1px solid #f0ece2;font-size:14px}
+    .status-row:last-child{border-bottom:none}
+    .status-label{color:#4e6b5d}
+    .status-value{font-weight:600}
+    .status-card{border-left:3px solid #cfe3d6}
+    .status-card.db{border-left-color:#d7c9f0}
   </style>
 </head>
 <body>
@@ -39,6 +50,17 @@
     </header>
 
     <div id="alerts" style="margin-top:12px"></div>
+
+    <section class="grid" style="margin-top:14px">
+      <div class="card status-card">
+        <h3>Server Status</h3>
+        <div id="serverStatus">Checking…</div>
+      </div>
+      <div class="card status-card db">
+        <h3>DB Status</h3>
+        <div id="dbStatus">Checking…</div>
+      </div>
+    </section>
 
     <section class="grid">
       <div class="card">
@@ -264,6 +286,32 @@
     }
     $('#ghBtn').onclick = loadGithub;
 
+    // Server + DB status panels.
+    function statusDot(state){
+      const map = { online:'on', configured:'on', ok:'on', offline:'off', absent:'off', unreachable:'off', error:'off', 'no-model':'warn' };
+      const cls = map[state] || 'warn';
+      return `<span class="dot ${cls}"></span>`;
+    }
+    function statusRow(label, value){
+      return `<div class="status-row"><span class="status-label">${label}</span><span class="status-value">${statusDot(value)}${value}</span></div>`;
+    }
+    async function loadStatus(){
+      try{
+        const s = await api('/api/status');
+        $('#serverStatus').innerHTML = [
+          statusRow('Dashboard', 'online'),
+          statusRow('Phi-4 (LM Studio)', s.server.phi4),
+          statusRow('Provider', s.server.provider),
+          statusRow('Model', s.server.model),
+          statusRow('GitHub connector', s.github),
+        ].join('');
+        $('#dbStatus').innerHTML = [
+          statusRow('Redis (Upstash)', s.db.redis),
+          statusRow('Postgres', s.db.postgres),
+        ].join('');
+      }catch(e){ $('#serverStatus').textContent='unavailable'; $('#dbStatus').textContent='unavailable'; }
+    }
+
     // Phi-4 live test.
     $('#phiBtn').onclick = async () => {
       const prompt = $('#phiPrompt').value.trim(); if(!prompt) return;
@@ -308,7 +356,8 @@
     $('#run').onclick = ()=>{ const cmd = $('#command').value.trim(); if(!cmd) return; $('#terminal').textContent += `\n> ${cmd}\n`; $('#command').value=''; const s = ensureWs(); if(s.readyState === WebSocket.OPEN) s.send(JSON.stringify({cmd})); else s.addEventListener('open',()=>s.send(JSON.stringify({cmd})),{once:true}); };
 
     refresh(); setInterval(refresh,5000);
-    loadAudit(); loadMetrics(); loadGithub();
+    loadAudit(); loadMetrics(); loadGithub(); loadStatus();
+    setInterval(loadStatus, 30000); // status panels refresh every 30s
     ensureWs();
     // Auto-refresh operator checks on a slow interval (60s) so cost/health trend.
     setInterval(()=>runOps(true), 60000);

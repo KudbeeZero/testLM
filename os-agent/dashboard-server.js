@@ -98,6 +98,22 @@ async function jsonBody(req) {
   return raw ? JSON.parse(raw) : {};
 }
 
+async function quickPhi4() {
+  try {
+    const r = await fetch("http://localhost:1234/v1/models", { signal: AbortSignal.timeout(3000) });
+    const j = await r.json();
+    return (j.data || []).some((m) => String(m.id).includes("phi-4-mini")) ? "online" : "no-model";
+  } catch { return "offline"; }
+}
+async function quickRedis() {
+  try {
+    const base = (process.env.UPSTASH_REDIS_REST_URL || "").replace(/\/$/, "");
+    const r = await fetch(base + "/dbsize", { headers: { Authorization: "Bearer " + (process.env.UPSTASH_REDIS_REST_TOKEN || "") }, signal: AbortSignal.timeout(4000) });
+    const j = await r.json();
+    return j.error ? "error" : `ok (${j.result ?? "?"} keys)`;
+  } catch { return "unreachable"; }
+}
+
 async function computeAlerts() {
   const metrics = await readMetrics(1);
   const last = metrics[metrics.length - 1];
@@ -333,6 +349,17 @@ const server = createServer(async (req, res) => {
     return;
   }
 
+  // Lightweight structured server + DB status (quick checks, no heavy ops).
+  if (url === "/api/status") {
+    const [phi4, redis] = await Promise.all([quickPhi4(), quickRedis()]);
+    json(res, 200, {
+      server: { dashboard: "online", phi4, provider: PROVIDER, model: LOCAL_MODEL },
+      db: { redis, postgres: process.env.DATABASE_URL ? "configured" : "absent" },
+      github: (process.env.GITHUB_PAT || process.env.GITHUB_TOKEN) ? "configured" : "absent",
+      ts: new Date().toISOString(),
+    });
+    return;
+  }
   // Export / reporting (JSON download).
   if (url.startsWith("/api/export/")) {
     const type = url.slice("/api/export/".length);
