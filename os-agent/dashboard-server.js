@@ -15,16 +15,24 @@ const TEST_SPECS_FILE = path.join(AGENT_DIR, "memory", "test-specs.json");
 const REGRESSIONS_FILE = path.join(AGENT_DIR, "memory", "regressions.json");
 const METRICS_FILE = path.join(AGENT_DIR, "memory", "metrics.json");
 
-// ── Enterprise auth (session cookie, HMAC-signed) ──────────────────────────
-// DASHBOARD_AUTH=false disables login for single-operator local testing.
+// ── Enterprise access control ───────────────────────────────────────────────
+// RBAC (viewer/operator/admin), API keys, rate limiting, CSRF.
+// DASHBOARD_AUTH=false disables auth for single-operator local testing.
 const AUTH_ENABLED = !["false", "0", "off"].includes(String(process.env.DASHBOARD_AUTH || "").toLowerCase());
-const DASHBOARD_PASSWORD = process.env.DASHBOARD_PASSWORD || randomBytes(16).toString("hex");
+const ROLE_RANK = { viewer: 1, operator: 2, admin: 3 };
+const ROLE_PASSWORDS = {
+  admin: process.env.DASHBOARD_ADMIN_PASSWORD || null,
+  operator: process.env.DASHBOARD_PASSWORD || null,
+  viewer: process.env.DASHBOARD_VIEWER_PASSWORD || null,
+};
+const API_KEY = process.env.DASHBOARD_API_KEY || null;
+const API_KEY_ROLE = ROLE_RANK[process.env.DASHBOARD_API_KEY_ROLE] ? process.env.DASHBOARD_API_KEY_ROLE : "operator";
 const SESSION_SECRET = randomBytes(32).toString("hex");
 const SESSION_TTL = 12 * 3600 * 1000;
 
-function sessionToken(exp) {
-  const sig = createHmac("sha256", SESSION_SECRET).update(String(exp)).digest("base64url");
-  return `${exp}.${sig}`;
+function sessionToken(exp, role) {
+  const sig = createHmac("sha256", SESSION_SECRET).update(`${exp}.${role}`).digest("base64url");
+  return `${exp}.${role}.${sig}`;
 }
 function parseCookies(req) {
   const out = {};
@@ -35,15 +43,70 @@ function parseCookies(req) {
   }
   return out;
 }
-function isAuthed(req) {
+function sessionRole(req) {
   const tok = parseCookies(req).kudbee_session;
-  if (!tok) return false;
-  const [exp, sig] = tok.split(".");
-  if (!exp || !sig) return false;
-  const expected = createHmac("sha256", SESSION_SECRET).update(exp).digest("base64url");
+  if (!tok) return null;
+  const [exp, role, sig] = tok.split(".");
+  if (!exp || !role || !sig) return null;
+  const expected = createHmac("sha256", SESSION_SECRET).update(`${exp}.${role}`).digest("base64url");
   let ok = false;
-  try { ok = timingSafeEqual(Buffer.from(sig), Buffer.from(expected)); } catch { return false; }
-  return ok && Number(exp) > Date.now();
+  try { ok = timingSafeEqual(Buffer.from(sig), Buffer.from(expected)); } catch { return null; }
+  if (!ok || Number(exp) < Date.now()) return null;
+  return ROLE_RANK[role] ? role : null;
+}
+function apiKeyRole(req) {
+  const h = req.headers["authorization"] || "";
+  const k = h.startsWith("Bearer ") ? h.slice(7) : (req.headers["x-api-key"] || "");
+  if (API_KEY && k) {
+    try { if (timingSafeEqual(Buffer.from(k), Buffer.from(API_KEY))) return API_KEY_ROLE; } catch {}
+  }
+  return null;
+}
+function currentRole(req) {
+  if (!AUTH_ENABLED) return "admin";
+  return apiKeyRole(req) || sessionRole(req);
+}
+function authorized(req, minRole) {
+  const r = currentRole(req);
+  if (!r) return { ok: false, code: 401, role: null };
+  if (ROLE_RANK[r] < ROLE_RANK[minRole]) return { ok: false, code: 403, role: r };
+  return { ok: true, code: 200, role: r };
+}
+
+// CSRF tokens for cookie-authenticated state-changing requests (API-key auth skips).
+const CSRF = new Map();
+function issueCsrf(tok) { const t = randomBytes(16).toString("hex"); CSRF.set(tok, t); return t; }
+function checkCsrf(req, tok) {
+  const c = CSRF.get(tok);
+  if (!c) return false;
+  const h = req.headers["x-csrf-token"] || "";
+  try { return timingSafeEqual(Buffer.from(h), Buffer.from(c)); } catch { return false; }
+}
+
+// Simple per-IP rate limiter (in-memory, sliding window).
+const RATE = new Map();
+function rateLimit(req, limit = 300, windowMs = 60000) {
+  const ip = req.socket.remoteAddress || "local";
+  const now = Date.now();
+  const e = RATE.get(ip) || { count: 0, reset: now + windowMs };
+  if (now > e.reset) { e.count = 0; e.reset = now + windowMs; }
+  e.count++;
+  RATE.set(ip, e);
+  if (RATE.size > 10000) RATE.clear();
+  return e.count <= limit;
+}
+
+// Endpoint → minimum role.
+const ENDPOINT_ROLE = {
+  "/api/state": "viewer", "/api/status": "viewer", "/api/metrics": "viewer",
+  "/api/audit": "viewer", "/api/github": "viewer",
+  "/api/ops": "operator", "/api/tasks": "operator", "/api/terminal": "operator",
+  "/api/phi4": "operator",
+};
+function endpointMinRole(url) {
+  if (url.startsWith("/api/export/")) return "viewer";
+  if (url.startsWith("/api/learning/")) return "operator";
+  return ENDPOINT_ROLE[url] || "viewer";
 }
 
 // ── Audit log (append-only governance trace) ───────────────────────────────
@@ -132,7 +195,7 @@ async function computeAlerts() {
   return alerts;
 }
 
-async function getState() {
+async function getState(req) {
   let memory = { learnings: [], health: [], optimizations: [] };
   try {
     memory = JSON.parse((await readFile(MEMORY_FILE, "utf8")).replace(/^\uFEFF/, ""));
@@ -178,7 +241,7 @@ async function getState() {
     tasks,
     repo: { name: path.basename(WORKSPACE), branch: "local workspace", source: "filesystem" },
     learning: await getLearningState(),
-    auth: { enabled: AUTH_ENABLED, passwordSet: !!process.env.DASHBOARD_PASSWORD },
+    auth: { enabled: AUTH_ENABLED, roles: Object.keys(ROLE_RANK), currentRole: currentRole(req), passwordSet: !!process.env.DASHBOARD_PASSWORD },
     alerts: await computeAlerts(),
   };
 }
@@ -229,25 +292,44 @@ const server = createServer(async (req, res) => {
   if (req.method === "POST" && url === "/api/login") {
     const body = await jsonBody(req);
     const pw = String(body.password || "");
-    const ok = pw.length > 0 && pw === DASHBOARD_PASSWORD;
-    await audit(ok ? "login.success" : "login.failed", "operator", ok ? "authenticated" : "bad password");
-    if (!ok) { json(res, 401, { ok: false, error: "invalid password" }); return; }
+    let role = null;
+    for (const [r, p] of Object.entries(ROLE_PASSWORDS)) {
+      if (p && pw.length > 0 && pw === p) { role = r; break; }
+    }
+    await audit(role ? "login.success" : "login.failed", role || "unknown", role || "bad password");
+    if (!role) { json(res, 401, { ok: false, error: "invalid password" }); return; }
     const exp = Date.now() + SESSION_TTL;
-    res.setHeader("Set-Cookie", `kudbee_session=${sessionToken(exp)}; HttpOnly; SameSite=Strict; Path=/; Max-Age=${SESSION_TTL / 1000}`);
-    json(res, 200, { ok: true });
+    const tok = sessionToken(exp, role);
+    const csrf = issueCsrf(tok);
+    res.setHeader("Set-Cookie", [
+      `kudbee_session=${tok}; HttpOnly; SameSite=Strict; Path=/; Max-Age=${SESSION_TTL / 1000}`,
+      `kudbee_csrf=${csrf}; SameSite=Strict; Path=/`,
+    ].join(", "));
+    json(res, 200, { ok: true, role });
     return;
   }
   if (req.method === "POST" && url === "/api/logout") {
-    res.setHeader("Set-Cookie", "kudbee_session=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0");
-    await audit("logout", "operator");
+    res.setHeader("Set-Cookie", [
+      "kudbee_session=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0",
+      "kudbee_csrf=; SameSite=Strict; Path=/; Max-Age=0",
+    ].join(", "));
+    await audit("logout", currentRole(req) || "operator");
     json(res, 200, { ok: true });
     return;
   }
 
-  // ── Protected API (everything else under /api) ──────────────────────────
-  if (url.startsWith("/api/") && AUTH_ENABLED && !isAuthed(req)) {
-    json(res, 401, { ok: false, error: "unauthorized" });
-    return;
+  // ── Protected API: rate limit + RBAC + CSRF ─────────────────────────────
+  if (url.startsWith("/api/")) {
+    if (!rateLimit(req)) { json(res, 429, { ok: false, error: "rate limited" }); return; }
+    const minRole = endpointMinRole(url);
+    const a = authorized(req, minRole);
+    if (!a.ok) { json(res, a.code, { ok: false, error: a.code === 403 ? "forbidden" : "unauthorized" }); return; }
+    // CSRF required for cookie-authenticated writes (API-key auth skips).
+    if (req.method === "POST" && !apiKeyRole(req)) {
+      const tok = parseCookies(req).kudbee_session;
+      if (!tok || !checkCsrf(req, tok)) { json(res, 403, { ok: false, error: "csrf token required" }); return; }
+    }
+    req.role = a.role;
   }
 
   if (req.method === "POST" && url === "/api/tasks") {
@@ -271,7 +353,7 @@ const server = createServer(async (req, res) => {
     child.on("close", code => { res.write(JSON.stringify({ stream: "exit", code }) + "\n"); res.end(); }); return;
   }
   if (url === "/api/state") {
-    json(res, 200, await getState()); return;
+    json(res, 200, await getState(req)); return;
   }
   if (url === "/api/audit") {
     json(res, 200, { entries: await readAudit() }); return;
@@ -432,7 +514,7 @@ wss.on("connection", (ws, req) => {
 });
 server.on("upgrade", (req, socket, head) => {
   const { url } = req;
-  if (url === "/ws/terminal" && (!AUTH_ENABLED || isAuthed(req))) {
+  if (url === "/ws/terminal" && (!AUTH_ENABLED || authorized(req, "operator").ok)) {
     wss.handleUpgrade(req, socket, head, ws => wss.emit("connection", ws, req));
   } else {
     socket.destroy();

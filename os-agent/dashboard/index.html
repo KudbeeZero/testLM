@@ -45,6 +45,7 @@
       </div>
       <div style="display:flex;align-items:center;gap:10px">
         <div id="status">connecting...</div>
+        <span id="roleBadge" class="pill" style="display:none"></span>
         <button id="logoutBtn" style="display:none">Log out</button>
       </div>
     </header>
@@ -168,8 +169,15 @@
     const $ = q => document.querySelector(q);
 
     async function api(path, opts){
+      opts = opts || {};
+      if(opts.method && opts.method.toUpperCase()==='POST'){
+        const c = (document.cookie.split(';').map(x=>x.trim()).find(x=>x.startsWith('kudbee_csrf='))||'').split('=')[1]||'';
+        opts.headers = Object.assign({'X-CSRF-Token': c}, opts.headers||{});
+      }
       const r = await fetch(path, opts);
       if (r.status === 401) { showLogin(); throw new Error('unauthorized'); }
+      if (r.status === 403) { throw new Error('forbidden'); }
+      if (r.status === 429) { throw new Error('rate limited'); }
       return r.json();
     }
 
@@ -180,7 +188,7 @@
       e.preventDefault();
       $('#loginErr').textContent = '';
       const r = await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:$('#password').value})});
-      if (r.ok){ $('#password').value=''; hideLogin(); refresh(); loadAudit(); loadMetrics(); }
+      if (r.ok){ const j = await r.json(); $('#password').value=''; hideLogin(); $('#roleBadge').textContent='role: '+j.role; $('#roleBadge').style.display='inline-block'; refresh(); loadAudit(); loadMetrics(); }
       else { $('#loginErr').textContent = 'Invalid password'; }
     };
     $('#logoutBtn').onclick = async () => { await fetch('/api/logout',{method:'POST'}); location.reload(); };
@@ -189,7 +197,8 @@
       try{
         const s = await api('/api/state');
         // Hide login/logout when auth is disabled (single-operator local testing).
-        if(s.auth && !s.auth.enabled){ hideLogin(); $('#logoutBtn').style.display='none'; }
+        if(s.auth && !s.auth.enabled){ hideLogin(); $('#logoutBtn').style.display='none'; $('#roleBadge').style.display='none'; }
+        else if(s.auth && s.auth.enabled){ $('#roleBadge').textContent='role: '+(s.auth.currentRole||'—'); $('#roleBadge').style.display='inline-block'; }
         $('#status').innerHTML = '<span style="color:#1a7c3a">● LIVE</span> · updated ' + new Date().toLocaleTimeString();
         $('#tasks').innerHTML = s.tasks.length ? s.tasks.map(t => `<div><strong>${t.title}</strong> <small>${t.status}</small></div>`).join('') : '<div>No tasks</div>';
         $('#routes').innerHTML = Object.values(s.handoff).map(h=>`<div>${h.label} — ${h.status}</div>`).join('');
