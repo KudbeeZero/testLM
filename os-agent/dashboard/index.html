@@ -38,6 +38,8 @@
       </div>
     </header>
 
+    <div id="alerts" style="margin-top:12px"></div>
+
     <section class="grid">
       <div class="card">
         <h3>Tasks</h3>
@@ -98,12 +100,31 @@
 
     <section class="grid" style="margin-top:14px">
       <div class="card">
-        <h3>Cost History <small style="color:#4e6b5d">snapshots from each ops check</small></h3>
+        <h3>Cost History & Uptime <small style="color:#4e6b5d">snapshots from each ops check</small></h3>
+        <div id="uptime" style="margin-bottom:8px;font-size:13px"></div>
         <div id="metrics">No metrics yet — run an ops check.</div>
       </div>
       <div class="card">
         <h3>Audit Log <small style="color:#4e6b5d">governance trace</small></h3>
         <div id="audit" class="mono" style="max-height:260px;overflow:auto">Loading…</div>
+      </div>
+    </section>
+
+    <section class="grid" style="margin-top:14px">
+      <div class="card">
+        <h3>GitHub PR Stack <small style="color:#4e6b5d">open PRs + CI</small></h3>
+        <div style="margin-bottom:8px"><button id="ghBtn">Refresh PRs</button> <span id="ghStatus" style="color:#888"></span></div>
+        <div id="github">Loading…</div>
+      </div>
+      <div class="card">
+        <h3>Export <small style="color:#4e6b5d">JSON reports</small></h3>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <a href="/api/export/state" target="_blank"><button>State</button></a>
+          <a href="/api/export/audit" target="_blank"><button>Audit</button></a>
+          <a href="/api/export/metrics" target="_blank"><button>Metrics</button></a>
+          <a href="/api/export/learnings" target="_blank"><button>Learnings</button></a>
+        </div>
+        <p style="color:#4e6b5d;font-size:12px;margin-top:8px">Download current state, audit log, metrics history, or learnings as JSON.</p>
       </div>
     </section>
   </main>
@@ -151,7 +172,13 @@
         $('#tasks').innerHTML = s.tasks.length ? s.tasks.map(t => `<div><strong>${t.title}</strong> <small>${t.status}</small></div>`).join('') : '<div>No tasks</div>';
         $('#routes').innerHTML = Object.values(s.handoff).map(h=>`<div>${h.label} — ${h.status}</div>`).join('');
         $('#learning').innerHTML = renderLearning(s.learning);
+        renderAlerts(s.alerts||[]);
       }catch(e){ if(e.message!=='unauthorized') $('#status').innerHTML='<span style="color:#b00020">● OFFLINE</span> · ' + e.message; }
+    }
+
+    function renderAlerts(alerts){
+      if(!alerts.length){ $('#alerts').innerHTML=''; return; }
+      $('#alerts').innerHTML = alerts.map(a=>`<div style="padding:8px 12px;border-radius:6px;margin-bottom:6px;font-size:13px;${a.level==='error'?'background:#fdecea;color:#b00020;border:1px solid #f5c6c0':'background:#fff7e6;color:#8a6d1a;border:1px solid #f0dfae'}">⚠ ${a.msg}</div>`).join('');
     }
 
     function renderLearning(l){
@@ -184,7 +211,10 @@
       try{
         const r = await api('/api/metrics');
         const m = r.metrics||[];
-        if(!m.length){ $('#metrics').textContent = 'No metrics yet — run an ops check.'; return; }
+        if(!m.length){ $('#metrics').textContent = 'No metrics yet — run an ops check.'; $('#uptime').textContent=''; return; }
+        // Uptime summary.
+        const pct = k => { const n=m.filter(x=>x[k]===true).length; return m.length?Math.round(n/m.length*100)+'%':'—'; };
+        $('#uptime').innerHTML = `Uptime: Phi-4 <b>${pct('phi4')}</b> · GitHub <b>${pct('github')}</b> · Redis <b>${pct('redis')}</b> · Postgres <b>${pct('postgres')}</b> · Audit <b>${pct('knowledge')}</b>`;
         // Cost trend bars (no external chart lib).
         const costs = m.filter(x=>x.cost!=null).map(x=>x.cost);
         const max = costs.length ? Math.max(...costs) : 1;
@@ -216,6 +246,23 @@
       if(!auto) btn.disabled = false;
     }
     $('#opsBtn').onclick = ()=>runOps(false);
+
+    // GitHub PR stack.
+    async function loadGithub(){
+      $('#ghStatus').textContent = 'loading…';
+      try{
+        const r = await api('/api/github');
+        if(!r.ok){ $('#github').textContent = 'error: '+(r.error||'unknown'); $('#ghStatus').textContent=''; return; }
+        $('#github').innerHTML = r.results.map(g=>{
+          if(g.error) return `<div><b>${g.repo}</b> — error ${g.error}</div>`;
+          if(!g.open) return `<div><b>${g.repo}</b> — no open PRs</div>`;
+          const prs = g.prs.map(p=>`<div style="margin:4px 0">#${p.number} <b>${p.title}</b> <small>${p.branch} → ${p.base}</small> · CI <span style="color:${p.ci==='success'?'#1a7c3a':(p.ci==='failure'?'#b00020':'#8a6d1a')}">${p.ci}</span></div>`).join('');
+          return `<div style="margin-bottom:10px"><b>${g.repo}</b> (${g.open} open)<div style="margin-left:8px">${prs}</div></div>`;
+        }).join('');
+        $('#ghStatus').textContent = 'done ' + new Date().toLocaleTimeString();
+      }catch(e){ $('#github').textContent = 'request failed: '+e.message; $('#ghStatus').textContent=''; }
+    }
+    $('#ghBtn').onclick = loadGithub;
 
     // Phi-4 live test.
     $('#phiBtn').onclick = async () => {
@@ -261,7 +308,7 @@
     $('#run').onclick = ()=>{ const cmd = $('#command').value.trim(); if(!cmd) return; $('#terminal').textContent += `\n> ${cmd}\n`; $('#command').value=''; const s = ensureWs(); if(s.readyState === WebSocket.OPEN) s.send(JSON.stringify({cmd})); else s.addEventListener('open',()=>s.send(JSON.stringify({cmd})),{once:true}); };
 
     refresh(); setInterval(refresh,5000);
-    loadAudit(); loadMetrics();
+    loadAudit(); loadMetrics(); loadGithub();
     ensureWs();
     // Auto-refresh operator checks on a slow interval (60s) so cost/health trend.
     setInterval(()=>runOps(true), 60000);

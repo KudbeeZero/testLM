@@ -98,6 +98,24 @@ async function jsonBody(req) {
   return raw ? JSON.parse(raw) : {};
 }
 
+async function computeAlerts() {
+  const metrics = await readMetrics(1);
+  const last = metrics[metrics.length - 1];
+  const alerts = [];
+  if (last) {
+    if (last.phi4 === false) alerts.push({ level: "warn", msg: "Phi-4 offline" });
+    if (last.github === false) alerts.push({ level: "warn", msg: "GitHub connector absent" });
+    if (last.redis === false) alerts.push({ level: "warn", msg: "Redis unreachable" });
+    if (last.postgres === false) alerts.push({ level: "warn", msg: "Postgres absent" });
+    if (last.knowledge === false) alerts.push({ level: "error", msg: "Knowledge audit FAIL" });
+    const budgetUsd = Number(MONTHLY_BUDGET_USD || 0);
+    if (last.cost != null && budgetUsd > 0 && last.cost >= budgetUsd * 0.8) {
+      alerts.push({ level: "error", msg: `Cost $${last.cost.toFixed(2)} >= 80% of budget $${budgetUsd}` });
+    }
+  }
+  return alerts;
+}
+
 async function getState() {
   let memory = { learnings: [], health: [], optimizations: [] };
   try {
@@ -145,6 +163,7 @@ async function getState() {
     repo: { name: path.basename(WORKSPACE), branch: "local workspace", source: "filesystem" },
     learning: await getLearningState(),
     auth: { enabled: AUTH_ENABLED, passwordSet: !!process.env.DASHBOARD_PASSWORD },
+    alerts: await computeAlerts(),
   };
 }
 
@@ -255,6 +274,9 @@ const server = createServer(async (req, res) => {
         cost: cost ? parseFloat(cost) : null,
         phi4: /Phi-4 \(LM Studio\)\s+ONLINE/.test(out),
         github: /GitHub connector\s+PRESENT/.test(out),
+        redis: /Redis \(Upstash\)\s+OK/.test(out),
+        postgres: /Postgres \(DATABASE_URL\)\s+PRESENT/.test(out),
+        knowledge: /Knowledge audit\s+PASS/.test(out),
         router: /Router\s+OFF/.test(out) ? "OFF" : "ON",
       });
       json(res, 200, { ok: true, output: out });
@@ -308,6 +330,49 @@ const server = createServer(async (req, res) => {
       await audit("learning.record-regression", "operator", failure.slice(0, 80));
       json(res, 200, { ok: true, output: out });
     } catch (e) { json(res, 200, { ok: false, output: (e.stdout || "") + "\n" + e.message }); }
+    return;
+  }
+
+  // Export / reporting (JSON download).
+  if (url.startsWith("/api/export/")) {
+    const type = url.slice("/api/export/".length);
+    let data, filename;
+    if (type === "state") { data = await getState(); filename = "kudbee-state.json"; }
+    else if (type === "audit") { data = { entries: await readAudit() }; filename = "kudbee-audit.json"; }
+    else if (type === "metrics") { data = { metrics: await readMetrics() }; filename = "kudbee-metrics.json"; }
+    else if (type === "learnings") { data = await readJson(MEMORY_FILE, null); filename = "kudbee-learnings.json"; }
+    else { json(res, 404, { ok: false, error: "unknown export type" }); return; }
+    await audit("export", "operator", type);
+    res.setHeader("Content-Type", "application/json");
+    res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
+    res.end(JSON.stringify(data, null, 2));
+    return;
+  }
+  // GitHub PR stack view (read-only, token never exposed).
+  if (url === "/api/github") {
+    const pat = process.env.GITHUB_PAT || process.env.GITHUB_TOKEN || "";
+    if (!pat) { json(res, 200, { ok: false, error: "no GitHub token configured" }); return; }
+    const repos = ["KudbeeZero/testLM", "KudbeeZero/Kudbee-fuel-gage"];
+    const gh = (p) => fetch(p, { headers: { Authorization: "Bearer " + pat, "User-Agent": "kudbee-agent-connector", "Accept": "application/vnd.github+json" } });
+    const results = [];
+    for (const repo of repos) {
+      try {
+        const prs = await (await gh(`https://api.github.com/repos/${repo}/pulls?state=open`)).json();
+        const list = [];
+        for (const pr of (Array.isArray(prs) ? prs : [])) {
+          let ci = "unknown";
+          try {
+            const checks = await (await gh(`https://api.github.com/repos/${repo}/commits/${pr.head.sha}/check-runs`)).json();
+            const cs = checks.check_runs || [];
+            if (cs.length) ci = cs.every((c) => c.conclusion === "success") ? "success" : (cs.some((c) => c.conclusion === "failure") ? "failure" : "pending");
+          } catch {}
+          list.push({ number: pr.number, title: pr.title, branch: pr.head.ref, base: pr.base.ref, state: pr.state, ci, created: pr.created_at });
+        }
+        results.push({ repo, open: list.length, prs: list });
+      } catch (e) { results.push({ repo, error: e.message }); }
+    }
+    await audit("github.prs", "operator");
+    json(res, 200, { ok: true, results });
     return;
   }
 
