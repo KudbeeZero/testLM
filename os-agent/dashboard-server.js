@@ -458,6 +458,7 @@ const server = createServer(async (req, res) => {
         rbac: AUTH_ENABLED ? 'ENABLED' : 'DISABLED',
         rateLimit: 'ACTIVE',
         csrf: AUTH_ENABLED ? 'ENABLED' : 'N/A',
+        spaSession: 'ENABLED',
         audit: 'ACTIVE',
         apiKey: process.env.DASHBOARD_API_KEY ? 'CONFIGURED' : 'NOT CONFIGURED',
         credentialHygiene: 'HEALTHY',

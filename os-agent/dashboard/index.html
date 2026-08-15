@@ -351,6 +351,8 @@
         $('#security').innerHTML = [
           secRow('Dashboard Auth', d.auth),
           secRow('Dashboard RBAC', d.rbac),
+          secRow('SPA Session', d.spaSession || 'N/A'),
+          secRow('CSRF', d.csrf),
           secRow('Ingestion Auth', g.authBoundary==='required' ? 'ENABLED' : (g.authBoundary==='dev-open' ? 'DEV-OPEN' : g.authBoundary)),
           secRow('Anonymous Protected', g.anonymousProtected),
           secRow('Terminal Boundary', g.terminalBoundary),
