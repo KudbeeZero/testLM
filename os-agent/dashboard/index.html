@@ -382,6 +382,10 @@
         const gAdmin = enforced.includes('admin:governance') ? 'ENFORCED' : 'OBSERVE';
         const mint = enforced.includes('mint:think-token') ? 'ENFORCED' : 'OBSERVE';
         const ingest = enforced.includes('ingest:telemetry') ? 'ENFORCED' : 'OBSERVE';
+        const union = enforced.includes('execute:union') ? 'ENFORCED' : 'OBSERVE';
+        const contractSign = enforced.includes('execute:contract') ? 'ENFORCED' : 'OBSERVE';
+        const contractVerify = enforced.includes('read:contract') ? 'ENFORCED' : 'OBSERVE';
+        const dispatch = enforced.includes('execute:dispatch') ? 'ENFORCED' : 'OBSERVE';
         const mode = c.enforcement==='partial' ? 'PARTIAL' : (c.enforcement==='observe' ? 'OBSERVE ONLY' : c.enforcement);
         $('#capability').innerHTML = [
           capRow('Registry', c.registryVersion ? 'ACTIVE v'+c.registryVersion : 'INACTIVE', !!c.registryVersion),
@@ -395,6 +399,10 @@
           capRow('Governance Admin', gAdmin, gAdmin==='ENFORCED'),
           capRow('THINK Token (mint)', mint, mint==='ENFORCED'),
           capRow('Telemetry Ingest', ingest, ingest==='ENFORCED'),
+          capRow('Union', union, union==='ENFORCED'),
+          capRow('Contract Sign', contractSign, contractSign==='ENFORCED'),
+          capRow('Contract Verify', contractVerify, contractVerify==='ENFORCED'),
+          capRow('Dispatch', dispatch, dispatch==='ENFORCED'),
           capRow('Other capabilities', 'OBSERVE ONLY', true),
           capRow('Allowed', c.allowed||0, true),
           capRow('Denials', c.denials||0, (c.denials||0)===0),
