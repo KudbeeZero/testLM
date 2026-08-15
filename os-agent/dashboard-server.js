@@ -1,6 +1,6 @@
 import { createServer } from "node:http";
 import { readFile, writeFile } from "node:fs/promises";
-import { spawn } from "node:child_process";
+import { spawn, execFileSync } from "node:child_process";
 import WebSocket, { WebSocketServer } from "ws";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -143,6 +143,18 @@ const server = createServer(async (req, res) => {
   if (req.url === "/api/state") {
     res.setHeader("Content-Type", "application/json");
     res.end(JSON.stringify(await getState()));
+    return;
+  }
+  // On-demand operator + AWS status (reuses kudbee-status.mjs). Heavy checks
+  // only run when requested — not on the 5s auto-poll. Read-only, no secrets.
+  if (req.url === "/api/ops") {
+    res.setHeader("Content-Type", "application/json");
+    try {
+      const out = execFileSync("node", [path.join(root, "kudbee-status.mjs")], { encoding: "utf8", timeout: 90000, cwd: WORKSPACE });
+      res.end(JSON.stringify({ ok: true, output: out }));
+    } catch (e) {
+      res.end(JSON.stringify({ ok: false, output: (e.stdout || "") + "\n" + (e.message || "") }));
+    }
     return;
   }
   const file = req.url === "/" ? "index.html" : req.url.slice(1);

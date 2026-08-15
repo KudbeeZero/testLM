@@ -60,6 +60,14 @@
         <div id="learning">Loading…</div>
       </div>
     </section>
+
+    <section style="margin-top:14px">
+      <div class="card">
+        <h3>Operator / AWS <small style="color:#4e6b5d">on-demand health + cost (read-only, no secrets)</small></h3>
+        <div style="margin-bottom:8px"><button id="opsBtn">Run checks</button> <span id="opsStatus" style="color:#888"></span></div>
+        <pre id="ops" class="terminal" style="height:auto;max-height:420px;white-space:pre-wrap">Click “Run checks” to verify AWS identity, Phi-4, providers, Redis, Postgres, GitHub, router, knowledge audit, and month-to-date cost.</pre>
+      </div>
+    </section>
   </main>
 
   <script>
@@ -97,6 +105,17 @@
     }
 
     $('#taskForm').onsubmit = async e => { e.preventDefault(); const title = $('#taskInput').value.trim(); if(!title) return; await fetch('/api/tasks',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title})}); $('#taskInput').value=''; refresh(); };
+
+    // On-demand operator + AWS checks (heavy — only run on click, not on 5s poll).
+    $('#opsBtn').onclick = async () => {
+      const btn = $('#opsBtn'); btn.disabled = true; $('#opsStatus').textContent = 'running…';
+      try {
+        const r = await fetch('/api/ops').then(r=>r.json());
+        $('#ops').textContent = r.output || (r.ok ? 'no output' : 'check failed');
+        $('#opsStatus').textContent = r.ok ? 'done ' + new Date().toLocaleTimeString() : 'error';
+      } catch(e){ $('#ops').textContent = 'request failed: ' + e.message; $('#opsStatus').textContent='error'; }
+      btn.disabled = false;
+    };
 
     // WebSocket interactive terminal
     let ws;
