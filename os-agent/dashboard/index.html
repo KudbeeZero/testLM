@@ -68,7 +68,23 @@
     <section style="margin-top:14px">
       <div class="card">
         <h3>Learning Loop <small style="color:#4e6b5d">observe → record → evaluate → learn → validate → teach → test → improve</small></h3>
+        <div style="margin-bottom:8px;display:flex;gap:8px;flex-wrap:wrap">
+          <button id="genTestsBtn">Generate test specs</button>
+          <button id="regBtn">Record regression</button>
+          <span id="learningAction" style="color:#888;font-size:12px"></span>
+        </div>
         <div id="learning">Loading…</div>
+      </div>
+    </section>
+
+    <section style="margin-top:14px">
+      <div class="card">
+        <h3>Phi-4 Test <small style="color:#4e6b5d">live local inference</small></h3>
+        <div class="controls" style="margin-bottom:8px">
+          <input id="phiPrompt" type="text" placeholder="Ask Phi-4 something…" />
+          <button id="phiBtn">Run</button>
+        </div>
+        <pre id="phiResult" class="terminal" style="height:auto;max-height:200px;white-space:pre-wrap">Phi-4 is ONLINE. Send a prompt to see the reply, latency, and tokens.</pre>
       </div>
     </section>
 
@@ -129,6 +145,8 @@
     async function refresh(){
       try{
         const s = await api('/api/state');
+        // Hide login/logout when auth is disabled (single-operator local testing).
+        if(s.auth && !s.auth.enabled){ hideLogin(); $('#logoutBtn').style.display='none'; }
         $('#status').innerHTML = '<span style="color:#1a7c3a">● LIVE</span> · updated ' + new Date().toLocaleTimeString();
         $('#tasks').innerHTML = s.tasks.length ? s.tasks.map(t => `<div><strong>${t.title}</strong> <small>${t.status}</small></div>`).join('') : '<div>No tasks</div>';
         $('#routes').innerHTML = Object.values(s.handoff).map(h=>`<div>${h.label} — ${h.status}</div>`).join('');
@@ -167,26 +185,65 @@
         const r = await api('/api/metrics');
         const m = r.metrics||[];
         if(!m.length){ $('#metrics').textContent = 'No metrics yet — run an ops check.'; return; }
-        const rows = m.map(x=>{
+        // Cost trend bars (no external chart lib).
+        const costs = m.filter(x=>x.cost!=null).map(x=>x.cost);
+        const max = costs.length ? Math.max(...costs) : 1;
+        const bars = m.map(x=>{
           const t = new Date(x.ts).toLocaleTimeString();
           const cost = x.cost!=null ? '$'+x.cost.toFixed(2) : '—';
-          return `<div><b>${t}</b> · cost ${cost} · Phi-4 ${x.phi4?'on':'off'} · GitHub ${x.github?'on':'off'} · router ${x.router}</div>`;
+          const h = x.cost!=null ? Math.max(4, Math.round((x.cost/max)*60)) : 4;
+          const color = x.phi4 ? '#1a7c3a' : '#b00020';
+          return `<div style="display:flex;align-items:flex-end;gap:4px;margin-bottom:6px">
+            <div style="width:10px;height:${h}px;background:${color}" title="cost ${cost}"></div>
+            <div style="font-size:12px">${t} · ${cost} · Phi-4 ${x.phi4?'on':'off'} · GitHub ${x.github?'on':'off'} · router ${x.router}</div>
+          </div>`;
         }).reverse().join('');
-        $('#metrics').innerHTML = rows;
+        $('#metrics').innerHTML = bars;
       }catch(e){}
     }
 
     $('#taskForm').onsubmit = async e => { e.preventDefault(); const title = $('#taskInput').value.trim(); if(!title) return; await api('/api/tasks',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title})}); $('#taskInput').value=''; refresh(); };
 
-    $('#opsBtn').onclick = async () => {
-      const btn = $('#opsBtn'); btn.disabled = true; $('#opsStatus').textContent = 'running…';
+    async function runOps(auto){
+      const btn = $('#opsBtn'); if(!auto) btn.disabled = true;
+      $('#opsStatus').textContent = auto ? 'auto-refreshing…' : 'running…';
       try {
         const r = await api('/api/ops');
         $('#ops').textContent = r.output || (r.ok ? 'no output' : 'check failed');
         $('#opsStatus').textContent = r.ok ? 'done ' + new Date().toLocaleTimeString() : 'error';
         loadMetrics();
       } catch(e){ $('#ops').textContent = 'request failed: ' + e.message; $('#opsStatus').textContent='error'; }
-      btn.disabled = false;
+      if(!auto) btn.disabled = false;
+    }
+    $('#opsBtn').onclick = ()=>runOps(false);
+
+    // Phi-4 live test.
+    $('#phiBtn').onclick = async () => {
+      const prompt = $('#phiPrompt').value.trim(); if(!prompt) return;
+      $('#phiResult').textContent = 'running…';
+      try {
+        const r = await api('/api/phi4',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});
+        if(r.ok){
+          const u = r.usage||{};
+          $('#phiResult').textContent = `reply: ${r.reply}\nlatency: ${r.latencyMs}ms\ntokens: in ${u.prompt_tokens??'?'} / out ${u.completion_tokens??'?'}`;
+        } else { $('#phiResult').textContent = 'error: ' + (r.error||'unknown'); }
+      } catch(e){ $('#phiResult').textContent = 'request failed: ' + e.message; }
+    };
+    $('#phiPrompt').addEventListener('keydown',e=>{ if(e.key==='Enter') $('#phiBtn').click(); });
+
+    // PR-6/PR-7 one-click triggers.
+    async function learningAction(name, body){
+      $('#learningAction').textContent = name + '…';
+      try {
+        const r = await api('/api/learning/'+name,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body||{})});
+        $('#learningAction').textContent = (r.ok?'done: ':'error: ') + (r.output||'').trim().split('\n').slice(-2).join(' | ');
+        refresh(); loadMetrics();
+      } catch(e){ $('#learningAction').textContent = 'request failed: '+e.message; }
+    }
+    $('#genTestsBtn').onclick = ()=>learningAction('generate-tests');
+    $('#regBtn').onclick = ()=>{
+      const failure = prompt('Failure description (verified):');
+      if(failure && failure.trim()) learningAction('record-regression',{failure:failure.trim()});
     };
 
     // WebSocket interactive terminal (requires auth)
@@ -206,6 +263,8 @@
     refresh(); setInterval(refresh,5000);
     loadAudit(); loadMetrics();
     ensureWs();
+    // Auto-refresh operator checks on a slow interval (60s) so cost/health trend.
+    setInterval(()=>runOps(true), 60000);
   </script>
 </body>
 </html>

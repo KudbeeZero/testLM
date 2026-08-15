@@ -16,6 +16,8 @@ const REGRESSIONS_FILE = path.join(AGENT_DIR, "memory", "regressions.json");
 const METRICS_FILE = path.join(AGENT_DIR, "memory", "metrics.json");
 
 // ── Enterprise auth (session cookie, HMAC-signed) ──────────────────────────
+// DASHBOARD_AUTH=false disables login for single-operator local testing.
+const AUTH_ENABLED = !["false", "0", "off"].includes(String(process.env.DASHBOARD_AUTH || "").toLowerCase());
 const DASHBOARD_PASSWORD = process.env.DASHBOARD_PASSWORD || randomBytes(16).toString("hex");
 const SESSION_SECRET = randomBytes(32).toString("hex");
 const SESSION_TTL = 12 * 3600 * 1000;
@@ -142,7 +144,7 @@ async function getState() {
     tasks,
     repo: { name: path.basename(WORKSPACE), branch: "local workspace", source: "filesystem" },
     learning: await getLearningState(),
-    auth: { enabled: true, passwordSet: !!process.env.DASHBOARD_PASSWORD },
+    auth: { enabled: AUTH_ENABLED, passwordSet: !!process.env.DASHBOARD_PASSWORD },
   };
 }
 
@@ -208,7 +210,7 @@ const server = createServer(async (req, res) => {
   }
 
   // ── Protected API (everything else under /api) ──────────────────────────
-  if (url.startsWith("/api/") && !isAuthed(req)) {
+  if (url.startsWith("/api/") && AUTH_ENABLED && !isAuthed(req)) {
     json(res, 401, { ok: false, error: "unauthorized" });
     return;
   }
@@ -262,6 +264,53 @@ const server = createServer(async (req, res) => {
     return;
   }
 
+  // Live Phi-4 inference test (local LM Studio).
+  if (req.method === "POST" && url === "/api/phi4") {
+    const body = await jsonBody(req);
+    const prompt = String(body.prompt || "").trim();
+    if (!prompt) { json(res, 400, { ok: false, error: "prompt required" }); return; }
+    const t0 = Date.now();
+    try {
+      const r = await fetch("http://localhost:1234/v1/chat/completions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ model: LOCAL_MODEL, messages: [{ role: "user", content: prompt }], max_tokens: 256, temperature: 0.2 }),
+        signal: AbortSignal.timeout(240000), // local Phi-4 can be slow (warmup)
+      });
+      const j = await r.json();
+      await audit("phi4.test", "operator", prompt.slice(0, 80));
+      json(res, 200, { ok: true, reply: j.choices?.[0]?.message?.content || "", latencyMs: Date.now() - t0, usage: j.usage || null });
+    } catch (e) {
+      json(res, 200, { ok: false, error: "Phi-4 unavailable: " + e.message });
+    }
+    return;
+  }
+  // PR-6: generate test specs from validated learnings (bounded, deduped).
+  if (req.method === "POST" && url === "/api/learning/generate-tests") {
+    try {
+      const out = execFileSync("node", [path.join(root, "generate-tests.mjs"), "--apply"], { encoding: "utf8", timeout: 30000, cwd: root });
+      await audit("learning.generate-tests", "operator");
+      json(res, 200, { ok: true, output: out });
+    } catch (e) { json(res, 200, { ok: false, output: (e.stdout || "") + "\n" + e.message }); }
+    return;
+  }
+  // PR-7: record a regression (append-only).
+  if (req.method === "POST" && url === "/api/learning/record-regression") {
+    const body = await jsonBody(req);
+    const failure = String(body.failure || "").trim();
+    if (!failure) { json(res, 400, { ok: false, error: "failure required" }); return; }
+    const args = ["record-regression.mjs", "--failure", failure, "--apply"];
+    if (body.learningId) args.push("--learningId", String(body.learningId));
+    if (body.provider) args.push("--provider", String(body.provider));
+    if (body.model) args.push("--model", String(body.model));
+    try {
+      const out = execFileSync("node", args, { encoding: "utf8", timeout: 30000, cwd: root });
+      await audit("learning.record-regression", "operator", failure.slice(0, 80));
+      json(res, 200, { ok: true, output: out });
+    } catch (e) { json(res, 200, { ok: false, output: (e.stdout || "") + "\n" + e.message }); }
+    return;
+  }
+
   const file = url === "/" ? "index.html" : url.slice(1);
   if (file.includes("..")) { res.writeHead(400); res.end("Bad path"); return; }
   try {
@@ -291,7 +340,7 @@ wss.on("connection", (ws, req) => {
 });
 server.on("upgrade", (req, socket, head) => {
   const { url } = req;
-  if (url === "/ws/terminal" && isAuthed(req)) {
+  if (url === "/ws/terminal" && (!AUTH_ENABLED || isAuthed(req))) {
     wss.handleUpgrade(req, socket, head, ws => wss.emit("connection", ws, req));
   } else {
     socket.destroy();
