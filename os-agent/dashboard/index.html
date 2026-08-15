@@ -3,28 +3,39 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Trust Agent / Workbench</title>
+  <title>KUDBEE Control Room</title>
   <style>
     body{font-family:Segoe UI,Arial,Helvetica,sans-serif;margin:0;background:#f6f4ee;color:#17221f}
     .shell{max-width:1200px;margin:24px auto;padding:20px}
-    header{display:flex;justify-content:space-between;align-items:end}
+    header{display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:8px}
     h1{margin:0;font-size:28px}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
     .card{background:#fff;padding:14px;border:1px solid #e0dbcf}
     .terminal{height:280px;overflow:auto;background:#0b0b0b;color:#cfcfcf;padding:12px;font-family:ui-monospace,monospace}
     .controls{display:flex;gap:8px;margin-top:8px}
-    input[type=text]{flex:1;padding:8px;border:1px solid #ccc}
-    button{padding:8px 12px}
+    input[type=text],input[type=password]{flex:1;padding:8px;border:1px solid #ccc}
+    button{padding:8px 12px;cursor:pointer}
+    /* Login overlay */
+    #loginOverlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:50}
+    #loginOverlay.show{display:flex}
+    .loginBox{background:#fff;padding:28px;border-radius:8px;width:320px;box-shadow:0 8px 30px rgba(0,0,0,.3)}
+    .loginBox h2{margin-top:0}
+    .loginBox .err{color:#b00020;font-size:13px;min-height:16px}
+    .pill{padding:3px 8px;border-radius:12px;font-size:12px;background:#e6efe9;color:#1a7c3a}
+    .mono{font-family:ui-monospace,monospace;font-size:12px}
   </style>
 </head>
 <body>
   <main class="shell">
     <header>
       <div>
-        <div style="font-size:12px;color:#4e6b5d">Trust Agent / Operator Workbench</div>
+        <div style="font-size:12px;color:#4e6b5d">KUDBEE / Operator Workbench</div>
         <h1>Control Room</h1>
       </div>
-      <div id="status">connecting...</div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <div id="status">connecting...</div>
+        <button id="logoutBtn" style="display:none">Log out</button>
+      </div>
     </header>
 
     <section class="grid">
@@ -68,18 +79,61 @@
         <pre id="ops" class="terminal" style="height:auto;max-height:420px;white-space:pre-wrap">Click “Run checks” to verify AWS identity, Phi-4, providers, Redis, Postgres, GitHub, router, knowledge audit, and month-to-date cost.</pre>
       </div>
     </section>
+
+    <section class="grid" style="margin-top:14px">
+      <div class="card">
+        <h3>Cost History <small style="color:#4e6b5d">snapshots from each ops check</small></h3>
+        <div id="metrics">No metrics yet — run an ops check.</div>
+      </div>
+      <div class="card">
+        <h3>Audit Log <small style="color:#4e6b5d">governance trace</small></h3>
+        <div id="audit" class="mono" style="max-height:260px;overflow:auto">Loading…</div>
+      </div>
+    </section>
   </main>
+
+  <!-- Login overlay -->
+  <div id="loginOverlay">
+    <div class="loginBox">
+      <h2>KUDBEE Control Room</h2>
+      <p style="color:#4e6b5d;font-size:13px">Enter the operator password to continue.</p>
+      <form id="loginForm" style="display:flex;flex-direction:column;gap:8px">
+        <input id="password" type="password" placeholder="Password" autocomplete="current-password" />
+        <button type="submit">Sign in</button>
+        <div class="err" id="loginErr"></div>
+      </form>
+    </div>
+  </div>
 
   <script>
     const $ = q => document.querySelector(q);
+
+    async function api(path, opts){
+      const r = await fetch(path, opts);
+      if (r.status === 401) { showLogin(); throw new Error('unauthorized'); }
+      return r.json();
+    }
+
+    function showLogin(){ $('#loginOverlay').classList.add('show'); $('#password').focus(); }
+    function hideLogin(){ $('#loginOverlay').classList.remove('show'); $('#logoutBtn').style.display='inline-block'; }
+
+    $('#loginForm').onsubmit = async e => {
+      e.preventDefault();
+      $('#loginErr').textContent = '';
+      const r = await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:$('#password').value})});
+      if (r.ok){ $('#password').value=''; hideLogin(); refresh(); loadAudit(); loadMetrics(); }
+      else { $('#loginErr').textContent = 'Invalid password'; }
+    };
+    $('#logoutBtn').onclick = async () => { await fetch('/api/logout',{method:'POST'}); location.reload(); };
+
     async function refresh(){
       try{
-        const s = await fetch('/api/state').then(r=>r.json());
-        $('#status').textContent = 'live / ' + new Date().toLocaleTimeString();
+        const s = await api('/api/state');
+        $('#status').innerHTML = '<span style="color:#1a7c3a">● LIVE</span> · updated ' + new Date().toLocaleTimeString();
         $('#tasks').innerHTML = s.tasks.length ? s.tasks.map(t => `<div><strong>${t.title}</strong> <small>${t.status}</small></div>`).join('') : '<div>No tasks</div>';
         $('#routes').innerHTML = Object.values(s.handoff).map(h=>`<div>${h.label} — ${h.status}</div>`).join('');
         $('#learning').innerHTML = renderLearning(s.learning);
-      }catch(e){$('#status').textContent='unavailable'}
+      }catch(e){ if(e.message!=='unauthorized') $('#status').innerHTML='<span style="color:#b00020">● OFFLINE</span> · ' + e.message; }
     }
 
     function renderLearning(l){
@@ -104,27 +158,45 @@
       `;
     }
 
-    $('#taskForm').onsubmit = async e => { e.preventDefault(); const title = $('#taskInput').value.trim(); if(!title) return; await fetch('/api/tasks',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title})}); $('#taskInput').value=''; refresh(); };
+    async function loadAudit(){
+      try{ const r = await api('/api/audit'); $('#audit').innerHTML = (r.entries||[]).map(e=>`<div>${e}</div>`).join('') || '<div style="color:#888">No audit entries yet.</div>'; }
+      catch(e){}
+    }
+    async function loadMetrics(){
+      try{
+        const r = await api('/api/metrics');
+        const m = r.metrics||[];
+        if(!m.length){ $('#metrics').textContent = 'No metrics yet — run an ops check.'; return; }
+        const rows = m.map(x=>{
+          const t = new Date(x.ts).toLocaleTimeString();
+          const cost = x.cost!=null ? '$'+x.cost.toFixed(2) : '—';
+          return `<div><b>${t}</b> · cost ${cost} · Phi-4 ${x.phi4?'on':'off'} · GitHub ${x.github?'on':'off'} · router ${x.router}</div>`;
+        }).reverse().join('');
+        $('#metrics').innerHTML = rows;
+      }catch(e){}
+    }
 
-    // On-demand operator + AWS checks (heavy — only run on click, not on 5s poll).
+    $('#taskForm').onsubmit = async e => { e.preventDefault(); const title = $('#taskInput').value.trim(); if(!title) return; await api('/api/tasks',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title})}); $('#taskInput').value=''; refresh(); };
+
     $('#opsBtn').onclick = async () => {
       const btn = $('#opsBtn'); btn.disabled = true; $('#opsStatus').textContent = 'running…';
       try {
-        const r = await fetch('/api/ops').then(r=>r.json());
+        const r = await api('/api/ops');
         $('#ops').textContent = r.output || (r.ok ? 'no output' : 'check failed');
         $('#opsStatus').textContent = r.ok ? 'done ' + new Date().toLocaleTimeString() : 'error';
+        loadMetrics();
       } catch(e){ $('#ops').textContent = 'request failed: ' + e.message; $('#opsStatus').textContent='error'; }
       btn.disabled = false;
     };
 
-    // WebSocket interactive terminal
+    // WebSocket interactive terminal (requires auth)
     let ws;
     function ensureWs(){
       if(ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING)) return ws;
       ws = new WebSocket((location.protocol==='https:'?'wss:':'ws:')+'//'+location.host+'/ws/terminal');
-      ws.onopen = ()=>{ $('#terminal').textContent += '\n[connected]\n'; };
+      ws.onopen = ()=>{ $('#terminal').textContent = $('#terminal').textContent.replace('Connecting to local runtime…','') + '\n[connected]\n'; };
       ws.onmessage = ev => { try { const m = JSON.parse(ev.data); if(m.stream==='out' || m.stream==='err'){ $('#terminal').textContent += m.text; } else if(m.stream==='exit'){ $('#terminal').textContent += `\n[exit ${m.code}]\n`; } } catch(e){ $('#terminal').textContent += ev.data; } $('#terminal').scrollTop = $('#terminal').scrollHeight; };
-      ws.onclose = ()=>$('#terminal').textContent += '\n[disconnected]\n';
+      ws.onclose = ()=>{ $('#terminal').textContent += '\n[disconnected]\n'; };
       ws.onerror = ()=>$('#terminal').textContent += '\n[error]\n';
       return ws;
     }
@@ -132,6 +204,8 @@
     $('#run').onclick = ()=>{ const cmd = $('#command').value.trim(); if(!cmd) return; $('#terminal').textContent += `\n> ${cmd}\n`; $('#command').value=''; const s = ensureWs(); if(s.readyState === WebSocket.OPEN) s.send(JSON.stringify({cmd})); else s.addEventListener('open',()=>s.send(JSON.stringify({cmd})),{once:true}); };
 
     refresh(); setInterval(refresh,5000);
+    loadAudit(); loadMetrics();
+    ensureWs();
   </script>
 </body>
 </html>
