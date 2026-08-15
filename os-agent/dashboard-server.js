@@ -447,6 +447,11 @@ const server = createServer(async (req, res) => {
     const ingestionBoundary = process.env.KUDBEE_AUTH_BOUNDARY || (process.env.NODE_ENV === 'production' ? 'required' : 'dev-open');
     const ingestionProtected = ingestionBoundary === 'required' || process.env.NODE_ENV === 'production';
     const devOpen = process.env.KUDBEE_DEV_OPEN === 'true';
+    let capability = { available: false, registryVersion: null, enforcement: null, resolutions: 0, denials: 0, missing: 0 };
+    try {
+      const c = await (await fetch("http://127.0.0.1:3000/api/capability", { signal: AbortSignal.timeout(4000) })).json();
+      capability = { available: true, ...c };
+    } catch { /* ingestion server unreachable — capability telemetry unavailable */ }
     json(res, 200, {
       dashboard: {
         auth: AUTH_ENABLED ? 'ENABLED' : 'DISABLED',
@@ -463,6 +468,7 @@ const server = createServer(async (req, res) => {
         terminalBoundary: ingestionProtected || !devOpen ? 'BLOCKED' : 'OPEN',
         filesystemBoundary: ingestionProtected || !devOpen ? 'BLOCKED' : 'OPEN',
       },
+      capability,
       ts: new Date().toISOString(),
     });
     return;
