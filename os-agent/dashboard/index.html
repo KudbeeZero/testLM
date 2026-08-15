@@ -381,6 +381,7 @@
         const gExec = enforced.includes('execute:governance') ? 'ENFORCED' : 'OBSERVE';
         const gAdmin = enforced.includes('admin:governance') ? 'ENFORCED' : 'OBSERVE';
         const mint = enforced.includes('mint:think-token') ? 'ENFORCED' : 'OBSERVE';
+        const ingest = enforced.includes('ingest:telemetry') ? 'ENFORCED' : 'OBSERVE';
         const mode = c.enforcement==='partial' ? 'PARTIAL' : (c.enforcement==='observe' ? 'OBSERVE ONLY' : c.enforcement);
         $('#capability').innerHTML = [
           capRow('Registry', c.registryVersion ? 'ACTIVE v'+c.registryVersion : 'INACTIVE', !!c.registryVersion),
@@ -393,6 +394,7 @@
           capRow('Governance Execute', gExec, gExec==='ENFORCED'),
           capRow('Governance Admin', gAdmin, gAdmin==='ENFORCED'),
           capRow('THINK Token (mint)', mint, mint==='ENFORCED'),
+          capRow('Telemetry Ingest', ingest, ingest==='ENFORCED'),
           capRow('Other capabilities', 'OBSERVE ONLY', true),
           capRow('Allowed', c.allowed||0, true),
           capRow('Denials', c.denials||0, (c.denials||0)===0),
