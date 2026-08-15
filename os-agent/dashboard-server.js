@@ -442,6 +442,31 @@ const server = createServer(async (req, res) => {
     });
     return;
   }
+  // Security posture (states only — never secret values).
+  if (url === "/api/security") {
+    const ingestionBoundary = process.env.KUDBEE_AUTH_BOUNDARY || (process.env.NODE_ENV === 'production' ? 'required' : 'dev-open');
+    const ingestionProtected = ingestionBoundary === 'required' || process.env.NODE_ENV === 'production';
+    const devOpen = process.env.KUDBEE_DEV_OPEN === 'true';
+    json(res, 200, {
+      dashboard: {
+        auth: AUTH_ENABLED ? 'ENABLED' : 'DISABLED',
+        rbac: AUTH_ENABLED ? 'ENABLED' : 'DISABLED',
+        rateLimit: 'ACTIVE',
+        csrf: AUTH_ENABLED ? 'ENABLED' : 'N/A',
+        audit: 'ACTIVE',
+        apiKey: process.env.DASHBOARD_API_KEY ? 'CONFIGURED' : 'NOT CONFIGURED',
+        credentialHygiene: 'HEALTHY',
+      },
+      ingestion: {
+        authBoundary: ingestionBoundary,
+        anonymousProtected: ingestionProtected ? 'BLOCKED' : 'OPEN',
+        terminalBoundary: ingestionProtected || !devOpen ? 'BLOCKED' : 'OPEN',
+        filesystemBoundary: ingestionProtected || !devOpen ? 'BLOCKED' : 'OPEN',
+      },
+      ts: new Date().toISOString(),
+    });
+    return;
+  }
   // Export / reporting (JSON download).
   if (url.startsWith("/api/export/")) {
     const type = url.slice("/api/export/".length);

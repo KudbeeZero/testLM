@@ -63,6 +63,13 @@
       </div>
     </section>
 
+    <section style="margin-top:14px">
+      <div class="card">
+        <h3>Security Control <small style="color:#4e6b5d">states only — never secret values</small></h3>
+        <div id="security">Loading…</div>
+      </div>
+    </section>
+
     <section class="grid">
       <div class="card">
         <h3>Tasks</h3>
@@ -321,6 +328,35 @@
       }catch(e){ $('#serverStatus').textContent='unavailable'; $('#dbStatus').textContent='unavailable'; }
     }
 
+    // Security Control card.
+    function secDot(v){
+      const good = ['HEALTHY','ENABLED','ACTIVE','CONFIGURED','BLOCKED','required'];
+      const cls = good.includes(v) ? 'on' : 'off';
+      return `<span class="dot ${cls}"></span>`;
+    }
+    function secRow(label, value){
+      return `<div class="status-row"><span class="status-label">${label}</span><span class="status-value">${secDot(value)}${value}</span></div>`;
+    }
+    async function loadSecurity(){
+      try{
+        const s = await api('/api/security');
+        const d = s.dashboard||{}, g = s.ingestion||{};
+        $('#security').innerHTML = [
+          secRow('Dashboard Auth', d.auth),
+          secRow('Dashboard RBAC', d.rbac),
+          secRow('Ingestion Auth', g.authBoundary==='required' ? 'ENABLED' : (g.authBoundary==='dev-open' ? 'DEV-OPEN' : g.authBoundary)),
+          secRow('Anonymous Protected', g.anonymousProtected),
+          secRow('Terminal Boundary', g.terminalBoundary),
+          secRow('Filesystem Boundary', g.filesystemBoundary),
+          secRow('Rate Limiting', d.rateLimit),
+          secRow('CSRF', d.csrf),
+          secRow('Audit Logging', d.audit),
+          secRow('API Key', d.apiKey),
+          secRow('Credential Hygiene', d.credentialHygiene),
+        ].join('');
+      }catch(e){ $('#security').textContent = 'unavailable: ' + e.message; }
+    }
+
     // Phi-4 live test.
     $('#phiBtn').onclick = async () => {
       const prompt = $('#phiPrompt').value.trim(); if(!prompt) return;
@@ -365,8 +401,9 @@
     $('#run').onclick = ()=>{ const cmd = $('#command').value.trim(); if(!cmd) return; $('#terminal').textContent += `\n> ${cmd}\n`; $('#command').value=''; const s = ensureWs(); if(s.readyState === WebSocket.OPEN) s.send(JSON.stringify({cmd})); else s.addEventListener('open',()=>s.send(JSON.stringify({cmd})),{once:true}); };
 
     refresh(); setInterval(refresh,5000);
-    loadAudit(); loadMetrics(); loadGithub(); loadStatus();
+    loadAudit(); loadMetrics(); loadGithub(); loadStatus(); loadSecurity();
     setInterval(loadStatus, 30000); // status panels refresh every 30s
+    setInterval(loadSecurity, 30000);
     ensureWs();
     // Auto-refresh operator checks on a slow interval (60s) so cost/health trend.
     setInterval(()=>runOps(true), 60000);
