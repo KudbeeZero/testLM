@@ -100,6 +100,35 @@ export function deprecate(learning, reason) {
   return learning;
 }
 
+/**
+ * P1 closed-loop re-evaluation: update a learning's status from new outcome
+ * evidence. Deterministic, no model call. If quality holds it stays
+ * ACTIVE/VERIFIED (CONFIRMED); if it deteriorates it is marked STALE (or
+ * SUPERSEDED when a newer learning replaces it).
+ */
+export function reEvaluate(learning, { sampleCount = 0, successCount = 0, failureCount = 0, threshold = 0.7, supersededBy = null }) {
+  const total = sampleCount || (successCount + failureCount);
+  if (total <= 0) return learning; // no new evidence — leave unchanged
+  const confidence = successCount / total;
+  learning.lastObservedAt = new Date().toISOString();
+  learning.confidence = confidence;
+  learning.sampleCount += sampleCount;
+  learning.successCount += successCount;
+  learning.failureCount += failureCount;
+  if (confidence >= threshold) {
+    if (learning.status === "STALE" || learning.status === "DRAFT") learning.status = "VERIFIED";
+    return learning; // CONFIRMED
+  }
+  if (supersededBy) {
+    learning.status = "SUPERSEDED";
+    learning.supersededBy = supersededBy;
+  } else {
+    learning.status = "STALE";
+    learning.staleReason = "quality below threshold in re-evaluation";
+  }
+  return learning;
+}
+
 /** Mark a learning STALE (past review, needs re-evaluation). */
 export function markStale(learning, reason) {
   learning.status = "STALE";
