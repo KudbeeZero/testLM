@@ -373,10 +373,20 @@
         const s = await api('/api/security');
         const c = s.capability||{};
         if(!c.available){ $('#capability').innerHTML = '<div style="color:#888">Ingestion server unreachable — capability telemetry unavailable.</div>'; return; }
+        const enforced = c.enforcedCapabilities||[];
+        const term = enforced.includes('execute:terminal') ? 'ENFORCED' : 'OBSERVE';
+        const fs_ = enforced.includes('execute:fs') ? 'ENFORCED' : 'OBSERVE';
+        const shell = enforced.includes('execute:shell') ? 'ENFORCED' : 'OBSERVE';
+        const mode = c.enforcement==='partial' ? 'PARTIAL' : (c.enforcement==='observe' ? 'OBSERVE ONLY' : c.enforcement);
         $('#capability').innerHTML = [
           capRow('Registry', c.registryVersion ? 'ACTIVE v'+c.registryVersion : 'INACTIVE', !!c.registryVersion),
           capRow('Resolution', c.resolutions>0 ? 'ACTIVE' : 'IDLE', c.resolutions>0),
-          capRow('Enforcement', c.enforcement==='observe' ? 'OBSERVE ONLY' : c.enforcement, c.enforcement==='observe'),
+          capRow('Enforcement', mode, mode==='PARTIAL'||mode==='OBSERVE ONLY'),
+          capRow('Terminal', term, term==='ENFORCED'),
+          capRow('Filesystem', fs_, fs_==='ENFORCED'),
+          capRow('Shell', shell, shell==='ENFORCED'),
+          capRow('Other capabilities', 'OBSERVE ONLY', true),
+          capRow('Allowed', c.allowed||0, true),
           capRow('Denials', c.denials||0, (c.denials||0)===0),
           capRow('Missing capabilities', c.missing||0, (c.missing||0)===0),
         ].join('');
