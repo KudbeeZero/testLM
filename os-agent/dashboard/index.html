@@ -377,6 +377,9 @@
         const term = enforced.includes('execute:terminal') ? 'ENFORCED' : 'OBSERVE';
         const fs_ = enforced.includes('execute:fs') ? 'ENFORCED' : 'OBSERVE';
         const shell = enforced.includes('execute:shell') ? 'ENFORCED' : 'OBSERVE';
+        const gRead = enforced.includes('read:governance') ? 'ENFORCED' : 'OBSERVE';
+        const gExec = enforced.includes('execute:governance') ? 'ENFORCED' : 'OBSERVE';
+        const gAdmin = enforced.includes('admin:governance') ? 'ENFORCED' : 'OBSERVE';
         const mode = c.enforcement==='partial' ? 'PARTIAL' : (c.enforcement==='observe' ? 'OBSERVE ONLY' : c.enforcement);
         $('#capability').innerHTML = [
           capRow('Registry', c.registryVersion ? 'ACTIVE v'+c.registryVersion : 'INACTIVE', !!c.registryVersion),
@@ -385,6 +388,9 @@
           capRow('Terminal', term, term==='ENFORCED'),
           capRow('Filesystem', fs_, fs_==='ENFORCED'),
           capRow('Shell', shell, shell==='ENFORCED'),
+          capRow('Governance Read', gRead, gRead==='ENFORCED'),
+          capRow('Governance Execute', gExec, gExec==='ENFORCED'),
+          capRow('Governance Admin', gAdmin, gAdmin==='ENFORCED'),
           capRow('Other capabilities', 'OBSERVE ONLY', true),
           capRow('Allowed', c.allowed||0, true),
           capRow('Denials', c.denials||0, (c.denials||0)===0),
