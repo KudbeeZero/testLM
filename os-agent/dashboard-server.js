@@ -227,7 +227,8 @@ const server = createServer(async (req, res) => {
     if (!command) { res.writeHead(400); res.end("Command required"); return; }
     await audit("terminal.command", "operator", command);
     res.setHeader("Content-Type", "application/x-ndjson");
-    const child = spawn("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", command], { cwd: WORKSPACE, windowsHide: true });
+    // cmd.exe avoids the PowerShell execution-policy block on npm.ps1.
+    const child = spawn("cmd.exe", ["/c", command], { cwd: WORKSPACE, windowsHide: true });
     child.stdout.on("data", data => res.write(JSON.stringify({ stream: "out", text: data.toString() }) + "\n"));
     child.stderr.on("data", data => res.write(JSON.stringify({ stream: "err", text: data.toString() }) + "\n"));
     child.on("close", code => { res.write(JSON.stringify({ stream: "exit", code }) + "\n"); res.end(); }); return;
@@ -275,12 +276,13 @@ const server = createServer(async (req, res) => {
 // WebSocket terminal — require an authenticated session on upgrade.
 const wss = new WebSocketServer({ noServer: true });
 wss.on("connection", (ws, req) => {
-  const child = spawn("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", "-"], { cwd: WORKSPACE, windowsHide: true });
+  // cmd.exe interactive (quiet) — npm/node/git work without the npm.ps1 block.
+  const child = spawn("cmd.exe", ["/Q"], { cwd: WORKSPACE, windowsHide: true });
   ws.on("message", msg => {
     try {
       const data = typeof msg === "string" ? JSON.parse(msg) : JSON.parse(msg.toString());
-      if (data && data.cmd) child.stdin.write(String(data.cmd) + "\n");
-    } catch { child.stdin.write(String(msg) + "\n"); }
+      if (data && data.cmd) child.stdin.write(String(data.cmd) + "\r\n");
+    } catch { child.stdin.write(String(msg) + "\r\n"); }
   });
   child.stdout.on("data", d => { try { ws.send(JSON.stringify({ stream: "out", text: d.toString() })); } catch {} });
   child.stderr.on("data", d => { try { ws.send(JSON.stringify({ stream: "err", text: d.toString() })); } catch {} });
