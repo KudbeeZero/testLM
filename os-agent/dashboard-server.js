@@ -6,6 +6,7 @@ import WebSocket, { WebSocketServer } from "ws";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { MEMORY_FILE, AGENT_DIR, PROVIDER, LOCAL_MODEL, providerLabel, WORKSPACE, MONTHLY_BUDGET_USD, RATE_LIMIT_PER_MINUTE, GEMINI_MODEL, GROK_MODEL, DEEPSEEK_MODEL, GEMINI_API_KEY, XAI_API_KEY, DEEPSEEK_API_KEY } from "./src/config.js";
+import { getCostSnapshot, COST_TTL_MS, COST_COOLDOWN_MS } from "./cost-cache.mjs";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const port = Number(process.env.DASHBOARD_PORT || 4173);
@@ -102,6 +103,7 @@ const ENDPOINT_ROLE = {
   "/api/audit": "viewer", "/api/github": "viewer",
   "/api/ops": "operator", "/api/tasks": "operator", "/api/terminal": "operator",
   "/api/phi4": "operator", "/api/metrics/clear": "operator",
+  "/api/cost": "viewer", "/api/cost/refresh": "operator",
 };
 function endpointMinRole(url) {
   if (url.startsWith("/api/export/")) return "viewer";
@@ -365,6 +367,28 @@ const server = createServer(async (req, res) => {
     await writeFile(METRICS_FILE, JSON.stringify({ version: 1, metrics: [] }, null, 2));
     await audit("metrics.clear", req.role || "operator");
     json(res, 200, { ok: true });
+    return;
+  }
+  // Cached AWS cost snapshot (GET) — never calls Cost Explorer directly.
+  if (url === "/api/cost") {
+    const s = await getCostSnapshot();
+    json(res, 200, {
+      ok: true,
+      cost: s,
+      ttlMs: COST_TTL_MS,
+      cooldownMs: COST_COOLDOWN_MS,
+    });
+    return;
+  }
+  // Manual Cost Explorer refresh (POST) — operator role, CSRF, 15 min cooldown.
+  if (req.method === "POST" && url === "/api/cost/refresh") {
+    const s = await getCostSnapshot({ force: true });
+    if (s.throttled) {
+      json(res, 429, { ok: false, error: "cost refresh throttled", retryAfterMs: s.retryAfterMs, cost: s });
+      return;
+    }
+    await audit("cost.refresh", req.role || "operator", s.status === "fresh" ? "fresh" : "stale");
+    json(res, 200, { ok: true, cost: s });
     return;
   }
   if (url === "/api/ops") {

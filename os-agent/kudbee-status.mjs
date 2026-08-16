@@ -11,6 +11,7 @@
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import { getCostText } from "./cost-cache.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
@@ -20,19 +21,10 @@ function run(cmd, args, opts = {}) {
   catch (e) { return null; }
 }
 
+// Cost comes from the server-side cache (24h TTL / manual cooldown) — this
+// never calls Cost Explorer directly, so /api/ops no longer costs money.
 async function awsCost() {
-  // Read-only AWS cost summary for the current month + last 24h.
-  const month = new Date().toISOString().slice(0, 7) + "-01";
-  const end = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
-  const m = run("aws", ["ce", "get-cost-and-usage",
-    "--time-period", `Start=${month},End=${end}`,
-    "--granularity", "MONTHLY", "--metrics", "UnblendedCost"]);
-  if (!m) return "AWS session unavailable (run 'aws login')";
-  try {
-    const d = JSON.parse(m);
-    const amt = d.ResultsByTime?.[0]?.Total?.UnblendedCost?.Amount;
-    return `month-to-date $${amt ? parseFloat(amt).toFixed(2) : "?"}`;
-  } catch { return "AWS cost parse error"; }
+  return await getCostText();
 }
 
 async function main() {

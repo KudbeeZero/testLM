@@ -164,6 +164,19 @@
       </div>
     </section>
 
+    <section style="margin-top:14px">
+      <div class="card">
+        <h3>AWS Cost <small style="color:#4e6b5d">cached — never hits Cost Explorer on load</small></h3>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span id="costTotal" style="font-size:22px;font-weight:700">—</span>
+          <span id="costStatus" class="pill" style="display:none"></span>
+          <button id="costRefreshBtn">Refresh AWS Cost</button>
+          <span id="costRefreshMsg" style="color:#888;font-size:12px"></span>
+        </div>
+        <div id="costMeta" style="color:#5f726a;font-size:12px;margin-top:6px"></div>
+      </div>
+    </section>
+
     <section class="grid" style="margin-top:14px">
       <div class="card">
         <h3>Cost History & Uptime <small style="color:#4e6b5d">snapshots from each ops check</small></h3>
@@ -324,6 +337,36 @@
         $('#metrics').innerHTML = bars;
       }catch(e){}
     }
+
+    // AWS Cost card — reads the server-side cache (no Cost Explorer on load).
+    async function loadCost(){
+      try{
+        const r = await api('/api/cost');
+        const c = r.cost || {};
+        $('#costTotal').textContent = c.total != null ? '$'+c.total : '—';
+        const st = c.status || 'unknown';
+        const pill = $('#costStatus');
+        pill.textContent = st.toUpperCase();
+        pill.style.display = 'inline-block';
+        pill.style.background = st==='fresh' ? 'var(--accent-soft)' : (st==='stale' ? '#fff3d6' : 'var(--accent-soft)');
+        pill.style.color = st==='stale' ? '#8a6d1a' : 'var(--accent)';
+        const fetched = c.fetchedAt ? new Date(c.fetchedAt).toLocaleString() : '—';
+        $('#costMeta').textContent = 'Last refresh: ' + fetched + ' · period ' + (c.period || '—') + (c.error ? ' · error: ' + c.error : '');
+      }catch(e){ $('#costTotal').textContent='—'; $('#costMeta').textContent='cost unavailable: '+e.message; }
+    }
+    $('#costRefreshBtn').onclick = async () => {
+      $('#costRefreshMsg').textContent = 'refreshing…';
+      try{
+        const r = await api('/api/cost/refresh',{method:'POST'});
+        if(r.cost && r.cost.throttled){
+          const s = Math.ceil((r.retryAfterMs||0)/60000);
+          $('#costRefreshMsg').textContent = 'throttled — retry in ' + (s||'<1') + ' min';
+        } else {
+          $('#costRefreshMsg').textContent = 'refreshed ' + new Date().toLocaleTimeString();
+        }
+        loadCost();
+      }catch(e){ $('#costRefreshMsg').textContent = 'failed: '+e.message; }
+    };
 
     // Cost History queue controls: show-limit and clear.
     $('#metricsLimit').onchange = loadMetrics;
@@ -523,7 +566,7 @@
     $('#run').onclick = ()=>{ const cmd = $('#command').value.trim(); if(!cmd) return; $('#terminal').textContent += `\n> ${cmd}\n`; $('#command').value=''; const s = ensureWs(); if(s.readyState === WebSocket.OPEN) s.send(JSON.stringify({cmd})); else s.addEventListener('open',()=>s.send(JSON.stringify({cmd})),{once:true}); };
 
     refresh(); setInterval(refresh,5000);
-    loadAudit(); loadMetrics(); loadGithub(); loadStatus(); loadSecurity(); loadCapability();
+    loadAudit(); loadMetrics(); loadGithub(); loadStatus(); loadSecurity(); loadCapability(); loadCost();
     setInterval(loadStatus, 30000); // status panels refresh every 30s
     setInterval(loadSecurity, 30000);
     setInterval(loadCapability, 30000);
