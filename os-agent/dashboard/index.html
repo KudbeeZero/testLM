@@ -108,6 +108,26 @@
       </div>
     </section>
 
+    <section style="margin-top:14px">
+      <div class="card">
+        <h3>Local Agent <small style="color:#4e6b5d">bounded overnight engine — read-only + test + analyze</small></h3>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px">
+          <span class="pill" id="agentState">idle</span>
+          <span class="pill" id="agentOvernight" style="background:#eee">OFF</span>
+          <button id="agentArmBtn">ARM</button>
+          <button id="agentStopBtn" style="border-color:var(--danger);color:var(--danger)">STOP</button>
+          <button id="agentRunBtn">Run one task</button>
+          <span id="agentMsg" style="color:#888;font-size:12px"></span>
+        </div>
+        <div id="agentStatus" style="font-size:13px;line-height:1.6">Loading…</div>
+        <div style="margin-top:8px">
+          <input id="agentTaskInput" type="text" placeholder="Add a safe task (e.g. check git status)" />
+          <button id="agentAddTaskBtn">Add task</button>
+        </div>
+        <div id="agentTasks" style="margin-top:8px;font-size:12.5px">No tasks.</div>
+      </div>
+    </section>
+
     <section class="grid" style="margin-top:14px">
       <div class="card status-card">
         <h3>Server Status</h3>
@@ -425,6 +445,34 @@
     }
     $('#notifLimit').onchange = loadNotifications;
     $('#clearNotifBtn').onclick = ()=>{ $('#notifications').innerHTML='<div style="color:#888">Cleared.</div>'; };
+
+    // Local Agent — status, tasks, arm/stop/run.
+    async function loadAgentStatus(){
+      try{
+        const [s, t, ses] = await Promise.all([api('/api/local-agent/status'), api('/api/local-agent/tasks'), api('/api/local-agent/session')]);
+        const st = s.state || {};
+        $('#agentState').textContent = st.state || 'idle';
+        $('#agentOvernight').textContent = st.overnightMode || 'OFF';
+        $('#agentOvernight').style.background = (st.overnightMode==='RUNNING') ? 'var(--accent-soft)' : '#eee';
+        $('#agentStatus').innerHTML =
+          `<div><b>Agent:</b> ${st.agentId||'—'} · <b>Model:</b> ${st.model||'—'} (${st.provider||'—'})</div>` +
+          `<div><b>Task:</b> ${st.currentTask||'—'} <small>(${st.currentTaskId||'—'})</small></div>` +
+          `<div><b>Iteration:</b> ${st.iteration||0} / ${st.maxIterations||3} · <b>Last tool:</b> ${st.currentTool||'—'}</div>` +
+          `<div><b>Last result:</b> ${st.lastResult||'—'} · <b>Last learning:</b> ${st.lastLearning||'—'}</div>` +
+          `<div><b>Last activity:</b> ${st.updatedAt?new Date(st.updatedAt).toLocaleTimeString():'—'}${st.error?' · <span style="color:var(--danger)">'+st.error+'</span>':''}</div>`;
+        const tasks = t.tasks||[];
+        $('#agentTasks').innerHTML = tasks.length
+          ? tasks.slice().reverse().map(x=>`<div>${x.status} · ${x.description} <small>(${x.id})</small></div>`).join('')
+          : 'No tasks.';
+        if(ses && ses.session) $('#agentMsg').textContent = 'last session: '+ses.session.stopReason+' ('+ses.session.tasksCompleted+'/'+ses.session.tasksAttempted+' ok)';
+      }catch(e){ $('#agentStatus').textContent='unavailable: '+e.message; }
+    }
+    $('#agentArmBtn').onclick = async ()=>{ try{ await api('/api/local-agent/arm',{method:'POST'}); $('#agentMsg').textContent='armed'; loadAgentStatus(); }catch(e){ $('#agentMsg').textContent='failed: '+e.message; } };
+    $('#agentStopBtn').onclick = async ()=>{ try{ await api('/api/local-agent/stop',{method:'POST'}); $('#agentMsg').textContent='stopped'; loadAgentStatus(); }catch(e){ $('#agentMsg').textContent='failed: '+e.message; } };
+    $('#agentRunBtn').onclick = async ()=>{ $('#agentMsg').textContent='running…'; try{ const r=await api('/api/local-agent/run',{method:'POST'}); $('#agentMsg').textContent='session done: '+(r.session?r.session.stopReason:'?'); loadAgentStatus(); }catch(e){ $('#agentMsg').textContent='failed: '+e.message; } };
+    $('#agentAddTaskBtn').onclick = async ()=>{ const d=$('#agentTaskInput').value.trim(); if(!d) return; try{ await api('/api/local-agent/tasks',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({description:d})}); $('#agentTaskInput').value=''; loadAgentStatus(); }catch(e){ $('#agentMsg').textContent='failed: '+e.message; } };
+    $('#agentTaskInput').addEventListener('keydown',e=>{ if(e.key==='Enter') $('#agentAddTaskBtn').click(); });
+
     // Cost History queue controls: show-limit and clear.
     $('#metricsLimit').onchange = loadMetrics;
     $('#clearMetricsBtn').onclick = async () => {
@@ -623,7 +671,7 @@
     $('#run').onclick = ()=>{ const cmd = $('#command').value.trim(); if(!cmd) return; $('#terminal').textContent += `\n> ${cmd}\n`; $('#command').value=''; const s = ensureWs(); if(s.readyState === WebSocket.OPEN) s.send(JSON.stringify({cmd})); else s.addEventListener('open',()=>s.send(JSON.stringify({cmd})),{once:true}); };
 
     refresh(); setInterval(refresh,5000);
-    loadAudit(); loadMetrics(); loadGithub(); loadStatus(); loadSecurity(); loadCapability(); loadCost(); loadNotifications();
+    loadAudit(); loadMetrics(); loadGithub(); loadStatus(); loadSecurity(); loadCapability(); loadCost(); loadNotifications(); loadAgentStatus();
     setInterval(loadStatus, 30000); // status panels refresh every 30s
     setInterval(loadSecurity, 30000);
     setInterval(loadCapability, 30000);

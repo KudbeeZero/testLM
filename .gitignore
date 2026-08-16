@@ -4,6 +4,9 @@ agent/logs/
 agent/memory/regressions.json
 agent/memory/test-specs.json
 agent/memory/local-learning.json
+agent/memory/local-agent-state.json
+agent/memory/local-session.json
+agent/memory/local-task-queue.json
 os-agent/dashboard/cost-cache.json
 
 # Secrets / local config (never commit API keys)

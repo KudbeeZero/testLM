@@ -7,6 +7,9 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { MEMORY_FILE, AGENT_DIR, PROVIDER, LOCAL_MODEL, providerLabel, WORKSPACE, MONTHLY_BUDGET_USD, RATE_LIMIT_PER_MINUTE, GEMINI_MODEL, GROK_MODEL, DEEPSEEK_MODEL, GEMINI_API_KEY, XAI_API_KEY, DEEPSEEK_API_KEY } from "./src/config.js";
 import { getCostSnapshot, COST_TTL_MS, COST_COOLDOWN_MS } from "./cost-cache.mjs";
+import { getState as getAgentState, setOvernightMode, transition } from "./src/mesh/agent-state.mjs";
+import { listTasks, enqueue } from "./src/mesh/task-queue.mjs";
+import { runOvernightSession, getLatestSession } from "./src/mesh/overnight-runner.mjs";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const port = Number(process.env.DASHBOARD_PORT || 4173);
@@ -104,6 +107,8 @@ const ENDPOINT_ROLE = {
   "/api/ops": "operator", "/api/tasks": "operator", "/api/terminal": "operator",
   "/api/phi4": "operator", "/api/metrics/clear": "operator",
   "/api/cost": "viewer", "/api/cost/refresh": "operator",
+  "/api/local-agent/status": "viewer", "/api/local-agent/tasks": "viewer", "/api/local-agent/session": "viewer",
+  "/api/local-agent/arm": "operator", "/api/local-agent/stop": "operator", "/api/local-agent/run": "operator",
 };
 function endpointMinRole(url) {
   if (url.startsWith("/api/export/")) return "viewer";
@@ -395,6 +400,50 @@ const server = createServer(async (req, res) => {
     }
     await audit("cost.refresh", req.role || "operator", s.status === "fresh" ? "fresh" : "stale");
     json(res, 200, { ok: true, cost: s });
+    return;
+  }
+  // Local autonomous agent — status / tasks / session (read-only).
+  if (url === "/api/local-agent/status") {
+    json(res, 200, { ok: true, state: await getAgentState() });
+    return;
+  }
+  if (url === "/api/local-agent/tasks") {
+    if (req.method === "POST") {
+      if ((req.role ? ROLE_RANK[req.role] : 0) < ROLE_RANK.operator) { json(res, 403, { ok: false, error: "forbidden" }); return; }
+      const body = await jsonBody(req);
+      const description = String(body.description || "").trim();
+      if (!description) { json(res, 400, { ok: false, error: "description required" }); return; }
+      const task = await enqueue({ description, maxIterations: body.maxIterations || 3 });
+      await audit("local-agent.task", req.role || "operator", description.slice(0, 80));
+      json(res, 200, { ok: true, task });
+      return;
+    }
+    json(res, 200, { ok: true, tasks: await listTasks() });
+    return;
+  }
+  if (url === "/api/local-agent/session") {
+    json(res, 200, { ok: true, session: await getLatestSession() });
+    return;
+  }
+  // Arm / stop / run (operator, CSRF-protected).
+  if (req.method === "POST" && url === "/api/local-agent/arm") {
+    const st = await setOvernightMode("ARMED");
+    await audit("local-agent.arm", req.role || "operator");
+    json(res, 200, { ok: true, state: st });
+    return;
+  }
+  if (req.method === "POST" && url === "/api/local-agent/stop") {
+    await setOvernightMode("STOPPED");
+    await transition("stopped");
+    await audit("local-agent.stop", req.role || "operator");
+    json(res, 200, { ok: true, state: await getAgentState() });
+    return;
+  }
+  if (req.method === "POST" && url === "/api/local-agent/run") {
+    const r = await runOvernightSession();
+    await audit("local-agent.run", req.role || "operator", r.ok ? (r.session?.stopReason || "done") : (r.error || "failed"));
+    if (!r.ok) { json(res, 409, { ok: false, error: r.error }); return; }
+    json(res, 200, { ok: true, session: r.session });
     return;
   }
   if (url === "/api/ops") {
