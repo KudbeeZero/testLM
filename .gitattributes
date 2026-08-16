@@ -1,0 +1,35 @@
+# Normalize line endings consistently across Windows / WSL / Linux (EC2).
+# Text files are stored as LF in the repo and checked out as native on each OS.
+* text=auto
+
+# Server-side / cross-platform source & config — always LF on checkout.
+*.js   text eol=lf
+*.mjs  text eol=lf
+*.cjs  text eol=lf
+*.ts   text eol=lf
+*.tsx  text eol=lf
+*.json text eol=lf
+*.md   text eol=lf
+*.sh   text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+*.css  text eol=lf
+*.html text eol=lf
+
+# Windows scripts that must keep CRLF.
+*.bat  text eol=crlf
+*.cmd  text eol=crlf
+*.ps1  text eol=crlf
+
+# Binary files — Git must never modify these.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.pdf  binary
+*.pem  binary
+*.lock binary
+*.ttf  binary
+*.woff binary
+*.woff2 binary
