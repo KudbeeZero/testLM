@@ -89,3 +89,18 @@ test("tool schema text exposes contracts and allowlisted suites", () => {
   expect(ALLOWED_TEST_SUITES).toContain("bun:test");
   expect(MAX_PLAN_ATTEMPTS).toBe(2);
 });
+
+test("runLocalTask attributes provider metadata from the worker", async () => {
+  const metaModel = async (prompt) => {
+    if (prompt.includes("planner")) return { ok: true, content: JSON.stringify({ tool: "git.status", arguments: {} }), provider: "local", model: "phi4-mini", usage: { inputTokens: 10, outputTokens: 5, totalTokens: 15 }, cost: 0, costStatus: "ACTUAL", latencyMs: 100 };
+    return { ok: true, content: JSON.stringify({ done: true, confidence: 0.9 }), provider: "local", model: "phi4-mini", usage: { inputTokens: 5, outputTokens: 3, totalTokens: 8 }, cost: 0, costStatus: "ACTUAL", latencyMs: 50 };
+  };
+  const out = await runLocalTask({ id: "meta", goal: "check repo" }, { model: metaModel });
+  expect(out.status).toBe("complete");
+  expect(out.provider).toBe("local");
+  expect(out.model).toBe("phi4-mini");
+  expect(out.cost).toBe(0);
+  expect(out.costStatus).toBe("ACTUAL");
+  expect(out.usage.prompt_tokens).toBe(15);
+  expect(out.usage.completion_tokens).toBe(8);
+});

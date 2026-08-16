@@ -93,6 +93,10 @@ export const MONTHLY_BUDGET_USD = Number(process.env.MONTHLY_BUDGET_USD || 50);
 // (Gemini / Grok). Protects against hitting provider rate limits / costs.
 export const RATE_LIMIT_PER_MINUTE = Number(process.env.RATE_LIMIT_PER_MINUTE || 30);
 
+// Cloud escalation cost gate. Default: UNKNOWN cloud cost => NO escalation.
+// Only an explicit flag enables escalation when cloud cost is unknown.
+export const ALLOW_UNKNOWN_CLOUD_COST = String(process.env.ALLOW_UNKNOWN_CLOUD_COST || "false") === "true";
+
 export function providerLabel() {
   return { local: "local (LM Studio)", gemini: "Gemini", grok: "Grok (xAI)", deepseek: "DeepSeek" }[PROVIDER] || PROVIDER;
 }

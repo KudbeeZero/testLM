@@ -524,6 +524,16 @@
         html.push('<div><b>Tasks:</b> '+s.tasksAttempted+' attempted / '+s.tasksCompleted+' completed / '+s.tasksFailed+' failed</div>');
         html.push('<div><b>Tools:</b> '+(s.toolsUsed||[]).join(', ')||'—'+' · <b>Denials:</b> '+s.denials+' · <b>Learnings:</b> '+(s.learnings||[]).length+'</div>');
         html.push('<div><b>Workspace changed:</b> '+(s.workspaceChanged?'YES (STOPPED)':'NO')+'</div>');
+        const sc = s.cost||{};
+        html.push('<div><b>Cost:</b> local $'+(sc.localCost||0)+' · cloud $'+(sc.cloudCost||0)+' · total $'+(sc.totalCost||0)+' · status '+(sc.costStatus||'UNKNOWN')+'</div>');
+        const journey = (s.tasks||[]);
+        if(journey.length){
+          html.push('<div style="margin-top:8px"><b>Model journey:</b></div>');
+          journey.forEach(t=>{
+            const st = t.status===="complete"?'<span style="color:var(--accent)">COMPLETE</span>':'<span style="color:var(--danger)">'+t.status.toUpperCase()+'</span>';
+            html.push('<div style="margin-left:8px">'+st+' · <b>'+t.goal.slice(0,40)+'</b> · '+t.initialModel+' → '+(t.escalated?('↓ '+t.finalModel+' (escalated: '+t.escalationReason+')'):t.finalModel)+' · attempts '+t.attempts+' · tools '+(t.tools||[]).join(',')+' · verify '+(t.verification||'—')+' · cost $'+(t.cost??'—')+' ('+(t.costStatus||'UNKNOWN')+')'+(t.learning?' · learn '+t.learning:'')+'</div>');
+          });
+        }
         const recent = (learn.learnings||[]).slice(-3);
         if(recent.length){
           html.push('<div style="margin-top:8px"><b>Recent learning:</b></div>');
