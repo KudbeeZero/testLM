@@ -543,7 +543,7 @@
         if(journey.length){
           html.push('<div style="margin-top:8px"><b>Model journey:</b></div>');
           journey.forEach(t=>{
-            const st = t.status===="complete"?'<span style="color:var(--accent)">COMPLETE</span>':'<span style="color:var(--danger)">'+t.status.toUpperCase()+'</span>';
+            const st = t.status==='complete'?'<span style="color:var(--accent)">COMPLETE</span>':'<span style="color:var(--danger)">'+t.status.toUpperCase()+'</span>';
             html.push('<div style="margin-left:8px">'+st+' · <b>'+t.goal.slice(0,40)+'</b> · '+t.initialModel+' → '+(t.escalated?('↓ '+t.finalModel+' (escalated: '+t.escalationReason+')'):t.finalModel)+' · attempts '+t.attempts+' · tools '+(t.tools||[]).join(',')+' · verify '+(t.verification||'—')+' · cost $'+(t.cost??'—')+' ('+(t.costStatus||'UNKNOWN')+')'+(t.learning?' · learn '+t.learning:'')+'</div>');
           });
         }
@@ -599,8 +599,7 @@
         const rows = (b.comparison.rows||[]).map(row=>{
           const p = row.phi4, g = row.gemini;
           const cell = m => m ? (m.outcome+' · score '+m.score+' · '+(m.latencyMs!=null?m.latencyMs+'ms':'—')+' · '+(m.costUsd!=null?('$'+m.costUsd):'cost?')+' · '+(m.usage?('tok '+m.usage.prompt_tokens+'/'+m.usage.completion_tokens):'usage?')) : '—';
-          return '<div style="padding:4px 0;border-bottom:1px solid #f2ecdf"><b>'+row.taskId+'</b> ('+row.skill+')
-'+
+          return '<div style="padding:4px 0;border-bottom:1px solid #f2ecdf"><b>'+row.taskId+'</b> ('+row.skill+')'+
             '<div style="margin-left:8px">Phi-4: '+cell(p)+'</div>'+
             '<div style="margin-left:8px">Gemini: '+cell(g)+'</div>'+
             '<div style="margin-left:8px">Winner: <b>'+row.winner+'</b> — '+row.reason+'</div></div>';
