@@ -5,35 +5,57 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>KUDBEE Control Room</title>
   <style>
-    body{font-family:Segoe UI,Arial,Helvetica,sans-serif;margin:0;background:#f6f4ee;color:#17221f}
-    .shell{max-width:1200px;margin:24px auto;padding:20px}
-    header{display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:8px}
-    h1{margin:0;font-size:28px}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
-    .card{background:#fff;padding:14px;border:1px solid #e0dbcf}
-    .terminal{height:280px;overflow:auto;background:#0b0b0b;color:#cfcfcf;padding:12px;font-family:ui-monospace,monospace}
+    :root{
+      --bg:#f4f1e8;--bg2:#ece7da;--card:#fffdf8;--ink:#1c2b26;--muted:#5f726a;
+      --accent:#1f7a4d;--accent-soft:#e3efe7;--line:#e6e0d2;--danger:#b00020;--warn:#c98a00;
+      --shadow:0 6px 24px rgba(40,60,50,.08);--radius:14px;
+    }
+    *{box-sizing:border-box}
+    body{font-family:Segoe UI,Arial,Helvetica,sans-serif;margin:0;color:var(--ink);
+      background:linear-gradient(180deg,var(--bg),var(--bg2));min-height:100vh}
+    .shell{max-width:1240px;margin:0 auto;padding:28px 22px 48px}
+    header{display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:10px}
+    h1{margin:0;font-size:30px;letter-spacing:-.5px}
+    h3{margin:0 0 10px;font-size:15px;font-weight:700}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+    .card{background:var(--card);padding:16px;border:1px solid var(--line);border-radius:var(--radius);
+      box-shadow:var(--shadow)}
+    .terminal{height:280px;overflow:auto;background:#0d0f0e;color:#d6d6d6;padding:12px;font-family:ui-monospace,monospace;border-radius:10px}
     .controls{display:flex;gap:8px;margin-top:8px}
-    input[type=text],input[type=password]{flex:1;padding:8px;border:1px solid #ccc}
-    button{padding:8px 12px;cursor:pointer}
+    input[type=text],input[type=password]{flex:1;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:#fff}
+    input:focus{outline:2px solid var(--accent-soft);border-color:var(--accent)}
+    button{padding:9px 14px;cursor:pointer;border:1px solid var(--line);border-radius:9px;background:#fff;
+      font-weight:600;color:var(--ink);transition:all .15s}
+    button:hover{background:var(--accent-soft);border-color:var(--accent)}
+    button:active{transform:translateY(1px)}
     /* Login overlay */
-    #loginOverlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:50}
+    #loginOverlay{position:fixed;inset:0;background:rgba(20,30,25,.55);display:none;align-items:center;justify-content:center;z-index:50;backdrop-filter:blur(3px)}
     #loginOverlay.show{display:flex}
-    .loginBox{background:#fff;padding:28px;border-radius:8px;width:320px;box-shadow:0 8px 30px rgba(0,0,0,.3)}
+    .loginBox{background:var(--card);padding:30px;border-radius:16px;width:340px;box-shadow:0 18px 50px rgba(0,0,0,.35);border:1px solid var(--line)}
     .loginBox h2{margin-top:0}
-    .loginBox .err{color:#b00020;font-size:13px;min-height:16px}
-    .pill{padding:3px 8px;border-radius:12px;font-size:12px;background:#e6efe9;color:#1a7c3a}
+    .loginBox .err{color:var(--danger);font-size:13px;min-height:16px}
+    .pill{padding:3px 10px;border-radius:12px;font-size:12px;background:var(--accent-soft);color:var(--accent)}
     .mono{font-family:ui-monospace,monospace;font-size:12px}
     /* Status panels */
     .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
-    .dot.on{background:#1a7c3a;box-shadow:0 0 4px #1a7c3a}
-    .dot.off{background:#b00020}
-    .dot.warn{background:#d99a00}
-    .status-row{display:flex;justify-content:space-between;align-items:center;padding:7px 2px;border-bottom:1px solid #f0ece2;font-size:14px}
+    .dot.on{background:var(--accent);box-shadow:0 0 5px var(--accent)}
+    .dot.off{background:var(--danger)}
+    .dot.warn{background:var(--warn)}
+    .status-row{display:flex;justify-content:space-between;align-items:center;padding:8px 2px;border-bottom:1px solid #f2ecdf;font-size:14px}
     .status-row:last-child{border-bottom:none}
-    .status-label{color:#4e6b5d}
+    .status-label{color:var(--muted)}
     .status-value{font-weight:600}
     .status-card{border-left:3px solid #cfe3d6}
     .status-card.db{border-left-color:#d7c9f0}
+    .metric-bar{display:flex;align-items:flex-end;gap:6px;margin-bottom:8px;padding:8px 10px;border-radius:10px;background:#faf7ef;border:1px solid var(--line)}
+    .metric-bar .bar{width:12px;border-radius:3px}
+    .metric-bar .meta{font-size:12px;color:var(--muted)}
+    .audit-row{padding:7px 2px;border-bottom:1px solid #f2ecdf;font-size:12.5px;font-family:ui-monospace,monospace}
+    .audit-row:last-child{border-bottom:none}
+    .audit-row .a-time{color:var(--muted)}
+    .audit-row .a-action{font-weight:700}
+    .audit-row .a-actor{color:var(--accent)}
+    .audit-row .a-detail{color:#4a5a52}
   </style>
 </head>
 <body>
@@ -60,6 +82,13 @@
       <div class="card status-card db">
         <h3>DB Status</h3>
         <div id="dbStatus">Checking…</div>
+      </div>
+    </section>
+
+    <section style="margin-top:14px">
+      <div class="card">
+        <h3>Models <small style="color:#4e6b5d">specific providers — states only</small></h3>
+        <div id="models">Checking…</div>
       </div>
     </section>
 
@@ -138,12 +167,22 @@
     <section class="grid" style="margin-top:14px">
       <div class="card">
         <h3>Cost History & Uptime <small style="color:#4e6b5d">snapshots from each ops check</small></h3>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <span style="font-size:12px;color:#5f726a">Show</span>
+          <select id="metricsLimit" style="padding:5px 8px;border:1px solid #e6e0d2;border-radius:8px">
+            <option value="10">10</option>
+            <option value="25" selected>25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+          <button id="clearMetricsBtn" style="margin-left:auto">Clear history</button>
+        </div>
         <div id="uptime" style="margin-bottom:8px;font-size:13px"></div>
         <div id="metrics">No metrics yet — run an ops check.</div>
       </div>
       <div class="card">
         <h3>Audit Log <small style="color:#4e6b5d">governance trace</small></h3>
-        <div id="audit" class="mono" style="max-height:260px;overflow:auto">Loading…</div>
+        <div id="audit" style="max-height:300px;overflow:auto">Loading…</div>
       </div>
     </section>
 
@@ -249,14 +288,26 @@
     }
 
     async function loadAudit(){
-      try{ const r = await api('/api/audit'); $('#audit').innerHTML = (r.entries||[]).map(e=>`<div>${e}</div>`).join('') || '<div style="color:#888">No audit entries yet.</div>'; }
-      catch(e){}
+      try{
+        const r = await api('/api/audit');
+        const entries = r.entries||[];
+        $('#audit').innerHTML = entries.map(e=>{
+          const parts = String(e).split(' | ');
+          const time = parts[0]||'';
+          const action = parts[1]||'';
+          const actor = parts[2]||'';
+          const detail = parts.slice(3).join(' | ');
+          return `<div class="audit-row"><span class="a-time">${time}</span> <span class="a-action">${action}</span> <span class="a-actor">@${actor}</span> <span class="a-detail">${detail}</span></div>`;
+        }).join('') || '<div style="color:#888">No audit entries yet.</div>';
+      }catch(e){}
     }
     async function loadMetrics(){
       try{
         const r = await api('/api/metrics');
-        const m = r.metrics||[];
+        let m = r.metrics||[];
         if(!m.length){ $('#metrics').textContent = 'No metrics yet — run an ops check.'; $('#uptime').textContent=''; return; }
+        const limit = Number(($('#metricsLimit')||{}).value || 25);
+        m = m.slice(-limit);
         // Uptime summary.
         const pct = k => { const n=m.filter(x=>x[k]===true).length; return m.length?Math.round(n/m.length*100)+'%':'—'; };
         $('#uptime').innerHTML = `Uptime: Phi-4 <b>${pct('phi4')}</b> · GitHub <b>${pct('github')}</b> · Redis <b>${pct('redis')}</b> · Postgres <b>${pct('postgres')}</b> · Audit <b>${pct('knowledge')}</b>`;
@@ -268,14 +319,18 @@
           const cost = x.cost!=null ? '$'+x.cost.toFixed(2) : '—';
           const h = x.cost!=null ? Math.max(4, Math.round((x.cost/max)*60)) : 4;
           const color = x.phi4 ? '#1a7c3a' : '#b00020';
-          return `<div style="display:flex;align-items:flex-end;gap:4px;margin-bottom:6px">
-            <div style="width:10px;height:${h}px;background:${color}" title="cost ${cost}"></div>
-            <div style="font-size:12px">${t} · ${cost} · Phi-4 ${x.phi4?'on':'off'} · GitHub ${x.github?'on':'off'} · router ${x.router}</div>
-          </div>`;
+          return `<div class="metric-bar"><div class="bar" style="height:${h}px;background:${color}"></div><div class="meta">${t} · ${cost} · Phi-4 ${x.phi4?'on':'off'} · GitHub ${x.github?'on':'off'} · router ${x.router}</div></div>`;
         }).reverse().join('');
         $('#metrics').innerHTML = bars;
       }catch(e){}
     }
+
+    // Cost History queue controls: show-limit and clear.
+    $('#metricsLimit').onchange = loadMetrics;
+    $('#clearMetricsBtn').onclick = async () => {
+      try { await api('/api/metrics/clear',{method:'POST'}); loadMetrics(); }
+      catch(e){}
+    };
 
     $('#taskForm').onsubmit = async e => { e.preventDefault(); const title = $('#taskInput').value.trim(); if(!title) return; await api('/api/tasks',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title})}); $('#taskInput').value=''; refresh(); };
 
@@ -332,7 +387,18 @@
           statusRow('Redis (Upstash)', s.db.redis),
           statusRow('Postgres', s.db.postgres),
         ].join('');
-      }catch(e){ $('#serverStatus').textContent='unavailable'; $('#dbStatus').textContent='unavailable'; }
+        // Specific model/provider card.
+        const m = s.models || {};
+        const modelRow = (label, cfg) => cfg
+          ? statusRow(label, `${cfg.status} · ${cfg.model}`)
+          : statusRow(label, '—');
+        $('#models').innerHTML = [
+          modelRow('Phi-4 (local)', m.phi4),
+          modelRow('Gemini (Mayor)', m.gemini),
+          modelRow('XAI / Grok', m.xai),
+          modelRow('DeepSeek', m.deepseek),
+        ].join('');
+      }catch(e){ $('#serverStatus').textContent='unavailable'; $('#dbStatus').textContent='unavailable'; $('#models').textContent='unavailable'; }
     }
 
     // Security Control card.

@@ -5,7 +5,7 @@ import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 import WebSocket, { WebSocketServer } from "ws";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { MEMORY_FILE, AGENT_DIR, PROVIDER, LOCAL_MODEL, providerLabel, WORKSPACE, MONTHLY_BUDGET_USD, RATE_LIMIT_PER_MINUTE } from "./src/config.js";
+import { MEMORY_FILE, AGENT_DIR, PROVIDER, LOCAL_MODEL, providerLabel, WORKSPACE, MONTHLY_BUDGET_USD, RATE_LIMIT_PER_MINUTE, GEMINI_MODEL, GROK_MODEL, DEEPSEEK_MODEL, GEMINI_API_KEY, XAI_API_KEY, DEEPSEEK_API_KEY } from "./src/config.js";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const port = Number(process.env.DASHBOARD_PORT || 4173);
@@ -101,7 +101,7 @@ const ENDPOINT_ROLE = {
   "/api/state": "viewer", "/api/status": "viewer", "/api/metrics": "viewer",
   "/api/audit": "viewer", "/api/github": "viewer",
   "/api/ops": "operator", "/api/tasks": "operator", "/api/terminal": "operator",
-  "/api/phi4": "operator",
+  "/api/phi4": "operator", "/api/metrics/clear": "operator",
 };
 function endpointMinRole(url) {
   if (url.startsWith("/api/export/")) return "viewer";
@@ -361,6 +361,12 @@ const server = createServer(async (req, res) => {
   if (url === "/api/metrics") {
     json(res, 200, { metrics: await readMetrics() }); return;
   }
+  if (req.method === "POST" && url === "/api/metrics/clear") {
+    await writeFile(METRICS_FILE, JSON.stringify({ version: 1, metrics: [] }, null, 2));
+    await audit("metrics.clear", req.role || "operator");
+    json(res, 200, { ok: true });
+    return;
+  }
   if (url === "/api/ops") {
     try {
       const out = execFileSync("node", [path.join(root, "kudbee-status.mjs")], { encoding: "utf8", timeout: 90000, cwd: WORKSPACE });
@@ -438,6 +444,13 @@ const server = createServer(async (req, res) => {
       server: { dashboard: "online", phi4, provider: PROVIDER, model: LOCAL_MODEL },
       db: { redis, postgres: process.env.DATABASE_URL ? "configured" : "absent" },
       github: (process.env.GITHUB_PAT || process.env.GITHUB_TOKEN) ? "configured" : "absent",
+      // Specific model/provider visibility (states only — never key values).
+      models: {
+        phi4: { model: LOCAL_MODEL, status: phi4 },
+        gemini: { model: GEMINI_MODEL, status: GEMINI_API_KEY ? "configured" : "absent" },
+        xai: { model: GROK_MODEL, status: XAI_API_KEY ? "configured" : "absent" },
+        deepseek: { model: DEEPSEEK_MODEL, status: DEEPSEEK_API_KEY ? "configured" : "absent" },
+      },
       ts: new Date().toISOString(),
     });
     return;
