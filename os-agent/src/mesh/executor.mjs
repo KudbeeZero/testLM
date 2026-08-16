@@ -17,7 +17,7 @@ function run(exe, args, { cwd, timeoutMs } = {}) {
     execFile(exe, args, {
       cwd,
       timeout: timeoutMs || 30000,
-      maxBuffer: 2 * 1024 * 1024,
+      maxBuffer: 16 * 1024 * 1024,
       windowsHide: true,
     }, (err, stdout, stderr) => {
       resolve({
@@ -81,8 +81,9 @@ const handlers = {
     const cwd = resolveWorkspacePath(args.path || ".");
     const suite = String(args.suite || "");
     const allowed = {
-      "bun:test": ["bun", "test"],
-      "npm:test": ["npm", "test"],
+      // Hermetic local engineering tests (no external DB/network) for the
+      // bounded overnight loop. Only bun:test works in os-agent.
+      "bun:test": ["bun", "test", "src/mesh/"],
     };
     if (!allowed[suite]) throw new Error("test suite not allowed: " + suite);
     const [exe, ...rest] = allowed[suite];

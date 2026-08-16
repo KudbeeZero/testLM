@@ -1,27 +1,35 @@
 /**
  * local-runner.mjs — LOCAL autonomous engineering loop.
  *
- * A bounded, MESH-gated cycle:
+ * A bounded, MESH-gated cycle with planner validation and denial-aware
+ * replanning:
  *
- *   TASK → PLAN (model proposes tool) → MESH → EXECUTE → OBSERVE → EVALUATE
- *   → VERIFY → STORE EVIDENCE → LEARN → NEXT ACTION (or stop)
+ *   TASK → PLAN (model proposes tool) → VALIDATE → MESH → EXECUTE → OBSERVE
+ *   → EVALUATE → VERIFY → STORE EVIDENCE → LEARN → NEXT ACTION (or stop)
  *
- * The model only PROPOSES a structured tool; MESH authorizes; the executor
- * runs it. The loop is bounded (MAX_ITERATIONS) and failure-safe. AWS is NOT
- * required — this runs entirely on the laptop.
+ * The model only PROPOSES a structured tool; the planner validates it against
+ * the tool contracts; MESH authorizes; the executor runs it. On a MESH denial
+ * the model may re-plan ONCE (bounded). MESH is never weakened.
  */
 import { meshGate } from "./index.mjs";
 import { localWorker, parseModelJson } from "./local-worker.mjs";
 import { recordLearning } from "./learning.mjs";
+import { toolSchemaText, validateProposal, TOOL_CONTRACTS } from "./tool-contracts.mjs";
 
 export const MAX_ITERATIONS = 3;
+export const MAX_PLAN_ATTEMPTS = 2; // initial + one replan
 
-// Prompt templates (kept small so a cheap local model can follow them).
-function planPrompt(task, evidence) {
+const SCHEMA = toolSchemaText();
+
+function planPrompt(task, evidence, feedback) {
+  const fb = feedback
+    ? `\nYour previous proposal was rejected. Feedback: ${feedback}\nChoose a DIFFERENT valid tool.`
+    : "";
   return `You are a local engineering planner. Propose the next SINGLE tool to run.
-Available tools: git.status, git.diff, project.check, project.test, file.read, filesystem.list, filesystem.search.
+AVAILABLE TOOLS (use ONLY these, exactly as named):
+${SCHEMA}
 Task: ${task.goal}
-Evidence so far: ${JSON.stringify(evidence.slice(-2))}
+Evidence so far: ${JSON.stringify(evidence.slice(-2))}${fb}
 Return ONLY JSON: {"tool":"<tool>","arguments":{}}`;
 }
 
@@ -49,6 +57,8 @@ export async function runLocalTask(task, opts = {}) {
     status: "running",
     iterations: 0,
     evidence: [],
+    plannerRetries: 0,
+    meshDenials: 0,
     learning: null,
     finalResult: null,
     error: null,
@@ -56,80 +66,107 @@ export async function runLocalTask(task, opts = {}) {
 
   for (let iter = 1; iter <= maxIterations; iter++) {
     outcome.iterations = iter;
+    let feedback = null;
 
-    // PLAN — model proposes a structured tool.
-    const plan = await model(planPrompt(task, outcome.evidence));
-    if (!plan.ok) {
-      outcome.status = "plan_failed";
-      outcome.error = plan.error || "model unavailable";
-      break;
-    }
-    const proposal = parseModelJson(plan.content);
-    if (!proposal || !proposal.tool) {
-      outcome.status = "malformed_plan";
-      outcome.error = "model returned malformed plan (no tool)";
-      break;
-    }
+    for (let attempt = 1; attempt <= MAX_PLAN_ATTEMPTS; attempt++) {
+      // PLAN — model proposes a structured tool.
+      const plan = await model(planPrompt(task, outcome.evidence, feedback));
+      if (!plan.ok) {
+        outcome.status = "plan_failed";
+        outcome.error = plan.error || "model unavailable";
+        return outcome;
+      }
+      const proposal = parseModelJson(plan.content);
 
-    // MESH authorization + execution.
-    const gate = await meshGate({
-      id: `${taskId}-${iter}`,
-      agentId: "hermes",
-      taskId,
-      tool: proposal.tool,
-      arguments: proposal.arguments || {},
-    });
+      // Planner validation (before MESH).
+      const v = validateProposal(proposal);
+      outcome.evidence.push({
+        iteration: iter,
+        kind: "planner_validation",
+        plan: plan.content,
+        tool: proposal?.tool || null,
+        valid: v.ok,
+        reason: v.ok ? null : v.reason,
+        timestamp: new Date().toISOString(),
+      });
+      if (!v.ok) {
+        outcome.plannerRetries++;
+        if (attempt < MAX_PLAN_ATTEMPTS) { feedback = v.reason; continue; }
+        outcome.status = "planner_invalid";
+        outcome.error = v.reason;
+        return outcome;
+      }
 
-    const rec = {
-      iteration: iter,
-      plan: plan.content,
-      tool: proposal.tool,
-      arguments: proposal.arguments || {},
-      decision: gate.decision,
-      success: gate.success,
-      result: gate.result || null,
-      durationMs: gate.result?.durationMs ?? null,
-      observation: gate.success ? "ok" : (gate.reason || "denied"),
-      evaluation: null,
-      verification: gate.success ? "ok" : "failed",
-      confidence: null,
-      timestamp: new Date().toISOString(),
-    };
-    outcome.evidence.push(rec);
+      // MESH authorization + execution.
+      const gate = await meshGate({
+        id: `${taskId}-${iter}-${attempt}`,
+        agentId: "hermes",
+        taskId,
+        tool: v.tool,
+        arguments: proposal.arguments || {},
+      });
 
-    if (!gate.success) {
-      outcome.status = "denied";
-      outcome.error = gate.reason;
-      break;
-    }
+      const rec = {
+        iteration: iter,
+        kind: "tool",
+        plan: plan.content,
+        tool: v.tool,
+        arguments: proposal.arguments || {},
+        decision: gate.decision,
+        success: gate.success,
+        result: gate.result || null,
+        durationMs: gate.result?.durationMs ?? null,
+        observation: gate.success ? "ok" : (gate.reason || "denied"),
+        evaluation: null,
+        verification: gate.success ? "ok" : "failed",
+        confidence: null,
+        timestamp: new Date().toISOString(),
+      };
+      outcome.evidence.push(rec);
 
-    // EVALUATE — model decides done / confidence.
-    const evalRes = await model(evalPrompt(task, rec));
-    if (evalRes.ok) {
-      const parsed = parseModelJson(evalRes.content);
-      if (parsed) {
-        rec.evaluation = parsed.note || "";
-        rec.confidence = typeof parsed.confidence === "number" ? parsed.confidence : null;
-        if (parsed.done === true) {
-          outcome.status = "complete";
-          outcome.finalResult = rec.result;
-          break;
+      if (!gate.success) {
+        outcome.meshDenials++;
+        if (attempt < MAX_PLAN_ATTEMPTS) {
+          feedback = `DENIED: ${gate.reason}. Allowed tools: ${Object.keys(TOOL_CONTRACTS).join(", ")}`;
+          continue;
+        }
+        outcome.status = "denied";
+        outcome.error = gate.reason;
+        return outcome;
+      }
+
+      // EVALUATE — model decides done / confidence.
+      const evalRes = await model(evalPrompt(task, rec));
+      if (evalRes.ok) {
+        const parsed = parseModelJson(evalRes.content);
+        if (parsed) {
+          rec.evaluation = parsed.note || "";
+          rec.confidence = typeof parsed.confidence === "number" ? parsed.confidence : null;
+          if (parsed.done === true) {
+            outcome.status = "complete";
+            outcome.finalResult = rec.result;
+            break;
+          }
         }
       }
+      break; // tool succeeded and evaluated — move to next iteration
     }
+    if (outcome.status === "complete") break;
   }
 
   if (outcome.status === "running") outcome.status = "iteration_limit";
 
   // Evidence-backed learning (only if we have real evidence).
-  const last = outcome.evidence[outcome.evidence.length - 1];
-  if (last && last.success) {
+  const last = outcome.evidence.find((e) => e.kind === "tool" && e.success);
+  if (last) {
     const lr = await recordLearning({
       taskId,
       observation: `task "${task.goal}" — tool ${last.tool} ${last.verification}`,
       evidence: { tool: last.tool, success: last.success, verification: last.verification },
       evaluation: last.evaluation || null,
       outcome: outcome.status,
+      plannerRetries: outcome.plannerRetries,
+      meshDenials: outcome.meshDenials,
     });
     outcome.learning = lr.ok ? lr.id : null;
   }
