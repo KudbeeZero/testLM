@@ -1,0 +1,1505 @@
+{
+    "Events": [
+        {
+            "EventId": "ade57f5a-df9f-35ca-a8b3-0ec76cb017b7",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T12:29:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOP32K5R6B"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T17:29:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOP32K5R6B\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGoaCXVzLWVhc3QtMSJIMEYCIQCKYwU4/PEG+HfMcoBmFt63UfaCcIJ55SAWJgxo0Ztp8wIhAM/dIz/HEEdoZdVO8uxpiPEDiZsoB2eufDxZVu0J4w2xKo8CCDMQBBoMMTk2ODU2MzI5NjkyIgyjFwQFF5InYBCBpv8q7AFsdHtSjq+d6fnwXUwZZm0ECz2MPm9/Nw2wt5+oRANGyDI9oQXXflHT6NIm6Ymycaa7/jw23gFme7uktpZM1eWWO0gI4Y3CukHIPxYjGZtHdu4EmH74Cs9zuhyqiFJG1Idkvq+XrKf4/YSBEm4prXwtsEgNHIz7OPGmHiagQTqM7MQ5KopM1DKdPiUPcj15yr8dgZdyiVU8K7jucX2z2HSsYCCijtAIVQnVGHRqEbAfZO7Y1Lh9uI09Fj79DUg6xZvdWJ/lTPUUKUg9J3/TwcJuNBjxQwnY/FqotJ1W5TbNyizjJ4Wv95tcvQfOwzDy5ofUBjqMAaseE3oRRjWM0FoDGpgW65PxGyWd9G1fump50MyaPe/sPoHpHjrSHFCoHCTz4/KDnzlFlIbtL/4x6Mnmp/d18KfV3NdXMx3j+H1Gwut3ARI10hZ3rLv/gOTRveNv1a6MJHot6kI/UqdoMiel1Zj3XC3jVZRBmGhoaWZwQoYgmCFjanPuu2rab838THXM\",\"expiration\":\"2026-08-16T18:29:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2OTAxMzYyMjE0OlI6Z0pJeVh1TXk=\"},\"requestID\":\"65c7e57a-afe6-4211-b4ed-0b3582d975bf\",\"eventID\":\"ade57f5a-df9f-35ca-a8b3-0ec76cb017b7\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"92e0f5c6-e95a-47d3-badb-9d6276fb544c\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "06af7dc2-2159-3461-a284-c6330db22a5f",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T11:59:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOOBLOOX3T"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T16:59:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOOBLOOX3T\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGkaCXVzLWVhc3QtMSJIMEYCIQDw7H/56O0ixVYARU6/JoXUq5ul4Inf5HPuWvV30xL4mwIhAI0vlU4tO/CSOEBymjmQMfHn9IbG24xByVSuPt41beGMKo8CCDIQBBoMMTk2ODU2MzI5NjkyIgyGessbXuaOftA7AAMq7AHLMgkkdlzouZiVR4aevtUnUyqCY3uJda8Co8W6GfSCKzIabF0n1s2ACQTcMV13xFtLIMLe6GmbLTRIlrKMtt8q9MeFvzP+ifzGq02Fp5aRL8KMUACEZ1HP8UkvQ5i97MSdAj875Z7DQYxxNhId9dWI6KZseRxyZtM4qYjL3Y5G6WMNMhf0BYZlnff2reDh1IHfK5EHPHDmkfR5IDz6XlzzwSaXsOsqziSxjUNR3Nhj7JaBf8K/mW28V6zu9/RpoG7z+L4eac69QLiGU4dmDMzG3M4lGOxG3Sss/5v2O/jRoeSwG/dRLoS66pbLSzDq2IfUBjqMAcJT6m7cPqnfUm354O09rn/anKrYsJw956+HASgSc8COQcL/wVinTRYHRRwRlF8v0wOEzoOMuf3NSqpMbJmV2nhRv4Vl1ALBpH++u238XR1at/YWsi2qOuOJxvzlDpoL8o5jRThWu1YALng5H77nhDLCA3dbDgSpydK70ZtxmiRqBivhMldlm/c3Bovn\",\"expiration\":\"2026-08-16T17:59:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODk5NTYyMjIzOlI6d0tuOU9zVm8=\"},\"requestID\":\"f2a78997-2b62-4aae-8e3b-bc29bc2474e2\",\"eventID\":\"06af7dc2-2159-3461-a284-c6330db22a5f\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"4151af6c-6909-4347-acee-b5c2e837aa19\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "a9b6b2c2-c5a0-3225-a188-0586f87e1ef9",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T11:57:44-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOP5ZNP5KM"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T16:57:44Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOP5ZNP5KM\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGkaCXVzLWVhc3QtMSJGMEQCIEppZqfdnzzq6cgn72cf+NkoYESAcMFOviG19jmGTiGZAiAISMJ7z0bt6tQZQGADq0CsQ8n8T2SQaURixEhYIEl6XCq7BQgyEAQaDDE5Njg1NjMyOTY5MiIMC2dnC6qEdu5JaCf9KpgFxFYtp5I8y+HWRF8Ywp6Z/WmAY6SqR6Z4Acb5UILQoC53Oc4xyyqn5GgIwJ8eBskGCyFldguqEtxtpM3xOTDtQosxCHhc4cfg0dPw8Vaf0cVOCOvV/L9jjZmEoPBgw3VPppaVxG/EyF7F1wJQChdrMrodCwsP1iyLuxAmne0ZjJMELdPsiLm0OMUzbJ6AU5KiDE0NTJGc0Ct7bGd0RDv8CK+LU1VwhN8FKZGvmZ12FZ5QdRaDQgYDFYmjU0qVqHW939sFN+ccFL/465p/ablV2/wKxECPmV4VrVx66VdAEBW0kE8v+FvAEwfq4xSocqVWvAkjBFQGph43xkWL0VJuKXh4P2gwz+0IH8TME1enPqM3tU7QmD4Y43g685jEbIQXQy8LCxkpjMZLJxWq/Bfut+UDkXMY6WFUwV5kj6lNtGi/yHO3LEHPZz9SpsuqCbfpOrW6weaeD3IgyiNVLrBAupFxA5XWujCFONpZC408i35VIIh4wQDok4MnbFaY3Ls/Rk4hM/DHYp/mS6fMTlMSRxuKY+IS2RZlmsVy/0VQCpSnqSz7jy9qs1gjw7zT6euMJb+1xBvDd3Kcz7lXrhq8/hsAyPd+kU0V5qk3hRvJxyyelVkH/MXt6Tbq/dLyshLAwIx/C9mz4V2FCfELOIz2/JoTN58vhb9tRbsvKnqs0wo034VAbBFYcLGegJr4r8UnFeJhBmI6uCj4JrmfT/0Hy7fDRID2W5lOnQmCssBbdUtHYWTLItqSrUU/ER6H4B/lD0VWJve3NWZJlXbLewyyYigMZIlHvCAU4ixhRpNgx21Skxq7lKJ8rihlEGE8dWK12I+EjhvBC2bbwB6qXO6PX2TQsLvOz2AoPEN2FvvBM1NPsS5O2CgRMzCI2IfUBjqyAffenPaZ94nlQYic6JFW4mlBzSREaPahoP+nxnaNReAvQHCS/y/5R5gXkqP0uUo1Tzoli1YdFZqGEXeKscWkwFUEkVinc2nYaIpPAHE+ufm46CqZnwtxfaGkTgOrCNpzoWIipc7bzEhzX+RafAF7/Rdbx1shzikG0XSHyjxIQ4AuLm/LP/iwsN08bjkgx3tydPNLmPucdOOkxnT8oaCG69aIGxs0tOUfVFvZ0vzkCZWxhUI=\",\"expiration\":\"2026-08-16T23:21:43Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODk5NDY0OTY5Ok9KaTlDV0hv\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"a9b6b2c2-c5a0-3225-a188-0586f87e1ef9\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"69785e08-b7b1-4127-949a-33f7a1b114f4\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "f2efd3b2-f0aa-30d2-bec3-ef53d0b0bd30",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T11:57:44-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOGPQ4D6OT"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T16:57:44Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOGPQ4D6OT\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGkaCXVzLWVhc3QtMSJGMEQCIGZ+sVwSKCgbrXtrFpFPBuyd4xIBoG0aY2Ui/Mokh3H0AiAdVonTxRPFhstt29mTUkK7BVmQoIXsHdKQakOO478boyq7BQgyEAQaDDE5Njg1NjMyOTY5MiIMKFWxgGwdWLHmjyiFKpgFbv4vjPF6ldOgg/+UBjouHc3B0BkDCoRmfPZcyw2mXrWuDLpTVrWNRtEiC88VYnOUBqsbqsHSXzRQMjtncYlueEUTHt0uIk5bSCLJt7Pl3mH5s3H04SbdsPL2jhDEdyG6qvYOIZhSwOwVNUykhebtwMA7o0Ip7OTP4gkSWIflFVD2Jquq8KSMBUVfs4ZRWAOz9gM7iXXIw7x7PG1xJtPFp11lIi5EMYmCHmkKYE59A3yWqCx+/XvVvzZzPmg85ewCHAKiJC2zhFS+5fKihiIAigX/1I4WKq2urnyDFw65/h9IgXOJPuT3d09KiybuSTGlGRLl3oCRBU8uGPD437b4TmBMjrStDn7RRQyg5WAmab9T1cdON8ceBL+Qcn7HvBLgNo+nI1tOUVNA2MNCo8ou56UE+/BRTLStNqd8DZbg7KXHzFNvPrPWJE9xA3JcWW/tOiVby/LF4sbBhopW9A7i+9zIr22tYqH3fmshO0gS/rht52gjVmgmBfoRr7PvRjoCfkAnG3dddJxAHAomLrS4a9koW24s+CPpHfkEb9XjgvWDRSesObqYg3XfVsQ1CgQ/A5FYWThwycoXI/m68aqcD/vCpqNcGouOz5Qvt8yl92Wt+hsNrJLspCyCiUE7bUgQihXXzb5cfDfv0BvSeFovgP1auOYaEnyeMtPsiQzVkaYsbtTi2XguTw9VTrOnDw8QUSM2rQsaAPp+H/tZ5r7WUWoIEPAZ6DuB3fflrDbOq6k94pStJ1EmvFHTT7E+wZkNYnY/MFP4roLCxS3PeSOf1FSQiPMPfryT4Aotegz+7t3bJqXyfTR6kdi2jXBiNwpEhZ4TlesGz3bi6l5YEJvwTpMkKRXXWBiC+sdW8wdNdqALJBIzloEmxTCI2IfUBjqyAaUJzJLhDzb/xxBBM/ZQOojtYd0EigmuLFk8NxLHcJU+Z1Ch7XIGxJiUx7LmtOVvx9508jxaboYbwsftxcjkcvswvD0oK0CFsJa8N4RrOiVBb6KetjMliA/0nlFFZnhm+lYzAh7vp6mXT/Fv6mBiF9zO/pK/F2NiRrI7Fi2f43+TUhK1nMzW1RHhAaZPl14DRFrdcbVREz3t3rEdAamQMdD0+65qid+zEBE3cpLe76DoU5M=\",\"expiration\":\"2026-08-16T23:26:49Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODk5NDY0OTU0Oloyazhhc2M5\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"f2efd3b2-f0aa-30d2-bec3-ef53d0b0bd30\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"8d601ca5-fd3b-4b93-915a-02e1a26a3fce\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "e1bb9736-1a0b-34aa-9f93-b3d84b8056bb",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T11:29:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOKENTH7N4"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T16:29:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOKENTH7N4\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGkaCXVzLWVhc3QtMSJIMEYCIQCTli/R40Hm94ORAhGSpBFOT49x1krg1sjMHqNRHJa27gIhAKA6nrR9v3eX9kF/jRi9eHQiORM66BycoIHqDQqX0w79Ko8CCDIQBBoMMTk2ODU2MzI5NjkyIgyyW427asvR+fXFvkAq7AHyjqA44Cf0n9XXVDNTSVJYQ0+OP0WWW0y3eFxStPX4p+zfH91k0Plxu/V8dfSTNL+oHqTnn1X+iQD5BODjkfioDhSspdN8x2cD4tIXRQhbTTRJ6iXY8fKqdc0jH7dj7gkVIs+XuB//Ftn+BD4PyqJQ4IdyQGZdjIXdEw3xlDo2YxUzvX4EYnaM1zIMCfSL69dw7iWx9kp1VWf6CAZXePdwB7r+IZ/O74tAiRPfSrjyKwYcppSSCwoPP8gfbjjH/mKgmqDsiniNvUwlQ50wPRrr1tN1n8KxYFvqXJgx0D+QNVCY2pY4J9Ixjipy+DDiyofUBjqMATDbGOrMqnmIkl+BywOb/OLoPraYBbwI7FLWc384AyNCZuoe3ziNa8mhXhU3Utw0gcfHzo1QLwxTAt5oL+uXHl34ohLbpHTitFgg4NWG58plCE+/11VhJOGwm9lhg06OjIDyFMNeZW0FmbPP1tle6SK1uTkpebouXIpLMS2uKIdRB4nplaOOSRsFG0YK\",\"expiration\":\"2026-08-16T17:29:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODk3NzYyMjI1OlI6eWZ3elBwYnI=\"},\"requestID\":\"002ab3c6-6dbc-41f8-8a1c-bc62e1285c08\",\"eventID\":\"e1bb9736-1a0b-34aa-9f93-b3d84b8056bb\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"f15fadd5-d55e-4b9f-90bf-61d9e112938e\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "bfbbb6f9-b77c-303f-9477-1b8c9722f4e1",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T10:59:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOOLKUYW2V"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T15:59:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOOLKUYW2V\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGgaCXVzLWVhc3QtMSJHMEUCIDhLG2RZz/LPJB0TZmXkB/jCURs46kaL2geOAaTraHWaAiEAwS+jfi3uGHobasX+oayKyCT7TgoQfJo94ZvfpBqT4A4qjwIIMRAEGgwxOTY4NTYzMjk2OTIiDBqN/ZMakBVLzxNSCSrsAbJ78LI31Lmua166tlf2kUxyvCv/S/shtcEBvEdev79B0QIsbZc8yHdnkXcXyZ3CN2gg7johLva5pSZGlSmRIRP4FLZ3CCM+3+H0U843mYQjbofK+3EL5hZ5/v9UiRkTZtkEiv6QlEKZudDSPR7y9O86S5WyhJ+AC9qNSsgSogw9nA3RYEt+IYIyFaWvWBML7u/YElSVL3uCsdi2ZFMLMm+fXk+FlvKiSbZg9Djz30bHTHDWe1jY7CbfpH+yWssWDTHpT5IpUSWbSAX6caLgRaKXmtWFkN4I8tDipRl1Fk83WZa+SjDbXOTdateWMNq8h9QGOo0BYdMECj17NBKDirwQR7kFtcxvxhOs3jsJq+9cgeDwUduCNfhTEJrdkCtc16l6AOOPjmrDSL43v5GpCFMDt7fQ4cZHF7qqiUdyVJ7Qm/To2niLDo+Mlvw2WRccAZinXOE9GyCRprYJUMyp69K+pG/RL4D6HooRpCGvc+6Sp3s9zc0OMSwxcRBCkZWyeYBx\",\"expiration\":\"2026-08-16T16:59:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODk1OTYyMjEzOlI6U0xJWTRvdmI=\"},\"requestID\":\"cbd77d35-4bb9-4cf3-8741-fd744914d773\",\"eventID\":\"bfbbb6f9-b77c-303f-9477-1b8c9722f4e1\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"da40d301-35c0-47e2-9aad-7fb810a782a0\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "044f3a96-fd53-3e6d-a34c-1bca2c21a610",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T10:57:43-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXODSXCFUZI"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T15:57:43Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXODSXCFUZI\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGgaCXVzLWVhc3QtMSJGMEQCIFYP9dpJv7xY0CAo7BzrVE5CFqBFyXCXlfPvf/lJntOmAiBYSBrpBI/7kuHX5eu63aNmKFaM1irt7yFGhN0foP7ctyq7BQgxEAQaDDE5Njg1NjMyOTY5MiIM7sBsCXMJLeBxq8NgKpgFa/Pv5wWQBkfOHJYM7qP5pqRIsl0FUFRaKMRGRjvOb4mHROu4C9Y8lLflvOVvdmsvRA36K0LYbPc4zINJlxW/RkkopTpdYTE7gzRxPyW05pzPhqrNs40x9FcTg5EBJxhtfZ5+cdXAfeTioLyZ/LtIzWVZ6TKesZUAt2dymz10WR5SzAvWcTC9kfj/uvF1IawJKd94m4TGu6VSMTeuDxO3mcgYNQ16tVUZqQ1F+GdCske/tSGlF0uFPhRI8ncbucTLrtqAMukaUrOJy6BqG8O6zZnxtTDI2JbIxQML2piDGhAIVRfdn5nRYI8vmYNnqylixGIQINMQR0y5Bbd7v0LI9/c5XzE8KsF8CMlDUknmDcBewHfgP5uZbQ7bYhAyDFFmuqgYnx5aO/g2dzX0QKQorOEjgr1J1fIehsNfXnSOcdR4cqDsKc5jwogJyI5hXWaUwel+t0jkxmxTgwOtWTd/+/U6D5AD7e+AemSAYUv4m2chdJka4KTx9vr135fltq4wX30PMs9CIE9QBHVEkEGoI+hbgoVLtbbhqD9dbKxngUV4ZS4apGWRIco5lYZ80oe1krTVY9I/xn3xjZlQ/+jBQzRYKjKsuzdWnMD/9Ij55RYLpn1HBSFhiZfqRPx5wzvY6+ez9QGWyXxhJXYv5QHOg6FQAMOq5YmhBlgUCx03BJ5IAw9EHOmZ30b3hAqjX8StSQj44OwLoLbn/ofRLPH/niw4jv0XEr0EXMs2+XJPrB+lvqweKU4TKvPyqqsGyW14iIGKiQRE0daC3kqcd8xQlKgnHwtSU+ZWan0P4bMOc4a5SjoKLTak0r2JsWK5WR8DXgDMibPb/hVQYgaVzK72SRRQnJeMRG3v1FcQslr3CakUeAsZaQkMQDD3u4fUBjqyAarRQzQl6SP3eOcz/r7Zs4ynnpLz9TzpuGw/MB0tUddO3jTL32vxcftYc9ZmMSYa4aFj8QNvhlRIsxHKF+0XW5GoVnG8ez6jXk+Rrb08c/VmcQmf5ZwGXnsocPI3U0Ji+KFtkG74/R2y/PvBIXmltb1jT/bfK77MJfXxBVhekUmny52u3gBlc+6NPH4yT2SyH7kOMXVV49NQrtP04zQ8HacPa7RKCdZ13RmTsyw4f1LEYpQ=\",\"expiration\":\"2026-08-16T22:18:45Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODk1ODYzMjMxOkhjdGVWZ1J3\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"044f3a96-fd53-3e6d-a34c-1bca2c21a610\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"306abc4d-fa4a-4257-a4ef-5faa973469f1\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "b0c8baa9-1d5b-3068-9474-76c4d5bd1273",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T10:57:43-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOGMSFOG27"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T15:57:43Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOGMSFOG27\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGgaCXVzLWVhc3QtMSJGMEQCIGH2zLEh6wypigkhcSMYts3GgLJt90ZO3yCp9TIjVH5yAiA3Gecd4OCevk59PjYc0ivd70BqS6wMYxOCRL+DPLQPnyq7BQgxEAQaDDE5Njg1NjMyOTY5MiIMgbr+Nm2JUmVQrh1sKpgFjkecDfOIQ05xikLlwxoBHPpWnHrR/vbYB3uKyLaHuNg7ceP8y++o2ynrcyhfyVwFBK8OzGaOr0iKU+gvuQwUeCQisOozjtT+oSLF4mmCPPpRSnQTAw0oBNHEPAItSFsp80COZhKXvb0qTMqWXWtwipFuInZ5Vo79KxHY7yYKr5/TxrJnUMiiUAbNAh0SxRAdRdS4j/egSeV3et8tQP9ENdRbJnlz/2nff1CQB1TC8cTdn/QW8d6Gcr4EAEF/JaMxCLf4bXo1JOPiARn9pMHCidLMDQmTTlvICLMptVbDCHcuwqibhZX+ZoV9LdKQfVIiXrtL1L9zOI/GS7MCZbBGsKGE6U45XISaSZ6LrKALb9YidckBKcO8hfYcQIsYArhqaibZn6DowApO645rLFRDmkAgD6iURB3kuemV6G4pn8Roy4CoPhjZ/4SC0DZk1+JJxYp9Pt9H0L9grs28zj6kSTY6FiuNG6Mdtk0FeRfZ4p49PIdj7A9R7MaHPTzhrcu8jDdOXwWIs70qXT/vjiFoYzidfmjIuzfViJd/s+/8T/P+qhVjGK1TeTEi+N8TIZ5tiSDuIb0nkfYl1nqcmh7bJPRQZv6Cz5M5g9CLiRP9FR0YKEzSCMsn1kKcU0HDfioB55EY3x+1Q8c6vCTvre7afjySCTjMI9e0hnvymy92rXRxLc7hLo+GF9WnYadn09rzCcGNh4KWJ0oPjZ6id/U7z4WFOsHp+lioxC76C7E8RL8UTtdllO/2BJZA7LdM0TAEoxTiqBHxFEAWQ/PparaXQ6Be8+gBVaCN4+gEtZvdwyFQ2FBBu9Aj//D5EACZAhYgEeR/rwYoZc+KwB4WunNj43FbV/IrSgpQmwjXwqJwqgPhuqbqkp2QujD3u4fUBjqyAdFUuOgs8ax17daZSsg9oyDMrd3cHiZUz6HqgBcMseKu7dVBE/t61AyM3TFtAV6WXQftGv7xgVxgMEcT6j+YAlrLPNj4Fv4C1yCxv0Tz/zxeLBMUg05CL2NrhJAhqmjyWwuLcslt0fARTDJbtI9maYuw2Dd0flfHhWhj0IdoV83I161MW2it9o1HlC7qaidRnFpHRXEd3I9x0CcHdwk4c3avEMRV00Bo2C0qyAqUsenweLM=\",\"expiration\":\"2026-08-16T22:03:20Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODk1ODYzMjQ3OlBWcnBsTFVO\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"b0c8baa9-1d5b-3068-9474-76c4d5bd1273\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"0a5bd847-645f-42e0-bd45-e6f8296291d7\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "2f5b8367-94a2-3039-9857-bab29654bb4b",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T10:29:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOP3OUEYQE"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T15:29:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOP3OUEYQE\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGgaCXVzLWVhc3QtMSJHMEUCIG+0+/IJb0P67+6+rcP1RlDxoxGjJtLg7VKVs2Cv1L85AiEA8U7hS70V++gYbWGp++PN0488ITjz2V8e88P0w540NNsqjwIIMRAEGgwxOTY4NTYzMjk2OTIiDOivJjLfztaid8oFHyrsAc94qjzV7zuT+uNxQpk8d88wTOVZYV4IHGSDZM9//ixVZ9UGFyMBAJnEI0hbIvB3JnlH97DiVCU0vXx/KfPl893cZdFUVf9yk569hgxDLTZDBU876g8kckYzPFNdZ3/V5L/BbekM6cWauO3LATiPuRwSBs2GA5msK4IdlxLc9mQCjbm0i12xweb/IOBvcIqxJKXOCaA/ARpbWObf9FefmzFGuxuZ5GwUHd3ZBF1uUoHI1bHOrv3P6SS4vEq9mpf1PZL5bQX0K0ynIDd+W53OndWJp193ik3hfwLoh0Fyb4/Fj9174tfGLC8O0I5LMNKuh9QGOo0B2SEgnYk3KNTlL7MvSCoRao+nGGXfLl2n5SvShgMCCA4Cvhhrgp4E9hKYm4c+umkuZTb5/WL2q37sEWndpWIAPeAQ1HG5LEUCreyPhBa68d7hJMG2/yE7b9h+HfHiBqG29c4C/hoVcjrQwU2qHXjgM+EXrQCgHPmlAaiVtjYLrehm0tGuVrFCaYShPtqn\",\"expiration\":\"2026-08-16T16:29:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODk0MTYyMjA4OlI6OVRFa1ZYeFo=\"},\"requestID\":\"1ab55dd3-d12c-40fe-b29a-c6080b39d8e0\",\"eventID\":\"2f5b8367-94a2-3039-9857-bab29654bb4b\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"e29df402-df7f-4539-9fcb-7a5f23c41eaa\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "e09e73c1-7d31-318e-8728-3020ec5ceeac",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T09:59:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOPYRNEJCQ"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T14:59:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOPYRNEJCQ\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGcaCXVzLWVhc3QtMSJGMEQCIBX5HNhuqKWdPs7KhoCz+8Nbd1NNQfTPvFA7tIC76P5LAiAMOOSPBhvCFA9aenm0QbuzpKjbbMi07M3VHtorVLn8kSqPAggwEAQaDDE5Njg1NjMyOTY5MiIML+/EbSVwq7cvsGwaKuwBN56/VkeaSbBLSc6xA10k+bZZgoPNNm4qE+2Kht3CO+neOU3selo7omI0RmPSz3MTJhYWTMZnCPiqeP3xruZcqeTI62LrLEm2vzBp305OK7rfpgedr3lfDrAMW2f5CrSjjILVV0KCqcplYMqh+2oa/aiFuVgatOlpwyk8Zf+sLQF1wLLuGfXcKwjfTi79azNIlb17U6rE7oNEkya/MnFqkdRSjONRHDHVEbvZLL6n1Go1wPZh282enc3HW+ixT9Y4jr6zS8cQDapyX/nc53sF3cdcVtConHr57p9eP5YriYcSuHQJBL/yCcSsFUIwyqCH1AY6jgGRUL+l5AwjAJux+9w12nxwsTHv6cjknYqKIe3C1kk7g2wkf0Ax3P3u/mbpbhJeKovby2zAcmaju/+nfD7lOJyrX57jDmiK/H426z68WbEidhD30krQy3IleRxIbPOTYRMalscd66uoaaPoVF5hthnm42jKXvY5Nv3FVJ5V8x2B2OPB6TAlMu7KVaoRCPUY\",\"expiration\":\"2026-08-16T15:59:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODkyMzYyMjI2OlI6WENUbmNhS2I=\"},\"requestID\":\"09f0201d-8b43-46e0-899d-1b8855aedac9\",\"eventID\":\"e09e73c1-7d31-318e-8728-3020ec5ceeac\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"6b800245-8fa1-4168-8082-fef5ad3787ec\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "425012d1-5a95-30e0-9470-4de8ec4e8a99",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T09:52:59-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOFFBEYBWL"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T14:52:59Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOFFBEYBWL\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGcaCXVzLWVhc3QtMSJGMEQCIBzQjdCEi+RVR0lrr4OlYWsySSkzUVG8vP1hPPA24jNFAiA7CshsI+ujJY2f09ECAbSdC8yJuRr+GMIOGJr9YrzdaCq7BQgwEAQaDDE5Njg1NjMyOTY5MiIMDk/evud3IGuTcZVfKpgFXU+co5iSlJTxDOqgxl5wegK5f7x7aXOVc8Lr8UIyidWIiv/ARUX+wvnrtayAVNsLAoF0+ivAq5qPtY/lmxLtExZ8/US0ZEVaHWqKqUtD4Fg5+fpb3BBBNeJFK+yjmlLyU19uqEoxKQ2TEnvEXTlLL7DLwlJknTijQMqULQFtWL7GWiY+l6nJ8na2nYaUaVOznBzgCMrjHeTNp7rC4NBQnaJAU1Ih6jBYsYGwCrGilAZy8D4ikn/SX8I9x0zG4yYUYMvBmtBwaWeJPT4vdsH4I3CzDfG8vC9QMNCN1bQ4Llvk2niyPVUT4iKsexdL9HV9GCAz8Py4EOODIZ5FBa3g2prw2XwvrUkg0B52dVat0xqyMPGYl3gAvJBU9KmkEkNHx7n+jZj7ZSoPyQ1F50PNA/Z9ULQHgjf5aYsfG0diXBRelwaOD0xS58iImlc1GrgI9xSyJoHknPVrX5s89rZ/l6wXzdNLbdd9Z/wm/eQhhPI8FuAR96Iw/6uQqI4AyUaQ04jjyZfs8S04EFUvmqvbZbZFFq3zO3+8QLwsMcklOtA4+eg1pxbbLeyMKal4pSaL7L179TJiWFtLHgQWrklvgKMjd0se2pjX/ovvwCfOoCZkEA4i5Fxq6tn5yGCK/4i9PH1aEauLuR0McT2ZsgPtII3XkQK+Nwl4UFU2grzy9avinX/mt3Ewn2a8bJIQv/5jZzmpVL/Va2F0QEJY96Gr9wRHqvqxA1fcd01wmv9ip+sz9RpmTddBM97Vv7fUejYRGysAVZG7pM7GKVfq+sswD8lDAUIUQI0l5ffERQzNHmCDR0kQR/beyn0duHhtVATWjcoCruGtlfKda5lsykLqAXEquZjJvsjmRBppn/rOE5C7cwukniaTWDDLnYfUBjqyARggO3//M3qrq/vEsGexuE1vLq6VWEkv5e8YE0ij+rljLAsBPwAXJlvGxIruxd5ELhOumUj5yev/42X1VHahCvZFoN4Qlt3O3nvPGVY2lPbLEfIOJpDRVkegC5zDE3hTZt5Lt7XOYsctP1C2Jb384xuwHEvykFJywwnne0Nx2KIu89WoW9Y5aYIPNBjiy4Eo6BZ8FxS+98GAPCa3JpUfhYgEUkuDiVhO1vRDPl7LajFZhb0=\",\"expiration\":\"2026-08-16T21:11:58Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODkxOTc5NDAzOkFJcjJDMnRF\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"425012d1-5a95-30e0-9470-4de8ec4e8a99\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"95101607-3ace-460e-8ece-6b4fa3cd3a76\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "58d40532-37f3-3fb6-95e2-3960bb42e4a8",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T09:52:59-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXON6SNCKY2"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T14:52:59Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXON6SNCKY2\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGcaCXVzLWVhc3QtMSJHMEUCIHT1LaiaSVr4fypotS/Pwclk5ouVTmrHwv2B31D0KUalAiEAmqAJqpZEGBMAayDmCZBTsnAoJDth5TvHPQOKmDNFMjMquwUIMBAEGgwxOTY4NTYzMjk2OTIiDCBpR4/OnId8o7tsHCqYBeDM+bW1i4kKLjAh4SrtkpVagLN8KWWgrGUrAvYUqJzwrr7s4xuixkEPGzvlX3aogF76xLD3ph4B76LfZnNIWZ9zJpTJ1d5Z+FtyqEqqbIOxV/ylMbSBFMFUOOrQ2Ue4xVyXBlqmv/i050x9PBDymBFIMSLa1PMUwifU0D7DDfuXthbiDeE3cbig+OhH/jGqsAs8OOoBHrGlZQyuO1e67aBe0gjpOkkxpd/1OtoQlx0nHY7ZA+8JY7iEGdtBF/zcE12dG2SLoj2Fo1H/tX+0MLuD9Vm1q+O8jXl3cRGWqzln1pk7/+niUoFSgmg1cisfDunzC2boTNf+iX7j0DWC5Oj7hgJKV+BqYON/VvMJLHK1JN8dBU1vi683rSeqk5qk4YBQJGL7qIYX13xRdV5fNGj+kyOEd71qr0Th4g5nsuA74DgmXQpJNBV8297aOg1OA4Dqf9jkrcbMdLFZVF+UO5PZCZ80xjLUB4/9NYGQCvVIItfySenRzWQjJCU5TeUHv1LWWu1XtyFW7XhN5/gnIlemYxJAzKh2hIApzmJ4L7tXFQ8OIXBgbmRc8L7/Y/7Ph0XEiEZsF2mLbd8S49W42+E4JTQ/6Rc5T2SVOjiqj6UXhKk57ztBrdOfKAR08VAut4XMRR7ZXhDbqg/1/XU1K1eU52IQ2dQje+BSWU8rNz44cwg9w7sX3fDRXqhTLR15OdCmq8f0FyuywWg0bdiKYJXxaZJ6YiwTB0yeEEhKyydDfM8n1+urUnMWQG+KkNUSdnH35womaXCUm3s5C9VvDvurT8zXO6GbuseVRKekKFre2aaeEae6bIx/BZ1murqySjmauEQ9sWjmfJQ+0ipg+V5cgvi+Z18eot1cscI6ecu8vP82HcxhIq4wy52H1AY6sQFiKebRDUY4A8SWXX9mBKlOABccMnVGqq9kVD84fQ24BMzMDzsvgbyu3ctgSYRbuZcYsmCmTkohVF8F1xlA2Nhb5Llg1LkBdPcqLPn8VKxbpHcwZA/VXFIBN056yIoLZWkWnpC41/xVR/SHGUdNFt8wGeUbtLjjbpX79iJOpJ6sZbxVMm8IdhpCmIpofGsKiiKxx/lQ18lO77bjFupH97DX3iZlwvmk01v8kXBz1+6dKW0=\",\"expiration\":\"2026-08-16T21:04:21Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODkxOTc5Mzg4OmtiN0JxR1p1\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"58d40532-37f3-3fb6-95e2-3960bb42e4a8\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"eb4fcfc3-043c-4109-95df-e27117c7bd2e\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "a70e4697-bfd0-38cd-8dba-d9be5a632086",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T09:29:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOPABSVDY7"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T14:29:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOPABSVDY7\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGcaCXVzLWVhc3QtMSJIMEYCIQCT5In0v0eoUxbHM4DZXd3RM0G3jWXkD3mT4m+jptfg4AIhAJ9ZKJiXAo3264Q/kyWv/lSdgCV4WtjfgfZ2id2ooncuKo8CCDAQBBoMMTk2ODU2MzI5NjkyIgwgn01ejZN4cu2587Iq7AE9DK+5iLrm7+5XOxgEmNq9Bpbpy2sdhzv9BGZMsPBz4JV9PHHNRz1iOYk1f32oJ78FZHcqQoSSGoiG4yx6KvGHVBjPGIIRy5bFF8BGJO2MSL28ysLjNMF+rT2vaU3ZKPZC+J9iQYElph8C73gAK20lGIK5qDKKESXlmAI5tKjHFVOgJpIzAAw+SNgeLirOagJqvW0X7KAOgdUIz7iAIvF3s/Fr7BGFsY0nHH9vvBgd7jUVKs/Ks4lA/wvPOfFxOubjpT/VeAjjJ5bEvM/UxG3ryHp7tLZY8W9g/lrMbG9RkWEBs10HiXBjxxZ+SzDCkofUBjqMAVJUeZ9yWgqNQCG7NgQjTiVXVVWUv1c3sX6ZLME3q4PgxoMaZASh9jt46/ylEoGy8Fp9XFvj0Pzt4xsHk7ncW1+jq9JoWPnIfIOYNYytIiyVHhwLOpVN3AH4jzCT79mqsvLNSeZT1rgk/jJYp+N/ThMvR8S5yeKM0IhF9D4n0RUV/rJpzpTtvZefcKTQ\",\"expiration\":\"2026-08-16T15:29:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODkwNTYyMjAzOlI6eVdmRVNZR0g=\"},\"requestID\":\"76d7aba2-4a3e-4f1e-bee8-8cd517325c12\",\"eventID\":\"a70e4697-bfd0-38cd-8dba-d9be5a632086\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"1d57986a-983a-46b3-8a00-56bad0ff846d\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "2dc46c66-eacf-3549-aa78-8a9f6dab50c3",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T08:59:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOGKPFOERR"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T13:59:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOGKPFOERR\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGYaCXVzLWVhc3QtMSJIMEYCIQDcRiFbrRa4YRPNIm4nfSldjsVa02a9vqJizH6iYgTKpAIhAJ84U1REYy8/3iB5egTXUCrfGNA4W5uUVXz6mJKSfQTtKo8CCC8QBBoMMTk2ODU2MzI5NjkyIgw1kp0o3uGZB3nwVPMq7AG7xMGS1eskEzXJyJ4Q9Uuc7slu/y+xt0joxj4htSwXVZGh6f7ZUl9xPPDGFc9isITMMZ9fk3ekn7Wl96JA7ClhoeNcPz87br8GE7CgNfsVYmTZdaJFqRlE9i99Bfji49p1mlEIy3CnmCdfGHroyMpwHdRNULKFWipylPqpM5KMECykMCvqPWt6oosp8EwjMhSo5I/VAfdDIkbs0WjwQUqvB/ARiRynY0xB5cnZZiRx1Ju7Zm3EIuKn2XcYryTKyIAuxRIODRj+kbetZkaHbL9YEBafijkR+iTpQuBbbwcqFiVRGIbxJ5W7a3gqUTC6hIfUBjqMAR+2HzA+HJJY9bkwtJcAVTrnnqPcLSYDY8EmvA95GMQVRQyI+pWLrbKSSV6sWZZ3OZg9fZGSF4cdY5HGuHAw598GURRuwTUrCfiFqcaHqYJgPduJsvQCosbyaAp7Bw+QWFgRefIT25TpNL+VWJxoJTYCgbnYwu2ioVaO369QtPfsC6/e5jyDGGIK7dVN\",\"expiration\":\"2026-08-16T14:59:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODg4NzYyMjA5OlI6WWI1N3ZicDI=\"},\"requestID\":\"537e332b-6e79-4136-bfd3-137378145cb3\",\"eventID\":\"2dc46c66-eacf-3549-aa78-8a9f6dab50c3\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"e85cd7a2-50e5-42cd-b6ca-c556f33f158f\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "1805ccbb-04bf-3d5a-9ddb-f2b6a35fad2c",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T08:50:34-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXONG5KGLU5"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T13:50:34Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXONG5KGLU5\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGYaCXVzLWVhc3QtMSJHMEUCIGgb4gKJ0RWsiG/aIdsLrbxIU2S4/BUsJ/LScKYzl1q4AiEAkjj+btHiYu56uhcX+XbAIvjoZF/sqZepOZeMvM1PGEUquwUILxAEGgwxOTY4NTYzMjk2OTIiDJE22yGMqZ5t48RBkiqYBVy4OOah3vgLU/uoS9cIOPiKqZ8/i1BbepvvudEdUN+ukNuPztHvgcP5DytFN4nzrU+5qdya/hEgb79fPmHBig86b49ly3gdo42r7WF2lMkwqwPl/dnpemHiZlK7hCX4cPOGyqxZxHMHmEDsdMTpQnfphbmUgzVYjd7pKkPH5BaAVwnY60LqnwbyB9EKDRtNr1rQGW2WEr78mux4SIhxIfqmLsUTrTToyn7hYSLkYLDGIAgh7ILaK1Rgeqwyy6omOiarwTUHrlUU0jmBuPgeDgAtL++1hnD1iMpLPU8crRQBrcgRxz8gU9e17BcYc4dtItDNBltM8k0sYWQpqQHu72vUMewngn38tNOt6Wr9SRNtHSP13WOOJbqI/3izYkgje5knTIkQmDd1RWBiObKOgOEHnVBospyNlhrjJNkqd4GV2G8klntdMpEWnHjfHG54swHXn9Aaae2x1INeuQAlGtJHwJYSV0xc3K+NfNqbBNaMrW0HMmYak8V1UU3dtA1D+KKtAgLhdesq3Df2rW1feVg+vFYAw33IT0E5cAQz8CNrrMdR//FtPA2WNUFgDerBTs6CxJdx9+A7T82r69BzBsCoXZPmkFVKejh5oUufo7arAc6FJHwtErLFuMO5D6Pnwx7s4FA3QZU3t7ENrnIy3l55yrx3DPCF5t9R/JiUrdUj1EeJ0oJMMZPbEmbKl+ojqlaCtikBeG6jQXzU7Z35VpdyM+62hZQtaDSWL/AGfn++70JMN9BLXoaVd7LSdFljrU0a28jb+WRhLIWYJCts0FsdT17lvG198DSOfIt8LpHFeiOiBqXedhAxQ7j5mWEfoZQ8htUgD9CUYdqVvNHcgDf7d2lNAXtQyZMBmV8Tr0tu7fz7vD4FMBEwqoCH1AY6sQEuPIvKWHYqTIW6rp7TDX4vrcmkit7XbRfRCVo1vZ1GMw+acmIun3hsecYDvTcfnNUZHB9I8tew1arUpOyiky7GZv44h6PxVCNjvDhTH79StUJ9m72ulvwC4bCSeBmz09bkYMYuNpA9R9a3yfqtHqjqZcay48OEXYDGGDrgkoHhJasQ19gGh+4EeOauDQnAEXcmuOG9YeaM3pY8CLjgGbqyiNGTZUlbWUFUVcaTyMAJzw0=\",\"expiration\":\"2026-08-16T19:59:08Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODg4MjM0MjI2OjhHb3VqZ25s\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"1805ccbb-04bf-3d5a-9ddb-f2b6a35fad2c\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"fa89ab31-d389-4bfd-8a6f-16e9e8922c99\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "18e0a866-1b3d-348a-8195-5b732573c380",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T08:50:34-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXONVZB7J7K"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T13:50:34Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXONVZB7J7K\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGYaCXVzLWVhc3QtMSJIMEYCIQC0oq97a2kjrnws/ipDH+f5kRZQ4C2mQl/T2Urk3XOt1gIhAI6pb+zoWszFAWoUI4/RMT8KNGrEjOWHpjtVzdneLdhdKrsFCC8QBBoMMTk2ODU2MzI5NjkyIgwONJ62hn9yg3RANlcqmAVwKcRNJ15EFrBzqHIHC0Kdk1ICF/kZt/Fa9olTVl0AZS3EdpJpCRQyWX9Au84BcsLm7fbHMEgnzxsUJLCdvaAtdxdE5kpBPq2Y6NU06KhNZIBgnPvQwn+vLoaQ/84ah5Szi2t6KcWXG7W9xXs/k8bZuF5wn60XRyLduJR1BlYSTns+0HtV9Ss4Z46ECG7VZAr8R0FaCxkSkkMyV0xUVt1pXkL8eJ4zp8dudLxJ8c9JxAJUEiG5dlSDE8px/wz6twiQG0KaFLzTaZWc8m5MlY0OzR4eRAsoVodPbHkDO7HLYqcd5XTHbJGZom8SGiFCxh5G4z1I4ALuCHC8717jQ3szkIQ9kM6n33SJpJKLlvPZdcaBcSIJx49awiESJaK6EUgrrPgDJ9SBJmALhSNk/pDdZZiT3rjthg/nGz6+V+aUkwyjEVN3wZhYj1/suDIpaUbHJjrl6sYmib+O9ynrl5POxVbV5Z09Unpa/Q9Dj30sjGDMwn86Puv06LgrADUyij4bfIANikyBdUzv2vPMpkQMTGpcvsGKfv11MG6zpQ2ywYToptrHiCN7txA4XWafRJBQV0RfjfaRs9uNtooWv8pS9xccLJ36qaW0RoXsD16p3qWkIEHiyR3uBNm5TQiwUq1GnAt2+pZNsHQvr6Zq8+cqVQWHwGvBYOlHvzmzXE7RuSPKnJzmj/SfXg0ORnksVFWLNl/z3P75dZwfIeO2/3i90QLeIGcqchzopnEE+v5Ayxkkbnt9a38XBQwPqFt8z+T/m3rBgyjuSGizpsyDUz0SuLlGHKFRzOxOshirfP+0ki2le3Q4osIQ2Qwd5M0j1S1F2spaCSqO/xkTAEFboNkOB9po+NEXpo3B2Vf8Nq9OzUS+giEE7chWMKqAh9QGOrABi+ndxhZbB0EwwQobSd+5aYdGIMKpYRtOa2xxQldi+wpUMNYeR3klvGP9spJ6gqpckk8o06i76uDPrac5j1Y3EJ9hnjDyPoG2DxlCDtWQNEzgkRuSBtjDzlea56WPOTejAHJLxoWfajN9QYOfhhlsVeAjo9YWC7fxO0ce5Exo1KooBa5doki81mkmv1ZZWsro45qk1hO+TuAonE6tHeI3lkJsFdvxqDXGvTEHSDVzshY=\",\"expiration\":\"2026-08-16T19:58:01Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODg4MjM0MjA0Ok9wM2F2d0xO\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"18e0a866-1b3d-348a-8195-5b732573c380\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"72c95e34-825d-4687-a2df-b59b4ddd3f6f\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "3522fe60-4100-34b5-9985-9ec02189e6a4",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T08:29:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXON4JTFV5J"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T13:29:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXON4JTFV5J\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGYaCXVzLWVhc3QtMSJGMEQCIDx2BbinoG5gkiXJooSZXgeVUVeXZmS3s4TG9/f+4l9bAiBUeohMYQ4+u9ngAumn7UXP5WDra6qzisXx5q6okVPQZiqPAggvEAQaDDE5Njg1NjMyOTY5MiIM6/P/r77BorQo6RpwKuwBoJykpMejwKVxFBXiaiw0OBdmrd7GZy2JNYo4ln0WT9w+7fEMtHokmU5dgqHFeDFi8O3kcZKqBnk5BB6K7blMQfvysWHRUt9mLgo5eFgBOhxIG010ItQ+GpLbgJRN3Lswa9SIl37laCRDu/zkfCIsELyP2V82ArI7gJJ1HzatnXCF4okrgIGpgXmjnS8q4MICpopngadFuEMTxe64+a/LUR7ph1Yuw+ERAIhIg23naX2/z0vuKzS9/2yRNonQP3Qeehbm/VGXqhffV9VqWsOkCxFU1iRilRA21Gd0+VGRMlGVT7g8da5nruEZ80kwsvaG1AY6jgHNfQsTorAaZjaMnbfieSwimjNxu9dyDTiA9Wlt/rw7tAEv7SIQyFo7foq3PATojjeFG6xzMw0e0/LNfZh1FbfUqcp+EV0A+QkawzLP25JVi7sxGxBan8pmQOQOsoWUrANtgdT0L6jrlGyA9/jnAv2j3i8Is1sq5r2X+iK01T4y4N5WjCsNd7Syk+phCDNa\",\"expiration\":\"2026-08-16T14:29:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODg2OTYyMjIxOlI6SWlqbzVId20=\"},\"requestID\":\"34286a3a-4aa0-4e94-b174-cf4ac31738ef\",\"eventID\":\"3522fe60-4100-34b5-9985-9ec02189e6a4\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"9fe86d82-01a8-42b7-9ec7-78d9e9f0a423\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "ac6f793e-b090-33bc-a1ba-0ede5e9d393a",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T07:59:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOJ5DNLE52"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T12:59:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOJ5DNLE52\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGUaCXVzLWVhc3QtMSJHMEUCIQDCy9fN5dwRS/wFJWdJLqiYA66fhVtORC1TXJGMO4VjJAIgKdj0b/G+VV/SUZkzQVoOEc0u4oG9e0gEnSLztwTfE+sqjwIILhAEGgwxOTY4NTYzMjk2OTIiDF2kCeTPVJkfRVrogSrsAb/Pf3MSZqoejHvaloqwWx4XHGCYDeHGGnMu/804i9QWrmjcu8JUZnAmKRb/chTr3Si4qAsqXNp4yMmdw+Cqy4rVGJHPhhvAyoZ3NONdj/vW9K1/OSYJd+GmoH2Dr/5gBCVcY6dtuuVC7H3MdQWOqo4Qz9n25VnKAZ+312J09tOFdTYCXFt18LKOESz4MoCM8Ygrnsg74iCoe1q48zQIPu3GL6oH0hvkpuoPUehLf0pW2FoyxeWgf6bvbqEJTm0ZFPwLM8f1LIToMlWNeYqq3mr9vW+mp1HjWBvWEZHbOfAvvqbCXJtJqhZa0HU0MKrohtQGOo0BUFhiyKwIVSIWosKQitb387mY8FB7Ye9gZ4mw2/p1Ba9W023qyyAzt+9imfWk885h/PrJ7R2Bm6skAkhMhXamItv41Qb3gBRzynjsqDFljJ3A8PMBxRloJjnJ0n69dOko9FAN7al3YKBSbUFEX7M4hGp+lOp/Pz65X0xTJH4S5bhtiSM1TPiIJqg7cBow\",\"expiration\":\"2026-08-16T13:59:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODg1MTYyMjE5OlI6WFJzTE9JMTA=\"},\"requestID\":\"9c838ee6-8f47-4797-b9bc-8a0d90850bbd\",\"eventID\":\"ac6f793e-b090-33bc-a1ba-0ede5e9d393a\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"c56c03d3-f4dc-477f-83aa-4d763545b11c\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "1b6adfe5-ee6a-3f6a-ac34-bbef1962eded",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T07:51:31-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXODU5BFQS4"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T12:51:31Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXODU5BFQS4\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGUaCXVzLWVhc3QtMSJHMEUCIFr73GPJT/gj6UG/717Tff+BK2GYoWO8Ue1A+LP6ZwUoAiEAik63YGJP6cbrWLaMrK26z8Z5KB6cS2K9fJ0MejRWz90quwUILhAEGgwxOTY4NTYzMjk2OTIiDD9dtwJ9ZdfLxxJFPiqYBcxwBQCr2SETaBui9FejjMg3YnNIySuYFvlCJRR2KL1y8fo7Es0IW5LtUV6t2CGDbO5JTfLTas+RcAySAq7WyZDtaHPiuTaimuahdzQ2afz0rNB2lYMAAciazc4/ITA0gW5dv9tqEwD3A73ObxGgR2pGtGiIYKTKZUbuaQDkJrWnpAWguIG7tjb16TsXQckzDJMFlOTe3wB+xEP271pKYUqzKznfbHON6qoAmYm/V+zs65IzHnlnO2Sks/+ogy3b9pZAhX3MgutniDEE1Ken+l8O6cblMw2O5C1cJrfS5H/aqRsdN5sMWwYCDwM5hfB4eXe8uIqkMEaBih5l7szbKsxuXbtI8HRlmhJgL9F8Mlmoc5kz9uhVP+BerANr1jQ/t8sMUNn9k8TJg03KeZEq6pFLPHE5TQGRUYhLxCl1+IpJDeBYFx8lqJohOV3fjoG5GC1x6fr6aCxMKHdXsjIETTvWpOKeWmzAZzaH2Awk35Ai8O3BWvc0bN+fwUdFZxzlhH30BTNh0UcuF8IpVbPChkrKc3nr51Luiao4HT2ofpVCIMVX18bq/02rlk3kthwhlDnyDKPmcXFtr0wLmbZmyJkyeovru6BDMpgAclFsAseG848dwU7hl86qdOlEduRteSoGBFu/MwbdmIZRdDyuECXtvihlg13XqeesG8JUaoUwOtUI3smEnY2WQCTThb1Y7OcGOKIjs7+YMwpj3gS3KdZRjOCjcLHzwxd343PaF9D1diQDUaIZr/0Nq2epOVM60qS6ueW9Hktadrjk2yQGoNwfiJ/20JJJSev3hoUDUPa9DCsQGo0CykXK9U3kbpooKwfEnSWL5EGv0cdeh8rGBDYatduhg2izfve6VvmVzJfKe65nK0nzpCcw0+SG1AY6sQHrxhoRaWgtyqA0EcK0XgNkN1LwerT3YPnVXndhirkPQru0ifAwitvhV2odk3jrbhwgiv9nGUtj3Xr0PXCqo8DrJ/6LWIC9FFWfsMvgAqqOogpLRtptSs0Si+VXOWKYmhtepFJrMuPc9CvfmwhKVTwRm8qbIFWhcTexBoxoPBVtiGiAx6SAIFKZeZEodrw8cC/sbPYdcg4c7bWXwxNxJJeJ2lwnQxb9ojoM6oOTkD+SHVk=\",\"expiration\":\"2026-08-16T19:05:37Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODg0NjkxMjQ4OlZtSVNNUWhp\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"1b6adfe5-ee6a-3f6a-ac34-bbef1962eded\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"f7c0e1d0-8eab-4139-a4e7-17010c950396\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "51f10f0b-0e45-3519-81da-d36bb40bf0f5",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T07:51:31-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOP4QHMVJ5"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T12:51:31Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOP4QHMVJ5\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGUaCXVzLWVhc3QtMSJHMEUCIQC1NWkqanaK4RKWx94Z7JDt0BGU2C28x9JCUC3PtFt4hQIgGs5jULxB5nWWyfvupZk7kcKwJ67wDXcDFf8Xtm9wX34quwUILhAEGgwxOTY4NTYzMjk2OTIiDFxjLyy98oaJ+ZzoOyqYBVo13DxjIK7XpDroEG00w1TfwuQrCMIteC/MQ/kuW9qCwXvFMokcNzfTMfMSlX+X3WMfyn7kMWeuuYk5xdZidVe67U9MEm+FWLUCLX/QSkPe4twml4VnvA6s4c90jm/dvU/aTae5nB1xqSnGwQDpiQ/VQevT3n878px9CTYOFtMLb8RvfXfX1DIizrfrKC9LqdXc3u/pQfiAyGXM7TDfZ2ozJh/YkrtdRBZRp09gCvnCAoxNzFdfYMXKY4JQEecVhZKbPkgp5eorQSHePp2NvJkmLeGvdj6lnVsi0lx8meyQW4iAX7W+ya5k33YA563sDClvrqQPAfr7A2LBooBjUhvBvI3ZZzlTTZsKJI2RY0+Fgj/oUZ+VDW0tNYnRpnLTCvNjULJ4ByOJhyb89rEMDVkBjcKUghcvXDJANJC1ZFr1zpQyz7E+8QiqkigtNEhyitOlN8xFV7Xu1H8KSCx9LUTT63MREqvnuRymtSyUrWus47N5pTwHjrOU2+2X/+lLBDoDAVLxkCtzWuqOn1aFsdJArFrEHvIt67xBwRoCDUp7bj9+e7CIdZw5+ZhZ6BDEKDA4LQnTHoWaZeeo8G9fIx4M8vJam+unWw8AMK3SN7I+nVB2bc4UD+YocDIHMAncZYFfxITGr5DFigbPGQiTenKOikaQdGb3J4NAAgy/vOpF3qi4a/Q0j15dhDjKgKdtY738GylSLlCGBbwmkWZlZshd+wOEUfRiy7UkemxvL8z0k1dQFfJGfSfof1zo5vPQvHi3EE9bMI6jPgal+CVcXdD5zXW7YQWvIo6MUjNCr5LV5ZTBFGANctpW5mTW3xL3wjCOUggyiiWOPQ3TeiiGjOe00q5+GUt5x4wKZdrpyGAaPW5GCeK1nbMw0+SG1AY6sQGBYRevVoK+RrvLfUMFj6qyWFnB/CxtTVa1JGWT0afLL6j2AGHUTo+Oy83XFqD4NYnV6GPPWnBmbJO7O3Kinq8RXABQ2u+aMDnByJBvDnPVRJQO38rgFUEZVl+LE1QTgcSQ/udbzYrSxU5dq3Ckf8rmBnfAMq0MK9604wBx5KrUkcwh+jTwtLmFlZd6Yfmzj5mwfmtWsxV5uPwT2ITMH307ZiOacYlk7FtKcUdDE7EL7/4=\",\"expiration\":\"2026-08-16T19:14:17Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODg0NjkxMjI5OjVVTkpsZGRZ\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"51f10f0b-0e45-3519-81da-d36bb40bf0f5\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"9e9db2cf-8c67-432b-87ef-ca22aa9b5e37\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "a500db6d-092b-3cab-8aea-9ea85b7d27f6",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T07:29:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOHIKJWAOV"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T12:29:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOHIKJWAOV\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGUaCXVzLWVhc3QtMSJGMEQCIELGSe0AJtHbdM8rH2l++qBX5aL9iJ5SXETIeDExKf61AiBhsJ1gPK7Rrxnr+/KrXu9xXkBxjbzp1UKs+5AL7NddGiqPAgguEAQaDDE5Njg1NjMyOTY5MiIMvyu+EZtTPnOkt7oJKuwBEYAZrpQ2UOYiSJhJe8fm50eacuUhSKUntaxvAjYxH0oc2xl2A8nGiTi31k53t6G92norKxOPBiOF2OPUXF7Xtd8BtsJVO0fujrQ16fyG8pQ3GuJveI8Hisj/ypCHkRZyq/lavHRl9BqVQL7Wozuc2N814Y8uVB3IoRPiupjy6pcpFWV3YiA91RuLV8J4Z+EAp3z8HQsh6JWr6t7ZujS5rr8bqrSvSofOI8Qy1cVN45jqxbNFaycuymYVkFtqtcfzTaFRj5QXeEgL6ZcFrPQNJHWIKbLUrSR9OxwFfgBqtlLUSOeMx+aEQMuleXcwotqG1AY6jgFJA4tzxZFjcpl7wUo65M7sot0OPKikwU/qIOBoWSxe001HlhdTDXjk0yNWUm0O5gT6qPGzLd7cg6BpkPtGoRCkhq4t+Pu1PeSUM9G5OeI4IbfQqVz+ta7WT34sjljkJ5mmR4TggXRFKdecCHU6m0btkhAxUohTs9rPmxzsQ/5SppM9B2iWZmTuiwD07oZ1\",\"expiration\":\"2026-08-16T13:29:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODgzMzYyMjE2OlI6QUNCN0FVQ1o=\"},\"requestID\":\"dbdb6d1b-b766-441d-b3fe-af62ad45d3d3\",\"eventID\":\"a500db6d-092b-3cab-8aea-9ea85b7d27f6\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"a61d007a-e512-411e-8efa-7bcdda11f84e\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "a9896955-6ffa-39a6-8cb2-51819100647f",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T06:59:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOLR3CUMSW"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T11:59:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOLR3CUMSW\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGQaCXVzLWVhc3QtMSJHMEUCIFKkn4CnE/EUH3pTjD4F6IcKU+3s0wKz4iC+OJO+JCIPAiEA7HltAKGN4N/87901oKNqI5IVLxCp6JIsipOfmVoJBfcqjwIILRAEGgwxOTY4NTYzMjk2OTIiDKhdCGYz4Yo53QfCSirsAcVR+W9K4ypMoictiA6rVIXrdg+s07nzEnQ6E2AkSZmSSfRiK5XPtRm1WHL7HeohcM1WVHhiLHtzeQfxEQ2lf6slrW0Y9LVgS5nqQ6r3CNF3j8OUWHbduYzBX+8tjrdhzJBsgjS2QLzeJp5x287TgOhGH8OU9xX0aweUYz904azeKMArC6RvkjassDLy4mfzw3X+ARvvnWVe3KUjttJ9ALYL29oji2gWkO/juU1f2uyKN0AtCO9CIZ7bgaOiWMzDyWi/xX1cxerUG6wQw51Mq58pnDQklsEU1qJviu2t93+B6y+DEUSoql+ORbTZMJrMhtQGOo0B1iCJlU804cqYT/mTcDi/D6FziNF5012qRaOnh7PQ+UBKsffNOi0LXn9W9ehNUO7kn7nj8eVEVWtOL/CoUKusvTidw/odjs7K0x+RK49Sk9VcmAmPexkosZa5MFjTtErZzXuWNu/3Qu99RjWvjLDEtCJP2jPlSELQ0liU0Zcvg6xwqesxbNXkze87eai9\",\"expiration\":\"2026-08-16T12:59:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODgxNTYyMjIyOlI6dEg1VzljV2o=\"},\"requestID\":\"cae67a8f-82d7-4fe6-a99d-32ecc8b4731e\",\"eventID\":\"a9896955-6ffa-39a6-8cb2-51819100647f\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"43e89a17-29b5-416b-8063-286f7ecf7abe\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "1ce958b9-b744-3429-b72c-cf02962f9d45",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T06:55:07-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOLGA6WDUO"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T11:55:07Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOLGA6WDUO\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGQaCXVzLWVhc3QtMSJHMEUCIQDX6ZVqr+2TW/tsP1JVfEI0jJUWYM/c4+SnPnEi437R3wIgKbSrYThWbbh14tPKZa47jn5CxhdktcjX7RaJqQgBXbIquwUILRAEGgwxOTY4NTYzMjk2OTIiDBd1PFyi/aMVZttkLCqYBV0zokIJ/bik6NM/ZUe33GcBZSqah9ec5UXInI0a5YpedPBAf4J8PokAdcbn0CpDinQ4ySie+dj3QeCrdrokQGGFeJkcscUk/PwZ5qxyXEt9L5+2H4FRYF+Wdikt3gRNoh/3HXTJbr2UgUpNvwFOkTwj4jvkjtA20GFoqlMoivA/0Igdhir0WfkSYYRSL+XI6SdEK/61SufajfXtKpiOJIA00aEjwKvhGKrjBbgqlffLpMO/n6jiJN+QN12G2uIp8uWapNnDDpZo6bwsHA2eQRhe16eitKscpEtaiPGC2IBBxZpraJe6kUp1e1zmTkl7/CDix8F7ROp4WGeVSwoA2xcIcQ5XaJ/GOWjVsmsb7C3u9Imx+Vrbf1YYop9iPhzT2YMuKI31h5+f5p1TDilWJCelsDjdsjuWahBcD8rszXOBK4oYV2Z3F8S3DMak3IpsbkckY1b6wlrEzyI/iIrNe3BC4csYOTiUxXOxtxtjrrnjYJWIMAWLK3l58AMxj3iQu/HJicWyjh195OAsabsCYDWBApV6FvwVV2vPBZDhBXoooQat7+ZbSQJ7aF9Tt5bJnZ+oID5o1+mLelijK12hcQVaWC0tKowKpkiIdaa23ZRU/pL3dWR9VVo3V6IbIsrUZG+09eNEuboayiPSf0f9/QhXjTTJaE3YtVd/TeyN4JjjgmLEa2VLHZhmM0jVxgSQ3C7+HIE43lEmBg5+ClA2WpmofWS8Vw+1CNHy4NnwT8+qXlFzH8U/OwlyYGivjeJYS4HQQSZ4bFhWc/boLdpemw5p2XNRWCbOZ4BnzApNuL/RBtcSgVtSEWa0eZAvZypWvgW+rpR9vH5rkVdU6wlyoCMCnce0PYAZg/re30kv3OIowxdKE0fAEoEwm8qG1AY6sQG6u0ciuVB8AAliEBmCmMsr0nGY1Ri6VKn76D6lPm6HxLGSDal8ywAQbtN+JIfc7MIFt/svUpkuS7T4RLYpEwBGwPgBhiq5TN9OyXJwP/F7SNI9kfqbzujzO73DhSngjAfFfFBFf79o68JyEqE7swsxV2uKLVcKynRguK+ajau/CIFUEck6uJVW4bohCPkhrWhG+TJtjmgddxvnWAnLBP1oGiCUBGQa5b3G5SxMloJ9DGk=\",\"expiration\":\"2026-08-16T18:01:16Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODgxMzA3NTUwOkZVbDhwNzRG\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"1ce958b9-b744-3429-b72c-cf02962f9d45\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"0916bb59-66bc-499c-8758-f1ba5b01d6a4\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "9ce1ef71-f4be-35da-b8ed-8afcdf2c51c1",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T06:55:07-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOCDGGUVOT"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T11:55:07Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOCDGGUVOT\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGQaCXVzLWVhc3QtMSJGMEQCIAi1Be9bHEG8WblrCYhjvea8qbO05UyxqKfQj+KK36EtAiA3ARYgoJ07zKz8I9A2699qs52pkymZPfloKVR2KVDF0Cq7BQgtEAQaDDE5Njg1NjMyOTY5MiIMqhwm4hw4Edrloxa5KpgFDrvTELw2RZSLlBPBRqZG9gXirvFbytX2rMA3zPnKpeBI0ZZXlr311vyyp9DVnVn23ojnsB/axShOMS/ZH8GaKoHaJhWvm9khumtCFMEA7NsM9TQEijYme73HA0EW1dxnYLFu6jRu5GVUKGo1D/1M+arR3Rn8MQBRAJcDBS2/U9hFf+BrJPVGCKraK3u7Y4TPoU+uKWjbQVJTpvEZhW8ShVCz2rgEHGo4/RGhAA8vMf0T+8S4xG5ifZHe2CfnoF39FlvflAYen0gVff2q8iExd54e5KmN0kh7R7cSdziQzTYxQ2cGVUQ29JXB+9cOQSGd1+g9uAixoCvNptgg4e2enIRHAV8eRkqgoKVg08cRA1KLSkYKpmzJnPkor+XyLesfnrI0f0CVX4Oruk/9y1oik+ZYXi9nNe2mheoWdIrfQzcHyKhG/HPASoQ8gqaJV3YVlikmR+y7pfqVAe3ZdxS4pGqcd8jmCKmh5RFa5Lu2SelZDiOI2SbPh270SHdgPKfg0O0xfkLHyCIc8b9xQy/8M04pKhh8AlJzX7vUlMc5HG8gvyfS1mo1ELJO19SEACDAaINrz6Bz1hQQNd7vSO0wZqf2N+c4OCLIw/MTkn7iHYD0IPJK4FAj2jaazerCxZBq23ba2z58PeLoCOKlL6h/mpsyjXGu0Ery8yGC95bCceNA/jSjVCwvgRUN4EzK4ClCr4AaGyBe4c5aO3t9NWa5xUCrWuhBikN/Pr0tob2Afpcd0Hji1IT6wN9QAqhocREDfyud2uCWn42/tSZC3jgX22eB8JGmqwm422l028z/GSCB8NslWLK3FwrCIl9+EpLtV0m4OyUMvBZECMl7XDmcupB5NQW6yisvOn+Nu+2y6WPk8AihhU6BejCbyobUBjqyAQS8mJvghIe3U5cA2BsAWEasfiFPj7b/NtBksI6rMqZ4d9p0zjqgnTpQS7YOq8m6Ovljk73TCxHVPFiBscfRuaredODJx4Gq3YxrAWzZZlWfW5b1DGQtovBjiJ99WTrv4H39pndwHv4hVW/YFLxHiXni4uN7LMqeJPjHkmqvZbcD2WlbwGYbifCU4r+EfOYIeLEy5EEU9mpNziisGiYbNWBcI9HucJEMs6Pe/rK/Ugi2yos=\",\"expiration\":\"2026-08-16T18:07:29Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODgxMzA3NTMwOmZmbnVWY3pw\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"9ce1ef71-f4be-35da-b8ed-8afcdf2c51c1\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"07f5c290-7288-4fb9-a6bd-3a2955d0eac8\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "d341f1f4-99c8-3758-a71d-c0f0b50213ba",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T06:29:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXODAJPIEKP"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T11:29:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXODAJPIEKP\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGQaCXVzLWVhc3QtMSJGMEQCIDpR7jHGN0o+PMIKtO2+i9fq5EaCs6lwBdVJcuf4hxgGAiBnDWjD2hjxIwuvgyzxNrfx7o9ODiHt0me1OidfwuruHCqPAggtEAQaDDE5Njg1NjMyOTY5MiIM9kStpwlPzTVo5kMqKuwBNkimpGGS+UgId7l6XXyMvdlQqhY94x1X1BRMwzDXl52vwhWYFieuP0yHs1mgp7Np1OJd4bEm+qdqLtlKInU6UMbjdsf09Mf5tJMDYogrkNEgE/kR73PcwH0IH79RSEJLxWmnDbyI2QBHXcCZTGaeIgW+tVm1wFsBqyOZp2zmatxjXVDMX/+MV4wdS6M+sUaGcfvV+hrQCxrwteIf2M0j5tZ7ne70wEle130bgqoHvlwTbGM2ZGBGT3lItvFXTJnlYCCXpJEwTXjYQ+O2cN3jIKWZEJ2b9bGY7O47zmF4WdpgD/LMUllAmljGCKIwkr6G1AY6jgHPN+LQAO1z7fP8h2+KIUxNxMof7lDsKiCBEkUadJbtj19Us5V1aTQKholMQHRPH6+Sph3Hoh+3qWFpqeTiY0Ve07zwS2lHRGCqov1jj41GM0mvDPOL2eSzXeO0w9gbawT3Sq0SJApC0L41amafAeT3ELdoWUdQIqnZFPRtQpfshtYWM0SAvryx/5FSxBPA\",\"expiration\":\"2026-08-16T12:29:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODc5NzYyMjA0OlI6VUxIZFBCRTc=\"},\"requestID\":\"18cc41b9-3d7b-4720-b49f-1931d180d7ea\",\"eventID\":\"d341f1f4-99c8-3758-a71d-c0f0b50213ba\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"269ed90e-5fc3-4147-b637-10ff8bcb8655\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "064c67e0-3a40-3a9a-aa8d-1ee3657906e5",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T05:59:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOJSJC3IJD"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T10:59:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOJSJC3IJD\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGMaCXVzLWVhc3QtMSJHMEUCIQC7DQ5TPPwHuahg3aXj7EiLc1HhwF0GYHBwXZ1av7mMLAIgZ0u6pXg4b4HXpUxpEjuzHyFanaK9MaQnKPTHm7B/SnAqjwIILBAEGgwxOTY4NTYzMjk2OTIiDFmnTjcUPfso6fmyvyrsARtOl/meSfewx3+/c9O+tNqvSCn9UwBIY+lYekkIXBv7rtky4A896Hzh4Kxb+1D8GGwKfgiiXjsLYEiDU22wLw7UpK6p6rcxltMQzWVJsPJx/dXE4QNNFTaX3x6ORtAyUXdLBgc7AA9Z2id1yb7pwYxL421s9b1HSPSE3wJZNwqM0e8eZMEeQoLLxq6Ow2V/Y3WvgjyjzIXieS/6XsnmiXRBMq9OADBXD+2iaGoDMZLdtI5F/lHfyRBk2jSYzfKNy8ronY0QcDf3xnJyENXMF+hvlbh+EIkTbVjXxzWzPq0SCt4j+c4+KYf4JXwyMIqwhtQGOo0BbKTJdsNfv8DJWBmwC4XMVRuwbyN9qTQO2882R80/O+2mvJJWTLDfjltfjYRywRgDoZ8XR0EcmYdD0plqb2zinqAYEhFHkW5nN0siQxWDtHZCgOjLe4WiBX74TcCvy5iZQMA6XqJIxF3yXwBAG3VhS5+R12HSzAkoggRW0v8HiNmR1oas9IExZdbsKIJT\",\"expiration\":\"2026-08-16T11:59:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODc3OTYyMTk2OlI6YkMwcVRUN3o=\"},\"requestID\":\"c0c49c15-6a85-4220-b789-20868606682f\",\"eventID\":\"064c67e0-3a40-3a9a-aa8d-1ee3657906e5\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"3c10f166-8654-4cd3-8416-2e616fab4814\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "5bf39ac6-47ff-331e-905c-dea918e85c26",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T05:50:56-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOAQL56MEV"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T10:50:56Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOAQL56MEV\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGMaCXVzLWVhc3QtMSJIMEYCIQCGWcrLUHmz3uea6U4eqrJ3X4Nr9bSKsszqSvx29xCk9QIhAKMK2NepPxhzhd1WA0p+HE/5gT5fIO2JFXNVvyvjSpvXKrsFCCwQBBoMMTk2ODU2MzI5NjkyIgwE1ZgP8+NTAg0PYvMqmAUdYyKHqTkuXg/f9wkyzd3a/dV6/AKhJTIWqu1JicelHaoQ+NkBAucw/22gJnD2IwWb+P24IAoHIaZVIocch2WIz5VxQ9coC+DTeEKHeAj07ZcW/sSwR4yTmwsMaeoUEOP6O/3TBZIZ4g5gCYRQHNf4rNe/s6A9ZkMQGJHNjgNtHRynLCJiq57oIRPgPjewqpL//mQ480QuRjjk7EAMKQ6CvLG90hU5Xi/YC/gBBoyR6g5eOshoMLXKjIBsMXIom+kNoKsNrhsjR0QteCgRYIuJ80tTsrpJ6TKKl9Bxti4OC3DqC6YY81P3zap0GdLb3qpn972nJ/T5FinaSrWlg4+hmzuKdIsaFr8Z90CD44h4u2oZaW7ZgITSJTlficUtXzd/QjlbVyoUtNHcRJeiKuWx28kCOCNRgWqANeRIFRUImBvF/mAZ+dbPMUzUGlz8JiJ37h2idZ1Jt2pVRIjhekn1fezAt9u0M5o2duq/fDxf7u3WfLlr5knznVRBDU516oodZUN3vdg3GV6Y8d9q6Jw1R9LTALtYCBN2J3vpM1KnE1DTDFJlFJB22YH3j+E6kVr6oIXoLVzzxvf68NHZXd132+KeNKmNfYV4aEgJ0If84oHG/DteYg8wf78yjYdDf6hi77n1lyrArI8jQBYFoPJVeJGG2EZPLqmdP1M/D0DQXLJPRhobiqTNs/wc2558RT/EBoXwY7oRVjlG0c8+wdITXR2A+7d+I4meD9vw6U4DCMhK64cvHyZg1ReczZO5QspF0gM6pWMnK1Ke9xUOYHfal8Kp1ilhPbXkTe5QHmcENEJbdZpIimq+DoMyaTgDztFx9XBqxopYs7k6DOqG3MCm58rs28GIU/rZPyAJUQHoYiR5dI0ojpaaMJCshtQGOrABGipk4hJAej0K6xP2T3WhXVsK6+0g7I/wrJoEYw3az2wNCQTupAs0EmMtKj7bApce6PSbydkZUJBAoCMR4lnbscgqgXiatbtunHZamysJ+bz4qZZyj8dtDwDFjPizxpQkpyf62rfwCgVpLrpfzLm3VpevbaSaP9gOuWNFlh19h1mJUwPCC1Y1rIPBRKPH3TmB4rlX62dEW0WThh7oM6VEkD13HGk3jMKa3o6ncDTcKxo=\",\"expiration\":\"2026-08-16T17:17:26Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODc3NDU2NjA0OkIzR0dFa000\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"5bf39ac6-47ff-331e-905c-dea918e85c26\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"3e427c98-ad77-4dc7-8601-05b1266d448b\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "68d15d9b-57ba-365f-9387-7e3675693245",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T05:50:56-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOIMCGHZUW"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T10:50:56Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOIMCGHZUW\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGMaCXVzLWVhc3QtMSJHMEUCIFkjQswljMw5kOCMTHHT+2Fg248gwKB1DCGGYBpVzK3VAiEA0aEhsnpJlu7+7pxJkCZd7I3NsQspKLHsEEVB9lgewo8quwUILBAEGgwxOTY4NTYzMjk2OTIiDM3xkP9sAQVqFJzBMyqYBfo4BuusY4AS+mIf3SuXvAG8ERMI6gjzeYHsDefZqEYZkwt/OvBu9kYGsxbo4uuGe55k9K42bbSN9ktabtIbVzpC3Quwl98dlFLxsVNundtkSFQw2nzYtMW9uN/3PDp16sK3Fb1sSlzg/Oe4afOPpplWBUBsX7ORsnqY6WC+yJh1CE56D6tIJKzEOLU8FFPLDhdjUOvylbuJWAwJq6+KfrHmKSw2NFZ2sIo8kvklfmf/rrElbivIel6Yke/USK+grC9UC+tKGgxGxEAlAS2R66eeabQmDQBkTKL+bcqw40DkkG3J641V/D9Gz3UJiXRaJBIaJ4CZhiqpr16CBcFpGOw6CyAIWAUOtN+zmqjCQhtPH22aQZXvYBhemolwGgra+tDh5wqW74Tw6DCDqnHR2PtPIq2ZHw5riX4NA5pFj2VSLJGXYJuDZDWjsVvVw+TzgVkAiSe+2KZyUA8DTgMup6ZGCaVoK83NKheXIdi67thV4jEmJKjoytpjgVID+4HMc7fdGXCQ0n2HYih/T/1ABfVKNHdtfmRNpGaa3R6m1WMfqtYRJKq3/gCXg83Kp+AJP8vygBfYLGa6S6NYM5kG+LcWvAw9ctpCjSNG2ZRMsAii6cQuKn4NducSxs7yWPYIWNaR/28tGvHSHgi0gP4tImmxlXiW6PDCwMs7YZEaNYg5ipd3QmiLP3YwHgmlvMK21rD5x3uWlJhPoDbKOZaY/QmIW/qX65r4qajT4hJbJsY8H2fKHi7VdAYcr4TFotMmn/6foxlISZLV3GIcM+Xz5/NINI5EgNaiF1qnInXgkwtzMO5yehxn0IxMBV+fw/9qIsw/hfIOUO61+wOuaeVJMb3wM3xcImeek5yEFeUQFLdz1Hvph9YHPdwwkKyG1AY6sQG40Zx0OqDsCQ0Rs2LB6r4NHji7zk1AkycnpLESn4LgZQZ22bzoOsFw+HWw+8zIsOoOfnsshjcFiXENSpp1sPsIOBRBdWjQXYWvYstQR/1ajNxP0bUE4yH8UB5TaSTHweBfL6dUNTqnwU/XyGp4VMX/g9/QkhjAv5S26RjsUWuejbgJ4bqwb0T9+M4t5J5dgQyuh7hDhWWL9vglgLzsDgKN/Tuo8WqUJVkpmyrzMQ3Ew7U=\",\"expiration\":\"2026-08-16T17:15:00Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODc3NDU2NTg2Okx2Nk1FbXVY\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"68d15d9b-57ba-365f-9387-7e3675693245\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"a488bb1a-0ca6-4b32-83a2-1771350f178e\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "c77063d9-021b-3853-8eee-af1bba385fa3",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T05:29:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOFAEJS3IG"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T10:29:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOFAEJS3IG\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGMaCXVzLWVhc3QtMSJIMEYCIQDhYZFN6b5tnRSA2sJLiL2S3OZugE/OHMGXX+uKBaw4fQIhAPj0cr590JOfiTF5PwhkQ39gs7qA6Dtv0cWAfBoQxjPuKo8CCCwQBBoMMTk2ODU2MzI5NjkyIgzwBRJEOkiirLIuDLsq7AHp9RuRBUtflwIfYQNzkloiCjjyLeI5Rnzo2v2WgEdzU9X8DkZhJAa13iZQMHxwmvWEE9fKxmzt1zlkCCf4zedlLruw/gkBpayPuwHR03/a/Y9GkCBcTfnOHDrUc4A5x5x1DMuo5PBl5NiUOpXz2yDh8q+rlIq/oqE5Ms4GLlqkRVaPuWqcliRK4QZVik5g1ntIABdVReu0Jtll21fYd2P6XG5kJ8+YRjjPJX5WlOrCEf5el59Df1/kVKRHi5hpUDjCwGn+frL2/+DclzQ88NYaQVUVxSbb4gP5f4VpLx2kR73vmjnSgtIDlbegfzCCoobUBjqMASivy0VOqRo+io4SzxeOB/msbHpnKE0L1bKVwFtozyAIuNKcLWLB4UUNt3C1xm7rm/3/WIv71bg2S3SaFhtyatmP3+GFj5AreJtXyauQdeBXrfXqg0+jqkjg0PmWj3lUuR1WPB72L32qLu3znDIxrPmkQGznvTUEsba3Vszxzmc0iDmM3jVQILz364Ck\",\"expiration\":\"2026-08-16T11:29:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODc2MTYyMjA2OlI6STN0bHREQ0U=\"},\"requestID\":\"20c04395-143a-4041-94d3-91ee81db1dbd\",\"eventID\":\"c77063d9-021b-3853-8eee-af1bba385fa3\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"b18c4754-e688-43d1-856b-35815375f361\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "a73659b1-c308-3911-ba55-77e81a77692b",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T04:59:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOALQDYU4X"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T09:59:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOALQDYU4X\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGIaCXVzLWVhc3QtMSJHMEUCIGBQmqysljfwQVVkBsi/X3pwQL3FQQg5fB2zAe+PKxy6AiEAlmRqvd+dz8meMZkFOVIs/KfSB7jHveXsc2AdXaiZhDgqjwIIKxAEGgwxOTY4NTYzMjk2OTIiDEfODtvb9AJJDhy0lyrsAfG5WSsCTT5jGlynMjY4MglJ5lU+8lnKxORlTF/ap+EognbZXAxt8i0zasL8gjVDNOmW1DMwVAoB6vFQrFSX6x4o8gLFXfgO65+a2H2W+N9QxIKoZrdEEsF0/qup1H18aQdbXnR13+jmVYeLETCkGyat56vvo8799exkqPsP0Bpysj9ZQSXvX3IrKOeyl7+7vffDAuDssdv9NtI8LHwjZgqBKpkTP4t7iRgI2DyiGY+tbI9s2Ws68se2WDSZg3AeyKoKjbFkDw+Uw/DWcOYhgrGqBrB69RqD7CMo8LwGpCWMDTmgoU9d6xyk9jRcMPqThtQGOo0BvCWLChM4RdcqVYNUkrv2fASSpNKdX/6aoTgZQmVb4Hql9byReby/8gXofhOD4Da1i1jlV69YqwNkhxrv9HWFP+A+T7zNiU+kIhK83+/f71NDwAZs2RGyQKzW+tD/n7t4OoJqHXU7PxAUWCn+NCcJK7u67g37e5pjJ6GNonHIZCBfUBpxjq8geYu3iCmB\",\"expiration\":\"2026-08-16T10:59:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODc0MzYyMTk2OlI6VUZJTUhWcmk=\"},\"requestID\":\"4b2ecfce-27a3-42c8-b9b9-c41809072a8e\",\"eventID\":\"a73659b1-c308-3911-ba55-77e81a77692b\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"670dc257-835a-4e08-9332-eeb954516752\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "19975cc9-54ec-3cec-bfb9-49f1147bc0f2",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T04:53:27-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOOY6U3UD5"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T09:53:27Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOOY6U3UD5\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGIaCXVzLWVhc3QtMSJHMEUCIDzIsj7CbQbjkFPj3bbA9gelr8IcUUi6iJDi5JYlh04AAiEAoR93DicdgEbDYjXLOsm0eBDz0Nz55fY5n5X3JugDDDwquwUIKxAEGgwxOTY4NTYzMjk2OTIiDFhmMW2Dy6zerepqpiqYBbHCPMUVpMJ0NY53fyj8TOzBDiTimo/+byUrJXB+0bl1d4wuyGBi2D3cNQqJYF7k6rzJDEX6zlmIICTT5nJV7gTbIQmMc79nb/KJRw7v8OW5QIQQv8uyC+kZ88R1FqTV/IQy5Xii/1456wghJGgfkePGKRvUEqMciHa3HbWENs5+wJ7PKqDLac813jwox2f6y+trmFLZP74h+tRHUGPAYlJJQwmNFYQ/d7XiJVF/X8z3Be07ttyO2VcfD9al/Bsj2pUaFeNJ1V3znznpUvPDva2I/5vdUVT9nCUw0OKNWglcOh/NNuc6vPgWjiil+C7LaqVFRDkzMd3foyJtfNJhELBWGspq9FzIXVOTHXqt81l7l865r4lFstjX3wVTai3V/XXDa2OpzVVrsmK9X0laSNL8kb/bFdfI3T4/+MwDSDjIcNxJG1Yv10NsDXQDud9FNUk4fWZGBTUToJwrEEAga/a/HGGfTu4fp3XA2tetD6JmzvWfdubWXFmKWzvtGH8cSghIvjuTPByov554nSRqPjali32DA3ioBF/v2LsJHVrcO/LiBz3gWKYO947f9H862r5NCjjW4M2sC9M3LhwmSS2Ez5u7RMfCAwstaicpIpXc5QKoBaWrG974sCJsUxrm3FuXgrDOpOEiNw0yuBZYnGrthWvfuP7fgnNHtmlM1OOXw0SF9qrPpc94J8DGopwmRrDWBVMXqC34rEMFpte9ZQyG/Cz5uskmbXToqW2QPJ1vs41ewir+8rZVu3Hr/VKcAWqCTtux7GcLThh2xtRCdzVIheEJo7E21C6VT2pSaf0jH718foIO53tuWtvEyP7PcXZ3jVTJD8I02o8L/7mT6rNvYHpwSv7Ss2Jhmvx6dBkj3eRYwu8hZoYwl5GG1AY6sQF2DOcCU+H2XsSzfuTYDCuNzHhGkl+5nupViSdR67tYQZ7Vh93esFSZRtRqZAYvmnKyhvm6L7gk/W+20RJxExj9F3b52OLicw4zlXex5fKqc/x0JP7qzc0BtWvWr3G2f/5ectE63eXkFaDgh8KlREZros/MSQ7rjdcJEE5RJbQlRtOtjNoTUFwlFKyE9nQUvBDAwP0Lvmc2lC3AA0X1qZcLWt2Za0VcWB8w3Uzl5HvuKoU=\",\"expiration\":\"2026-08-16T16:02:45Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODc0MDA3NjY3OkRXaG1Ua0dl\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"19975cc9-54ec-3cec-bfb9-49f1147bc0f2\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"ec109791-10e5-462b-8176-cc2e2db15917\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "b2bd45cd-5d6c-354c-9760-3bff4d1fefee",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T04:53:27-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXONZ6A4IHK"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T09:53:27Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXONZ6A4IHK\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGIaCXVzLWVhc3QtMSJIMEYCIQDb/DS3y5ONdpZCPbzU0k93fpA7obm6RKcFhuvSBSAJKAIhAJcUjAL6AKZ3aeaMIfTj1+43CTkmHtc+q3kfKnSP6wu/KrsFCCsQBBoMMTk2ODU2MzI5NjkyIgxPgZ1L4oHuaR0Qk1MqmAWYjb58HKrsIlVhltB96qj+zmZgl9J42zNzkVM5Hq///fXp9b+LU//qkPGy97FDGS7iOpe5/7B34ff4IjY2tHmTsnWe76PrubPR1CwfMt/NC7YKoHSVBYBFS8FL9xjmhBD6J6GAysRrw508D05R6kYl7iq4eHWDWZqX7V0XQTuMCoURW53svrtXtrQCIgtSBQxAwjkULBlPlFSPzh5pYq9Pa3QXWqsOn9y4lioYopdMCT6CbnPLlevf4GWmC6tSaCGyaO5Pq7UP2JATL5PB/KuZMxabJghw+SIC7NSxUG5u982bpROT4s7mv7l7AQtQ+Qs+edNqXAszllSLYsTbIpT3qGH8nfkn5VJQtIYeNhhnSx/tkkVrKKC5UD7RSyS1sFdQC1Em4vs30kZtKR6uKR37XQhlKrma5tWGPtGWk8YP6X8HNdqOMibMePQalSOKMux+gh47wb8K/w7n5IzKeQLQK/m+GYe8l0ZRjzT5qbc7bJgySXooxgGPyP8b2dOc7hGmsbxU+EGeH6JmXgVTmdoImgoo8qBSRKX7vyI0mNkl5yXNgquvbohNtthUB7ao2i0yLXNUz7PwkMITlJqCg4BdaCfKy5w8Ee2UFpT6xQRQG+LV22XALv1tNfHG+Jln7hznw0GD240PO5op19W1NqW8mcfjwGLTCipbelxcalfUik5gPoifahSKSgfO/6z3+ee2ZZr4U7Zpy6j9/Wr6LqANztspptxRWEZ2EYvsBaH5SqDm3jYpppkXG8KojFgzegokrTstutb5QiEsbv7xfHAOfhOWJ79k4of4gRQFs/G4dTUn4c4TAA/1FHcywgY+ivh6of/S3ruAQKtZBZuL7H4r0ssqz+pPRWP5FqeBeVSHTIWohLTisezAMJeRhtQGOrABoMdmFAVm4iDGWurJNQncHPJ8zfw16WoAfFXlRkPtLrIu3DlsSoA+gLmLyYf6ryqj0fEBGcaU9MXU1E0BbqzHBkmGG1+bSakLJjwS5NGCetUkBKBzkdZAKYSfcPuug/rMucnu8WJuOnQnkGOz998zemnzZwyLnv5QT0AwI5fKQsVHrccE23uSgyVPuAQd+JdpJ7cUfewJEXhEEeK8Aq0uTF4vtjPOYSinb7b5fUSN4S4=\",\"expiration\":\"2026-08-16T16:01:10Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODc0MDA3Njc4OmpnN2J1Rnhy\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"b2bd45cd-5d6c-354c-9760-3bff4d1fefee\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"4cfcc479-4db7-483c-8d8d-792fcb0717c3\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "d1b2c59a-d19b-305a-b5fd-d52749070fa2",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T04:29:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOKJHJVTPW"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T09:29:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOKJHJVTPW\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGIaCXVzLWVhc3QtMSJGMEQCIFO9uJ/j3ahlDd59PRS/nsuWp4I/rJxI3EtziclfoSDTAiAzDy5tU5SyFBefbKeguFv7yiLqrF2CvYe4ue3ha6J9HyqPAggrEAQaDDE5Njg1NjMyOTY5MiIMM/8werHV1TIO6td9KuwBNfTrg6S80qB+4vo9EEAoxctNzDXWAW/MFhVEwoooeWku9ohUVXS8RwM/VGlLPOY6FnKqJ3COKz78XrW9fOuf/dUuN3qaty3e7h2/wPXdkxm9Kfgz6gMnSJvdIqZLXaNE7oS/wBAxKas3Tryz0HDuIPzygFoI0esxq/xf5BVvTg05BDSunJSqWm5yP4t+XpV2Ne80Egm7LqtPXk/vZcYMjWg65dYJnvLXfhR9OF/Qf1HPt9EQGm8bpoPcOnEZu2K3LP249dr1BaGoDqq8LRR2kdiN/VH4QnWZDBmd7B33+O+jbpWJkruxO7uxKosw8oWG1AY6jgHg5zq+opXsgrln9DTOnIK8wMbJKEJ0sMQ5bCvTDfmaUegI7dZBR3xIRdILMNeIFsqLP1Dlfv1Jz3V8srdlKIPw0yj4rtJnl9eZh5XK+ObJRMWFMIQ9xxlMezGIa33PGrgkYZAYlg7O0g0mcu61sQ0oH2Nrx13s6I1wdvm83HqPpdUSkj60oX/HtoYAphik\",\"expiration\":\"2026-08-16T10:29:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODcyNTYyMjEzOlI6cGpQZVR6bDc=\"},\"requestID\":\"32528ff9-4de2-4f26-b154-2cd7f9243b7b\",\"eventID\":\"d1b2c59a-d19b-305a-b5fd-d52749070fa2\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"9b667980-abad-4edf-b95a-5311a44ca08f\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "6d97000a-1e9b-34c6-834d-5cd04c8ded8d",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T03:59:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOFZ6OQLCH"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T08:59:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOFZ6OQLCH\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGEaCXVzLWVhc3QtMSJIMEYCIQDw8yGTzlyq/ECzL+R0UrevdkGLeU5LWql8Z8RhbHai0QIhAO0Jz2/16FdzwpOycv+dr3b0u5vmeYheRm0gzxMLq2KrKo8CCCoQBBoMMTk2ODU2MzI5NjkyIgyLsBgoeWgmhXay/jYq7AFE0dcq3YQ7qwntZ29e+3F8+nc3pDL91OdGtFTomfKhJydKOFCUYsuhpItIOa319+EI9lALCpOhASk2x4jZEmjIjiJxw70zm37vj0F2J6nViFz/BeZ76YCPo40J3sAGfwC6qBigfbiblWR9DOnAhyXBUBQc3CQyG4s0K+7akARrR/PfqZDxMpgKmMWVEf9ZoctsNIgiZxr2Hh732QUBzKe4N5qIc17G5QI6riAer9IoQqBJFALku4Lj/pzBfOk8rBjMQEMhOQGgTTRdS2FhQamBtM74LMPkU+PR4TrmGxdWi9eGN1hINdQhmqWoSTDq94XUBjqMAR7FD/M5esQb9v+k2QVckruGzN8u7ObDw5W6UPHHnSUaTJD3ixFkrCzYgRlK3h15U8RCEkWPC6zFw7FFytlnV8zD58g0i8FlmIu4+alNjsqLRGglN7hWqXo9pl1JU7PApColSng/J/24M48DjIdWQ2zMsaH0a7sWb+SLO5XVjAvA/J1ABCQLyP2x1nl/\",\"expiration\":\"2026-08-16T09:59:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODcwNzYyMjI3OlI6dms1YzZXT3c=\"},\"requestID\":\"a654af30-a513-4bdd-b3c0-f5dc53d3df69\",\"eventID\":\"6d97000a-1e9b-34c6-834d-5cd04c8ded8d\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"ab40203c-cb67-4827-876f-1af75dc4429f\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "12287001-6895-3d37-a46c-016a4a0eddd6",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T03:54:55-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOO36TUERQ"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T08:54:55Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOO36TUERQ\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGEaCXVzLWVhc3QtMSJGMEQCIHQ9aWwN7dxWH4qCl4FLa48RMaMehJOw5FbaAQf9FHZTAiAzxtKQnA9R5gtwextaycw3Sv6e5cihY75JFfH+g+FCSiq7BQgqEAQaDDE5Njg1NjMyOTY5MiIM1TyekxTFrj4yo9/sKpgFqsR9ejs8oBN4AybfIysJWvosrHIxVpifrkhP5TT8u/MdY2DMWX3TmzR7/lYoVbexbvx8Njnpmw7mOvY+ioUjcmCEOoE97nGcecJKkpMEsxiPiwWh6tfT2Xvly9/jOZOCy87I178hZig94GIfmHJIRNQJcmX0lk6Swu9hO1aKu0VuzYlUny4qG9fVtRh2oE5aWiqbpJsm4MZxSXZP4PJ9Z7TTLNXRlBxrmSpo0NsmIPf7cJJuIxTpMudFs6skco4v1gfyX2fFJ0iQ8yry/9SIyGPq1HVOKMRtgdXB+0fj1huMHViADV03S02uSBwct7L8XTWpQu4lsfUsy+pH3fIy+Tx3YLEdWzdKZMZj2gmV539PTZkAPVXct8ns6KG681+ECq2g8OPuhV9lVs9oKFP0f9qbftg+XsoOsAibSamKVRiefmuoOiRaVFbQKdvgRGbU5L2QqMPwdx8bt6D3bO9L0VPtDsPd48ghcw+6YpU1Hj2FA5eo8xalA7RMUFDwuDXFJQVudo44tupjoIx/11ycn74S5rn6gx8PkIwIdR+eEIyaqttRjiSgp8WhwMIOAsvU28UgjTXKraKHFmWgtNPCmqs9GlETFGrTtj7zW+apqx+WvHbWbJA10EHKV7hz4CCOihcdTkY+ENS8D78innqaIriMwm5RPwOJO/eRw6pPYij9UhMqMxdSH6l25MY0DHV928aAJoWNb5kiTKqP2FwGsQcX9gCxqE77uDca1pawt0puf4GtPzphSCM+pn0MtKT8RxAjZY95gQtgCuJvm1rP8plN33TVFaInQr89OoEjH6QL+9rKCUAx/PJ7GlLuVsdSv9TGaGZzD3jmvjV+AiMC4IC5YPaSc5aFjWyiCGR8JhE28yDoAATzYDDf9YXUBjqyAaQ4guTpsHPl6KYYwJp2p5WwVnlqBi6OWhmslBrI81xAyyDVOgpDyQTZL/8RyEM2g9z+tF/J2J2R3FedT5WYP0QnvZfFZ5s/lqawgcBsDhlb+cE6rjsCDsyQSvrlSsyAcFit057yLrzAfVn6ZSdKVlpcJr1CV2YjQAFoNkGl3FQq2Pz9ft9BvaKqf+MGV6Fss/3wL40vpMuZSMc7dUV2+sRydqXdL2zB7iZi6YEchp2w7Ko=\",\"expiration\":\"2026-08-16T15:14:21Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODcwNDk1MjIwOmFVQ0xUVVRv\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"12287001-6895-3d37-a46c-016a4a0eddd6\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"fcb76eff-9e0c-4cd3-a56e-885abaf9d8f9\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "36f01cc7-4ca8-33f6-b063-edd8683f8099",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T03:54:55-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOOBJJ2PSD"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T08:54:55Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOOBJJ2PSD\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGEaCXVzLWVhc3QtMSJIMEYCIQCGUhZXcnZ+DB3bNm2+3xDb5cF2leAbiNoHfu0MuqkaUgIhALTzUM1+5YHzBh3d7BTB1ZYS+OXrVSnoopXfc2kwbhmKKrsFCCoQBBoMMTk2ODU2MzI5NjkyIgyDGKgygCuzVAQzLrsqmAUHfNwnwsHfT6jJ+8ty40VufeLlWm1TH2//t79B5NSArYpdoXKwc2FDh8oJ6cvVYR155zfWGZLDmR5fOgP+NCvjb8xLOdn4DLfwhMSfOXZRzyohILjbbzMOmBlfeefcVJiEdwbeItfWoPJo9ORsJyoDMa+Xvxy3u7S+A/w4Wh5XZLo/96xnfkibfba1n3ILiVo9/qe5y5iBbfb9Hrfz83WK4C7T7i/dxW3m0eG8IDmw5K7Tb2n3HJxMpmztaeiC7jC7W6S5YuNLe886JWC8RuqZd7vHCEbIyLO6oJczvoHTPF+XBPKDlg2xvbOKIgszMcCSkfjKSiypPt50DRZp/0nXIApXhy5IFJyt82IJjrnO6JzHBKluj+xTPP0+paJF/oPp4OcsfDujDGfkN7b74cU+HBLu0Wnpcmg8NkPBvKu1i3dDcQW5f+ikjQ9SZNklLsR8vPtvK06gejksjE6xKUqW0dVEjQhcaSgIlDqWIYs7IQFtq4jIz2g/2XbZHwCLQ0SVMii0jpdmq201wKmy5Cv9EXniAAEW5GQ6ikVjLcmBljeheiSy4F9PwQf3WM7NuqShMnT92rk6rLa+nXbXjXQm48uNaHH8yUUHYqfMjhVy5ltm+FiNhML8ObV/ou3V0Sg0dOPOyVpHZRhXLltCz639yUSU8LsDCJUhiFgNLe6Tr6YjeDf/J1gJMjcDzFPEeLGwKfDScxC1xnqJ4MJTLe2z7YuFFL0GFcckefxszkvkokEKMUhFbHYOq46Quca3zBkIZrrc2H0YbMPDhignMV8bD/3qJ4DLcJz+DNmrnT2G/h33cnHmmRQ5n2Lwhd2E723Vqc0+BkZZy/gqwwJ71B18lILWOZcSN7bZ+6EFxZOomutOh/CRB9MFMN/1hdQGOrAB5w7OGuZ2Unqoo396qeyTCcUK1eWTA0h0c8fWn4S0pywbmIlpEIXwnzH+peU7WjYGRM8ddEtgVBd6YsRpra3ovY8CBvTJ6Nu7a2+GIefmlSK1YY7R8IBatONpFrYJHqKfkLOSIa+lQqzTzIWuZMeIi5kitzOlEj8FOgtmpvUlfDWX+zI4xYZxoF8MKCQ1/zyYjmJydZFHQwsnMXYW/wuRLCH5tjzGrBqr6r6VY0L5CV4=\",\"expiration\":\"2026-08-16T15:22:06Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODcwNDk1MjM1Om13SVdOVU9Q\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"36f01cc7-4ca8-33f6-b063-edd8683f8099\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"88b41b19-83fc-4d5d-b29f-a04e12dd7fb6\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "e8b23485-abea-3232-a2b7-e8512e356476",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T03:29:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOCXDZ33P2"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T08:29:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOCXDZ33P2\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGEaCXVzLWVhc3QtMSJGMEQCIAEK2+fW4wJLbWbowUAQD0Jnr9E1BtrnONxxrwq6M0Y7AiBFQ+r230PTDQXX3Ej0Ne4ybsGBbDs+oQVACvV/v7hG9iqPAggqEAQaDDE5Njg1NjMyOTY5MiIM2IV9AVnjy8kcrQjKKuwBMIMk7+mt98bo8JZwaAfpuRmI3M19K4C4N5iNya6k998is/arwpMvet8owhK0ZE6CdDNVx2kQIBoWi9C2jwmbCsJXUAZ7xVNJV2kKyhbDTIAzSaGUAe1KIzjMJmPzFyAGLxncE81Syza3RdJYZ1RECPfA9mgn9MTIpF+CJeTr6dZZqO0bYbQ40vUWrHYLLphXjvqczCpW8CtdeKjQK2m1tcwd1uGvqXyQBhLv99TrHmbToVM6DJMA+6wnFSxDuT1bq5VlcFz/N0fmHSLGuk/WpWLbjSqZRzHOEuw5hmWeiywCX2BCUer5+/fiBHgw4umF1AY6jgE97mw65MRRB9BrjHEQyh8pAgzIcTwSSylPI1OhkNtV0eI5PdK148jbX8bJjwZ0aEw7IKFff6Fp5F1j33siQqA1zEyZlLUGlCiySshjDo9jcSS0yFYWpKbLGdTexR/zgyEMo0NcX09kRSzwSc9735Q8UyTNNg27v79lger11KgYtCIw/0Vr3aN3DBsUhREO\",\"expiration\":\"2026-08-16T09:29:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODY4OTYyMjA5OlI6Q2ttM0ZvOU4=\"},\"requestID\":\"99845e0a-daa8-4ef5-902e-87f092bcb21b\",\"eventID\":\"e8b23485-abea-3232-a2b7-e8512e356476\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"acdc4078-053b-4a4b-973b-e6703489d3cd\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "7c302e9e-407b-33cb-ad99-cfb7593a4f76",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T02:59:45-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOCILUUI45"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T07:59:45Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOCILUUI45\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGAaCXVzLWVhc3QtMSJGMEQCICcXKgIkJUArk4s+3pzlz15grQVAWCPP+YPxyH7tAj/QAiBK6BOGqWYUklaHoY6b0/nMdTY0H3jUhEHS0RQviK0GPCq7BQgpEAQaDDE5Njg1NjMyOTY5MiIMqINNAP2agm5jubVwKpgFdiSNUOKn+eDPazsnMBJjVae+2oXlHYI2cS749Ydp01Xhb/GsMXJ8PKUwV6aAFTF9uptlIIFA1eZ0GNMJNcD15vLhM/SRIY+aHjReheyWukr5SznkyknWIANVVopGAeBBeUCTTW/WpoZ+lwmsncO2XpLthkslACROU32kQ3tX2ic4VfBAtSATAVz+h9ZO/6ruzNxF5bk44jmf5dNXt9MfBJtIvavKRSqgd6+W6itFJiIRa8fMSZS9icmnsHh33NiSREfXqnxlPs4+pHTCYFK5MVteFlaMdgRRlSAuzY9ZYwZOLLn+Q3Bs2nS94QCGFTOOBjGXUrSdIGvA/L1ePN2DZCWwK4OAhRDRcXlm44L6UitfMY7c5MzmFlFSso4GXrR7QdIvnnWFuj7kRCHJdfxORi6594+LnGgVHKS3EtCOTSOh1UWtIpNAhcBKN/cO4WRC5zVJDBjIXBGarrpyG+1CpSMUhO6RPnyMudYjhNJ0re5Lo4gffwLW540Vs4Ijb1q4iXmMqJO3+LqPr9NP5YASLdT8265ta9UF829tQqGupiXUqJEzUGCpZTigrssXkI4tXuyedvGwznmYqPBnenjenMEav0Kkd61h1z30qL7mntqYGrJlRoz1hY3jYS+8466pyt0RIbkYZPVwwml3OVbzQKJ/LZIco/7iZTjy22tFZI6rtCVg8aqgrYaIHt052xm0nuV5dWluoUkPrZz90bdWy/8Mcz1DaRv6swRsN2JGLB8vTk4j+PG1TG7VyaIpA6TnNEb6HU/5Y9VxoFL6ZEub7Kp50EMOf7L17nfMUOThRmYUwYPqBl2M7etHcWJ5m78quzSNbrb0zMZFM5GTb1Ard/H6vEvqcyUKbnjxccEIWnuKQi0TwzPoGzDx24XUBjqyAUBumV/S+jiCGo0UQf2FLMkYRQJ1h2CRWhc8IjELgWn+UcWlkc13AUJdGXnVbo28yZEsVwt9WBQOnmoapPytZe+rK8kcnnITIDCPmBjUkCkNaeNi9/gM9RMTdyYb3aUn7qEw7Efn++361rZ8HHLiiIIfRHGODYXJl7zFqSOAEYyOhwT7pxbwsvWf10wNND+6yWssu0NV4S4b6HGL6AiGUTvlQZ7sQ068IBIHHc7y1pr1HZg=\",\"expiration\":\"2026-08-16T14:03:02Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODY3MTg1MDg1OkdZQUFGbHIx\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"7c302e9e-407b-33cb-ad99-cfb7593a4f76\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"a0000c3a-8567-4177-b5b1-d82c3b240b58\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "ce5b4788-3f6e-3c86-9a6e-3cb96ccf3289",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T02:59:45-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOPSGESSNI"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T07:59:45Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOPSGESSNI\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGAaCXVzLWVhc3QtMSJHMEUCIQDXNIexyh/7U3BFzvwBjrQz7Ds28entY8RYCpU5W2ksPwIgMOojrOeGyoh9qcnjqVzlVJaqnfdpBaFN3KpLQTxK7boquwUIKRAEGgwxOTY4NTYzMjk2OTIiDKuxiWFfELhgp9WaFSqYBb8Y+iCqznVDGs1FeJT2GsLE8fmnCQii32HyDrNjQK9lLnMO87fbw/DjzDReF+ZJC2KUFOyllxXFvIepKR6QYKQjfG4oiuexh0ick5XMFErVcOaATdMhSMKaLBk732Ll2IUzuPEdm2aHNWt8p715IbzSkZZ5nTIHlM+YJQfxhtzNmM4vCe2e3po4ruVM6TpGy1IiGr7afmEZUQKA3Cj7ZOloPTkuQzWT78KHg/8dm7g0ozhwKfS8S3HMyqNnJTmoXsyw69iY1U3fDUt2cXClhcFkuvcoFxyGv+M4plONyVAMzB1BOUWxebyFSV6A6AlRf5RL/5nndVjg/0xFnk4rlFLD2AX4OqzXRg4gCA6TomavX8sDxit6hy9vChjFQ+lX8Jhy0KV/H290Pi9+sd7fx0Gm1kLbCiwyOhX/Lx5ycIesrUCtgQsJNZe7lAitxmll9OLtsOH0DqXAvY2m0/tv8h1ULyKAGx+7DtNTh2NQ42TFFBtpe8r8nWP9HFXzHyW+WTjf47SEodZza8y9QWILHFivcNJTp/AKmovDICV9UYkzT80Lc8JCQUYNiopClhVB1jE6qzrw3ymnL9XNcn7EmffTKsDR0i52Xp47+0wZg+uHj18/mY/fTltKTse0bF+2F/LCCfJGBreVvSin+0lYKNYZbkBtv/k4s4k9mYyxqW7K4TM5xVrPVb3ZsCWekR8RY4+b4BPK8pQrthN6zzppcLlHrKhw2uY30uvy23J19QvkEn13hupMkcL6zBM5Sq1e2DiFVoylXBFG4DA8uzLFShWNmEd1YiELbi1iUj12ZMWiqyJTZSCcUuJmwOcBUGJMISEXxOq5kOb7NWBdB1hc0iQddOa8lppvfXJK5fRwmShy68FPXz6T3V4w8duF1AY6sQEZK92p+/6xME7/xuH2++2P5gZV1KiGxTZIj8J2AK2t/efgWYPYtS+Uy33kd+E0O65NeVS3OIKXO+BDs/OgOQ2UPgkKwJsr509LWIWvwlU3Jgn2QN1eGh8fNbS1Qsto0E/vDMPGuKfG/PfiGYhtXSnHoPXMhH6UVpsuqDzfeGNkLibrwvoRBse7geZ6OFRN2P0jUItwgha55NKTUnxVhYhaXCZ9IAWCVzzIJHwKEng6M1w=\",\"expiration\":\"2026-08-16T14:23:24Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODY3MTg1MDcwOjc3djAwQWl5\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"ce5b4788-3f6e-3c86-9a6e-3cb96ccf3289\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"573fa053-ee9e-49fe-8190-eb0de30e0efa\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "6f38a5b4-6a8b-314c-a13c-f61c1a4345c0",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T02:59:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOMCLEYSLV"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T07:59:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOMCLEYSLV\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGAaCXVzLWVhc3QtMSJHMEUCIQCyhsBwm6aw6LJlv+gT4nMzzN+EDiVJDx3BeJ12mxfJdwIgYE7tJH5JZCrfxI4CG6v09DDXieYYH/qyN4QBtnrCci0qjwIIKRAEGgwxOTY4NTYzMjk2OTIiDExKKEdXLzdlR5WAWirsAd+fUMrx7fsIDNJG6IKCN0s7bNG2ctH8wB6tOYPqUUHJap7zJWYV0nLImB6tkDHQ+bQRpK/RQS1WwlZ18xBDQrIQO5P0lTL0ylL66KaYtLto7xq0EKIpJXa4CVR5S3+vO5xraK+RSDm296+Ls0Kro747qmqxnbt8rSKxEyXAtEf8ralnzDK4huyr7RVne6Za3GUbzS2I6qRykgFgWLno6RFXEPMADn0ScolZY1QTzKpGYB5Q3INaXWqANN3GUay2oIdef3AK22ritSfa7LgkscBnCYdDqYAJ0dERC3vNGhdqJE1ynTqxrN9RsemcMNrbhdQGOo0Bnc6Rsjl8KwKPJOfDv/SiEJ62X85fOuEG/vWSIq19V+j4jJQ930dbH7u4BijfefwIvlNpL343tUrOWVHfMbC4nJCPTlA1p0PKsHs3aQDolEOVJWMR0/GYu76d/QGczOeci+gCG/IBj8pGAj2Y767pdylw+6euYhDXPjE3CcsxDGaCIWyN41WKSwGwwEL+\",\"expiration\":\"2026-08-16T08:59:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODY3MTYyMjA2OlI6eEJyRm5kc1I=\"},\"requestID\":\"54954278-c487-4693-bf2d-34b86784b634\",\"eventID\":\"6f38a5b4-6a8b-314c-a13c-f61c1a4345c0\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"bfe4eab1-7cea-40ed-bf3e-964a345c7b94\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "e3efcba2-d1f6-3b12-b09c-ac684fac013c",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T02:29:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOBFTF75XI"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T07:29:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOBFTF75XI\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEGAaCXVzLWVhc3QtMSJIMEYCIQC8TBjJkVkwlcsqK2lzH5dG5IrgKzNTp9x3s2HEl7HtsgIhAK3HLdPhPTXXSftZr9qIdJVFtlgirvF59AhcOfh6LOFnKo8CCCkQBBoMMTk2ODU2MzI5NjkyIgx3QidlLB3NITo6mLMq7AEEV5+CI7+vOmXkyKAf2kyrD6xfQrsrjErnGw7Aomg49HlLDbWQ6ANVTSS4npgC8vb7mjIOlupLWBKKoq8p9T+oNctgKDUQJ8yonuuPGmlFoFtxaKSLFJ4lvJqiRkKXnDmWWz+bvTiFTH3HeobjcjUzcnte6WdCM0/JHXpQF3orOJDghzmNwkYcjFFrlk047Au1siDvq2PBOjXxyK8s+qxrkADNehl0u3OsGBYs2nJsRAJaqJIw/5oFki151zJI5ebNr9Ruj0eKHniIAya7+2uZa2P3tkFp9XwaYD/pQzCCUlgsIJOCSskj5pCB8TDSzYXUBjqMAfS924JWlMoLftkJpLQsbzsC+EdtzNRtNGG/8sh48afVwTrX//sKh1YzEJ/ggOEDw8/anaqkyn6/qW4J5ZB1YEO1X/juwqN2RES4NLbTM+aaQtacbkOK5+/wLp3fZLO1q8inWOUyf7wu/sSrVIBG5sB3DhqxUgQpz00dGkvKlsTIg5h2LaW4pFjOQq8s\",\"expiration\":\"2026-08-16T08:29:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODY1MzYyMjMzOlI6eFk5aWVXcGI=\"},\"requestID\":\"74b1e47c-4451-4846-b070-6f923b985b4a\",\"eventID\":\"e3efcba2-d1f6-3b12-b09c-ac684fac013c\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"ce02f9b2-e2a7-4c60-843f-9d252bdd7d0a\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "7bc83515-b6fb-3f16-8513-9db2d61eca52",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T01:59:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOKRY5BDF3"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T06:59:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOKRY5BDF3\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEF8aCXVzLWVhc3QtMSJHMEUCIQDvXn8GJmQEZW4NBhIrqUISTc6aJ9wCiYs85Mie0+KN0QIgWkXx+hVwZ/RJZglHPjHHOldGDIkPXnUkQ25MhaZlqC0qjwIIKBAEGgwxOTY4NTYzMjk2OTIiDALryNwcxlHcglZEryrsASrufvIOzTZQHP2eKmL/JstrTLf7NKaxGJmB2S4sWbCJHQ80xnPfAzI3KzROZzoAVDX6lVMI3NzGBeij9Cfg5ybyzbYNSfZaiBDk9A4vz/LgpYHUpZnatfv/HKj38ioWhwG07VMNhRnUQ/SgL1UdTa7uciFvE52bEr0V8HezZZ4fjk3bfWdTJ+jXM8bvju2M3A22PT7UCLd9PBiWQ9WHNxDfVVWjSfRO0P9L5tPtl4GykrfRzj+G0K4i3LTpmkPpVOX8MleyVHk+bvb6e2XmaPXyQBR2NrX3kRIHvBHfDAfBe5EY7S+OOvhLwAbJMMq/hdQGOo0BXLIf9d5gpBaHDsHgMaEI4YxR3BYCMYMV1/E14zETN53z84J/NSuNby0VaCJHdpVm+MNxjhapzl0xARzC58dowZXD9Iky6KTVZD8/8JHisMy6gvODhEDJAjYKk6is8Tt6lS+fxtUDunGsYi1/1dml6Dklw+J0TsCrGBjyJUIjA7xzI9SBLPithNirBMES\",\"expiration\":\"2026-08-16T07:59:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODYzNTYyMjMxOlI6Mjl0N0FMQlk=\"},\"requestID\":\"2f9054b3-5065-4a18-88ee-5007e1e6c060\",\"eventID\":\"7bc83515-b6fb-3f16-8513-9db2d61eca52\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"10795ac6-f865-4622-9b2a-567abb0bbea6\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "b6943bdc-aff0-3acf-a012-b27330341369",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T01:57:39-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOJWQDMJSI"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T06:57:39Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOJWQDMJSI\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEF8aCXVzLWVhc3QtMSJHMEUCIQCjwhjsYSt4DhkcTvDFUyQ8cHYlf9GZuJHB+hoxbrqzXAIgWR4NYf+W7uN10+F0OjOPr0jWIWSSZYmLoYvOlmfpKgoquwUIKBAEGgwxOTY4NTYzMjk2OTIiDDgwtsMLUQ5tFI6idyqYBWJ37qVcXL2c3w+IDkR7UpbXikiG4gbxoGaFRyDxNPlkvEbv752SC9f7hxeiTnZeXTF3KzGcF9ixpJPFi2mWB/fCOUZNiOZaVc9nQzJnmUQNcZFStzlDsyI1br9+P6iJFVHv6Dxgn92yCmN902AsLi8sH+4B5ygRhdVBVHhI922c8L+niHn7xJAR55sjABP0W6WhtqPkdQMaUTGX7vF72h0AzNpkyOfbPEmQEPDIEK1zghjRzO8qbxIonv/tSRUuEw+pgHpbAVMKIcQYJ7S4kM340xVr8RRK3Xm0GFbqCpMwfKlQggj12V1+GwktFHcEi2pil1VV9Q0vO3oaBTqghU8MzaC5yrn9giW4gHeUgtRWVmwlmDL47D0ys6CJDBDbCzFyuBqP+9c4F+cm0xCtGPoA0ebs3QmLRZ4yTebHkj4UC6YnIhrNzWQN+RDXiVg33/4COhcuEt6mw14ZEH5g0Dg66T93fnQ+BHOJo4hH555+GUa+hANiFfowPL/eihPW9CrssyMqZuzgtFl4/g7ZSdfJ0xd4N9Mxh/L2IaJWkNkseTLrSpEpjf2/pme8EjIPTGUrB0IID1i8OsvvFRAE8uXE9i7Z0MqOGE0aJigZ8Rp9KGOqR9vxw0gOs9G/+6f4PKbW1HDNfofLICQNi0HUMUBkPqXXHBWiJIoUHVDxin6jslY+kFSQMt76m+Vzj/YyOCMFoOL7kxSwQiA1hvXWFrIUyJl9h50/KqqCW4E/NK3WLRP8TMGZolocGnYiBgwyqmCLx/Vgoi7mYEe0rjL6RTdrj2AARDRRo9++hmZtSwDRnl+1wt9O5LPiQgHw3vog/Kc+WWIe+99BdDASt04wVpgQJztAGNXKr9sPknQ5n4M5/sAgo0L9OM8w476F1AY6sQEkx94L62gIXIId7UecBp+Yk7m5wE/CURPLm51ZunoD9ij0dQkl7SPTyq93ZnX59SNYWW9lex5eJTEAe+HxUZRK1TlGEKvxqGEepDQ7UWrGoLdP3A08o5nDKJjcspBgxJPIcVn/mPGr4ano3R3lvv//Wh4h14xWFfMdahvQYAgCahFF8nqnMxk3KxXxxCjT1vMddgroDs6sotMtZLYiJ7VF/mH6uIYxKa3uGkjqGp2qLFs=\",\"expiration\":\"2026-08-16T13:07:43Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODYzNDU5ODYzOjBZNEw5VHpC\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"b6943bdc-aff0-3acf-a012-b27330341369\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"e945fd38-eb53-4e5a-a214-6fe25d329906\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "eb63322a-2cc8-3408-ad27-1eb9410ef11f",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T01:57:39-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOPOLHHPTD"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T06:57:39Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOPOLHHPTD\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEF8aCXVzLWVhc3QtMSJGMEQCIAr0NdQA1EqWYfTdIHMdZf15T0l4BrSsKrYmekrXlwHNAiBKyf3wonB/PS6TP9vwA2AIrNhthML2RoGpKo3ztnWRESq7BQgoEAQaDDE5Njg1NjMyOTY5MiIMobCkswydTxh1X/UYKpgFpul5JG1DmHZoZqLk9xO5XAs7FbrHuuZe/9PshdzVnLgz6iiXxidgwaNllHBVf1tifIlUWfQxBTMTk6IYrws1OsoeWPb506maNUeZn0gMDKEPSZ3ynX2KthzIGSNhJ1iUk4BsduenjW4UXa3NpXw+TS/MxdxqDxQCfXHRjUmixFVUZ1pKk/ohb6anQA7fW1SYeWURY9JGDFJsvJJDUinBxLBEyIWsuI1mUnAHY3NO5ztDJmNg6HRjL2hqzHjAKbvxObm1kgfrAIr1LMCoapMJ4VTHYybKE6563D950J7rJKwmM3sPIDCjbN6XCvY7D2oDsnWvdHYCVKyLs8G3NJD/GlmIPRdET+QRHvyyxA8Jupnazqwh/dwLHrereQ92X4giLjcvb9AAKRzymJ8mudEGR/tAUn8WMAf/FAsPvLglDK/MuldESvq1OPbMclb1ZvElBaz90ONil927dsJ4j7tIOB7Le635fH0frq34imOsYo5OY73+94J2ifxjPGmboCizYiCj60MrXkxDigA7iLDLTI5Ue5hgkyL5wjAgYoD3yllmmsPXFpDS53wgcjgHybMvRHPQlQDT4d8iiRokYZe9tlM6vtQKjWhaxS31ZXyChzdfwcLEtmDi2ck+bKHguT0CC2DTAG76P1r1z+Ta0zAZLbAhuyfvpgdrRY+vxIfrC+0NkFnDXuk9hrnGPezFI1WLFtnNm3TyrJsIYh3YN/g7F8PCDM23MHMJvttuE8t1z25TpSwvp7usXFgsvbTI//nnc3oYkrwpqpF0L4iiFwET8Qn0hBw6C2sLXl8qrJivgAZhKXI7D8OjusHwBEHZ5kKO7JnBORSH85C/DhCnk8Lr65DHz7S9NjoCFFy/nvQvnu/69t5fn73h4jDjvoXUBjqyAQ4nsNRUeXSyfFwfQgGaAc52d1kU8YEBeVt01N5HU5WxAuFcE5vQ2sy/62tiFmVpKzpryNiXvyYPIirXRffFglbmwqx5aXna8ekqmM2alrtXIicedZvD88g+usCf3qxf3Y64xfhAKA0C1l3KR4Gi0YoVfh8oFlNvKaPJq95CzHFe0qcRKlOC2VKhYMymEG4ME9m6up0tWWTn8Xk+/kDneSFWbDe1zA8nFnHcZAz/cwda+EU=\",\"expiration\":\"2026-08-16T13:09:30Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODYzNDU5ODc3Ok5yemJQMnhY\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"eb63322a-2cc8-3408-ad27-1eb9410ef11f\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"f817f7f2-1680-4632-bcc4-fe50c8422561\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "d02c74c7-b6e3-3a94-94d3-bcdef8ff8158",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T01:29:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOETX7YF7S"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T06:29:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOETX7YF7S\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEF8aCXVzLWVhc3QtMSJIMEYCIQCfoRvdfCsSXmciQ6u83cFNWuJ1WHr8++4TPiUiT3xeBgIhANT6Uy2hSJsm5KnykHuHs1BGVd2jPVQIJGwHxVcr6mxSKo8CCCgQBBoMMTk2ODU2MzI5NjkyIgxfU3LvfHXHCJKTfHkq7AF05fnzfSLVrac9bDR3f6f/3/ZX1uqTB89IHTymmf6iNEt74yTS+fvy1bRdtvysMCXraYjezvAKgstI/FO4WqcssgGaSdPtMTbV98P2wiNVuIW6iScy3Qy6ME1D5jlmzwQlchZvqlggHd5NZGTDf6ykogoHqifQyorEYt497F7n4Lw7rqU8HCgAE+8uM8klzE8eWP0gu29IIIRuK2wfsrTyqKt4ttkPs+0lb40EzJRnoYEwBBB+txrlLkMsj986ywIszUqy+nOMFVhy2jDS5KK2ik/FgivcBr2BP7HtCPslX8iT4L+397nZ6njgFDDCsYXUBjqMATtLvSK7sHr1urXw+hc4kVwDhbgiKn0otB9JB3yrynMzUt5Vy8KlRNxKbeADL7dntneghARQQSFZSqWxOYpoz91C0L2PReBKPLdCe8VR5GHu5yjWltxKrnl0Wbh3MN6+89c7TGPGdq/BBtUJeWrz5cNvIEpJ/NthIZgSP3SSO5Exk+kQ4vzgwx1SpwVB\",\"expiration\":\"2026-08-16T07:29:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODYxNzYyMjE3OlI6OUNSWjBuOFo=\"},\"requestID\":\"d7f639a0-4daf-4518-9abd-965e7599c223\",\"eventID\":\"d02c74c7-b6e3-3a94-94d3-bcdef8ff8158\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"3970422e-f560-41d2-af60-e1e9ec3cb3cf\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "43a4bafa-bc1f-3c1a-96b0-6a0922c3702d",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T00:59:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOKU5MUBGD"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T05:59:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOKU5MUBGD\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEF4aCXVzLWVhc3QtMSJHMEUCIQDnTF4ZIVm+2evkui/H/FaHioZn0pW2go62pjzGf2+OqwIgEYmmC3vP7S36uBY0CMR8ZoYa+RkRK3+OmRkg5XkvVb4qjwIIJxAEGgwxOTY4NTYzMjk2OTIiDNkxiGZY7N90Qi4QVirsAacq4QITRP7UyizGpwz6jNR3KAzIFeOicF0Hq6eJmnKJ0tS/s4ZgoIWCrVix2XzuMFAtCJVG+y27hdQUB6QBlgLlYa8hQOZ946A0gI1ogL21nMjljFOS4FlIR9H7aizOdnBdHCFfaqd1CZ4Q0A8DrpVYPIcpccjKuR33gLPFG9HFnfEfYk7WzC0oYjrNIzOzFQDcudCY0yzzRkx+ZtTsSwOoUKNyHEdbfUUiHTa0+2FC3cRGzKF0TO4+6eNFeupl4yseFKKNfARPHBkGA7dlSSf3qqOD79y4ist1u+XGBlxW6PHBYXPh3ne03EYFMLqjhdQGOo0B0LoO+8vVgMa0pfezGlsoC7S9afoAt44Eb3PnIRyaX6P/8j4inEWdxdRL0KtteJDk9YMYevU/6Z3ywgYzfUZ86Dv1qowoHqvlLqcePkOvdy/UkVtZ410Tg5fhVcqaGwYNjW25ADYxliOmhxlWbX5jsv5H/bG+ZheGFmEcCWhPcjKhQg16FcCqbSgLfEbZ\",\"expiration\":\"2026-08-16T06:59:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODU5OTYyMjM0OlI6czR2ZFN3YjY=\"},\"requestID\":\"6c6ad33f-1f87-4e37-9584-af0571f2a53f\",\"eventID\":\"43a4bafa-bc1f-3c1a-96b0-6a0922c3702d\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"6f9a257a-0d42-484a-ae51-e39466f55eb1\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "a3a13189-95e9-34e6-a837-baf7958196e8",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T00:56:44-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOFQPMB6DE"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T05:56:44Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOFQPMB6DE\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEF4aCXVzLWVhc3QtMSJGMEQCIEyZXZvsB1HGHyJPMQLF176pSPn89w74zB6kiRoH3DwzAiAkWrU6IVivzMyZMDPOKB1HbBsmd9w1tcbOYCFZW2PTpyq7BQgnEAQaDDE5Njg1NjMyOTY5MiIMzBybAH532PCnl6jFKpgFyNqAilIq9Ko/lYxqX+Al+oNSe3WkayCSjyZsIluI758gsvXgZvHfSIzPlHQUuaIrbF1SJh2cYuWcRmZVgUBUR1WxJ7mL2aVg6iHqrdnr9NDPxwXEIZjodYw3kFORRxIJwKnsqWJZ+3OBXTAYt0cJFBrAudCbfcQJtm6vrqMdNOUVx1Yk6LYisJNDQHoA8k98M+CTov62UP38UHhpGvOz4OeIymIAnO7vR/2ce0KzERs8tm9GNLvEXZdD+fywuEd0H6jpRc+qOYUerFfmehnOtiC4S6r76xQNGOHYNfX9E360ZnWicpwnPJ2JYjxYhU6rvqefizr3MgeqZQoChDORvdeVFCGok5mm0ikmpQ3FoctluC78CRM6RqGQSruvBx6s5y0ECVsbmjkdo87zV5ucD5RHvJJAkR4i3tVl17sL6iPrM3KHHP39MTURNzhl9Dlhgjxi2kHPD7OagwEPH+569LIFEVeyfDh1hIFMgjk+zunaed2ors3/T6zQWkta6B0POQ1dbC7XumRkt9PikVGizDqY7saK8KFfAJf+iaTEpkjPprwAAyapFhtebed2JXPSD35B69cBvub6CjA+Jxg0ysGe7SHtTDaAwM1VkgP+JxqhWyhPFR4WFjnrOvpZDNmwAlnZkI575F9XjFTpXOC6JZQOEYhaX+eYE4YNm5W0UYMZeohFjfgK4hNpV9QaUCJOov+d2pBGzMWfawZYHjqg3ySezuHAJ0DP8j9p0yiE4TNhXEPV3V8av3CIGd7+zVBwAPKwNq3TiKEH2mzQq2u7tdZtNF/31StIbZNweTr2TvnAnU+G0qRL9q95j+X9yiD9vS6SeTKYyx1VdWpvQS+ZnS1PcB5kQm/2XlNs8GcLQ6eYwwT0R+RNGzCcooXUBjqyAXZXCNaKgHLXIIgqWliocHdYJmc47kCFSQmPLoqfbi0HZHjWGbf9ikxllP4J5IhxVswnKmrooqx+LlItIlXsWAdoA3ep4O2RDCHdHOEOnVGzSB/GZQ8YJdcdd2oS9dFBl/1QUJXzGuAUjZAuyHIAAAbKX0Zzyy91vgHBepU73WG8+fFrm9I2ERbaZH83Gny01p786DzF+Fq+lfD0+IGqnnKVnlFhqcVvY37BDBx77nyB5wI=\",\"expiration\":\"2026-08-16T12:00:31Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODU5ODA0MTI1OmU0ZWkwSWNJ\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"a3a13189-95e9-34e6-a837-baf7958196e8\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"f94785fb-1ff4-488a-9b42-eac7a10423f5\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "d424d210-2b7d-32c5-8a39-9b71e5e8dca2",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T00:56:44-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOJGVAQKSG"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ec2.amazonaws.com\"},\"eventTime\":\"2026-08-16T05:56:44Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ec2.amazonaws.com\",\"userAgent\":\"ec2.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\"},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOJGVAQKSG\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEF4aCXVzLWVhc3QtMSJIMEYCIQDRKyvVL4zY6uBecEpYNZaEUUsuhqb0rBVJQYyReNiuEQIhAPMG9vN0LBvqfvtrjG1tUWlso5v9QaZzAzGn+1gM/AAWKrsFCCcQBBoMMTk2ODU2MzI5NjkyIgy+8EasNMr/6I6Xf6oqmAUuOetBMelLFsft0fRQy7z6hAsY38WTbF6ieh7F5GtUWOxV6Cz5Evr2KCpMxF5c58gLqMJP5La7CNLjDja9AmxKEmqy9q6Gs/h7X2oKXlnIc9Gz46NeQVLQ/7ughgNTn4UOwFD77k3tBC6lEOAuMBURhNOzuDSFuvzonwGd5owtlKqHGaMNbVitVaCajT/n3g8Q0hMveR7rROGa/Zj+pE6tu1LFMeDElIYtkErGT0iQSvXCMc/HK1JZQQ/HuqWop9MmQsIUwYKk6G3batSZvNsbZRvR+g8CckA4mRO8SyeAKqLq/NrRWfN9NCu9UgNLMPxZjM2Dhe6hKXLwiN35EOCb24kih9Fsas00dOK91a1hpX1266QL4cnRJjMfOq7eUPBhn0IYafUS5eBxaSLXkbC8ltudObnLTBa9TppNGT9gSjAcJs2lMWN+PVCvjRx91HG1m0VOAC7oUnbVYqyL6KA08ixfO33PIMliIQVSJVer5yAGh8P9igwskmvduZ44kaD8B4n1M25MfaGDsmenC7/Y3aZEnkI0aTvEoDOjKMYVPT5HTPrrrylrSbOvZOQ801TaPjrhbwBVw3bjvVIpR1HA8Vv1Coar5b9FsvGNSJrUgfTZbGuh7+izYMghF4jQFjsaNnsdJYPKzf7GX75A8AoQVdm3fJst6dDQzD2lfnPon8yc7waryRaC0HfWcBKuxnmdsn6zQwNZFp6TQ+ykSQicbEw9RzLKADbqQuOwnD8IcSXivSLZJne68a9q2A2njBbfzlELf8IZcZLdDE6EwDrml1GL5B+Py8h/kBIG1zjV0wEN6XMeXdD1BBWm8hjIOBQrhyK1v1fdBJcVtrv9k/veN1uQk7at6S/CSea9V9S7B7xrnxWu6/CXMJyihdQGOrABWCDjyHFwhZ5u68n8vOA7z09Gj1Y1cOa5ZH//p4Xt796C4yShi2L64TE9m1oO0U//0oKfBjAudj9W3MRJsdCkO2U3aLvjuaOYvy4McWpSkPbUTNdEewxSOuOXHVuYMCzcj0/jseptIFCTrcuO7WpK8awNQvnZz1nrWQxUQvdGjkizCcMsZOoeBQAuyOFJBxMJO8wpW8gYba4Qo0f0Y0ZFNRTbwMzPBh2BTlfluMPxsYQ=\",\"expiration\":\"2026-08-16T12:20:31Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOFWUOYJFVE:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/EC2-SSM-ROLE/i-0a8157bc8ea33b36b\"},\"packedPolicySize\":1},\"additionalEventData\":{\"ExtendedRequestId\":\"MTpJQUQ6QToxNzg2ODU5ODA0MTQxOnFyYTI3bm96\"},\"requestID\":\"0d653411-8cec-4d61-99b3-7142f98e6140\",\"eventID\":\"d424d210-2b7d-32c5-8a39-9b71e5e8dca2\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"7af16451-3e5a-4311-a2e4-146de30b9c46\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "3f05e752-2b22-3271-bd22-9a5b69fa3969",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-16T00:29:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOKYDAFHQD"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T05:29:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOKYDAFHQD\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEF4aCXVzLWVhc3QtMSJIMEYCIQCMzb/KIs0HlXmCGhEXIBIMbj52/leSQyqZz/mlOL2a+gIhAP5+vOlLu5xVYvRkwOlfQ79EQLgjsl8u05o7sYfgR6A5Ko8CCCcQBBoMMTk2ODU2MzI5NjkyIgxqI27iEKXbQ06Sk60q7AGlFIOb8OKmDv6z59cODRiCCTlA0QVnqDh1T7ro9cJrB3WMGmEFmHDc701z+p7R20QAaF8vlFTfoMf8s4AcIMicErSgDxw53LiuJQ8DCTCqaKAxDYGA2RLNL67iCahk8yhPW+IZX7h8XlqhiOr0SJTSBODcntsIlnZb045tHimfMYU2vJY2UPCgtrt0AUryeW4A9l+8OkNhNjnl69+dI5KFUTUIk2B8hUfEJhUbslWRcpb+bNy3WjN6fvXXiPiGqeOhKVF4xrqTVVvbCSqNLPlLaG8IXWPVNBLCCUmOVPodM3NbHbLAUL2eGsXyGjCylYXUBjqMAbYWn1fR/suIJ95sk5EZsV1Q+I9lJVk3Pyk3HI7CmiANy8Wzt0/YcdwlQLTXgUZdwRYZG72oaRKeMreOUmaphHDy7+Ro+3z7jjTStDOyEjdzbaf4xlExigyQNauzXFqwThtiFBQeWHGVqMQ++6CbIMup8vh/SA7C1yxeVqg81j4aOLHZMjb38edZK5On\",\"expiration\":\"2026-08-16T06:29:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODU4MTYyMjQzOlI6UjlKUTR6RDI=\"},\"requestID\":\"f9f2890b-3e17-4c43-a259-fbc953152992\",\"eventID\":\"3f05e752-2b22-3271-bd22-9a5b69fa3969\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"90623cdf-fa96-466c-a7cf-880d86467c48\",\"eventCategory\":\"Management\"}"
+        },
+        {
+            "EventId": "165be7bf-3ed3-385f-8dd0-70d51d32f868",
+            "EventName": "AssumeRole",
+            "ReadOnly": "true",
+            "EventTime": "2026-08-15T23:59:22-05:00",
+            "EventSource": "sts.amazonaws.com",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::AccessKey",
+                    "ResourceName": "ASIAS3VMNGXOI7UES3ZB"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::STS::AssumedRole",
+                    "ResourceName": "i-0a8157bc8ea33b36b"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"AWSService\",\"invokedBy\":\"ssm.amazonaws.com\"},\"eventTime\":\"2026-08-16T04:59:22Z\",\"eventSource\":\"sts.amazonaws.com\",\"eventName\":\"AssumeRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"ssm.amazonaws.com\",\"userAgent\":\"ssm.amazonaws.com\",\"requestParameters\":{\"roleArn\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\",\"roleSessionName\":\"i-0a8157bc8ea33b36b\",\"durationSeconds\":3600},\"responseElements\":{\"credentials\":{\"accessKeyId\":\"ASIAS3VMNGXOI7UES3ZB\",\"sessionToken\":\"IQoJb3JpZ2luX2VjEF0aCXVzLWVhc3QtMSJIMEYCIQDlnZeaOQkst4sLzBPsJOCLMsnmj9NMjZtK9/E0wEAW4AIhAJnnspHxIvDMU9PyM7GHOqi06ZgiGV6tEJyNsfEnjG8KKo8CCCYQBBoMMTk2ODU2MzI5NjkyIgwNBYAtBN6PKLqEoFAq7AE6n85oZaQtPGZCvDTaF1J0DWwcpinktki6uHCe4cC75urtG5tM8k7pL9lISzddjCjcn9LMblY6U1sbTIFWjatsRcnw/g9J1x6opvy/I6Pm36XemTJmZEiJdE0A6kHGlMh0FiHN8xCv3GO+H5TJACyn6dHptT9U3SF8RU1ifUlZMSf4kZRvsL1GL3Plg4Q8+PjkYxCdHgA15zOmljfuULs+0hdvYdvLHfdu6Xcm7crs9CfNAHty4ifcZVfU1i/Jq473XSnPJkNLWRZ4AE+2lFNuQo7zrZlELDC2WWMFynly702VoyFJj3A4+M8MFjCqh4XUBjqMAX3eq1Za98YTuGzAiPtAla3gqdamrmXoK/3I4ykQwP475W47SV84vnIcVNFG5oqFy/tgRbSCo2ZkdAMJc65Un18aMxPqmNNevFiOtCmfQJFeVc/08mv3tdG6bNvYsW2pYztoCnL+7vMFJ4+Dy6YuJaOCX3vEq4DcU1FMAcwk6vGOjZfbGS/98ASjdfW2\",\"expiration\":\"2026-08-16T05:59:22Z\"},\"assumedRoleUser\":{\"assumedRoleId\":\"AROAS3VMNGXOI7SDS3AKO:i-0a8157bc8ea33b36b\",\"arn\":\"arn:aws:sts::196856329692:assumed-role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1/i-0a8157bc8ea33b36b\"}},\"additionalEventData\":{\"ExtendedRequestId\":\"MTp1cy1lYXN0LTE6UzoxNzg2ODU2MzYyMjE2OlI6T1JjMHNxalQ=\"},\"requestID\":\"b2eabf24-cfc2-4bc7-919e-b196a7f4022b\",\"eventID\":\"165be7bf-3ed3-385f-8dd0-70d51d32f868\",\"readOnly\":true,\"resources\":[{\"accountId\":\"196856329692\",\"type\":\"AWS::IAM::Role\",\"ARN\":\"arn:aws:iam::196856329692:role/AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1\"}],\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"sharedEventID\":\"6184d566-c983-47f0-aa15-f27b297b0fba\",\"eventCategory\":\"Management\"}"
+        }
+    ],
+    "NextToken": "h1m4b8TnG7a/GMFiJbuWV4ewxlR4EgiQp8ixuYx7qj7Auyvm1Wkc4OqgPHH1T6pt"
+}

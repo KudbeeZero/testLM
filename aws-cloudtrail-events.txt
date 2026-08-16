@@ -1,0 +1,592 @@
+{
+    "Events": [
+        {
+            "EventId": "4392a7c9-1809-4ba7-90b5-f73fe41c4dfe",
+            "EventName": "DetachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOBG3SH32V",
+            "EventTime": "2026-08-16T11:46:58-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AIDevOpsAgentFullAccess"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOBG3SH32V\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-16T14:58:35Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-16T16:46:58Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"DetachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"13.218.174.175\",\"userAgent\":\"aws-cli/2.36.18 md/awscrt#0.36.0 ua/2.1 os/linux#6.1.176-223.369.amzn2023.x86_64 md/arch#x86_64 lang/python#3.14.6 md/pyimpl#CPython exec-env/CloudShell-AmazonQ-For-CLI-Version-2.5.1 m/AQ,z,Z,E,b cfg/retry-mode#standard md/installer#exe sid/3b0b0d064a68 md/distrib#amzn.2023 md/prompt#off md/command#iam.detach-role-policy\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AIDevOpsAgentFullAccess\"},\"responseElements\":null,\"requestID\":\"9e29b2f0-f609-496a-8174-6b94c0ded4d2\",\"eventID\":\"4392a7c9-1809-4ba7-90b5-f73fe41c4dfe\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "6db30aec-b0b3-473e-9bb6-c12c70ce6ae8",
+            "EventName": "DetachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOBG3SH32V",
+            "EventTime": "2026-08-16T11:46:26-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AIOpsConsoleAdminPolicy"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOBG3SH32V\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-16T14:58:35Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-16T16:46:26Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"DetachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"13.218.174.175\",\"userAgent\":\"aws-cli/2.36.18 md/awscrt#0.36.0 ua/2.1 os/linux#6.1.176-223.369.amzn2023.x86_64 md/arch#x86_64 lang/python#3.14.6 md/pyimpl#CPython exec-env/CloudShell-AmazonQ-For-CLI-Version-2.5.1 m/AQ,z,Z,E,b cfg/retry-mode#standard md/installer#exe sid/3b0b0d064a68 md/distrib#amzn.2023 md/prompt#off md/command#iam.detach-role-policy\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AIOpsConsoleAdminPolicy\"},\"responseElements\":null,\"requestID\":\"a070a21e-5f1b-4e28-88b4-044bfb0204ea\",\"eventID\":\"6db30aec-b0b3-473e-9bb6-c12c70ce6ae8\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "487dc54a-caba-4414-bc01-9416eff72b47",
+            "EventName": "DetachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOBG3SH32V",
+            "EventTime": "2026-08-16T11:45:50-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AlexaForBusinessFullAccess"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOBG3SH32V\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-16T14:58:35Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-16T16:45:50Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"DetachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"13.218.174.175\",\"userAgent\":\"aws-cli/2.36.18 md/awscrt#0.36.0 ua/2.1 os/linux#6.1.176-223.369.amzn2023.x86_64 md/arch#x86_64 lang/python#3.14.6 md/pyimpl#CPython exec-env/CloudShell-AmazonQ-For-CLI-Version-2.5.1 m/AQ,z,Z,E,b cfg/retry-mode#standard md/installer#exe sid/3b0b0d064a68 md/distrib#amzn.2023 md/prompt#off md/command#iam.detach-role-policy\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AlexaForBusinessFullAccess\"},\"responseElements\":null,\"requestID\":\"43890583-5467-4cdb-8b1a-6f7da123731b\",\"eventID\":\"487dc54a-caba-4414-bc01-9416eff72b47\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "81758510-cd27-4c16-bfb7-a55f48cdc23f",
+            "EventName": "DetachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOBG3SH32V",
+            "EventTime": "2026-08-16T11:45:20-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AgentRegistryFullAccess"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOBG3SH32V\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-16T14:58:35Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-16T16:45:20Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"DetachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"13.218.174.175\",\"userAgent\":\"aws-cli/2.36.18 md/awscrt#0.36.0 ua/2.1 os/linux#6.1.176-223.369.amzn2023.x86_64 md/arch#x86_64 lang/python#3.14.6 md/pyimpl#CPython exec-env/CloudShell-AmazonQ-For-CLI-Version-2.5.1 m/AQ,z,Z,E,b cfg/retry-mode#standard md/installer#exe sid/3b0b0d064a68 md/distrib#amzn.2023 md/prompt#off md/command#iam.detach-role-policy\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AgentRegistryFullAccess\"},\"responseElements\":null,\"requestID\":\"2f61b883-e245-4933-8fd3-7ccffc754140\",\"eventID\":\"81758510-cd27-4c16-bfb7-a55f48cdc23f\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "7c5f0e5c-3e04-492d-b59a-93aba14573c5",
+            "EventName": "DetachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXONFKQHD2F",
+            "EventTime": "2026-08-15T01:26:40-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AdministratorAccess"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXONFKQHD2F\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-15T03:33:16Z\",\"mfaAuthenticated\":\"true\"},\"signInSessionArn\":\"arn:aws:signin:us-east-1:196856329692:session/199cd238-ff00-4b16-ad4f-9d4996280b91\"}},\"eventTime\":\"2026-08-15T06:26:40Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"DetachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"aws-cli/2.36.21 md/awscrt#0.36.0 ua/2.1 os/windows#10 md/arch#amd64 lang/python#3.14.6 md/pyimpl#CPython m/AC,AD,Z,E,b cfg/retry-mode#standard md/installer#script-exe sid/30e41a9d625a md/prompt#off md/command#iam.detach-role-policy\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AdministratorAccess\"},\"responseElements\":null,\"requestID\":\"7a9519d8-d46c-424c-a818-02f132f0bf55\",\"eventID\":\"7c5f0e5c-3e04-492d-b59a-93aba14573c5\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"}}"
+        },
+        {
+            "EventId": "8ef3a918-ce7c-4cfc-9dae-dab84bf1e8df",
+            "EventName": "AttachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOAAFUG5U4",
+            "EventTime": "2026-08-12T11:51:38-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOAAFUG5U4\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T12:38:53Z\",\"mfaAuthenticated\":\"true\"},\"signInSessionArn\":\"arn:aws:signin:us-east-1:196856329692:session/99fa8536-519b-4fbc-bce6-1376ac5ed3a0\"}},\"eventTime\":\"2026-08-12T16:51:38Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AttachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"aws-cli/2.36.21 md/awscrt#0.36.0 ua/2.1 os/windows#10 md/arch#amd64 lang/python#3.14.6 md/pyimpl#CPython m/AC,E,b,AD,Z,AR cfg/retry-mode#standard md/installer#script-exe sid/95d48db8e3a8 md/prompt#off md/command#iam.attach-role-policy\",\"errorCode\":\"LimitExceededException\",\"errorMessage\":\"Cannot exceed quota for PoliciesPerRole: 20\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore\"},\"responseElements\":null,\"requestID\":\"5197c2ae-4b7c-4dc6-94fd-31d89aadb096\",\"eventID\":\"8ef3a918-ce7c-4cfc-9dae-dab84bf1e8df\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"}}"
+        },
+        {
+            "EventId": "1e1a101a-e576-4b51-8074-02cb008f8470",
+            "EventName": "AddRoleToInstanceProfile",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:50-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::InstanceProfile",
+                    "ResourceName": "EC2-SSM-ROLE"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:50Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AddRoleToInstanceProfile\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"instanceProfileName\":\"EC2-SSM-ROLE\",\"roleName\":\"EC2-SSM-ROLE\"},\"responseElements\":null,\"requestID\":\"a9706ecb-a16e-4178-9bbe-afd3351ae19d\",\"eventID\":\"1e1a101a-e576-4b51-8074-02cb008f8470\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "4fe2cde7-6479-4cd2-8b83-6fc908ffd42e",
+            "EventName": "AttachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:50-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AlexaForBusinessGatewayExecution"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:50Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AttachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AlexaForBusinessGatewayExecution\"},\"responseElements\":null,\"requestID\":\"4e125d6a-d0b2-4f08-84b8-439527fd97ef\",\"eventID\":\"4fe2cde7-6479-4cd2-8b83-6fc908ffd42e\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "8ac72c44-2caa-4cad-8a16-eada07fad28d",
+            "EventName": "AttachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:50-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AlexaForBusinessFullAccess"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:50Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AttachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AlexaForBusinessFullAccess\"},\"responseElements\":null,\"requestID\":\"65ec96c9-d698-4886-bdec-ba2bf522adbe\",\"eventID\":\"8ac72c44-2caa-4cad-8a16-eada07fad28d\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "123ef2ba-c5c7-44bd-bc8a-bd5458e987ab",
+            "EventName": "AttachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:49-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AIDevOpsOperatorAppAccessPolicy"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:49Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AttachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AIDevOpsOperatorAppAccessPolicy\"},\"responseElements\":null,\"requestID\":\"610f9355-9eef-4daa-9142-d3556fda9e1b\",\"eventID\":\"123ef2ba-c5c7-44bd-bc8a-bd5458e987ab\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "18b25785-3b72-414c-89a2-29a8a660ed6e",
+            "EventName": "AttachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:49-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AccountManagementFromVercel"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:49Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AttachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AccountManagementFromVercel\"},\"responseElements\":null,\"requestID\":\"9d61797f-f546-4635-8551-b4ffcd47dc01\",\"eventID\":\"18b25785-3b72-414c-89a2-29a8a660ed6e\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "1dab9d93-5761-404f-ab6d-12844d3ba474",
+            "EventName": "AttachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:49-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AIDevOpsAgentAccessPolicy"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:49Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AttachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AIDevOpsAgentAccessPolicy\"},\"responseElements\":null,\"requestID\":\"298f4e09-f1a1-4619-91db-24073b2191a4\",\"eventID\":\"1dab9d93-5761-404f-ab6d-12844d3ba474\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "272ebcb9-226f-4907-add3-338676dd25a7",
+            "EventName": "CreateRole",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:49-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "AROAS3VMNGXOFWUOYJFVE"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "arn:aws:iam::196856329692:role/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:49Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"CreateRole\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"assumeRolePolicyDocument\":\"{\\\"Version\\\":\\\"2012-10-17\\\",\\\"Statement\\\":[{\\\"Effect\\\":\\\"Allow\\\",\\\"Action\\\":[\\\"sts:AssumeRole\\\"],\\\"Principal\\\":{\\\"Service\\\":[\\\"ec2.amazonaws.com\\\"]}}]}\",\"description\":\"Allows EC2 instances to call AWS services on your behalf.\"},\"responseElements\":{\"role\":{\"path\":\"/\",\"roleName\":\"EC2-SSM-ROLE\",\"roleId\":\"AROAS3VMNGXOFWUOYJFVE\",\"arn\":\"arn:aws:iam::196856329692:role/EC2-SSM-ROLE\",\"createDate\":\"2026-08-12T16:50:49Z\",\"assumeRolePolicyDocument\":\"%7B%22Version%22%3A%222012-10-17%22%2C%22Statement%22%3A%5B%7B%22Effect%22%3A%22Allow%22%2C%22Action%22%3A%5B%22sts%3AAssumeRole%22%5D%2C%22Principal%22%3A%7B%22Service%22%3A%5B%22ec2.amazonaws.com%22%5D%7D%7D%5D%7D\"}},\"requestID\":\"466755b0-8fb8-401d-8ede-83e93695c9a2\",\"eventID\":\"272ebcb9-226f-4907-add3-338676dd25a7\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "292a6561-cd24-4774-9b93-d2c0b8faf8dc",
+            "EventName": "AttachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:49-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AlexaForBusinessDeviceSetup"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:49Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AttachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AlexaForBusinessDeviceSetup\"},\"responseElements\":null,\"requestID\":\"f33f4c18-a27f-4052-86c8-16c44bed1d2f\",\"eventID\":\"292a6561-cd24-4774-9b93-d2c0b8faf8dc\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "399e65cb-d598-4d35-aed7-8bcad95d14be",
+            "EventName": "AttachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:49-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AdministratorAccess-Amplify"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:49Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AttachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AdministratorAccess-Amplify\"},\"responseElements\":null,\"requestID\":\"0460f310-675e-4f1a-b8d0-d1a9c084af6c\",\"eventID\":\"399e65cb-d598-4d35-aed7-8bcad95d14be\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "50b2b82b-4606-48e7-840a-098bb1d54aed",
+            "EventName": "AttachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:49-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AdministratorAccess-AWSElasticBeanstalk"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:49Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AttachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AdministratorAccess-AWSElasticBeanstalk\"},\"responseElements\":null,\"requestID\":\"9f70cd9e-dd7a-493f-a33a-01579750f5fe\",\"eventID\":\"50b2b82b-4606-48e7-840a-098bb1d54aed\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "5a24536a-c88b-48f1-a6f1-9851d81a60cd",
+            "EventName": "CreateInstanceProfile",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:49-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::InstanceProfile",
+                    "ResourceName": "EC2-SSM-ROLE"
+                },
+                {
+                    "ResourceType": "AWS::IAM::InstanceProfile",
+                    "ResourceName": "AIPAS3VMNGXOB5CFFIDXC"
+                },
+                {
+                    "ResourceType": "AWS::IAM::InstanceProfile",
+                    "ResourceName": "arn:aws:iam::196856329692:instance-profile/EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:49Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"CreateInstanceProfile\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"instanceProfileName\":\"EC2-SSM-ROLE\"},\"responseElements\":{\"instanceProfile\":{\"path\":\"/\",\"instanceProfileName\":\"EC2-SSM-ROLE\",\"instanceProfileId\":\"AIPAS3VMNGXOB5CFFIDXC\",\"arn\":\"arn:aws:iam::196856329692:instance-profile/EC2-SSM-ROLE\",\"createDate\":\"2026-08-12T16:50:49Z\",\"roles\":[]}},\"requestID\":\"acd7a084-e29e-49cd-a776-6b394e1b8d10\",\"eventID\":\"5a24536a-c88b-48f1-a6f1-9851d81a60cd\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "6e0f1479-3edb-41f6-91cb-b2c9449f81c8",
+            "EventName": "AttachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:49-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AdministratorAccess"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:49Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AttachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AdministratorAccess\"},\"responseElements\":null,\"requestID\":\"31919f61-4a8d-4bcc-8c05-8bd8a61deb01\",\"eventID\":\"6e0f1479-3edb-41f6-91cb-b2c9449f81c8\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "717f92fd-fb97-4f54-9df7-d18051efb233",
+            "EventName": "AttachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:49-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AIOpsReadOnlyAccess"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:49Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AttachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AIOpsReadOnlyAccess\"},\"responseElements\":null,\"requestID\":\"bf5a5d49-3696-44b1-9ef6-80a412ea929c\",\"eventID\":\"717f92fd-fb97-4f54-9df7-d18051efb233\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "93d011fa-6c15-4e3e-afa3-c3d843edbc09",
+            "EventName": "AttachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:49-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AIOpsAssistantPolicy"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:49Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AttachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AIOpsAssistantPolicy\"},\"responseElements\":null,\"requestID\":\"0b41318d-a646-4bda-8f4e-8214106624f7\",\"eventID\":\"93d011fa-6c15-4e3e-afa3-c3d843edbc09\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "a4d1a2c8-8dfe-4300-85a8-2e592560ee85",
+            "EventName": "AttachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:49-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AgentRegistryFullAccess"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:49Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AttachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AgentRegistryFullAccess\"},\"responseElements\":null,\"requestID\":\"b1c9d813-79f5-4d24-88d1-fd2f65ef80e6\",\"eventID\":\"a4d1a2c8-8dfe-4300-85a8-2e592560ee85\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "a7a0fe6e-b994-4eee-a5bf-2c05a70574d9",
+            "EventName": "AttachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:49-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AIOpsOperatorAccess"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:49Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AttachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AIOpsOperatorAccess\"},\"responseElements\":null,\"requestID\":\"fcc01845-b8e6-4864-8019-68c41f83267d\",\"eventID\":\"a7a0fe6e-b994-4eee-a5bf-2c05a70574d9\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "af96478b-4382-4454-a7ed-d8398be6174f",
+            "EventName": "AttachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:49-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AgentRegistryReadOnlyAccess"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:49Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AttachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AgentRegistryReadOnlyAccess\"},\"responseElements\":null,\"requestID\":\"41ba8209-42c2-4dae-86b9-30d7fa645ed3\",\"eventID\":\"af96478b-4382-4454-a7ed-d8398be6174f\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "b56e8942-553d-4b04-bb7b-3afa56bfe520",
+            "EventName": "AttachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:49-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AIOpsConsoleAdminPolicy"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:49Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AttachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AIOpsConsoleAdminPolicy\"},\"responseElements\":null,\"requestID\":\"33a54a6b-9d0a-4294-967e-3b0bbff030ab\",\"eventID\":\"b56e8942-553d-4b04-bb7b-3afa56bfe520\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "d1bc5b31-fffe-4676-bc03-a037453da124",
+            "EventName": "AttachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:49-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AIOpsAssistantIncidentReportPolicy"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:49Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AttachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AIOpsAssistantIncidentReportPolicy\"},\"responseElements\":null,\"requestID\":\"1fa9e302-1435-40e6-82d1-fea821b8c876\",\"eventID\":\"d1bc5b31-fffe-4676-bc03-a037453da124\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "d6ca18e1-4807-4b50-a26e-38a2d8b1a4df",
+            "EventName": "AttachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:49-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AIDevOpsAgentReadOnlyAccess"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:49Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AttachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AIDevOpsAgentReadOnlyAccess\"},\"responseElements\":null,\"requestID\":\"70deb28b-233b-48ae-add0-3b5630aeeb29\",\"eventID\":\"d6ca18e1-4807-4b50-a26e-38a2d8b1a4df\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "daa01b35-76ed-48fa-a74c-20c9aef4cddf",
+            "EventName": "AttachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:49-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/service-role/AIDevOpsConstellationAccessPolicy"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:49Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AttachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/service-role/AIDevOpsConstellationAccessPolicy\"},\"responseElements\":null,\"requestID\":\"1e879652-b25f-4dcb-b3e8-911c174a7ebe\",\"eventID\":\"daa01b35-76ed-48fa-a74c-20c9aef4cddf\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "e5ecbeac-95a9-486f-831a-3c5d74dca431",
+            "EventName": "AttachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:49-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AIDevOpsAgentFullAccess"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:49Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AttachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AIDevOpsAgentFullAccess\"},\"responseElements\":null,\"requestID\":\"93a6346d-a027-406f-b6f7-720bf2a2fe8a\",\"eventID\":\"e5ecbeac-95a9-486f-831a-3c5d74dca431\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        },
+        {
+            "EventId": "f6b6f6bd-8474-424f-a694-68ee2140947d",
+            "EventName": "AttachRolePolicy",
+            "ReadOnly": "false",
+            "AccessKeyId": "ASIAS3VMNGXOPMMUIBIE",
+            "EventTime": "2026-08-12T11:50:49-05:00",
+            "EventSource": "iam.amazonaws.com",
+            "Username": "root",
+            "Resources": [
+                {
+                    "ResourceType": "AWS::IAM::Policy",
+                    "ResourceName": "arn:aws:iam::aws:policy/AIDevOpsAgentActionsPolicy"
+                },
+                {
+                    "ResourceType": "AWS::IAM::Role",
+                    "ResourceName": "EC2-SSM-ROLE"
+                }
+            ],
+            "CloudTrailEvent": "{\"eventVersion\":\"1.11\",\"userIdentity\":{\"type\":\"Root\",\"principalId\":\"196856329692\",\"arn\":\"arn:aws:iam::196856329692:root\",\"accountId\":\"196856329692\",\"accessKeyId\":\"ASIAS3VMNGXOPMMUIBIE\",\"userName\":\"kudbee\",\"sessionContext\":{\"attributes\":{\"creationDate\":\"2026-08-12T16:00:19Z\",\"mfaAuthenticated\":\"true\"}}},\"eventTime\":\"2026-08-12T16:50:49Z\",\"eventSource\":\"iam.amazonaws.com\",\"eventName\":\"AttachRolePolicy\",\"awsRegion\":\"us-east-1\",\"sourceIPAddress\":\"12.229.149.106\",\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0\",\"requestParameters\":{\"roleName\":\"EC2-SSM-ROLE\",\"policyArn\":\"arn:aws:iam::aws:policy/AIDevOpsAgentActionsPolicy\"},\"responseElements\":null,\"requestID\":\"91a242ef-307a-434a-90a3-466d78ce4d44\",\"eventID\":\"f6b6f6bd-8474-424f-a694-68ee2140947d\",\"readOnly\":false,\"eventType\":\"AwsApiCall\",\"managementEvent\":true,\"recipientAccountId\":\"196856329692\",\"eventCategory\":\"Management\",\"tlsDetails\":{\"tlsVersion\":\"TLSv1.3\",\"cipherSuite\":\"TLS_AES_128_GCM_SHA256\",\"clientProvidedHostHeader\":\"iam.amazonaws.com\"},\"sessionCredentialFromConsole\":\"true\"}"
+        }
+    ]
+}

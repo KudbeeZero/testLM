@@ -1,0 +1,56 @@
+{
+    "InstanceInformationList": [
+        {
+            "InstanceId": "i-0a8157bc8ea33b36b",
+            "PingStatus": "Online",
+            "LastPingDateTime": "2026-08-16T12:51:48.975000-05:00",
+            "AgentVersion": "3.3.4851.0",
+            "IsLatestVersion": true,
+            "PlatformType": "Linux",
+            "PlatformName": "Amazon Linux",
+            "PlatformVersion": "2023",
+            "IamRole": "AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1",
+            "RegistrationDate": "2026-08-15T01:29:22.679000-05:00",
+            "ResourceType": "EC2Instance",
+            "IPAddress": "172.31.15.22",
+            "ComputerName": "ip-172-31-15-22.ec2.internal",
+            "AssociationStatus": "Success",
+            "LastAssociationExecutionDate": "2026-08-16T12:17:03.499000-05:00",
+            "LastSuccessfulAssociationExecutionDate": "2026-08-16T12:17:03.499000-05:00",
+            "AssociationOverview": {
+                "DetailedStatus": "Success",
+                "InstanceAssociationStatusAggregatedCount": {
+                    "Success": 2
+                }
+            },
+            "SourceId": "i-0a8157bc8ea33b36b",
+            "SourceType": "AWS::EC2::Instance"
+        },
+        {
+            "InstanceId": "i-0685561c90845986d",
+            "PingStatus": "Online",
+            "LastPingDateTime": "2026-08-16T12:54:03.264000-05:00",
+            "AgentVersion": "3.3.4851.0",
+            "IsLatestVersion": true,
+            "PlatformType": "Linux",
+            "PlatformName": "Amazon Linux",
+            "PlatformVersion": "2023",
+            "IamRole": "AWS-QuickSetup-SSM-DefaultEC2MgmtRole-us-east-1",
+            "RegistrationDate": "2026-08-15T02:00:29.494000-05:00",
+            "ResourceType": "EC2Instance",
+            "IPAddress": "172.31.3.136",
+            "ComputerName": "ip-172-31-3-136.ec2.internal",
+            "AssociationStatus": "Success",
+            "LastAssociationExecutionDate": "2026-08-16T12:15:52.035000-05:00",
+            "LastSuccessfulAssociationExecutionDate": "2026-08-16T12:15:52.035000-05:00",
+            "AssociationOverview": {
+                "DetailedStatus": "Success",
+                "InstanceAssociationStatusAggregatedCount": {
+                    "Success": 2
+                }
+            },
+            "SourceId": "i-0685561c90845986d",
+            "SourceType": "AWS::EC2::Instance"
+        }
+    ]
+}

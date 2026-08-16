@@ -1,0 +1,22 @@
+{
+    "IamInstanceProfileAssociations": [
+        {
+            "AssociationId": "iip-assoc-068248cde6768ebaa",
+            "InstanceId": "i-0685561c90845986d",
+            "IamInstanceProfile": {
+                "Arn": "arn:aws:iam::196856329692:instance-profile/EC2-SSM-ROLE",
+                "Id": "AIPAS3VMNGXOB5CFFIDXC"
+            },
+            "State": "associated"
+        },
+        {
+            "AssociationId": "iip-assoc-06b769501862391ce",
+            "InstanceId": "i-0a8157bc8ea33b36b",
+            "IamInstanceProfile": {
+                "Arn": "arn:aws:iam::196856329692:instance-profile/EC2-SSM-ROLE",
+                "Id": "AIPAS3VMNGXOB5CFFIDXC"
+            },
+            "State": "associated"
+        }
+    ]
+}

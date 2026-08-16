@@ -1,0 +1,16 @@
+[
+    [
+        "i-0a8157bc8ea33b36b",
+        {
+            "Arn": "arn:aws:iam::196856329692:instance-profile/EC2-SSM-MINIMAL",
+            "Id": "AIPAS3VMNGXOAQV2S3GF5"
+        }
+    ],
+    [
+        "i-0685561c90845986d",
+        {
+            "Arn": "arn:aws:iam::196856329692:instance-profile/EC2-SSM-MINIMAL",
+            "Id": "AIPAS3VMNGXOAQV2S3GF5"
+        }
+    ]
+]

@@ -1,0 +1,64 @@
+{
+    "AttachedPolicies": [
+        {
+            "PolicyName": "AlexaForBusinessGatewayExecution",
+            "PolicyArn": "arn:aws:iam::aws:policy/AlexaForBusinessGatewayExecution"
+        },
+        {
+            "PolicyName": "AlexaForBusinessDeviceSetup",
+            "PolicyArn": "arn:aws:iam::aws:policy/AlexaForBusinessDeviceSetup"
+        },
+        {
+            "PolicyName": "AdministratorAccess-AWSElasticBeanstalk",
+            "PolicyArn": "arn:aws:iam::aws:policy/AdministratorAccess-AWSElasticBeanstalk"
+        },
+        {
+            "PolicyName": "AIOpsOperatorAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AIOpsOperatorAccess"
+        },
+        {
+            "PolicyName": "AIOpsAssistantPolicy",
+            "PolicyArn": "arn:aws:iam::aws:policy/AIOpsAssistantPolicy"
+        },
+        {
+            "PolicyName": "AIDevOpsAgentActionsPolicy",
+            "PolicyArn": "arn:aws:iam::aws:policy/AIDevOpsAgentActionsPolicy"
+        },
+        {
+            "PolicyName": "AIDevOpsOperatorAppAccessPolicy",
+            "PolicyArn": "arn:aws:iam::aws:policy/AIDevOpsOperatorAppAccessPolicy"
+        },
+        {
+            "PolicyName": "AIOpsAssistantIncidentReportPolicy",
+            "PolicyArn": "arn:aws:iam::aws:policy/AIOpsAssistantIncidentReportPolicy"
+        },
+        {
+            "PolicyName": "AIDevOpsAgentReadOnlyAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AIDevOpsAgentReadOnlyAccess"
+        },
+        {
+            "PolicyName": "AdministratorAccess-Amplify",
+            "PolicyArn": "arn:aws:iam::aws:policy/AdministratorAccess-Amplify"
+        },
+        {
+            "PolicyName": "AIDevOpsAgentAccessPolicy",
+            "PolicyArn": "arn:aws:iam::aws:policy/AIDevOpsAgentAccessPolicy"
+        },
+        {
+            "PolicyName": "AIOpsReadOnlyAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AIOpsReadOnlyAccess"
+        },
+        {
+            "PolicyName": "AgentRegistryReadOnlyAccess",
+            "PolicyArn": "arn:aws:iam::aws:policy/AgentRegistryReadOnlyAccess"
+        },
+        {
+            "PolicyName": "AccountManagementFromVercel",
+            "PolicyArn": "arn:aws:iam::aws:policy/AccountManagementFromVercel"
+        },
+        {
+            "PolicyName": "AIDevOpsConstellationAccessPolicy",
+            "PolicyArn": "arn:aws:iam::aws:policy/service-role/AIDevOpsConstellationAccessPolicy"
+        }
+    ]
+}
