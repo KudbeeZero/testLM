@@ -10,6 +10,7 @@ import { getCostSnapshot, COST_TTL_MS, COST_COOLDOWN_MS } from "./cost-cache.mjs
 import { getState as getAgentState, setOvernightMode, transition } from "./src/mesh/agent-state.mjs";
 import { listTasks, enqueue } from "./src/mesh/task-queue.mjs";
 import { runOvernightSession, getLatestSession } from "./src/mesh/overnight-runner.mjs";
+import { listLearnings } from "./src/mesh/learning.mjs";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const port = Number(process.env.DASHBOARD_PORT || 4173);
@@ -107,7 +108,7 @@ const ENDPOINT_ROLE = {
   "/api/ops": "operator", "/api/tasks": "operator", "/api/terminal": "operator",
   "/api/phi4": "operator", "/api/metrics/clear": "operator",
   "/api/cost": "viewer", "/api/cost/refresh": "operator",
-  "/api/local-agent/status": "viewer", "/api/local-agent/tasks": "viewer", "/api/local-agent/session": "viewer",
+  "/api/local-agent/status": "viewer", "/api/local-agent/tasks": "viewer", "/api/local-agent/session": "viewer", "/api/local-agent/learning": "viewer",
   "/api/local-agent/arm": "operator", "/api/local-agent/stop": "operator", "/api/local-agent/run": "operator",
 };
 function endpointMinRole(url) {
@@ -423,6 +424,10 @@ const server = createServer(async (req, res) => {
   }
   if (url === "/api/local-agent/session") {
     json(res, 200, { ok: true, session: await getLatestSession() });
+    return;
+  }
+  if (url === "/api/local-agent/learning") {
+    json(res, 200, { ok: true, learnings: await listLearnings() });
     return;
   }
   // Arm / stop / run (operator, CSRF-protected).

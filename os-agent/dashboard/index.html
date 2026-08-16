@@ -128,6 +128,14 @@
       </div>
     </section>
 
+    <section style="margin-top:14px">
+      <div class="card">
+        <h3>Morning Report <small style="color:#4e6b5d">latest overnight session + learning</small></h3>
+        <div style="margin-bottom:8px"><button id="morningRefreshBtn">Refresh report</button> <span id="morningStatus" style="color:#888;font-size:12px"></span></div>
+        <div id="morningReport" style="font-size:12.5px;line-height:1.5">Loading…</div>
+      </div>
+    </section>
+
     <section class="grid" style="margin-top:14px">
       <div class="card status-card">
         <h3>Server Status</h3>
@@ -473,6 +481,30 @@
     $('#agentAddTaskBtn').onclick = async ()=>{ const d=$('#agentTaskInput').value.trim(); if(!d) return; try{ await api('/api/local-agent/tasks',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({description:d})}); $('#agentTaskInput').value=''; loadAgentStatus(); }catch(e){ $('#agentMsg').textContent='failed: '+e.message; } };
     $('#agentTaskInput').addEventListener('keydown',e=>{ if(e.key==='Enter') $('#agentAddTaskBtn').click(); });
 
+    // Morning Report — latest session + learning (read-only, no secrets).
+    async function loadMorningReport(){
+      $('#morningStatus').textContent = 'loading…';
+      try{
+        const [ses, learn] = await Promise.all([api('/api/local-agent/session'), api('/api/local-agent/learning')]);
+        const s = ses.session;
+        if(!s){ $('#morningReport').innerHTML='<div style="color:#888">No overnight session yet.</div>'; $('#morningStatus').textContent=''; return; }
+        const dur = s.durationMs!=null ? (s.durationMs/1000).toFixed(1)+'s' : '—';
+        const html = [] ;
+        html.push('<div style="margin-bottom:8px"><b>Session</b> '+s.id+' · '+s.stopReason+' · '+dur+'</div>');
+        html.push('<div><b>Tasks:</b> '+s.tasksAttempted+' attempted / '+s.tasksCompleted+' completed / '+s.tasksFailed+' failed</div>');
+        html.push('<div><b>Tools:</b> '+(s.toolsUsed||[]).join(', ')||'—'+' · <b>Denials:</b> '+s.denials+' · <b>Learnings:</b> '+(s.learnings||[]).length+'</div>');
+        html.push('<div><b>Workspace changed:</b> '+(s.workspaceChanged?'YES (STOPPED)':'NO')+'</div>');
+        const recent = (learn.learnings||[]).slice(-3);
+        if(recent.length){
+          html.push('<div style="margin-top:8px"><b>Recent learning:</b></div>');
+          recent.forEach(l=>html.push('<div style="margin-left:8px">• '+l.observation+' <small>['+l.id+']</small></div>'));
+        }
+        $('#morningReport').innerHTML = html.join('');
+        $('#morningStatus').textContent = 'updated ' + new Date().toLocaleTimeString();
+      }catch(e){ $('#morningReport').textContent='unavailable: '+e.message; $('#morningStatus').textContent=''; }
+    }
+    $('#morningRefreshBtn').onclick = loadMorningReport;
+
     // Cost History queue controls: show-limit and clear.
     $('#metricsLimit').onchange = loadMetrics;
     $('#clearMetricsBtn').onclick = async () => {
@@ -671,7 +703,7 @@
     $('#run').onclick = ()=>{ const cmd = $('#command').value.trim(); if(!cmd) return; $('#terminal').textContent += `\n> ${cmd}\n`; $('#command').value=''; const s = ensureWs(); if(s.readyState === WebSocket.OPEN) s.send(JSON.stringify({cmd})); else s.addEventListener('open',()=>s.send(JSON.stringify({cmd})),{once:true}); };
 
     refresh(); setInterval(refresh,5000);
-    loadAudit(); loadMetrics(); loadGithub(); loadStatus(); loadSecurity(); loadCapability(); loadCost(); loadNotifications(); loadAgentStatus();
+    loadAudit(); loadMetrics(); loadGithub(); loadStatus(); loadSecurity(); loadCapability(); loadCost(); loadNotifications(); loadAgentStatus(); loadMorningReport();
     setInterval(loadStatus, 30000); // status panels refresh every 30s
     setInterval(loadSecurity, 30000);
     setInterval(loadCapability, 30000);
