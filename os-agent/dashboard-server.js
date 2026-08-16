@@ -112,6 +112,9 @@ function endpointMinRole(url) {
 }
 
 // ── Audit log (append-only governance trace) ───────────────────────────────
+// Throttle low-value auto-refresh audits (e.g. ops.check every 60s) so the
+// governance trace stays readable instead of flooding with noise.
+let lastOpsAuditAt = 0;
 async function audit(action, actor = "operator", detail = "") {
   const line = `${new Date().toISOString()} | ${action} | ${actor} | ${String(detail).slice(0, 200)}`;
   try { await appendFile(AUDIT_FILE, line + "\n"); } catch {}
@@ -327,7 +330,10 @@ const server = createServer(async (req, res) => {
     const a = authorized(req, minRole);
     if (!a.ok) { json(res, a.code, { ok: false, error: a.code === 403 ? "forbidden" : "unauthorized" }); return; }
     // CSRF required for cookie-authenticated writes (API-key auth skips).
-    if (req.method === "POST" && !apiKeyRole(req)) {
+    // Only enforced when auth is enabled — with DASHBOARD_AUTH=false (single-
+    // operator local testing) there is no session cookie to protect, so POSTs
+    // must not be blocked by a missing CSRF token.
+    if (AUTH_ENABLED && req.method === "POST" && !apiKeyRole(req)) {
       const tok = parseCookies(req).kudbee_session;
       if (!tok || !checkCsrf(req, tok)) { json(res, 403, { ok: false, error: "csrf token required" }); return; }
     }
@@ -394,7 +400,9 @@ const server = createServer(async (req, res) => {
   if (url === "/api/ops") {
     try {
       const out = execFileSync("node", [path.join(root, "kudbee-status.mjs")], { encoding: "utf8", timeout: 90000, cwd: WORKSPACE });
-      await audit("ops.check", "operator");
+      // Throttle the auto-refresh audit to once per 5 min (metrics still record every check).
+      const now = Date.now();
+      if (now - lastOpsAuditAt > 5 * 60 * 1000) { lastOpsAuditAt = now; await audit("ops.check", "operator"); }
       // Record a lightweight metric snapshot (cost + key health flags).
       const cost = (out.match(/month-to-date \$([\d.]+)/) || [])[1] || null;
       await recordMetric({

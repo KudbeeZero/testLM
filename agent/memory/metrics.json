@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "metrics": [
+    {
+      "ts": "2026-08-16T11:45:42.712Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T11:46:42.659Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T11:47:43.568Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    }
+  ]
+}

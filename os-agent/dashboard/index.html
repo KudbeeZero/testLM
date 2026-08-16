@@ -56,6 +56,24 @@
     .audit-row .a-action{font-weight:700}
     .audit-row .a-actor{color:var(--accent)}
     .audit-row .a-detail{color:#4a5a52}
+    /* Responsive: collapse the two-column grid on small screens */
+    @media (max-width:760px){ .grid{grid-template-columns:1fr} .shell{padding:16px 12px 32px} }
+    /* Card hover elevation */
+    .card{transition:box-shadow .2s,transform .2s}
+    .card:hover{box-shadow:0 10px 30px rgba(40,60,50,.12);transform:translateY(-1px)}
+    /* Scrollbars */
+    ::-webkit-scrollbar{width:10px;height:10px}
+    ::-webkit-scrollbar-thumb{background:#cfc7b4;border-radius:6px}
+    ::-webkit-scrollbar-track{background:transparent}
+    /* Notification / activity queue */
+    .notif-item{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:10px;margin-bottom:6px;background:#faf7ef;border:1px solid var(--line)}
+    .notif-item .n-badge{flex:0 0 auto;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:700;color:#fff;letter-spacing:.3px}
+    .n-badge.info{background:var(--accent)}
+    .n-badge.warn{background:var(--warn)}
+    .n-badge.err{background:var(--danger)}
+    .notif-item .n-body{font-size:12.5px;line-height:1.35;flex:1}
+    .notif-item .n-time{color:var(--muted);font-size:11px;white-space:nowrap}
+    .notif-item .n-msg{color:#3f4f47}
   </style>
 </head>
 <body>
@@ -73,6 +91,22 @@
     </header>
 
     <div id="alerts" style="margin-top:12px"></div>
+
+    <section style="margin-top:14px">
+      <div class="card">
+        <h3>Notifications <small style="color:#4e6b5d">bounded activity queue — alerts + recent events</small></h3>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <span style="font-size:12px;color:#5f726a">Show</span>
+          <select id="notifLimit" style="padding:5px 8px;border:1px solid #e6e0d2;border-radius:8px">
+            <option value="10" selected>10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+          </select>
+          <button id="clearNotifBtn" style="margin-left:auto">Clear</button>
+        </div>
+        <div id="notifications" style="max-height:360px;overflow:auto">Loading…</div>
+      </div>
+    </section>
 
     <section class="grid" style="margin-top:14px">
       <div class="card status-card">
@@ -368,6 +402,29 @@
       }catch(e){ $('#costRefreshMsg').textContent = 'failed: '+e.message; }
     };
 
+    // Notifications — bounded activity queue (alerts + recent audit events).
+    async function loadNotifications(){
+      try{
+        const [state, audit] = await Promise.all([api('/api/state'), api('/api/audit')]);
+        const limit = Number(($('#notifLimit')||{}).value || 10);
+        const items = [];
+        (state.alerts||[]).forEach(a=>{
+          items.push({ level: a.level==='error' ? 'err' : 'warn', time: '', msg: a.msg });
+        });
+        const entries = (audit && audit.entries) || [];
+        for (const e of entries.slice(0, limit)) {
+          const p = String(e).split(' | ');
+          const detail = p[3] ? ' · '+p[3] : '';
+          items.push({ level: 'info', time: p[0]||'', msg: (p[1]||'')+' · '+(p[2]||'')+detail });
+        }
+        const label = {err:'ALERT', warn:'WARN', info:'INFO'};
+        $('#notifications').innerHTML = items.slice(0,limit).map(n=>
+          `<div class="notif-item"><span class="n-badge ${n.level}">${label[n.level]}</span><div class="n-body">${n.time?`<span class="n-time">${n.time}</span> `:'<span class="n-time">now</span> '}<span class="n-msg">${n.msg}</span></div></div>`
+        ).join('') || '<div style="color:#888">No notifications.</div>';
+      }catch(e){ $('#notifications').textContent = 'unavailable: ' + e.message; }
+    }
+    $('#notifLimit').onchange = loadNotifications;
+    $('#clearNotifBtn').onclick = ()=>{ $('#notifications').innerHTML='<div style="color:#888">Cleared.</div>'; };
     // Cost History queue controls: show-limit and clear.
     $('#metricsLimit').onchange = loadMetrics;
     $('#clearMetricsBtn').onclick = async () => {
@@ -566,7 +623,7 @@
     $('#run').onclick = ()=>{ const cmd = $('#command').value.trim(); if(!cmd) return; $('#terminal').textContent += `\n> ${cmd}\n`; $('#command').value=''; const s = ensureWs(); if(s.readyState === WebSocket.OPEN) s.send(JSON.stringify({cmd})); else s.addEventListener('open',()=>s.send(JSON.stringify({cmd})),{once:true}); };
 
     refresh(); setInterval(refresh,5000);
-    loadAudit(); loadMetrics(); loadGithub(); loadStatus(); loadSecurity(); loadCapability(); loadCost();
+    loadAudit(); loadMetrics(); loadGithub(); loadStatus(); loadSecurity(); loadCapability(); loadCost(); loadNotifications();
     setInterval(loadStatus, 30000); // status panels refresh every 30s
     setInterval(loadSecurity, 30000);
     setInterval(loadCapability, 30000);
