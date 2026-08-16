@@ -8,6 +8,12 @@ export const WORKSPACE = path.resolve(ROOT, "..");          // testLM/ (workspac
 export const AGENT_DIR = path.join(WORKSPACE, "agent");    // testLM/agent/
 export const MEMORY_FILE = path.join(AGENT_DIR, "memory", "learnings.json");
 
+// Runtime memory store directory. Overridable via KUDBEE_MEMORY_DIR so the
+// test suite (which project.test runs) never mutates the real overnight stores.
+export const MEMORY_DIR = process.env.KUDBEE_MEMORY_DIR
+  ? path.resolve(process.env.KUDBEE_MEMORY_DIR)
+  : path.join(AGENT_DIR, "memory");
+
 // Load the workspace-root .env (where API keys live), then the os-agent .env.
 config({ path: path.join(WORKSPACE, ".env") });
 config({ path: path.join(ROOT, ".env") });

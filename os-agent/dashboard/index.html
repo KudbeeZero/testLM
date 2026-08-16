@@ -130,9 +130,26 @@
 
     <section style="margin-top:14px">
       <div class="card">
-        <h3>Morning Report <small style="color:#4e6b5d">latest overnight session + learning</small></h3>
+        <h3>Morning Report <small style="color:#4e6b5d">latest overnight session + learning + activity timeline</small></h3>
         <div style="margin-bottom:8px"><button id="morningRefreshBtn">Refresh report</button> <span id="morningStatus" style="color:#888;font-size:12px"></span></div>
         <div id="morningReport" style="font-size:12.5px;line-height:1.5">Loading…</div>
+      </div>
+    </section>
+
+    <section class="grid" style="margin-top:14px">
+      <div class="card">
+        <h3>Local Routing Intelligence <small style="color:#4e6b5d">observation layer — evidence, not authority</small></h3>
+        <div style="margin-bottom:8px"><button id="routingRefreshBtn">Refresh</button> <span id="routingStatus" style="color:#888;font-size:12px"></span></div>
+        <div id="routing" style="font-size:12.5px;line-height:1.5">Loading…</div>
+      </div>
+      <div class="card">
+        <h3>Model Benchmark <small style="color:#4e6b5d">Phi-4 vs Gemini — identical tasks, same MESH</small></h3>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+          <button id="benchPhiBtn">Run Phi-4</button>
+          <button id="benchBothBtn">Run Phi-4 + Gemini</button>
+          <span id="benchStatus" style="color:#888;font-size:12px"></span>
+        </div>
+        <div id="benchmark" style="font-size:12.5px;line-height:1.5">Loading…</div>
       </div>
     </section>
 
@@ -481,7 +498,7 @@
     $('#agentAddTaskBtn').onclick = async ()=>{ const d=$('#agentTaskInput').value.trim(); if(!d) return; try{ await api('/api/local-agent/tasks',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({description:d})}); $('#agentTaskInput').value=''; loadAgentStatus(); }catch(e){ $('#agentMsg').textContent='failed: '+e.message; } };
     $('#agentTaskInput').addEventListener('keydown',e=>{ if(e.key==='Enter') $('#agentAddTaskBtn').click(); });
 
-    // Morning Report — latest session + learning (read-only, no secrets).
+    // Morning Report — latest session + learning + activity timeline (read-only, no secrets).
     async function loadMorningReport(){
       $('#morningStatus').textContent = 'loading…';
       try{
@@ -499,11 +516,72 @@
           html.push('<div style="margin-top:8px"><b>Recent learning:</b></div>');
           recent.forEach(l=>html.push('<div style="margin-left:8px">• '+l.observation+' <small>['+l.id+']</small></div>'));
         }
+        const tl = (s.timeline||[]);
+        if(tl.length){
+          html.push('<div style="margin-top:8px"><b>Activity timeline ('+tl.length+'):</b></div>');
+          tl.forEach(e=>{
+            const t = e.ts ? new Date(e.ts).toLocaleTimeString() : '';
+            const ev = e.event||'';
+            const detail = e.tool ? (' '+e.tool) : (e.reason ? (' '+e.reason) : '');
+            const color = (ev==='tool.denied'||ev==='task.failed'||ev==='session.error') ? 'var(--danger)' : ((ev==='tool.completed'||ev==='task.completed') ? 'var(--accent)' : '');
+            html.push('<div style="margin-left:8px"><span style="color:#5f726a">'+t+'</span> <span style="color:'+color+'">'+ev+'</span>'+detail+'</div>');
+          });
+        }
         $('#morningReport').innerHTML = html.join('');
         $('#morningStatus').textContent = 'updated ' + new Date().toLocaleTimeString();
       }catch(e){ $('#morningReport').textContent='unavailable: '+e.message; $('#morningStatus').textContent=''; }
     }
     $('#morningRefreshBtn').onclick = loadMorningReport;
+
+    // Local Routing Intelligence — observation layer (read-only).
+    async function loadRouting(){
+      $('#routingStatus').textContent = 'loading…';
+      try{
+        const r = await api('/api/local-agent/routing');
+        const ri = r.routing||{};
+        if(ri.collecting){ $('#routing').innerHTML='<div style="color:#888">Collecting evidence — no evaluations yet.</div>'; $('#routingStatus').textContent=''; return; }
+        const html = [];
+        html.push('<div><b>Tasks observed:</b> '+ri.observed+'</div>');
+        html.push('<div><b>Phi-4 success rate:</b> '+((ri.successRate!=null)?(ri.successRate*100).toFixed(0)+'%':'—')+' · <b>Planner retry rate:</b> '+((ri.plannerRetryRate!=null)?(ri.plannerRetryRate*100).toFixed(0)+'%':'—')+' · <b>MESH denial rate:</b> '+((ri.meshDenialRate!=null)?(ri.meshDenialRate*100).toFixed(0)+'%':'—')+'</div>');
+        html.push('<div><b>Verification rate:</b> '+((ri.verificationRate!=null)?(ri.verificationRate*100).toFixed(0)+'%':'—')+' · <b>Avg duration:</b> '+(ri.avgDurationMs!=null?ri.avgDurationMs+'ms':'—')+' · <b>Avg confidence:</b> '+(ri.avgConfidence!=null?ri.avgConfidence:'—')+'</div>');
+        if((ri.topTools||[]).length) html.push('<div><b>Top tools:</b> '+ri.topTools.map(x=>x[0]+' ('+x[1]+')').join(', ')+'</div>');
+        if((ri.topFailures||[]).length) html.push('<div><b>Top failure classes:</b> '+ri.topFailures.map(x=>x[0]+' ('+x[1]+')').join(', ')+'</div>');
+        if((ri.topRecoveries||[]).length) html.push('<div><b>Top recovery classes:</b> '+ri.topRecoveries.map(x=>x[0]+' ('+x[1]+')').join(', ')+'</div>');
+        $('#routing').innerHTML = html.join('');
+        $('#routingStatus').textContent = 'updated ' + new Date().toLocaleTimeString();
+      }catch(e){ $('#routing').textContent='unavailable: '+e.message; $('#routingStatus').textContent=''; }
+    }
+    $('#routingRefreshBtn').onclick = loadRouting;
+
+    // Model Benchmark — identical tasks through the same MESH loop.
+    async function loadBenchmark(){
+      try{
+        const r = await api('/api/local-agent/benchmark');
+        const b = r.benchmark;
+        if(!b || !(b.comparison||{}).rows){ $('#benchmark').innerHTML='<div style="color:#888">No benchmark run yet.</div>'; return; }
+        const agg = b.comparison.aggregate||{};
+        const rows = (b.comparison.rows||[]).map(row=>{
+          const p = row.phi4, g = row.gemini;
+          const cell = m => m ? (m.outcome+' · score '+m.score+' · '+(m.latencyMs!=null?m.latencyMs+'ms':'—')+' · '+(m.costUsd!=null?('$'+m.costUsd):'cost?')+' · '+(m.usage?('tok '+m.usage.prompt_tokens+'/'+m.usage.completion_tokens):'usage?')) : '—';
+          return '<div style="padding:4px 0;border-bottom:1px solid #f2ecdf"><b>'+row.taskId+'</b> ('+row.skill+')
+'+
+            '<div style="margin-left:8px">Phi-4: '+cell(p)+'</div>'+
+            '<div style="margin-left:8px">Gemini: '+cell(g)+'</div>'+
+            '<div style="margin-left:8px">Winner: <b>'+row.winner+'</b> — '+row.reason+'</div></div>';
+        }).join('');
+        $('#benchmark').innerHTML = '<div><b>Aggregate:</b> Phi-4 wins '+agg.phi4Wins+' · Gemini wins '+agg.geminiWins+' · ties '+agg.ties+'</div><div style="margin-top:6px">'+rows+'</div>';
+      }catch(e){ $('#benchmark').textContent='unavailable: '+e.message; }
+    }
+    async function runBenchmark(models){
+      $('#benchStatus').textContent = 'running ('+models.join('+')+')… this can take a while';
+      try{
+        await api('/api/local-agent/benchmark/run',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({models,maxTasks:2})});
+        $('#benchStatus').textContent = 'done ' + new Date().toLocaleTimeString();
+        loadBenchmark();
+      }catch(e){ $('#benchStatus').textContent = 'failed: '+e.message; }
+    }
+    $('#benchPhiBtn').onclick = ()=>runBenchmark(['phi4']);
+    $('#benchBothBtn').onclick = ()=>runBenchmark(['phi4','gemini']);
 
     // Cost History queue controls: show-limit and clear.
     $('#metricsLimit').onchange = loadMetrics;
@@ -703,7 +781,7 @@
     $('#run').onclick = ()=>{ const cmd = $('#command').value.trim(); if(!cmd) return; $('#terminal').textContent += `\n> ${cmd}\n`; $('#command').value=''; const s = ensureWs(); if(s.readyState === WebSocket.OPEN) s.send(JSON.stringify({cmd})); else s.addEventListener('open',()=>s.send(JSON.stringify({cmd})),{once:true}); };
 
     refresh(); setInterval(refresh,5000);
-    loadAudit(); loadMetrics(); loadGithub(); loadStatus(); loadSecurity(); loadCapability(); loadCost(); loadNotifications(); loadAgentStatus(); loadMorningReport();
+    loadAudit(); loadMetrics(); loadGithub(); loadStatus(); loadSecurity(); loadCapability(); loadCost(); loadNotifications(); loadAgentStatus(); loadMorningReport(); loadRouting(); loadBenchmark();
     setInterval(loadStatus, 30000); // status panels refresh every 30s
     setInterval(loadSecurity, 30000);
     setInterval(loadCapability, 30000);

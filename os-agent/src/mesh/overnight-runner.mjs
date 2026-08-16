@@ -13,12 +13,12 @@
 import { execFileSync } from "node:child_process";
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { WORKSPACE, AGENT_DIR } from "../config.js";
+import { WORKSPACE, MEMORY_DIR } from "../config.js";
 import { runLocalTask } from "./local-runner.mjs";
 import { getState, setState, setOvernightMode } from "./agent-state.mjs";
 import { nextQueued, updateTask } from "./task-queue.mjs";
 
-const SESSION_FILE = path.join(AGENT_DIR, "memory", "local-session.json");
+const SESSION_FILE = path.join(MEMORY_DIR, "local-session.json");
 
 async function persistSession(session) {
   try {
@@ -113,8 +113,13 @@ export async function runOvernightSession({ maxTasks = LIMITS.MAX_TASKS_PER_RUN,
     learnings: [],
     stopReason: null,
     workspaceChanged: false,
+    timeline: [],
   };
   const startMs = Date.now();
+  const pushTimeline = (event) => {
+    session.timeline.push({ ts: new Date().toISOString(), ...event });
+  };
+  pushTimeline({ event: "session.started", state: "planning" });
 
   try {
     for (let t = 0; t < maxTasks; t++) {
@@ -129,9 +134,10 @@ export async function runOvernightSession({ maxTasks = LIMITS.MAX_TASKS_PER_RUN,
       }
       session.tasksAttempted++;
       await setState({ currentTaskId: task.id, currentTask: task.description, state: "planning" });
+      pushTimeline({ event: "task.started", task: task.id, goal: task.description, state: "planning" });
 
       const out = await taskRunner(
-        { id: task.id, goal: task.description },
+        { id: task.id, goal: task.description, sessionId: session.id, skill: task.skill || null },
         { maxIterations: task.maxIterations || LIMITS.MAX_ITERATIONS_PER_TASK }
       );
       await updateTask(task.id, { status: out.status === "complete" ? "complete" : "failed", result: out.status });
@@ -144,7 +150,21 @@ export async function runOvernightSession({ maxTasks = LIMITS.MAX_TASKS_PER_RUN,
         if (e.tool && !session.toolsUsed.includes(e.tool)) session.toolsUsed.push(e.tool);
         if (e.decision === "deny") session.denials++;
         if (e.verification === "failed") session.modelFailures++;
+        if (e.kind === "tool") {
+          pushTimeline({
+            event: e.decision === "allow" ? "tool.completed" : "tool.denied",
+            task: task.id, tool: e.tool, decision: e.decision,
+            success: e.success, verification: e.verification,
+            confidence: e.confidence ?? null,
+          });
+        } else if (e.kind === "planner_validation" && !e.valid) {
+          pushTimeline({ event: "planner.invalid", task: task.id, reason: e.reason, state: "planning" });
+        }
       }
+      pushTimeline({
+        event: out.status === "complete" ? "task.completed" : "task.failed",
+        task: task.id, status: out.status, state: out.status === "complete" ? "complete" : "failed",
+      });
       await setState({ state: "idle", currentTaskId: null, currentTask: null, iteration: 0 });
     }
 
@@ -152,9 +172,11 @@ export async function runOvernightSession({ maxTasks = LIMITS.MAX_TASKS_PER_RUN,
     session.workspaceChanged = after !== before;
     if (session.workspaceChanged) session.stopReason = "unexpected_workspace_change";
     else if (!session.stopReason) session.stopReason = "session_complete";
+    pushTimeline({ event: "session.complete", stopReason: session.stopReason, state: "complete" });
   } catch (e) {
     session.stopReason = "runner_error";
     session.error = String((e && e.message) || e);
+    pushTimeline({ event: "session.error", error: session.error, state: "failed" });
   } finally {
     session.end = new Date().toISOString();
     session.durationMs = Date.now() - startMs;

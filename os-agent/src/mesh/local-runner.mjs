@@ -14,6 +14,7 @@
 import { meshGate } from "./index.mjs";
 import { localWorker, parseModelJson } from "./local-worker.mjs";
 import { recordLearning } from "./learning.mjs";
+import { buildEvaluation, recordEvaluation } from "./evaluation.mjs";
 import { toolSchemaText, validateProposal, TOOL_CONTRACTS } from "./tool-contracts.mjs";
 
 export const MAX_ITERATIONS = 3;
@@ -48,8 +49,10 @@ Return ONLY JSON: {"done":true|false,"confidence":0.0,"note":"..."}`;
  */
 export async function runLocalTask(task, opts = {}) {
   const model = opts.model || localWorker;
+  const modelLabel = opts.modelLabel || task.model || "phi4-mini";
   const maxIterations = opts.maxIterations || MAX_ITERATIONS;
   const taskId = task.id || `task-${Date.now()}`;
+  const startMs = Date.now();
 
   const outcome = {
     taskId,
@@ -62,6 +65,17 @@ export async function runLocalTask(task, opts = {}) {
     learning: null,
     finalResult: null,
     error: null,
+    usage: null,
+  };
+
+  // Accumulate real provider usage across model calls (null when unavailable).
+  const accumulateUsage = (u) => {
+    if (!u) return;
+    const base = outcome.usage || { prompt_tokens: 0, completion_tokens: 0, calls: 0 };
+    base.prompt_tokens += u.prompt_tokens ?? u.input_tokens ?? 0;
+    base.completion_tokens += u.completion_tokens ?? u.output_tokens ?? 0;
+    base.calls += 1;
+    outcome.usage = base;
   };
 
   for (let iter = 1; iter <= maxIterations; iter++) {
@@ -71,6 +85,7 @@ export async function runLocalTask(task, opts = {}) {
     for (let attempt = 1; attempt <= MAX_PLAN_ATTEMPTS; attempt++) {
       // PLAN — model proposes a structured tool.
       const plan = await model(planPrompt(task, outcome.evidence, feedback));
+      accumulateUsage(plan.usage);
       if (!plan.ok) {
         outcome.status = "plan_failed";
         outcome.error = plan.error || "model unavailable";
@@ -137,6 +152,7 @@ export async function runLocalTask(task, opts = {}) {
 
       // EVALUATE — model decides done / confidence.
       const evalRes = await model(evalPrompt(task, rec));
+      accumulateUsage(evalRes.usage);
       if (evalRes.ok) {
         const parsed = parseModelJson(evalRes.content);
         if (parsed) {
@@ -169,6 +185,14 @@ export async function runLocalTask(task, opts = {}) {
       meshDenials: outcome.meshDenials,
     });
     outcome.learning = lr.ok ? lr.id : null;
+  }
+
+  outcome.durationMs = Date.now() - startMs;
+  // RDTHINK evaluation record (feeds routing intelligence + benchmark).
+  try {
+    await recordEvaluation(buildEvaluation({ ...task, model: modelLabel }, outcome));
+  } catch {
+    // non-fatal: evaluation store must never break the task loop
   }
 
   return outcome;

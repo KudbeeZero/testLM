@@ -8,9 +8,9 @@
  */
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { AGENT_DIR } from "../config.js";
+import { MEMORY_DIR } from "../config.js";
 
-const FILE = path.join(AGENT_DIR, "memory", "local-task-queue.json");
+const FILE = path.join(MEMORY_DIR, "local-task-queue.json");
 
 async function load() {
   try {

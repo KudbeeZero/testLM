@@ -103,3 +103,41 @@ test("runner survives a failed task (session continues)", async () => {
   expect(r.session.tasksFailed).toBe(1);
   expect(r.session.denials).toBe(1);
 });
+
+test("runner records a bounded activity timeline", async () => {
+  await setOvernightMode("ARMED");
+  await enqueue({ description: "check git status", maxIterations: 2 });
+  const stub = async (task) => ({
+    status: "complete",
+    evidence: [
+      { kind: "tool", tool: "git.status", decision: "allow", success: true, verification: "ok", confidence: 0.9 },
+    ],
+    learning: null,
+  });
+  const r = await runOvernightSession({ maxTasks: 1, taskRunner: stub });
+  expect(r.ok).toBe(true);
+  const events = (r.session.timeline || []).map((e) => e.event);
+  expect(events).toContain("session.started");
+  expect(events).toContain("task.started");
+  expect(events).toContain("tool.completed");
+  expect(events).toContain("task.completed");
+  expect(events).toContain("session.complete");
+});
+
+test("runner completes a 3-task session with failure isolation", async () => {
+  await setOvernightMode("ARMED");
+  await enqueue({ description: "a", maxIterations: 2 });
+  await enqueue({ description: "b", maxIterations: 2 });
+  await enqueue({ description: "c", maxIterations: 2 });
+  const stub = async (task) => {
+    if (task.goal === "b") return { status: "denied", evidence: [{ decision: "deny" }], learning: null };
+    return { status: "complete", evidence: [{ tool: "git.status", decision: "allow", verification: "ok" }], learning: "learn-x" };
+  };
+  const r = await runOvernightSession({ maxTasks: 3, taskRunner: stub });
+  expect(r.ok).toBe(true);
+  expect(r.session.tasksAttempted).toBe(3);
+  expect(r.session.tasksCompleted).toBe(2);
+  expect(r.session.tasksFailed).toBe(1);
+  expect(r.session.stopReason).toBe("session_complete");
+  expect(r.session.workspaceChanged).toBe(false);
+});

@@ -11,6 +11,9 @@ import { getState as getAgentState, setOvernightMode, transition } from "./src/m
 import { listTasks, enqueue } from "./src/mesh/task-queue.mjs";
 import { runOvernightSession, getLatestSession } from "./src/mesh/overnight-runner.mjs";
 import { listLearnings } from "./src/mesh/learning.mjs";
+import { listEvaluations } from "./src/mesh/evaluation.mjs";
+import { routingIntelligence, suggestModel } from "./src/mesh/routing.mjs";
+import { getLatestBenchmark, runBenchmark } from "./src/mesh/benchmark.mjs";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const port = Number(process.env.DASHBOARD_PORT || 4173);
@@ -109,7 +112,8 @@ const ENDPOINT_ROLE = {
   "/api/phi4": "operator", "/api/metrics/clear": "operator",
   "/api/cost": "viewer", "/api/cost/refresh": "operator",
   "/api/local-agent/status": "viewer", "/api/local-agent/tasks": "viewer", "/api/local-agent/session": "viewer", "/api/local-agent/learning": "viewer",
-  "/api/local-agent/arm": "operator", "/api/local-agent/stop": "operator", "/api/local-agent/run": "operator",
+  "/api/local-agent/routing": "viewer", "/api/local-agent/evaluations": "viewer", "/api/local-agent/benchmark": "viewer",
+  "/api/local-agent/arm": "operator", "/api/local-agent/stop": "operator", "/api/local-agent/run": "operator", "/api/local-agent/benchmark/run": "operator",
 };
 function endpointMinRole(url) {
   if (url.startsWith("/api/export/")) return "viewer";
@@ -428,6 +432,34 @@ const server = createServer(async (req, res) => {
   }
   if (url === "/api/local-agent/learning") {
     json(res, 200, { ok: true, learnings: await listLearnings() });
+    return;
+  }
+  // Routing intelligence + evaluation dataset (read-only, observation layer).
+  if (url === "/api/local-agent/routing") {
+    json(res, 200, { ok: true, routing: await routingIntelligence() });
+    return;
+  }
+  if (url === "/api/local-agent/evaluations") {
+    json(res, 200, { ok: true, evaluations: await listEvaluations() });
+    return;
+  }
+  if (url === "/api/local-agent/benchmark") {
+    json(res, 200, { ok: true, benchmark: await getLatestBenchmark() });
+    return;
+  }
+  // Run a bounded benchmark (operator). Gemini is opt-in and bounded; the
+  // default runs Phi-4 only so a stray click never spends cloud budget.
+  if (req.method === "POST" && url === "/api/local-agent/benchmark/run") {
+    const body = await jsonBody(req);
+    const models = Array.isArray(body.models) ? body.models.filter((m) => m === "phi4" || m === "gemini") : ["phi4"];
+    const maxTasks = Math.min(Number(body.maxTasks) || 2, 5);
+    if (models.includes("gemini") && !process.env.GEMINI_API_KEY) {
+      json(res, 400, { ok: false, error: "gemini not configured" });
+      return;
+    }
+    await audit("local-agent.benchmark", req.role || "operator", `models=${models.join("+")} tasks=${maxTasks}`);
+    const r = await runBenchmark({ models, maxTasks });
+    json(res, 200, { ok: true, ...r });
     return;
   }
   // Arm / stop / run (operator, CSRF-protected).

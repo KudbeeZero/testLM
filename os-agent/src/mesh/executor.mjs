@@ -8,17 +8,19 @@
  * executes it; the result is returned as structured evidence for RDTHINK.
  */
 import { execFile } from "node:child_process";
-import { readFile, readdir } from "node:fs/promises";
+import { mkdtemp, readFile, readdir, rm } from "node:fs/promises";
+import os from "node:os";
 import path from "node:path";
 import { resolveWorkspacePath, workspaceRoot } from "./workspace.mjs";
 
-function run(exe, args, { cwd, timeoutMs } = {}) {
+function run(exe, args, { cwd, timeoutMs, env } = {}) {
   return new Promise((resolve) => {
     execFile(exe, args, {
       cwd,
       timeout: timeoutMs || 30000,
       maxBuffer: 16 * 1024 * 1024,
       windowsHide: true,
+      env: env ? { ...process.env, ...env } : process.env,
     }, (err, stdout, stderr) => {
       resolve({
         exitCode: err ? (typeof err.code === "number" ? err.code : 1) : 0,
@@ -87,8 +89,16 @@ const handlers = {
     };
     if (!allowed[suite]) throw new Error("test suite not allowed: " + suite);
     const [exe, ...rest] = allowed[suite];
-    const r = await run(exe, rest, { cwd, timeoutMs: args.timeoutMs || 60000 });
-    return { evidence: { suite, cwd }, output: r.stdout, exitCode: r.exitCode, stderr: r.stderr };
+    // Run the suite with an ISOLATED memory dir so the tests never mutate the
+    // real overnight stores (queue/evaluations/learning/session). The temp dir
+    // is removed after the run.
+    const memDir = await mkdtemp(path.join(os.tmpdir(), "kudbee-test-mem-"));
+    try {
+      const r = await run(exe, rest, { cwd, timeoutMs: args.timeoutMs || 60000, env: { KUDBEE_MEMORY_DIR: memDir } });
+      return { evidence: { suite, cwd, isolated: true }, output: r.stdout, exitCode: r.exitCode, stderr: r.stderr };
+    } finally {
+      await rm(memDir, { recursive: true, force: true }).catch(() => {});
+    }
   },
 };
 
