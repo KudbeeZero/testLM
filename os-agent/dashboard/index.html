@@ -166,6 +166,19 @@
       </div>
     </section>
 
+    <section style="margin-top:14px">
+      <div class="card">
+        <h3>HERMES Execution <small style="color:#4e6b5d">structured tool seam — MESH remains final authority</small></h3>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+          <input id="hermesTool" type="text" placeholder="tool (e.g. git.status)" style="flex:1" />
+          <button id="hermesExecBtn">Execute</button>
+          <button id="hermesRefreshBtn">Refresh</button>
+          <span id="hermesStatus" style="color:#888;font-size:12px"></span>
+        </div>
+        <div id="hermes" style="font-size:12.5px;line-height:1.5">Loading…</div>
+      </div>
+    </section>
+
     <section class="grid" style="margin-top:14px">
       <div class="card status-card">
         <h3>Server Status</h3>
@@ -648,6 +661,41 @@
     $('#adaptiveRefreshBtn').onclick = loadAdaptive;
     $('#adaptiveTaskType').addEventListener('keydown',e=>{ if(e.key==='Enter') decideAdaptive(); });
 
+    // HERMES Execution — structured tool seam (MESH final authority).
+    async function loadHermes(){
+      $('#hermesStatus').textContent = 'loading…';
+      try{
+        const r = await api('/api/hermes/status');
+        const st = r.stats||{};
+        const html = [];
+        if(st.collecting){ html.push('<div style="color:#888">No HERMES executions yet.</div>'); }
+        else {
+          html.push('<div><b>Executions:</b> '+st.observed+' · <b>Allowed:</b> '+st.allowed+' · <b>Denied:</b> '+st.denied+' · <b>Failed:</b> '+st.failed+' · <b>Success rate:</b> '+((st.successRate!=null)?(st.successRate*100).toFixed(0)+'%':'—')+'</div>');
+          if((st.topTools||[]).length) html.push('<div><b>Top tools:</b> '+st.topTools.map(x=>x[0]+' ('+x[1]+')').join(', ')+'</div>');
+        }
+        const rec = (r.recent||[]);
+        if(rec.length){
+          html.push('<div style="margin-top:6px"><b>Recent:</b></div>');
+          rec.forEach(e=>html.push('<div style="margin-left:8px">'+e.decision+' · '+e.tool+' · '+(e.success?'ok':'failed')+' · verify '+e.verification+(e.reason?' · '+e.reason:'')+' <small>'+new Date(e.ts).toLocaleTimeString()+'</small></div>'));
+        }
+        $('#hermes').innerHTML = html.join('');
+        $('#hermesStatus').textContent = 'updated ' + new Date().toLocaleTimeString();
+      }catch(e){ $('#hermes').textContent='unavailable: '+e.message; $('#hermesStatus').textContent=''; }
+    }
+    async function runHermesExec(){
+      const tool = $('#hermesTool').value.trim();
+      if(!tool){ $('#hermesStatus').textContent='enter a tool'; return; }
+      $('#hermesStatus').textContent = 'executing '+tool+'…';
+      try{
+        const r = await api('/api/hermes/execute',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({tool})});
+        $('#hermesStatus').textContent = tool+' -> '+r.decision+' ('+(r.success?'ok':'failed')+')'+(r.reason?': '+r.reason:'');
+        loadHermes();
+      }catch(e){ $('#hermesStatus').textContent = 'failed: '+e.message; }
+    }
+    $('#hermesExecBtn').onclick = runHermesExec;
+    $('#hermesRefreshBtn').onclick = loadHermes;
+    $('#hermesTool').addEventListener('keydown',e=>{ if(e.key==='Enter') runHermesExec(); });
+
     // Cost History queue controls: show-limit and clear.
     $('#metricsLimit').onchange = loadMetrics;
     $('#clearMetricsBtn').onclick = async () => {
@@ -846,7 +894,7 @@
     $('#run').onclick = ()=>{ const cmd = $('#command').value.trim(); if(!cmd) return; $('#terminal').textContent += `\n> ${cmd}\n`; $('#command').value=''; const s = ensureWs(); if(s.readyState === WebSocket.OPEN) s.send(JSON.stringify({cmd})); else s.addEventListener('open',()=>s.send(JSON.stringify({cmd})),{once:true}); };
 
     refresh(); setInterval(refresh,5000);
-    loadAudit(); loadMetrics(); loadGithub(); loadStatus(); loadSecurity(); loadCapability(); loadCost(); loadNotifications(); loadAgentStatus(); loadMorningReport(); loadRouting(); loadBenchmark(); loadAdaptive();
+    loadAudit(); loadMetrics(); loadGithub(); loadStatus(); loadSecurity(); loadCapability(); loadCost(); loadNotifications(); loadAgentStatus(); loadMorningReport(); loadRouting(); loadBenchmark(); loadAdaptive(); loadHermes();
     setInterval(loadStatus, 30000); // status panels refresh every 30s
     setInterval(loadSecurity, 30000);
     setInterval(loadCapability, 30000);

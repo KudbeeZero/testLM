@@ -12,6 +12,7 @@ agent/memory/local-benchmark.json
 agent/memory/provider-telemetry.json
 agent/memory/local-routing-decisions.json
 agent/memory/local-escalations.json
+agent/memory/local-hermes-executions.json
 os-agent/dashboard/cost-cache.json
 
 # Secrets / local config (never commit API keys)

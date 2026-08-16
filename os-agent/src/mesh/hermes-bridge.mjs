@@ -11,6 +11,26 @@
  * the actual allowed executable.
  */
 import { meshGate } from "./index.mjs";
+import { recordLearning } from "./learning.mjs";
+import { recordHermesExecution } from "./hermes-execution.mjs";
+
+/**
+ * Validate a HERMES structured tool task contract BEFORE MESH.
+ * Rejects raw command / shell / exec / script / process / env fields.
+ * @returns {{ok:boolean, tool?:string, error?:string}}
+ */
+export function validateHermesTask(task) {
+  if (!task || typeof task !== "object") return { ok: false, error: "task required" };
+  const tool = task.tool;
+  if (!tool || typeof tool !== "string") return { ok: false, error: "tool required" };
+  const args = task.arguments || {};
+  if (typeof args !== "object" || Array.isArray(args)) return { ok: false, error: "arguments must be an object" };
+  // Reject any raw-command / executable field anywhere in the request.
+  for (const bad of ["command", "shell", "exec", "script", "process", "cmd", "environment"]) {
+    if (bad in task || bad in args) return { ok: false, error: "raw command field present: " + bad };
+  }
+  return { ok: true, tool };
+}
 
 /**
  * Run a HERMES-style structured tool task through MESH.
@@ -43,4 +63,55 @@ export async function runHermesToolTask(task) {
   };
 
   return { ...result, evidence };
+}
+
+/**
+ * Full HERMES execution lifecycle: validate contract → MESH → evidence →
+ * learning. This is the seam a production HERMES worker calls for a
+ * structured tool task. Malicious/malformed requests are denied before MESH
+ * and never crash the caller. Learning is evidence-backed only.
+ *
+ * @param {object} task  { taskId, tool, arguments, ... }
+ * @returns {Promise<object>} { ok, decision, success, evidence, ... }
+ */
+export async function runHermesTask(task) {
+  const v = validateHermesTask(task);
+  if (!v.ok) {
+    const evidence = {
+      task: task?.taskId || null,
+      tool: task?.tool || null,
+      decision: "deny",
+      success: false,
+      verification: "failed",
+      reason: v.error,
+      ts: new Date().toISOString(),
+    };
+    await recordHermesExecution({
+      taskId: task?.taskId || null, tool: task?.tool || null, decision: "deny",
+      success: false, verification: "failed", reason: v.error,
+    });
+    return { ok: false, decision: "deny", success: false, reason: v.error, evidence };
+  }
+
+  const result = await runHermesToolTask(task);
+  await recordHermesExecution({
+    taskId: task.taskId || null,
+    tool: task.tool,
+    decision: result.decision,
+    success: result.success,
+    verification: result.success ? "ok" : "failed",
+    reason: result.success ? null : (result.reason || "executor_failure"),
+  });
+
+  // Evidence-backed learning only (never from a model statement alone).
+  if (result.success) {
+    await recordLearning({
+      taskId: task.taskId || null,
+      observation: `HERMES tool "${task.tool}" verified`, 
+      evidence: { tool: task.tool, success: true, verification: "ok" },
+      outcome: "complete",
+    });
+  }
+
+  return { ...result, ok: result.success, evidence: result.evidence };
 }

@@ -15,6 +15,8 @@ import { listEvaluations } from "./src/mesh/evaluation.mjs";
 import { routingIntelligence, suggestModel, routingDecision, listRoutingDecisions, recordRoutingDecision, taskTypeStats } from "./src/mesh/routing.mjs";
 import { getLatestBenchmark, runBenchmark } from "./src/mesh/benchmark.mjs";
 import { providerTelemetry } from "./src/mesh/provider-telemetry.mjs";
+import { runHermesTask } from "./src/mesh/hermes-bridge.mjs";
+import { hermesExecutionStats, listHermesExecutions } from "./src/mesh/hermes-execution.mjs";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const port = Number(process.env.DASHBOARD_PORT || 4173);
@@ -115,6 +117,7 @@ const ENDPOINT_ROLE = {
   "/api/local-agent/status": "viewer", "/api/local-agent/tasks": "viewer", "/api/local-agent/session": "viewer", "/api/local-agent/learning": "viewer",
   "/api/local-agent/routing": "viewer", "/api/local-agent/evaluations": "viewer", "/api/local-agent/benchmark": "viewer", "/api/local-agent/telemetry": "viewer", "/api/local-agent/adaptive": "viewer",
   "/api/local-agent/arm": "operator", "/api/local-agent/stop": "operator", "/api/local-agent/run": "operator", "/api/local-agent/benchmark/run": "operator", "/api/local-agent/routing/decide": "operator",
+  "/api/hermes/status": "viewer", "/api/hermes/execute": "operator",
 };
 function endpointMinRole(url) {
   if (url.startsWith("/api/export/")) return "viewer";
@@ -486,6 +489,25 @@ const server = createServer(async (req, res) => {
     await recordRoutingDecision(decision);
     await audit("local-agent.routing-decision", req.role || "operator", `${taskType} -> ${decision.selectedModel} (${decision.reason})`);
     json(res, 200, { ok: true, decision });
+    return;
+  }
+  // HERMES execution seam — status (read-only) + structured tool execution.
+  if (url === "/api/hermes/status") {
+    json(res, 200, { ok: true, stats: await hermesExecutionStats(), recent: (await listHermesExecutions()).slice(-10).reverse() });
+    return;
+  }
+  if (req.method === "POST" && url === "/api/hermes/execute") {
+    const body = await jsonBody(req);
+    const task = {
+      taskId: body.taskId || `hermes-${Date.now()}`,
+      tool: body.tool,
+      arguments: body.arguments || {},
+      agentId: "hermes",
+      risk: body.risk || "L0",
+    };
+    const r = await runHermesTask(task);
+    await audit("hermes.execute", req.role || "operator", `${task.tool} -> ${r.decision} (${r.success ? "ok" : "failed"})`);
+    json(res, 200, { ok: r.ok, decision: r.decision, success: r.success, reason: r.reason || null, evidence: r.evidence });
     return;
   }
   // Arm / stop / run (operator, CSRF-protected).
