@@ -2,7 +2,7 @@
   "version": 1,
   "metrics": [
     {
-      "ts": "2026-08-16T11:45:42.712Z",
+      "ts": "2026-08-16T12:26:53.208Z",
       "cost": 6.48,
       "phi4": true,
       "github": true,
@@ -12,7 +12,7 @@
       "router": "OFF"
     },
     {
-      "ts": "2026-08-16T11:46:42.659Z",
+      "ts": "2026-08-16T12:27:53.115Z",
       "cost": 6.48,
       "phi4": true,
       "github": true,
@@ -22,7 +22,767 @@
       "router": "OFF"
     },
     {
-      "ts": "2026-08-16T11:47:43.568Z",
+      "ts": "2026-08-16T12:29:26.293Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:30:26.176Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:31:26.235Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:32:26.093Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:33:26.181Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:34:26.611Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:35:27.265Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:36:26.499Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:37:26.543Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:38:26.556Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:39:26.433Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:40:26.611Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:41:26.584Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:42:26.142Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:43:16.450Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:45:15.956Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:45:26.158Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:46:16.825Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:46:26.784Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:47:16.381Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:47:26.635Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:48:16.777Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:48:26.413Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:49:16.724Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:49:26.473Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:50:16.407Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:50:26.200Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:51:18.936Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:51:25.113Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:52:15.930Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:52:25.170Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:54:18.616Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:55:16.918Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:55:51.720Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:56:17.523Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:57:17.227Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T12:58:17.416Z",
+      "cost": 6.48,
+      "phi4": false,
+      "github": false,
+      "redis": false,
+      "postgres": false,
+      "knowledge": false,
+      "router": "ON"
+    },
+    {
+      "ts": "2026-08-16T13:01:32.166Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:02:31.900Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:03:31.500Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:04:31.044Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:05:31.422Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:06:32.029Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:08:26.086Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:09:25.967Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:10:25.886Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:11:25.931Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:12:26.486Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:12:54.553Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:13:30.784Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:14:31.183Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:15:47.506Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:17:04.825Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:18:04.100Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:19:04.203Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:20:04.752Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:21:03.215Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:22:04.231Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:23:04.024Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:24:55.676Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:25:55.719Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:26:55.647Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:27:56.704Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:28:56.375Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:29:55.628Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:30:56.245Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:32:26.978Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:33:26.964Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:34:27.364Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:35:27.026Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:35:57.126Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:37:27.421Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T13:37:55.589Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T14:16:13.057Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T14:17:12.685Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T14:18:12.990Z",
+      "cost": 6.48,
+      "phi4": true,
+      "github": true,
+      "redis": true,
+      "postgres": true,
+      "knowledge": true,
+      "router": "OFF"
+    },
+    {
+      "ts": "2026-08-16T14:19:12.651Z",
       "cost": 6.48,
       "phi4": true,
       "github": true,
