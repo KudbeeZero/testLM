@@ -7,6 +7,7 @@ import {
   PRICING,
 } from "./config.js";
 import { overBudget, recordSpend } from "./budget.js";
+import { recordProviderCall } from "./mesh/provider-telemetry.mjs";
 
 /**
  * Simple token-bucket rate limiter. Enforces at most `perMinute` calls per
@@ -182,13 +183,13 @@ function estimateCost(provider, usage) {
 }
 
 /**
- * Unified provider interface. Returns the content string (legacy contract).
- * Wires recordSpend() telemetry for every call (including local $0 spend).
+ * Shared provider invocation. Returns a full structured metadata object.
+ * Never fabricates token counts or costs: missing fields are null/UNKNOWN.
  *
- * `opts.provider` selects the provider (default: global PROVIDER). The router
- * uses this to choose the execution path; DeepSeek is never selected by it.
+ * costStatus: local = ACTUAL ($0); cloud with configured pricing + usage =
+ * ESTIMATED; otherwise UNKNOWN.
  */
-export async function generate(prompt, opts = {}) {
+async function callProvider(prompt, opts = {}) {
   const provider = opts.provider || PROVIDER;
   const taskType = opts.taskType || "unknown";
   const reason = opts.reason || null;
@@ -213,12 +214,32 @@ export async function generate(prompt, opts = {}) {
     const { content, usage } = await fn(prompt);
     const latency = Date.now() - start;
     const usd = estimateCost(provider, usage);
+    const inputTokens = usage?.prompt_tokens ?? usage?.input_tokens ?? null;
+    const outputTokens = usage?.completion_tokens ?? usage?.output_tokens ?? null;
+    const totalTokens = (inputTokens != null && outputTokens != null) ? inputTokens + outputTokens : null;
+    const costStatus = provider === "local" ? "ACTUAL" : (usd == null ? "UNKNOWN" : "ESTIMATED");
+    const meta = {
+      content,
+      provider,
+      model: MODEL_FOR[provider],
+      usage: {
+        inputTokens,
+        outputTokens,
+        totalTokens,
+        cachedInputTokens: usage?.cached_input_tokens ?? null,
+      },
+      latencyMs: latency,
+      requestId: null,
+      estimatedCost: usd,
+      costStatus,
+      success: true,
+    };
     await recordSpend({
       provider,
       model: MODEL_FOR[provider],
       usd,
-      inputTokens: usage?.prompt_tokens ?? usage?.input_tokens ?? null,
-      outputTokens: usage?.completion_tokens ?? usage?.output_tokens ?? null,
+      inputTokens,
+      outputTokens,
       cachedInputTokens: usage?.cached_input_tokens ?? null,
       cacheHit: usage?.cached_input_tokens ? true : null,
       latency,
@@ -226,7 +247,12 @@ export async function generate(prompt, opts = {}) {
       success: true,
       reason,
     });
-    return content;
+    await recordProviderCall({
+      taskType, provider, model: MODEL_FOR[provider], success: true,
+      latencyMs: latency, inputTokens, outputTokens, totalTokens,
+      cost: usd, costStatus,
+    });
+    return meta;
   } catch (e) {
     const latency = Date.now() - start;
     await recordSpend({
@@ -238,8 +264,30 @@ export async function generate(prompt, opts = {}) {
       success: false,
       reason: e.message,
     });
+    await recordProviderCall({
+      taskType, provider, model: MODEL_FOR[provider], success: false,
+      latencyMs: latency, cost: 0, costStatus: "UNKNOWN", failureClass: "MODEL_FAILURE",
+    });
     throw e;
   }
+}
+
+/**
+ * Unified provider interface. Returns the content string (legacy contract).
+ * Wires recordSpend() + provider telemetry for every call.
+ */
+export async function generate(prompt, opts = {}) {
+  const r = await callProvider(prompt, opts);
+  return r.content;
+}
+
+/**
+ * Detailed provider interface — returns full structured metadata.
+ * Compatible with generate() for content; callers that need usage/cost/latency
+ * use this. Throws on failure (same as generate).
+ */
+export async function generateDetailed(prompt, opts = {}) {
+  return callProvider(prompt, opts);
 }
 
 export { PROVIDER, LOCAL_MODEL, GEMINI_MODEL, GROK_MODEL, MODEL_TTL_SECONDS };

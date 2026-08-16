@@ -9,6 +9,8 @@ agent/memory/local-session.json
 agent/memory/local-task-queue.json
 agent/memory/local-evaluations.json
 agent/memory/local-benchmark.json
+agent/memory/provider-telemetry.json
+agent/memory/local-routing-decisions.json
 os-agent/dashboard/cost-cache.json
 
 # Secrets / local config (never commit API keys)

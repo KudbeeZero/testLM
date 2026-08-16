@@ -63,12 +63,28 @@ export function scoreEvaluation(ev) {
     recovery,
     calibration,
   };
-  const score = +(Object.values(dimensions).reduce((a, b) => a + b, 0) / Object.keys(dimensions).length).toFixed(3);
+  const qualityScore = +(Object.values(dimensions).reduce((a, b) => a + b, 0) / Object.keys(dimensions).length).toFixed(3);
+
+  // latencyScore: lower is better (0..1). Unknown latency = neutral 0.5.
+  const latencyMs = ev.durationMs ?? null;
+  const latencyScore = latencyMs == null ? 0.5 : +Math.max(0, Math.min(1, 1 - latencyMs / 120000)).toFixed(3);
+
+  // costScore: local ($0) = 1; known low cost = high; UNKNOWN = neutral 0.5.
+  const costUsd = ev.costUsd ?? null;
+  const costScore = costUsd == null ? 0.5 : (costUsd <= 0 ? 1 : +Math.max(0, Math.min(1, 1 - costUsd / 0.05)).toFixed(3));
+
+  // overallScore: quality dominates, latency + cost are secondary.
+  const overallScore = +((qualityScore * 0.6) + (latencyScore * 0.2) + (costScore * 0.2)).toFixed(3);
+
   return {
-    score,
+    score: qualityScore,
+    qualityScore,
+    latencyScore,
+    costScore,
+    overallScore,
     dimensions,
-    latencyMs: ev.durationMs ?? null,
-    costUsd: ev.costUsd ?? null,
+    latencyMs,
+    costUsd,
     usage: ev.usage ?? null,
   };
 }

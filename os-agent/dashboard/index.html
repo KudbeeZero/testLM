@@ -153,6 +153,19 @@
       </div>
     </section>
 
+    <section style="margin-top:14px">
+      <div class="card">
+        <h3>Adaptive Routing <small style="color:#4e6b5d">evidence-driven recommendation — MESH still authorizes</small></h3>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
+          <input id="adaptiveTaskType" type="text" placeholder="task type (e.g. repository-health)" style="flex:1" />
+          <button id="adaptiveDecideBtn">Decide</button>
+          <button id="adaptiveRefreshBtn">Refresh</button>
+          <span id="adaptiveStatus" style="color:#888;font-size:12px"></span>
+        </div>
+        <div id="adaptive" style="font-size:12.5px;line-height:1.5">Loading…</div>
+      </div>
+    </section>
+
     <section class="grid" style="margin-top:14px">
       <div class="card status-card">
         <h3>Server Status</h3>
@@ -583,6 +596,48 @@
     $('#benchPhiBtn').onclick = ()=>runBenchmark(['phi4']);
     $('#benchBothBtn').onclick = ()=>runBenchmark(['phi4','gemini']);
 
+    // Adaptive Routing — evidence-driven recommendation (read-only observability).
+    async function loadAdaptive(){
+      $('#adaptiveStatus').textContent = 'loading…';
+      try{
+        const r = await api('/api/local-agent/adaptive');
+        const ri = r.routing||{}, tel = r.telemetry||{};
+        const html = [];
+        html.push('<div><b>Default:</b> Phi-4 Mini · <b>Escalation:</b> Gemini '+((tel.byProvider&&tel.byProvider.gemini)?'(used)':'(candidate)')+'</div>');
+        if(ri.collecting){ html.push('<div style="color:#888">Collecting evidence…</div>'); }
+        else {
+          html.push('<div><b>Local success rate:</b> '+((ri.successRate!=null)?(ri.successRate*100).toFixed(0)+'%':'—')+' · <b>Escalation (cloud calls):</b> '+(tel.cloudEscalations||0)+'</div>');
+          html.push('<div><b>Avg local latency:</b> '+(ri.avgDurationMs!=null?ri.avgDurationMs+'ms':'—')+' · <b>Verification:</b> '+((ri.verificationRate!=null)?(ri.verificationRate*100).toFixed(0)+'%':'—')+'</div>');
+        }
+        const tp = tel.byProvider||{};
+        if(Object.keys(tp).length){
+          html.push('<div style="margin-top:6px"><b>Provider telemetry:</b></div>');
+          Object.entries(tp).forEach(([k,v])=>html.push('<div style="margin-left:8px">'+k+': '+v.calls+' calls · '+(v.successRate*100).toFixed(0)+'% ok · '+v.totalCost+' cost · '+v.avgLatencyMs+'ms avg</div>'));
+        }
+        const decs = (r.decisions||[]);
+        if(decs.length){
+          html.push('<div style="margin-top:6px"><b>Recent routing decisions:</b></div>');
+          decs.forEach(d=>html.push('<div style="margin-left:8px">'+d.taskType+' -> '+d.selectedModel+' ('+d.reason+') <small>'+new Date(d.timestamp).toLocaleTimeString()+'</small></div>'));
+        }
+        $('#adaptive').innerHTML = html.join('');
+        $('#adaptiveStatus').textContent = 'updated ' + new Date().toLocaleTimeString();
+      }catch(e){ $('#adaptive').textContent='unavailable: '+e.message; $('#adaptiveStatus').textContent=''; }
+    }
+    async function decideAdaptive(){
+      const taskType = $('#adaptiveTaskType').value.trim();
+      if(!taskType){ $('#adaptiveStatus').textContent='enter a task type'; return; }
+      $('#adaptiveStatus').textContent = 'deciding…';
+      try{
+        const r = await api('/api/local-agent/routing/decide',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({taskType})});
+        const d = r.decision||{};
+        $('#adaptiveStatus').textContent = 'decision: '+d.selectedModel+' ('+d.reason+')';
+        loadAdaptive();
+      }catch(e){ $('#adaptiveStatus').textContent = 'failed: '+e.message; }
+    }
+    $('#adaptiveDecideBtn').onclick = decideAdaptive;
+    $('#adaptiveRefreshBtn').onclick = loadAdaptive;
+    $('#adaptiveTaskType').addEventListener('keydown',e=>{ if(e.key==='Enter') decideAdaptive(); });
+
     // Cost History queue controls: show-limit and clear.
     $('#metricsLimit').onchange = loadMetrics;
     $('#clearMetricsBtn').onclick = async () => {
@@ -781,7 +836,7 @@
     $('#run').onclick = ()=>{ const cmd = $('#command').value.trim(); if(!cmd) return; $('#terminal').textContent += `\n> ${cmd}\n`; $('#command').value=''; const s = ensureWs(); if(s.readyState === WebSocket.OPEN) s.send(JSON.stringify({cmd})); else s.addEventListener('open',()=>s.send(JSON.stringify({cmd})),{once:true}); };
 
     refresh(); setInterval(refresh,5000);
-    loadAudit(); loadMetrics(); loadGithub(); loadStatus(); loadSecurity(); loadCapability(); loadCost(); loadNotifications(); loadAgentStatus(); loadMorningReport(); loadRouting(); loadBenchmark();
+    loadAudit(); loadMetrics(); loadGithub(); loadStatus(); loadSecurity(); loadCapability(); loadCost(); loadNotifications(); loadAgentStatus(); loadMorningReport(); loadRouting(); loadBenchmark(); loadAdaptive();
     setInterval(loadStatus, 30000); // status panels refresh every 30s
     setInterval(loadSecurity, 30000);
     setInterval(loadCapability, 30000);

@@ -12,8 +12,9 @@ import { listTasks, enqueue } from "./src/mesh/task-queue.mjs";
 import { runOvernightSession, getLatestSession } from "./src/mesh/overnight-runner.mjs";
 import { listLearnings } from "./src/mesh/learning.mjs";
 import { listEvaluations } from "./src/mesh/evaluation.mjs";
-import { routingIntelligence, suggestModel } from "./src/mesh/routing.mjs";
+import { routingIntelligence, suggestModel, routingDecision, listRoutingDecisions, recordRoutingDecision, taskTypeStats } from "./src/mesh/routing.mjs";
 import { getLatestBenchmark, runBenchmark } from "./src/mesh/benchmark.mjs";
+import { providerTelemetry } from "./src/mesh/provider-telemetry.mjs";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const port = Number(process.env.DASHBOARD_PORT || 4173);
@@ -112,8 +113,8 @@ const ENDPOINT_ROLE = {
   "/api/phi4": "operator", "/api/metrics/clear": "operator",
   "/api/cost": "viewer", "/api/cost/refresh": "operator",
   "/api/local-agent/status": "viewer", "/api/local-agent/tasks": "viewer", "/api/local-agent/session": "viewer", "/api/local-agent/learning": "viewer",
-  "/api/local-agent/routing": "viewer", "/api/local-agent/evaluations": "viewer", "/api/local-agent/benchmark": "viewer",
-  "/api/local-agent/arm": "operator", "/api/local-agent/stop": "operator", "/api/local-agent/run": "operator", "/api/local-agent/benchmark/run": "operator",
+  "/api/local-agent/routing": "viewer", "/api/local-agent/evaluations": "viewer", "/api/local-agent/benchmark": "viewer", "/api/local-agent/telemetry": "viewer", "/api/local-agent/adaptive": "viewer",
+  "/api/local-agent/arm": "operator", "/api/local-agent/stop": "operator", "/api/local-agent/run": "operator", "/api/local-agent/benchmark/run": "operator", "/api/local-agent/routing/decide": "operator",
 };
 function endpointMinRole(url) {
   if (url.startsWith("/api/export/")) return "viewer";
@@ -460,6 +461,31 @@ const server = createServer(async (req, res) => {
     await audit("local-agent.benchmark", req.role || "operator", `models=${models.join("+")} tasks=${maxTasks}`);
     const r = await runBenchmark({ models, maxTasks });
     json(res, 200, { ok: true, ...r });
+    return;
+  }
+  // Provider telemetry + adaptive routing observability (read-only).
+  if (url === "/api/local-agent/telemetry") {
+    json(res, 200, { ok: true, telemetry: await providerTelemetry() });
+    return;
+  }
+  if (url === "/api/local-agent/adaptive") {
+    const [routing, telemetry, decisions] = await Promise.all([
+      routingIntelligence(), providerTelemetry(), listRoutingDecisions(),
+    ]);
+    json(res, 200, { ok: true, routing, telemetry, decisions: decisions.slice(-10).reverse() });
+    return;
+  }
+  // Adaptive routing decision for a task type (recommendation only — no model call).
+  if (req.method === "POST" && url === "/api/local-agent/routing/decide") {
+    const body = await jsonBody(req);
+    const taskType = String(body.taskType || "").trim();
+    if (!taskType) { json(res, 400, { ok: false, error: "taskType required" }); return; }
+    const costStatus = String(body.costStatus || "UNKNOWN").toUpperCase();
+    const allowEscalation = body.allowEscalation === true;
+    const decision = await routingDecision(taskType, { costStatus, allowEscalation });
+    await recordRoutingDecision(decision);
+    await audit("local-agent.routing-decision", req.role || "operator", `${taskType} -> ${decision.selectedModel} (${decision.reason})`);
+    json(res, 200, { ok: true, decision });
     return;
   }
   // Arm / stop / run (operator, CSRF-protected).

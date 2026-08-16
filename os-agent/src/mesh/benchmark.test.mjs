@@ -21,6 +21,29 @@ test("scoreEvaluation computes visible dimensions and a score", () => {
   expect(s.score).toBeGreaterThan(0);
 });
 
+test("scoreEvaluation computes quality/latency/cost/overall scores", () => {
+  const ev = {
+    failureClass: "NONE", successfulTools: ["git.status"], meshDenials: 0,
+    toolsExecuted: ["git.status"], verification: "ok", recoveryClass: "NONE",
+    confidence: 0.9, durationMs: 100, costUsd: 0,
+  };
+  const s = scoreEvaluation(ev);
+  expect(s.qualityScore).toBeGreaterThan(0);
+  expect(s.latencyScore).toBeGreaterThan(0.9); // 100ms is fast
+  expect(s.costScore).toBe(1); // $0 local
+  expect(s.overallScore).toBeGreaterThan(0);
+});
+
+test("scoreEvaluation marks unknown cost as neutral costScore", () => {
+  const ev = {
+    failureClass: "NONE", successfulTools: ["git.status"], meshDenials: 0,
+    toolsExecuted: ["git.status"], verification: "ok", recoveryClass: "NONE",
+    confidence: 0.9, durationMs: 100, costUsd: null,
+  };
+  const s = scoreEvaluation(ev);
+  expect(s.costScore).toBe(0.5);
+});
+
 test("scoreEvaluation penalizes a MESH denial", () => {
   const ev = {
     failureClass: "MESH_CAPABILITY_DENIED", successfulTools: [], meshDenials: 1,
