@@ -9,15 +9,33 @@ on:
 jobs:
   node-ci:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 20]
     steps:
       - uses: actions/checkout@v4
+
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: os-agent/node_modules
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('os-agent/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ matrix.node-version }}-
+
       - name: Install deps (os-agent)
         working-directory: ./os-agent
         run: npm ci
-      - name: Run tests (placeholder)
+
+      - name: Run lint
+        working-directory: ./os-agent
+        run: npm run lint
+
+      - name: Run tests
         working-directory: ./os-agent
         run: npm test

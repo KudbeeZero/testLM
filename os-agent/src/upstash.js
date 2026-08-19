@@ -3,7 +3,7 @@ import { Index } from "@upstash/vector";
 import {
   UPSTASH_REDIS_URL, UPSTASH_REDIS_TOKEN,
   UPSTASH_VECTOR_URL, UPSTASH_VECTOR_TOKEN,
-  PROVIDER, LOCAL_MODEL,
+  PROVIDER,
 } from "./config.js";
 
 // Upstash Redis (state / cache)

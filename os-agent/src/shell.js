@@ -9,7 +9,6 @@
  * regardless of whether PowerShell is present.
  */
 import { spawn, execFileSync } from "node:child_process";
-import { existsSync } from "node:fs";
 
 const CANDIDATES = {
   powershell: [

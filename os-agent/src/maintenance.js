@@ -10,11 +10,11 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { AGENT_DIR } from "./config.js";
-import { hasPowerShell, shellCommand, spawn } from "./shell.js";
+import { shellCommand, spawn } from "./shell.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");       // os-agent/
-const WORKSPACE = path.resolve(ROOT, "..");       // testLM/
+const _WORKSPACE = path.resolve(ROOT, "..");       // testLM/ (unused placeholder)
 const MEMORY_DIR = path.join(AGENT_DIR, "memory");
 const MEMORY_FILE = path.join(MEMORY_DIR, "learnings.json");
 
