@@ -1,0 +1,8 @@
+{
+  "root": true,
+  "env": { "node": true, "es2021": true, "es2022": true },
+  "parserOptions": { "ecmaVersion": 2022, "sourceType": "module" },
+  "extends": "eslint:recommended",
+  "rules": { "no-empty": "warn", "no-unused-vars": "warn", "no-console": "off" },
+  "ignorePatterns": ["node_modules/", "os-agent/node_modules/", "Kudbee-fuel-gage/**/node_modules/"]
+}

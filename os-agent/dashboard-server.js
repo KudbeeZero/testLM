@@ -37,6 +37,13 @@ const ROLE_PASSWORDS = {
   viewer: process.env.DASHBOARD_VIEWER_PASSWORD || null,
 };
 const API_KEY = process.env.DASHBOARD_API_KEY || null;
+
+// If no operator password is set, generate one for the user and display it on startup.
+let GENERATED_DASHBOARD_PASSWORD = null;
+if (!process.env.DASHBOARD_PASSWORD) {
+  GENERATED_DASHBOARD_PASSWORD = randomBytes(6).toString('base64url');
+  ROLE_PASSWORDS.operator = GENERATED_DASHBOARD_PASSWORD;
+}
 const API_KEY_ROLE = ROLE_RANK[process.env.DASHBOARD_API_KEY_ROLE] ? process.env.DASHBOARD_API_KEY_ROLE : "operator";
 const SESSION_SECRET = randomBytes(32).toString("hex");
 const SESSION_TTL = 12 * 3600 * 1000;
@@ -735,7 +742,7 @@ server.on("upgrade", (req, socket, head) => {
 server.listen(port, "127.0.0.1", () => {
   console.log(`Agent dashboard: http://127.0.0.1:${port}`);
   if (!process.env.DASHBOARD_PASSWORD) {
-    console.log(`Dashboard password (auto-generated): ${DASHBOARD_PASSWORD}`);
+    console.log(`Dashboard password (auto-generated): ${GENERATED_DASHBOARD_PASSWORD}`);
     console.log("Set DASHBOARD_PASSWORD in the environment to use your own.");
   }
 });

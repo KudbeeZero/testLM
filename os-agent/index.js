@@ -148,8 +148,15 @@ already exist. Return ONLY the JSON array, no extra text.`;
   }
 }
 
-banner();
-if (!learnOnly) runMaintenance();
-if (!maintainOnly) await runLearning();
-await closeDb();
-console.log("\nOS Agent run complete.");
+async function main() {
+  banner();
+  if (!learnOnly) runMaintenance();
+  if (!maintainOnly) await runLearning();
+  await closeDb();
+  console.log("\nOS Agent run complete.");
+}
+
+main().catch((err) => {
+  console.error('Agent run failed:', err);
+  process.exitCode = 1;
+});
