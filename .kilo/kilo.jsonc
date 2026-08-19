@@ -17,6 +17,7 @@
       ".tsx",
       ".yaml",
       ".yml"
-    ]
+    ],
+    "provider": "gemini"
   }
 }
