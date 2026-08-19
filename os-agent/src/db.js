@@ -56,3 +56,4 @@ export async function recentLearnings(limit = 5) {
 export async function closeDb() {
   if (pool) await pool.end();
 }
+

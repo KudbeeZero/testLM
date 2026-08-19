@@ -291,3 +291,4 @@ export async function generateDetailed(prompt, opts = {}) {
 }
 
 export { PROVIDER, LOCAL_MODEL, GEMINI_MODEL, GROK_MODEL, MODEL_TTL_SECONDS };
+

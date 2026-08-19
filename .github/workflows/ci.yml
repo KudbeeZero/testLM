@@ -20,13 +20,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Cache node modules
-        uses: actions/cache@v4
+      - name: Configure Node cache
+        uses: actions/setup-node@v4
         with:
-          path: os-agent/node_modules
-          key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('os-agent/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ matrix.node-version }}-
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: os-agent/package-lock.json
 
       - name: Install deps (os-agent)
         working-directory: ./os-agent

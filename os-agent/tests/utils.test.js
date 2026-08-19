@@ -8,3 +8,4 @@ test('isString detects strings', () => {
   expect(isString('x')).toBe(true);
   expect(isString(1)).toBe(false);
 });
+

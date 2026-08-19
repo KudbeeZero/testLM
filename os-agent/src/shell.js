@@ -28,7 +28,7 @@ function resolveShell(family) {
     try {
       execFileSync(exe, ["-NoProfile", "-Command", "exit"], { stdio: "ignore" });
       return exe;
-    } catch { /* no-op */
+    } catch { /* no-op */ /* no-op */
       // try next candidate
     }
   }
@@ -80,4 +80,5 @@ export function spawnShell(command, opts = {}) {
   });
   return p;
 }
+
 

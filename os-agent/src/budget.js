@@ -107,3 +107,4 @@ export async function overBudget() {
   const spent = await monthSpend();
   return spent >= MONTHLY_BUDGET_USD;
 }
+
