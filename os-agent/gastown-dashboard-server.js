@@ -44,8 +44,8 @@ const POLL_INTERVAL_MS = 5_000;
 const HEALTH_TIMEOUT_MS = 6_000;
 
 // Load workspace-root .env + os-agent .env (same order as src/config.js)
-try { loadEnv({ path: path.join(ROOT, ".env") }); } catch {}
-try { loadEnv({ path: path.join(__dirname, ".env") }); } catch {}
+try { loadEnv({ path: path.join(ROOT, ".env") }); } catch { /* no-op */}
+try { loadEnv({ path: path.join(__dirname, ".env") }); } catch { /* no-op */}
 
 // ---------------------------------------------------------------------------
 // Logging
@@ -81,7 +81,7 @@ function sendJson(res, status, payload) {
       res.statusCode = 500;
       res.setHeader("Content-Type", "application/json");
       res.end(JSON.stringify({ ok: false, error: "serialization_failed" }));
-    } catch {
+    } catch { /* no-op */
       if (res.writableEnded === false) res.end();
     }
   }
@@ -193,7 +193,7 @@ async function queryDatabase() {
   try {
     const mod = await import("pg");
     Pool = mod.Pool || mod.default || null;
-  } catch {
+  } catch { /* no-op */
     return { connected: false, degraded: true, error: "pg not installed", agentSchemas: [], tables: [] };
   }
   if (!Pool) return { connected: false, degraded: true, error: "pg not installed", agentSchemas: [], tables: [] };
@@ -241,14 +241,14 @@ async function queryDatabase() {
                 `count-${name}`
               );
               tables.push({ name, count: Number(c?.rows?.[0]?.c) || 0 });
-            } catch {
+            } catch { /* no-op */
               tables.push({ name: row.name, count: null });
             }
           }
         }
         const idx = result.agentSchemas.findIndex((a) => a.id === agent.id);
         if (idx >= 0) result.agentSchemas[idx] = { ...agent, exists, tables };
-      } catch {
+      } catch { /* no-op */
         // schema-level failure keeps default exists:false
       }
     }
@@ -270,7 +270,7 @@ async function queryDatabase() {
     result.degraded = true;
     result.error = err instanceof Error ? err.message : String(err);
   } finally {
-    try { await pool.end(); } catch {}
+    try { await pool.end(); } catch { /* no-op */}
   }
   return result;
 }
@@ -291,13 +291,13 @@ async function checkApiHealth() {
       const respondedAt = Date.now();
       const res = await fetch(`${base}${ep.path}`, { signal: ctrl.signal });
       let latency = "";
-      try { latency = res.headers.get("x-response-time") || ""; } catch {}
+      try { latency = res.headers.get("x-response-time") || ""; } catch { /* no-op */}
       checks.push({
         ...ep,
         status: res.ok ? "ok" : res.status,
         latency: latency || `${Date.now() - respondedAt}ms`,
       });
-    } catch {
+    } catch { /* no-op */
       checks.push({ ...ep, status: "unreachable", latency: "" });
     } finally {
       if (timer) clearTimeout(timer);
@@ -323,7 +323,7 @@ async function getState() {
     try {
       const s = envStatus(key);
       return { key, kind, secret: !!secret, status: s.status, value: secret && s.value ? mask(s.value) : s.value };
-    } catch {
+    } catch { /* no-op */
       return { key, kind, secret: !!secret, status: "error", value: "" };
     }
   });
@@ -375,7 +375,7 @@ function readJsonStore(rel, fallback) {
     const p = path.join(KILO_MEMORY, rel);
     if (!existsSync(p)) return fallback;
     return JSON.parse(readFileSync(p, "utf8"));
-  } catch {
+  } catch { /* no-op */
     return fallback;
   }
 }
@@ -383,7 +383,7 @@ function readJsonStore(rel, fallback) {
 function readdirSyncSafe(dir) {
   try {
     return readdirSync(dir);
-  } catch {
+  } catch { /* no-op */
     return [];
   }
 }
@@ -403,10 +403,10 @@ function phoneFeed() {
           const d = JSON.parse(readFileSync(path.join(dir, f), "utf8"));
           if (Array.isArray(d)) voicemails.push(...d);
           else voicemails.push(d);
-        } catch {}
+        } catch { /* no-op */}
       }
     }
-  } catch {}
+  } catch { /* no-op */}
   voicemails.sort((a, b) => String(b.timestamp || "").localeCompare(String(a.timestamp || "")));
 
   const nodes = Object.values(tree?.nodes ?? {});
@@ -539,7 +539,7 @@ async function runTerminalCommand(cmd) {
       child.stderr.on("data", (d) => (out += d));
       child.on("error", (e) => { out += `\n[spawn error] ${e?.message || String(e)}`; finish(1); });
       child.on("close", (code) => finish(code));
-      setTimeout(() => { try { child.kill(); } catch {} finish(-1); }, 20_000);
+      setTimeout(() => { try { child.kill(); } catch { /* no-op */} finish(-1); }, 20_000);
     });
   } catch (e) {
     return { type: "terminal:error", exitCode: 1, output: e instanceof Error ? e.message : String(e) };
@@ -593,7 +593,7 @@ async function probeInception() {
       latencyMs: Date.now() - startedAt,
       error: "",
     };
-  } catch {
+  } catch { /* no-op */
     return { reachable: "unreachable", latencyMs: null, error: "endpoint not reachable (no auth or network)" };
   } finally {
     if (timer) clearTimeout(timer);
@@ -711,7 +711,7 @@ const server = createServer(async (req, res) => {
       }
       if (overLimit) { sendJson(res, 413, { type: "terminal:error", exitCode: 1, output: "Request body too large." }); return; }
       let body = {};
-      try { body = raw ? JSON.parse(raw) : {}; } catch { sendJson(res, 400, { type: "terminal:error", exitCode: 1, output: "Invalid JSON body." }); return; }
+      try { body = raw ? JSON.parse(raw) : {}; } catch { /* no-op */ sendJson(res, 400, { type: "terminal:error", exitCode: 1, output: "Invalid JSON body." }); return; }
       const cmd = String(body.command || "").trim();
       if (!cmd) { sendJson(res, 400, { type: "terminal:error", exitCode: 1, output: "Command required." }); return; }
       sendJson(res, 200, await runTerminalCommand(cmd));
@@ -736,7 +736,7 @@ const server = createServer(async (req, res) => {
     res.end(content);
   } catch (e) {
     // If we already sent headers, we can't write a body — just close safely.
-    if (res.headersSent) { try { res.end(); } catch {} return; }
+    if (res.headersSent) { try { res.end(); } catch { /* no-op */} return; }
     sendJson(res, 500, { ok: false, error: "server_error", message: e instanceof Error ? e.message : String(e) });
   }
 });
@@ -748,11 +748,11 @@ const server = createServer(async (req, res) => {
 const wss = new WebSocketServer({ noServer: true });
 
 function sendToSockets(payload) {
-  const msg = (() => { try { return JSON.stringify(payload); } catch { return null; } })();
+  const msg = (() => { try { return JSON.stringify(payload); } catch { /* no-op */ return null; } })();
   if (!msg) return;
   for (const ws of wss.clients) {
     if (ws.readyState === (typeof ws.OPEN === "number" ? ws.OPEN : 1)) {
-      try { ws.send(msg); } catch {}
+      try { ws.send(msg); } catch { /* no-op */}
     }
   }
 }
@@ -767,12 +767,12 @@ wss.on("connection", (ws) => {
     if (stopped) return;
     try {
       sendToSockets(await snapState());
-    } catch {}
+    } catch { /* no-op */}
   };
   push();
   ws._timer = setInterval(push, POLL_INTERVAL_MS);
   ws.on("close", () => { stopped = true; if (ws._timer) clearInterval(ws._timer); });
-  ws.on("error", () => { stopped = true; if (ws._timer) clearInterval(ws._timer); try { ws.close(); } catch {} });
+  ws.on("error", () => { stopped = true; if (ws._timer) clearInterval(ws._timer); try { ws.close(); } catch { /* no-op */} });
 });
 
 server.on("upgrade", (req, socket, head) => {
@@ -782,13 +782,13 @@ server.on("upgrade", (req, socket, head) => {
     } else {
       socket.destroy();
     }
-  } catch {
-    try { socket.destroy(); } catch {}
+  } catch { /* no-op */
+    try { socket.destroy(); } catch { /* no-op */}
   }
 });
 
 server.on("clientError", (_err, socket) => {
-  try { socket.end("HTTP/1.1 400 Bad Request\r\n\r\n"); } catch {}
+  try { socket.end("HTTP/1.1 400 Bad Request\r\n\r\n"); } catch { /* no-op */}
 });
 
 // ---------------------------------------------------------------------------
@@ -803,9 +803,10 @@ function shutdown(signal) {
   log.info(`Received ${signal}; shutting down gracefully…`);
   const timer = setTimeout(() => { log.warn("Forced exit after timeout"); process.exit(1); }, 5000);
   timer.unref();
-  for (const ws of wss.clients) { try { ws.close(); } catch {} }
+  for (const ws of wss.clients) { try { ws.close(); } catch { /* no-op */} }
   wss.close(() => {});
   server.close(() => { clearTimeout(timer); process.exit(0); });
 }
 process.on("SIGINT", () => shutdown("SIGINT"));
 process.on("SIGTERM", () => shutdown("SIGTERM"));
+

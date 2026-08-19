@@ -55,7 +55,7 @@ function validateNormalization(content) {
     const required = ["event_id", "timestamp", "source", "event_type", "severity", "resource",
       "correlation_id", "evidence_location", "integrity_hash", "schema_version", "ingested_at"];
     return required.every(k => (k in j) && j[k] !== null && j[k] !== "");
-  } catch {
+  } catch { /* no-op */
     return false;
   }
 }
@@ -168,3 +168,4 @@ export function dryRun(prompt) {
   decision.level = ROUTER_DEFAULT_LEVEL; decision.reason = "router_default";
   return decision;
 }
+

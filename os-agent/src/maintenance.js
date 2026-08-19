@@ -26,7 +26,7 @@ function nowIso() { return new Date().toISOString(); }
 async function ensureMemoryFile() {
   try {
     await fs.access(MEMORY_FILE);
-  } catch {
+  } catch { /* no-op */
     await fs.mkdir(MEMORY_DIR, { recursive: true });
     await fs.writeFile(MEMORY_FILE, JSON.stringify({ system: {}, health: {}, optimizations: [], learnings: [] }, null, 2), "utf8");
   }
@@ -45,14 +45,14 @@ async function tempDirSizeMB() {
   async function walk(dir) {
     let entries;
     try { entries = await fs.readdir(dir, { withFileTypes: true }); }
-    catch { return; }
+    catch { /* no-op */ return; }
     for (const e of entries) {
       const full = path.join(dir, e.name);
       try {
         if (e.isDirectory()) await walk(full);
         else if (e.isSymbolicLink()) { /* skip */ }
         else { const s = await fs.stat(full); total.bytes += s.size; }
-      } catch { /* skip unreadable */ }
+      } catch { /* no-op */ /* skip unreadable */ }
     }
   }
   await walk(temp);
@@ -65,13 +65,13 @@ async function cleanupTemp() {
   async function del(dir) {
     let entries;
     try { entries = await fs.readdir(dir, { withFileTypes: true }); }
-    catch { return; }
+    catch { /* no-op */ return; }
     for (const e of entries) {
       const full = path.join(dir, e.name);
       try {
         if (e.isDirectory()) await del(full), await fs.rmdir(full).catch(() => {});
         else await fs.unlink(full).catch(() => {});
-      } catch { /* best effort */ }
+      } catch { /* no-op */ /* best effort */ }
     }
   }
   await del(temp);
@@ -87,7 +87,7 @@ async function topProcesses(count = 5) {
       for await (const chunk of p.stdout) out += chunk;
       const lines = out.split(/\r?\n/).map((s) => s.trim()).filter(Boolean);
       return lines.slice(0, count);
-    } catch { /* fall through */ }
+    } catch { /* no-op */ /* fall through */ }
   }
   // No PowerShell: report by CPU count / system info instead.
   return os.cpus().slice(0, count).map((c) => `${c.model.trim()} ${c.speed} MHz`);
@@ -102,7 +102,7 @@ async function gpuNames() {
     let out = "";
     for await (const chunk of p.stdout) out += chunk;
     return out.split(/\r?\n/).map((s) => s.trim()).filter(Boolean);
-  } catch { return []; }
+  } catch { /* no-op */ return []; }
 }
 
 /** Gather system health. Returns { memPct, diskFreeGb, tempMb, gpus, topProcs }. */
@@ -185,3 +185,4 @@ export async function runMaintenance({ reportOnly = false } = {}) {
     topProcs: health.topProcs,
   };
 }
+
