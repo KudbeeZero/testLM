@@ -1,0 +1,22 @@
+{
+  "$schema": "https://app.kilo.ai/config.json",
+  "indexing": {
+    "lancedb": {
+      "directory": ".kilo/index"
+    },
+    "fileExtensions": [
+      ".js",
+      ".json",
+      ".md",
+      ".ps1",
+      ".py",
+      ".sh",
+      ".sql",
+      ".toml",
+      ".ts",
+      ".tsx",
+      ".yaml",
+      ".yml"
+    ]
+  }
+}
