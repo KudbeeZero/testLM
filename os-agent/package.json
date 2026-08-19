@@ -9,7 +9,19 @@
     "dashboard": "node dashboard-server.js",
     "learn": "node index.js --learn-only",
     "maintain": "node index.js --maintain-only",
-    "test": "echo \"No tests configured yet; add unit tests under os-agent/tests\" && exit 0"
+    "test": "jest --runInBand"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "eslint": "^8.50.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dashboard": "node dashboard-server.js",
+    "learn": "node index.js --learn-only",
+    "maintain": "node index.js --maintain-only",
+    "test": "jest --runInBand",
+    "lint": "eslint src tests --ext .js --ignore-path .eslintignore"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
