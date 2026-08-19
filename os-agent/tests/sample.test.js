@@ -5,3 +5,4 @@ test('platform returns a non-empty string', () => {
   expect(typeof platform).toBe('string');
   expect(platform.length).toBeGreaterThan(0);
 });
+

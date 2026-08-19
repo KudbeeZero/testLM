@@ -23,19 +23,19 @@ const learnOnly = args.includes("--learn-only");
 const maintainOnly = args.includes("--maintain-only");
 
 function banner() {
-  console.log("======================================");
-  console.log("  Engineering OS Agent");
-  console.log("  Provider: " + providerLabel());
-  console.log("======================================");
+  console.console.log("======================================");
+  console.console.log("  Engineering OS Agent");
+  console.console.log("  Provider: " + providerLabel());
+  console.console.log("======================================");
 }
 
 function runMaintenance() {
-  console.log("\n>> Step 1: Maintenance");
+  console.console.log("\n>> Step 1: Maintenance");
   const script = `${AGENT_DIR}\\maintain.ps1`;
   const out = execFileSync("powershell.exe", [
     "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", script,
   ], { encoding: "utf8" });
-  console.log(out.trim());
+  console.console.log(out.trim());
 }
 
 function readMemory() {
@@ -49,7 +49,7 @@ function writeMemory(mem) {
 }
 
 async function runLearning() {
-  console.log("\n>> Step 2: Learning (using " + providerLabel() + ")");
+  console.console.log("\n>> Step 2: Learning (using " + providerLabel() + ")");
   const mem = readMemory();
   const context = JSON.stringify(mem, null, 2);
 
@@ -58,7 +58,7 @@ async function runLearning() {
   const lastRun = mem.last_run || {};
   const healthNow = mem.health?.last_check;
   if (healthNow && healthNow === lastRun.healthCheck) {
-    console.log("[no-call] health unchanged since last run — skipping model call (existing knowledge).");
+    console.console.log("[no-call] health unchanged since last run — skipping model call (existing knowledge).");
     return;
   }
   mem.last_run = { ...lastRun, healthCheck: healthNow };
@@ -127,7 +127,7 @@ already exist. Return ONLY the JSON array, no extra text.`;
   }
 
   writeMemory(mem);
-  console.log(`\nAdded ${added} new learning(s). Total learnings: ${mem.learnings.length}`);
+  console.console.log(`\nAdded ${added} new learning(s). Total learnings: ${mem.learnings.length}`);
 
   // Persist new learnings to the per-agent Neon database.
   const newRows = mem.learnings.slice(mem.learnings.length - added);
@@ -148,8 +148,17 @@ already exist. Return ONLY the JSON array, no extra text.`;
   }
 }
 
-banner();
-if (!learnOnly) runMaintenance();
-if (!maintainOnly) await runLearning();
-await closeDb();
-console.log("\nOS Agent run complete.");
+async function main() {
+  banner();
+  if (!learnOnly) runMaintenance();
+  if (!maintainOnly) await runLearning();
+  await closeDb();
+  console.console.log("\nOS Agent run complete.");
+}
+
+main().catch((err) => {
+  console.error('Agent run failed:', err);
+  process.exitCode = 1;
+});
+
+

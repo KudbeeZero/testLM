@@ -100,3 +100,4 @@ export const ALLOW_UNKNOWN_CLOUD_COST = String(process.env.ALLOW_UNKNOWN_CLOUD_C
 export function providerLabel() {
   return { local: "local (LM Studio)", gemini: "Gemini", grok: "Grok (xAI)", deepseek: "DeepSeek" }[PROVIDER] || PROVIDER;
 }
+

@@ -37,6 +37,13 @@ const ROLE_PASSWORDS = {
   viewer: process.env.DASHBOARD_VIEWER_PASSWORD || null,
 };
 const API_KEY = process.env.DASHBOARD_API_KEY || null;
+
+// If no operator password is set, generate one for the user and display it on startup.
+let GENERATED_DASHBOARD_PASSWORD = null;
+if (!process.env.DASHBOARD_PASSWORD) {
+  GENERATED_DASHBOARD_PASSWORD = randomBytes(6).toString('base64url');
+  ROLE_PASSWORDS.operator = GENERATED_DASHBOARD_PASSWORD;
+}
 const API_KEY_ROLE = ROLE_RANK[process.env.DASHBOARD_API_KEY_ROLE] ? process.env.DASHBOARD_API_KEY_ROLE : "operator";
 const SESSION_SECRET = randomBytes(32).toString("hex");
 const SESSION_TTL = 12 * 3600 * 1000;
@@ -61,7 +68,7 @@ function sessionRole(req) {
   if (!exp || !role || !sig) return null;
   const expected = createHmac("sha256", SESSION_SECRET).update(`${exp}.${role}`).digest("base64url");
   let ok = false;
-  try { ok = timingSafeEqual(Buffer.from(sig), Buffer.from(expected)); } catch { return null; }
+  try { ok = timingSafeEqual(Buffer.from(sig), Buffer.from(expected)); } catch { /* no-op */ /* no-op */ return null; }
   if (!ok || Number(exp) < Date.now()) return null;
   return ROLE_RANK[role] ? role : null;
 }
@@ -69,7 +76,7 @@ function apiKeyRole(req) {
   const h = req.headers["authorization"] || "";
   const k = h.startsWith("Bearer ") ? h.slice(7) : (req.headers["x-api-key"] || "");
   if (API_KEY && k) {
-    try { if (timingSafeEqual(Buffer.from(k), Buffer.from(API_KEY))) return API_KEY_ROLE; } catch {}
+    try { if (timingSafeEqual(Buffer.from(k), Buffer.from(API_KEY))) return API_KEY_ROLE; } catch { /* no-op */ /* no-op */}
   }
   return null;
 }
@@ -91,7 +98,7 @@ function checkCsrf(req, tok) {
   const c = CSRF.get(tok);
   if (!c) return false;
   const h = req.headers["x-csrf-token"] || "";
-  try { return timingSafeEqual(Buffer.from(h), Buffer.from(c)); } catch { return false; }
+  try { return timingSafeEqual(Buffer.from(h), Buffer.from(c)); } catch { /* no-op */ /* no-op */ return false; }
 }
 
 // Simple per-IP rate limiter (in-memory, sliding window).
@@ -125,19 +132,19 @@ function endpointMinRole(url) {
   return ENDPOINT_ROLE[url] || "viewer";
 }
 
-// ── Audit log (append-only governance trace) ───────────────────────────────
+// ── Audit console.log(append-only governance trace) ───────────────────────────────
 // Throttle low-value auto-refresh audits (e.g. ops.check every 60s) so the
 // governance trace stays readable instead of flooding with noise.
 let lastOpsAuditAt = 0;
 async function audit(action, actor = "operator", detail = "") {
   const line = `${new Date().toISOString()} | ${action} | ${actor} | ${String(detail).slice(0, 200)}`;
-  try { await appendFile(AUDIT_FILE, line + "\n"); } catch {}
+  try { await appendFile(AUDIT_FILE, line + "\n"); } catch { /* no-op */ /* no-op */}
 }
 async function readAudit(limit = 100) {
   try {
     const txt = await readFile(AUDIT_FILE, "utf8");
     return txt.trim().split("\n").filter(Boolean).slice(-limit).reverse();
-  } catch { return []; }
+  } catch { /* no-op */ /* no-op */ return []; }
 }
 
 // ── Metrics history (bounded, append-only) ─────────────────────────────────
@@ -145,7 +152,7 @@ async function readMetrics(limit = 500) {
   try {
     const m = JSON.parse((await readFile(METRICS_FILE, "utf8")).replace(/^\uFEFF/, ""));
     return (m.metrics || []).slice(-limit);
-  } catch { return []; }
+  } catch { /* no-op */ /* no-op */ return []; }
 }
 async function recordMetric(snapshot) {
   const m = await readMetrics(500);
@@ -166,13 +173,13 @@ function json(res, code, obj) {
 }
 
 async function readTasks() {
-  try { return JSON.parse(await readFile(TASKS_FILE, "utf8")); } catch { return []; }
+  try { return JSON.parse(await readFile(TASKS_FILE, "utf8")); } catch { /* no-op */ /* no-op */ return []; }
 }
 async function readJson(file, key) {
   try {
     const data = JSON.parse((await readFile(file, "utf8")).replace(/^\uFEFF/, ""));
     return key ? (data[key] || []) : data;
-  } catch { return []; }
+  } catch { /* no-op */ /* no-op */ return []; }
 }
 async function jsonBody(req) {
   let raw = "";
@@ -185,7 +192,7 @@ async function quickPhi4() {
     const r = await fetch("http://localhost:1234/v1/models", { signal: AbortSignal.timeout(3000) });
     const j = await r.json();
     return (j.data || []).some((m) => String(m.id).includes("phi-4-mini")) ? "online" : "no-model";
-  } catch { return "offline"; }
+  } catch { /* no-op */ /* no-op */ return "offline"; }
 }
 async function quickRedis() {
   try {
@@ -193,7 +200,7 @@ async function quickRedis() {
     const r = await fetch(base + "/dbsize", { headers: { Authorization: "Bearer " + (process.env.UPSTASH_REDIS_REST_TOKEN || "") }, signal: AbortSignal.timeout(4000) });
     const j = await r.json();
     return j.error ? "error" : `ok (${j.result ?? "?"} keys)`;
-  } catch { return "unreachable"; }
+  } catch { /* no-op */ /* no-op */ return "unreachable"; }
 }
 
 async function computeAlerts() {
@@ -218,7 +225,7 @@ async function getState(req) {
   let memory = { learnings: [], health: [], optimizations: [] };
   try {
     memory = JSON.parse((await readFile(MEMORY_FILE, "utf8")).replace(/^\uFEFF/, ""));
-  } catch {}
+  } catch { /* no-op */ /* no-op */}
 
   const learnings = memory.learnings || [];
   const health = memory.health || memory.healthReports || [];
@@ -630,7 +637,7 @@ const server = createServer(async (req, res) => {
     try {
       const c = await (await fetch("http://127.0.0.1:3000/api/capability", { signal: AbortSignal.timeout(4000) })).json();
       capability = { available: true, ...c };
-    } catch { /* ingestion server unreachable — capability telemetry unavailable */ }
+    } catch { /* no-op */ /* no-op */ /* ingestion server unreachable — capability telemetry unavailable */ }
     json(res, 200, {
       dashboard: {
         auth: AUTH_ENABLED ? 'ENABLED' : 'DISABLED',
@@ -685,7 +692,7 @@ const server = createServer(async (req, res) => {
             const checks = await (await gh(`https://api.github.com/repos/${repo}/commits/${pr.head.sha}/check-runs`)).json();
             const cs = checks.check_runs || [];
             if (cs.length) ci = cs.every((c) => c.conclusion === "success") ? "success" : (cs.some((c) => c.conclusion === "failure") ? "failure" : "pending");
-          } catch {}
+          } catch { /* no-op */ /* no-op */}
           list.push({ number: pr.number, title: pr.title, branch: pr.head.ref, base: pr.base.ref, state: pr.state, ci, created: pr.created_at });
         }
         results.push({ repo, open: list.length, prs: list });
@@ -702,7 +709,7 @@ const server = createServer(async (req, res) => {
     const content = await readFile(path.join(root, "dashboard", file));
     res.setHeader("Content-Type", file.endsWith(".css") ? "text/css" : "text/html");
     res.end(content);
-  } catch {
+  } catch { /* no-op */ /* no-op */
     res.writeHead(404); res.end("Not found");
   }
 });
@@ -716,12 +723,12 @@ wss.on("connection", (ws, req) => {
     try {
       const data = typeof msg === "string" ? JSON.parse(msg) : JSON.parse(msg.toString());
       if (data && data.cmd) child.stdin.write(String(data.cmd) + "\r\n");
-    } catch { child.stdin.write(String(msg) + "\r\n"); }
+    } catch { /* no-op */ /* no-op */ child.stdin.write(String(msg) + "\r\n"); }
   });
-  child.stdout.on("data", d => { try { ws.send(JSON.stringify({ stream: "out", text: d.toString() })); } catch {} });
-  child.stderr.on("data", d => { try { ws.send(JSON.stringify({ stream: "err", text: d.toString() })); } catch {} });
-  child.on("close", code => { try { ws.send(JSON.stringify({ stream: "exit", code })); } catch {} ws.close(); });
-  ws.on("close", () => { try { child.kill(); } catch {} });
+  child.stdout.on("data", d => { try { ws.send(JSON.stringify({ stream: "out", text: d.toString() })); } catch { /* no-op */ /* no-op */} });
+  child.stderr.on("data", d => { try { ws.send(JSON.stringify({ stream: "err", text: d.toString() })); } catch { /* no-op */ /* no-op */} });
+  child.on("close", code => { try { ws.send(JSON.stringify({ stream: "exit", code })); } catch { /* no-op */ /* no-op */} ws.close(); });
+  ws.on("close", () => { try { child.kill(); } catch { /* no-op */ /* no-op */} });
 });
 server.on("upgrade", (req, socket, head) => {
   const { url } = req;
@@ -733,9 +740,12 @@ server.on("upgrade", (req, socket, head) => {
 });
 
 server.listen(port, "127.0.0.1", () => {
-  console.log(`Agent dashboard: http://127.0.0.1:${port}`);
+  console.console.log(`Agent dashboard: http://127.0.0.1:${port}`);
   if (!process.env.DASHBOARD_PASSWORD) {
-    console.log(`Dashboard password (auto-generated): ${DASHBOARD_PASSWORD}`);
-    console.log("Set DASHBOARD_PASSWORD in the environment to use your own.");
+    console.console.log(`Dashboard password (auto-generated): ${GENERATED_DASHBOARD_PASSWORD}`);
+    console.console.log("Set DASHBOARD_PASSWORD in the environment to use your own.");
   }
 });
+
+
+

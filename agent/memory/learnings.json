@@ -128,5 +128,15 @@
       "insight": "With 1158.8 GB of free disk space, disk capacity is not a bottleneck, whereas system RAM remains the primary performance constraint.",
       "recommendation": "Reallocate agent background health checks to prioritize dynamic RAM reclamation and process monitoring over disk maintenance tasks."
     }
-  ]
+  ],
+  "meta": {
+    "last_update": "2026-08-19T23:11:00.000Z",
+    "changes": [
+      "Added CONTRIBUTING.md to improve developer onboarding.",
+      "Added Jest tests and initial unit tests for os-agent (sample + utils).",
+      "Added ESLint and lint scripts; targeted src and tests to reduce noise.",
+      "Added CI workflow to run lint and tests across Node 18 & 20 with caching.",
+      "Small code cleanups to silence lint warnings and added utils.js helper."
+    ]
+  }
 }

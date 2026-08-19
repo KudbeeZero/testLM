@@ -3,7 +3,7 @@ import { Index } from "@upstash/vector";
 import {
   UPSTASH_REDIS_URL, UPSTASH_REDIS_TOKEN,
   UPSTASH_VECTOR_URL, UPSTASH_VECTOR_TOKEN,
-  PROVIDER, LOCAL_MODEL,
+  PROVIDER,
 } from "./config.js";
 
 // Upstash Redis (state / cache)
@@ -29,7 +29,7 @@ export async function getState(key) {
   if (!redis) return null;
   const raw = await redis.get(agentKey(key));
   if (!raw) return null;
-  try { return JSON.parse(raw); } catch { return raw; }
+  try { return JSON.parse(raw); } catch { /* no-op */ /* no-op */ return raw; }
 }
 
 /**
@@ -58,3 +58,5 @@ export async function queryVector(vectorQuery, topK = 5) {
 }
 
 export { redis, vector };
+
+

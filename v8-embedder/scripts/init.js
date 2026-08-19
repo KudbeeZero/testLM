@@ -1,1 +1,3 @@
-log("initializing host API...");
+console.console.log("initializing host API...");
+
+

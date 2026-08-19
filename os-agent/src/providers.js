@@ -27,7 +27,7 @@ class RateLimiter {
       const oldest = this.timestamps[0];
       const waitMs = windowMs - (now - oldest);
       if (waitMs > 0) {
-        console.log(`[rate-limit] waiting ${Math.ceil(waitMs / 1000)}s to respect ${this.perMinute}/min limit`);
+        console.console.log(`[rate-limit] waiting ${Math.ceil(waitMs / 1000)}s to respect ${this.perMinute}/min limit`);
         await new Promise((r) => setTimeout(r, waitMs));
       }
     }
@@ -291,3 +291,5 @@ export async function generateDetailed(prompt, opts = {}) {
 }
 
 export { PROVIDER, LOCAL_MODEL, GEMINI_MODEL, GROK_MODEL, MODEL_TTL_SECONDS };
+
+

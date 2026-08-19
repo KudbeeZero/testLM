@@ -9,7 +9,6 @@
  * regardless of whether PowerShell is present.
  */
 import { spawn, execFileSync } from "node:child_process";
-import { existsSync } from "node:fs";
 
 const CANDIDATES = {
   powershell: [
@@ -29,7 +28,7 @@ function resolveShell(family) {
     try {
       execFileSync(exe, ["-NoProfile", "-Command", "exit"], { stdio: "ignore" });
       return exe;
-    } catch {
+    } catch { /* no-op */ /* no-op */
       // try next candidate
     }
   }
@@ -81,3 +80,5 @@ export function spawnShell(command, opts = {}) {
   });
   return p;
 }
+
+
