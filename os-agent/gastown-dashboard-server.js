@@ -51,7 +51,7 @@ try { loadEnv({ path: path.join(__dirname, ".env") }); } catch { /* no-op */ /* 
 // Logging
 // ---------------------------------------------------------------------------
 const log = {
-  info: (...a) => console.log(`[gastown] ${new Date().toISOString()}`, ...a),
+  info: (...a) => console.console.log(`[gastown] ${new Date().toISOString()}`, ...a),
   warn: (...a) => console.warn(`[gastown] ${new Date().toISOString()}`, ...a),
   error: (...a) => console.error(`[gastown] ${new Date().toISOString()}`, ...a),
 };
@@ -504,7 +504,7 @@ async function runTerminalCommand(cmd) {
         ls: { cmd: ["cmd", "/c", "dir"] },
         node_version: { cmd: [process.execPath, "--version"] },
         npm_ls: { cmd: ["cmd", "/c", "npm ls --depth=0"] },
-        system_uptime: { cmd: [process.execPath, "-e", "console.log(process.uptime().toFixed(1))"] },
+        system_uptime: { cmd: [process.execPath, "-e", "console.console.log(process.uptime().toFixed(1))"] },
       };
       const byAlias = (alias, def) => {
         const entry = LOW_RISK[alias];
@@ -809,5 +809,6 @@ function shutdown(signal) {
 }
 process.on("SIGINT", () => shutdown("SIGINT"));
 process.on("SIGTERM", () => shutdown("SIGTERM"));
+
 
 

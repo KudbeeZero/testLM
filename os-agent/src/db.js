@@ -37,7 +37,7 @@ export async function saveLearnings(learnings) {
     );
     inserted += res.rowCount;
   }
-  console.log(`[db] Stored ${inserted} learning(s) in schema "${schema}".`);
+  console.console.log(`[db] Stored ${inserted} learning(s) in schema "${schema}".`);
   return inserted;
 }
 
@@ -56,4 +56,5 @@ export async function recentLearnings(limit = 5) {
 export async function closeDb() {
   if (pool) await pool.end();
 }
+
 

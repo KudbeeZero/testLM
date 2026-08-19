@@ -132,7 +132,7 @@ function endpointMinRole(url) {
   return ENDPOINT_ROLE[url] || "viewer";
 }
 
-// ── Audit log (append-only governance trace) ───────────────────────────────
+// ── Audit console.log(append-only governance trace) ───────────────────────────────
 // Throttle low-value auto-refresh audits (e.g. ops.check every 60s) so the
 // governance trace stays readable instead of flooding with noise.
 let lastOpsAuditAt = 0;
@@ -740,11 +740,12 @@ server.on("upgrade", (req, socket, head) => {
 });
 
 server.listen(port, "127.0.0.1", () => {
-  console.log(`Agent dashboard: http://127.0.0.1:${port}`);
+  console.console.log(`Agent dashboard: http://127.0.0.1:${port}`);
   if (!process.env.DASHBOARD_PASSWORD) {
-    console.log(`Dashboard password (auto-generated): ${GENERATED_DASHBOARD_PASSWORD}`);
-    console.log("Set DASHBOARD_PASSWORD in the environment to use your own.");
+    console.console.log(`Dashboard password (auto-generated): ${GENERATED_DASHBOARD_PASSWORD}`);
+    console.console.log("Set DASHBOARD_PASSWORD in the environment to use your own.");
   }
 });
+
 
 
